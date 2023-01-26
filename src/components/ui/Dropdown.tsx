@@ -1,10 +1,4 @@
-import React, {
-	ChangeEvent,
-	ReactNode,
-	useEffect,
-	useRef,
-	useState,
-} from "react";
+import React, { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import styles from "../../styles/components/ui/Dropdown.module.css";
 import Image from "next/future/image";
@@ -56,10 +50,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 	}
 
 	const closeIfNotDropdown = (e: MouseEvent) => {
-		if (
-			e.target != dropdownRef.current &&
-			!dropdownRef.current?.contains(e.target as Node)
-		) {
+		if (e.target != dropdownRef.current && !dropdownRef.current?.contains(e.target as Node)) {
 			setIsOpen(false);
 		}
 	};
@@ -103,9 +94,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 			>
 				{label && <span className={styles.mainLabel}>{label}</span>}
 				<div className={styles.activeName}>
-					{selected?.label && (
-						<span className={styles.label}>{selected?.label}</span>
-					)}
+					{selected?.label && <span className={styles.label}>{selected?.label}</span>}
 					<span>{selected?.name}</span>
 				</div>
 				<motion.span

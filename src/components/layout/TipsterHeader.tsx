@@ -36,17 +36,17 @@ const TipsterHeader: React.FC = () => {
 					/>
 				</a>
 			</Link>
+			<div className={styles.links}>
+				{links.map(({ href, label }) => (
+					<MenuLink
+						key={label}
+						href={href}
+						label={label}
+						active={router.pathname.includes(href)}
+					/>
+				))}
+			</div>
 			<nav>
-				<div className={styles.links}>
-					{links.map(({ href, label }) => (
-						<MenuLink
-							key={label}
-							href={href}
-							label={label}
-							active={router.pathname.includes(href)}
-						/>
-					))}
-				</div>
 				<div className={styles.controls}>
 					{Timezones && (
 						<Dropdown

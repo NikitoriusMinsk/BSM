@@ -12,12 +12,8 @@ import { createContext } from "src/server/router/context";
 import superjson from "superjson";
 
 const BlogPage: NextPage = () => {
-	const { data: news, isLoading: newsLoading } = trpc.useQuery([
-		"news.getAll",
-	]);
-	const { data: matches, isLoading: matchesLoading } = trpc.useQuery([
-		"matches.getAll",
-	]);
+	const { data: news, isLoading: newsLoading } = trpc.useQuery(["news.getAll"]);
+	const { data: matches, isLoading: matchesLoading } = trpc.useQuery(["matches.getAll"]);
 
 	if (newsLoading || matchesLoading) {
 		return <div>Loading...</div>;
@@ -149,9 +145,7 @@ const SideNews: React.FC<SideNewsProps> = (props) => {
 						<span className={styles.date}>
 							<Moment format="DD MMM YYYY">{news[0].date}</Moment>
 						</span>
-						<h2 className={styles.title}>
-							{shortenString(news[0].title, 75)}
-						</h2>
+						<h2 className={styles.title}>{shortenString(news[0].title, 75)}</h2>
 					</div>
 				</div>
 			)}
@@ -175,9 +169,7 @@ const SideNews: React.FC<SideNewsProps> = (props) => {
 						<span className={styles.date}>
 							<Moment format="DD MMM YYYY">{news.date}</Moment>
 						</span>
-						<h2 className={styles.title}>
-							{shortenString(news.title, 45)}
-						</h2>
+						<h2 className={styles.title}>{shortenString(news.title, 45)}</h2>
 						<div className={styles.stats}>
 							<span className={styles.stat}>
 								<Image
@@ -334,9 +326,7 @@ const NewsBlock: React.FC<NewsBlockProps> = (props) => {
 						<div className={styles.info}>
 							<div className={styles.mainInfo}>
 								<span className={styles.date}>
-									<Moment format="DD MMM YYYY">
-										{news.date}
-									</Moment>
+									<Moment format="DD MMM YYYY">{news.date}</Moment>
 								</span>
 								<h2 className={styles.title}>{news.title}</h2>
 							</div>
@@ -395,9 +385,7 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 							/>
 							<div className={styles.info}>
 								<span className={styles.date}>
-									<Moment format="DD MMM YYYY">
-										{news.date}
-									</Moment>
+									<Moment format="DD MMM YYYY">{news.date}</Moment>
 								</span>
 								<h2 className={styles.title}>{news.title}</h2>
 							</div>
@@ -443,13 +431,9 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 							</div>
 							<div className={styles.info}>
 								<span className={styles.date}>
-									<Moment format="DD MMM YYYY">
-										{news.date}
-									</Moment>
+									<Moment format="DD MMM YYYY">{news.date}</Moment>
 								</span>
-								<h2 className={styles.title}>
-									{shortenString(news.title, 45)}
-								</h2>
+								<h2 className={styles.title}>{shortenString(news.title, 45)}</h2>
 								<div className={styles.stats}>
 									<span className={styles.stat}>
 										<Image

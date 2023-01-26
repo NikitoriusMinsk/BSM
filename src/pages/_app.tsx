@@ -8,8 +8,6 @@ import "@styles/globals.css";
 import MainLayout from "../components/layout/MainLayout";
 import { ReactElement } from "react";
 import { useRouter } from "next/router";
-import TipsterLayout from "@components/layout/TipsterLayout";
-import MatchesLayout from "@components/layout/MatchesLayout";
 import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
 
@@ -26,34 +24,17 @@ function MyApp(appProps: AppProps<{ session: Session }>) {
 		"/forgot-password",
 		"/reset-password",
 	];
-	const tipsterRoutes = ["/tipster-rating", "/tipster-competition"];
-	const matchesRoutes = ["matches"];
 
 	function getLayout(): ReactElement {
-		if (!noLayoutRoutes.includes(router.asPath.split("?")[0] ?? "")) {
-			if (tipsterRoutes.includes(router.asPath.split("?")[0] ?? "")) {
-				return (
-					<TipsterLayout>
-						<Component {...pageProps} />
-					</TipsterLayout>
-				);
-			}
-			if (matchesRoutes.includes(router.asPath.split("?")[0]?.split("/")[1] ?? "")) {
-				return (
-					<MainLayout>
-						<MatchesLayout>
-							<Component {...pageProps} />
-						</MatchesLayout>
-					</MainLayout>
-				);
-			}
-			return (
-				<MainLayout>
-					<Component {...pageProps} />
-				</MainLayout>
-			);
+		if (noLayoutRoutes.includes(router.asPath.split("?")[0] ?? "")) {
+			return <Component {...pageProps} />;
 		}
-		return <Component {...pageProps} />;
+
+		return (
+			<MainLayout>
+				<Component {...pageProps} />
+			</MainLayout>
+		);
 	}
 
 	return <SessionProvider session={session}>{getLayout()}</SessionProvider>;

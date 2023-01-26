@@ -15,9 +15,7 @@ import { createContext } from "src/server/router/context";
 import superjson from "superjson";
 
 const MatchesPage: NextPage = () => {
-	const { data: tips, isLoading: tipsLoading } = trpc.useQuery([
-		"tips.getAll",
-	]);
+	const { data: tips, isLoading: tipsLoading } = trpc.useQuery(["tips.getAll"]);
 	const { data: matches, isLoading: matchesLoading } = trpc.useQuery([
 		"matches.getAllByLeague",
 	]);
@@ -45,19 +43,30 @@ const MatchesPage: NextPage = () => {
 		return <div>Loading...</div>;
 	}
 
-	if (
-		!tips ||
-		!liveMatches ||
-		!bookmakers ||
-		!leagues ||
-		!sports ||
-		!matches
-	) {
+	if (!tips || !liveMatches || !bookmakers || !leagues || !sports || !matches) {
 		return <div>Error...</div>;
 	}
 
 	return (
 		<>
+			<div className={styles.sideCol}>
+				<div className={styles.filters}>
+					<DatePicker onChange={() => {}} />
+					<NestedFilter
+						items={leagues}
+						h3="BY COUNTRY"
+						h2="Choose Matches"
+						onChange={() => {}}
+					/>
+					<NestedFilter
+						items={leagues}
+						h3="OTHER COUNTRIES"
+						onChange={() => {}}
+						withClearButton={false}
+						colapsible={true}
+					/>
+				</div>
+			</div>
 			<div className={styles.mainColumn}>
 				<div className={styles.banner}>
 					<Banner
