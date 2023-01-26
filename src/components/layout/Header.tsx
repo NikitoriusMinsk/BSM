@@ -13,9 +13,7 @@ import { trpc } from "src/utils/trpc";
 import "moment-timezone";
 import Moment from "react-moment";
 import debounce from "src/utils/debounce";
-import dynamic from "next/dynamic";
 import UserProfile from "./shared/UserProfile";
-// const UserProfile = dynamic(() => import('@components/layout/shared/UserProfile'))
 
 const Header: React.FC = () => {
 	const router = useRouter();
@@ -106,8 +104,7 @@ const More: React.FC<MoreProps> = (props) => {
 	const { items } = props;
 	const [isOpen, setIsOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
-	const [filteredItems, setFilteredItems] =
-		useState<MoreProps["items"]>(items);
+	const [filteredItems, setFilteredItems] = useState<MoreProps["items"]>(items);
 
 	function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
 		if (e.target.value.length > 0) {

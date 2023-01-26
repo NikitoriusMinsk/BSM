@@ -10,6 +10,8 @@ import { ReactElement } from "react";
 import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
+import useWindowSize from "src/utils/useWindowSize";
+import MobileLayout from "@components/layout/MobileLayout";
 
 function MyApp(appProps: AppProps<{ session: Session }>) {
 	const {
@@ -17,6 +19,7 @@ function MyApp(appProps: AppProps<{ session: Session }>) {
 		pageProps: { session, ...pageProps },
 	} = appProps;
 
+	const { width } = useWindowSize();
 	const router = useRouter();
 	const noLayoutRoutes = [
 		"/sign-in",
@@ -28,6 +31,14 @@ function MyApp(appProps: AppProps<{ session: Session }>) {
 	function getLayout(): ReactElement {
 		if (noLayoutRoutes.includes(router.asPath.split("?")[0] ?? "")) {
 			return <Component {...pageProps} />;
+		}
+
+		if (width <= 425) {
+			return (
+				<MobileLayout>
+					<Component {...pageProps} />
+				</MobileLayout>
+			);
 		}
 
 		return (
