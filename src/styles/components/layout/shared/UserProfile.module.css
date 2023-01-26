@@ -139,7 +139,8 @@
 .menuSection {
     display: flex;
     flex-direction: row;
-    gap: 76px;
+    justify-content: space-between;
+    gap: 20px;
     padding: 27px 23px;
     background-color: #F2F2F24D;
     border-radius: 8px;
@@ -159,7 +160,6 @@
     gap: 9px;
     align-items: center;
     cursor: pointer;
-    width: max-content;
 }
 
 .menuItem span {
@@ -185,8 +185,49 @@
     line-height: 18px;
 }
 
+.back {
+    display: none;
+    transform: rotateZ(180deg);
+    cursor: pointer;
+}
+
 @media screen and (max-width: 425px) {
     .container {
-        gap: 40px;
+        gap: 25px;
+        z-index: 100;
     }
+
+    .profile {
+        position: unset;
+    }
+
+    .menu {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .menuSection {
+        background-color: transparent;
+        padding: 0px;
+    }
+
+    .column {
+        gap: 12px;
+    }
+
+    .menuItem {
+        background-color: #F2F2F24D;
+        border-radius: 8px;
+        width: 100%;
+        padding: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .back {
+        display: block;
+    }
+
 }

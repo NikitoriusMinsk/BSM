@@ -210,6 +210,17 @@ const Profile: React.FC<ProfileProps> = (props) => {
 						exit="closed"
 					>
 						<div className={styles.menuHeader}>
+							<div
+								className={styles.back}
+								onClick={() => setIsOpen(false)}
+							>
+								<Image
+									src={"/icons/arrow-narrow-right-black.svg"}
+									height={24}
+									width={24}
+									alt="Back"
+								/>
+							</div>
 							<div className={styles.name}>{name}</div>
 							<button>
 								<Image
