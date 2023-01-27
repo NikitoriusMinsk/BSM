@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@styles/components/layout/MobileNavbar.module.css";
 import Link from "next/link";
 import { ReactSVG } from "react-svg";
 import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/future/image";
+import Settings from "./shared/Settings";
 
 const links = [
 	{
@@ -28,6 +29,10 @@ const links = [
 const MobileNavbar: React.FC = () => {
 	const router = useRouter();
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+	useEffect(() => {
+		setIsMenuOpen(false);
+	}, [router.pathname]);
 
 	return (
 		<>
@@ -144,27 +149,31 @@ const Menu: React.FC<MenuProps> = (props) => {
 			</div>
 			<div className={styles.menuSection}>
 				<div className={styles.column}>
-					<div className={styles.menuItem}>
-						<Image
-							src="/images/menu/live-events.svg"
-							alt="profile"
-							width={24}
-							height={24}
-						/>
-						<span>Live Events</span>
-					</div>
-					<div className={styles.menuItem}>
-						<Image
-							src="/icons/settings.svg"
-							alt="profile"
-							width={24}
-							height={24}
-						/>
-						<span>Settings</span>
-					</div>
+					<Link href="/live-matches">
+						<a className={styles.menuItem}>
+							<Image
+								src="/images/menu/live-events.svg"
+								alt="profile"
+								width={24}
+								height={24}
+							/>
+							<span>Live Events</span>
+						</a>
+					</Link>
+					<Link href="/blog">
+						<a className={styles.menuItem}>
+							<Image
+								src="/images/menu/blog.svg"
+								alt="profile"
+								width={24}
+								height={24}
+							/>
+							<span>Blog</span>
+						</a>
+					</Link>
 				</div>
 				<div className={styles.column}>
-					<Link href="/user-dashboard">
+					<Link href="/bookmakers">
 						<a className={styles.menuItem}>
 							<Image
 								src="/images/menu/bookmakers.svg"
@@ -175,15 +184,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 							<span>Bookmakers</span>
 						</a>
 					</Link>
-					<div className={styles.menuItem}>
-						<Image
-							src="/images/menu/Blog.svg"
-							alt="profile"
-							width={24}
-							height={24}
-						/>
-						<span>Blog</span>
-					</div>
+					<Settings />
 				</div>
 			</div>
 			<div className={styles.socials}>
