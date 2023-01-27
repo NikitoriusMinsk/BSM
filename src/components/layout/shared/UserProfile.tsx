@@ -118,6 +118,20 @@ const Notifications: React.FC<NotificationsProps> = (props) => {
 						animate="open"
 						exit="closed"
 					>
+						<div className={styles.notificationsHeader}>
+							<div
+								className={styles.back}
+								onClick={() => setIsOpen(false)}
+							>
+								<Image
+									src={"/icons/arrow-narrow-right-black.svg"}
+									height={24}
+									width={24}
+									alt="Back"
+								/>
+							</div>
+							<h2>Notifications</h2>
+						</div>
 						{items.map((item) => (
 							<div
 								key={item.id}
