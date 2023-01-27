@@ -180,10 +180,14 @@ const Settings: React.FC = () => {
 						<div className={styles.settingItem}>
 							<h3>Choose your language</h3>
 							<div className={styles.settingsItemContent}>
-								<Dropdown
-									items={Languages}
-									onSelect={(id) => {}}
-								/>
+								{width > 425 ? (
+									<Dropdown
+										items={Languages}
+										onSelect={(id) => {}}
+									/>
+								) : (
+									<LanguageTab />
+								)}
 							</div>
 						</div>
 					</motion.div>
@@ -325,6 +329,86 @@ const TimezoneTab: React.FC = (props) => {
 										tz={tz.name}
 										format={"DD.MM Z"}
 									/>
+								</div>
+							))}
+						</div>
+						<div
+							className={styles.tabSave}
+							onClick={handleSave}
+						>
+							Save
+						</div>
+					</motion.div>
+				)}
+			</AnimatePresence>
+		</>
+	);
+};
+
+const LanguageTab: React.FC = (props) => {
+	const [active, setActive] = useState("1");
+	const [isOpen, setIsOpen] = useState(false);
+	const [selected, setSelected] = useState(active);
+
+	function handleSave() {
+		setActive(selected);
+		setIsOpen(false);
+	}
+
+	return (
+		<>
+			<div
+				className={styles.tabButton}
+				onClick={() => setIsOpen(true)}
+			>
+				<div className={styles.info}>
+					{Languages.find((lang) => lang.id === active)?.label}
+					{Languages.find((lang) => lang.id === active)?.name}
+				</div>
+				<Image
+					className={styles.chevron}
+					src={"/icons/chevron-black.svg"}
+					height={12}
+					width={12}
+					alt="Choose Language"
+				/>
+			</div>
+			<AnimatePresence initial={false}>
+				{isOpen && (
+					<motion.div
+						className={styles.tab}
+						variants={TabVariants}
+						initial="closed"
+						animate="open"
+						exit="closed"
+					>
+						<div className={styles.menuHeader}>
+							<div
+								className={styles.back}
+								onClick={() => setIsOpen(false)}
+							>
+								<Image
+									src={"/icons/arrow-narrow-right-black.svg"}
+									height={24}
+									width={24}
+									alt="Back"
+								/>
+							</div>
+							<h2>Choose your language</h2>
+						</div>
+						<div
+							className={styles.options}
+							id={styles.language}
+						>
+							{Languages.map((lang) => (
+								<div
+									className={`${styles.option} ${
+										selected === lang.id && styles.selected
+									}`}
+									onClick={() => setSelected(lang.id)}
+								>
+									{lang.label}
+									{lang.name}
 								</div>
 							))}
 						</div>

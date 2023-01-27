@@ -128,6 +128,7 @@
 .tabButton .info {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
 }
 
@@ -184,6 +185,12 @@
     padding-bottom: 16px;
 }
 
+.options#language {
+    border: none;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 .option {
     display: flex;
     flex-direction: row;
@@ -191,6 +198,10 @@
     align-items: center;
     cursor: pointer;
     padding: 13px 24px;
+}
+
+#language .option {
+    padding: 13px 0;
 }
 
 .tabSave {
