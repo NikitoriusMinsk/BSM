@@ -584,13 +584,18 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 						</div>
 						<Slider swipable={true}>
 							{ArrayToChunks(users, width > 425 ? 4 : 1).map(
-								(chunk, chunkIndex) => (
+								(chunk) => (
 									<div className={styles.participantsContainer}>
 										{chunk.map((user, index) => (
 											<CompetitionParticipant
 												{...user}
-												place={chunkIndex + index + 1}
-												key={`participant_${index}`}
+												place={
+													users.findIndex(
+														(_user) =>
+															_user.id === user.id
+													) + 1
+												}
+												key={`participant_${user.id}`}
 											/>
 										))}
 									</div>
