@@ -14,6 +14,19 @@
     min-width: max-content;
 }
 
+.container.light {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.light .mainLabel,
+.light .activeName {
+    color: #FFFFFF;
+}
+
+.light .chevron {
+    filter: invert();
+}
+
 .mainLabel {
     font-family: 'Samsung Sans';
     font-style: normal;

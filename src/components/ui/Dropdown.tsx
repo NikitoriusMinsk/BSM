@@ -16,6 +16,7 @@ interface DropdownProps {
 	onSelect: (id: string) => void;
 	minWidth?: string | number;
 	searchable?: boolean;
+	style?: "light" | "default";
 }
 
 const DropdownVariants = {
@@ -37,7 +38,14 @@ const ChevronVariants = {
 };
 
 const Dropdown: React.FC<DropdownProps> = (props) => {
-	const { items, onSelect, label, searchable = false, minWidth } = props;
+	const {
+		items,
+		onSelect,
+		label,
+		searchable = false,
+		minWidth,
+		style = "default",
+	} = props;
 	const [isOpen, setIsOpen] = useState(false);
 	const [selected, setSelected] = useState(items[0]);
 	const dropdownRef = useRef<HTMLDivElement>(null);
@@ -50,7 +58,10 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 	}
 
 	const closeIfNotDropdown = (e: MouseEvent) => {
-		if (e.target != dropdownRef.current && !dropdownRef.current?.contains(e.target as Node)) {
+		if (
+			e.target != dropdownRef.current &&
+			!dropdownRef.current?.contains(e.target as Node)
+		) {
 			setIsOpen(false);
 		}
 	};
@@ -82,7 +93,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 
 	return (
 		<div
-			className={styles.container}
+			className={`${styles.container} ${styles[style]}`}
 			ref={dropdownRef}
 			style={{
 				minWidth: minWidth,
@@ -94,7 +105,9 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 			>
 				{label && <span className={styles.mainLabel}>{label}</span>}
 				<div className={styles.activeName}>
-					{selected?.label && <span className={styles.label}>{selected?.label}</span>}
+					{selected?.label && (
+						<span className={styles.label}>{selected?.label}</span>
+					)}
 					<span>{selected?.name}</span>
 				</div>
 				<motion.span

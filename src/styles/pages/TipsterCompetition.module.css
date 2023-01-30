@@ -57,17 +57,9 @@
 .controls {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 40px;
 }
 
-.bottomBlock>h2 {
-    font-family: 'Samsung Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #1A1C21;
-}
 
 /* Current Competition */
 
@@ -471,6 +463,23 @@
     min-height: 738px;
     border-radius: 16px;
     overflow: hidden;
+    padding: 24px 140px;
+}
+
+.previousCompetitions .header {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.previousCompetitions .header h2 {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    color: #FFFFFF;
 }
 
 .previousCompetitions .background {
@@ -485,7 +494,6 @@
     display: flex;
     flex-direction: column;
     gap: 96px;
-    padding: 20px 24px;
     height: 100%;
 }
 
@@ -493,7 +501,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    text-align: left;
+    text-align: center;
     margin-left: 70px;
 }
 
@@ -515,11 +523,11 @@
     color: #FFFFFFE5;
 }
 
-.previousCompetitions .slide .participants {
+.previousCompetitions .slide .participantsContainer {
     display: flex;
     flex-direction: row;
-    gap: 21px;
-    flex-wrap: wrap;
+    gap: 40px;
+    padding-bottom: 50px;
 }
 
 /* Participant */
@@ -527,34 +535,75 @@
 .participant {
     display: flex;
     flex-direction: column;
+    gap: 20px;
     padding: 20px 14px;
     border: 1px solid #FFFFFF66;
     border-radius: 8px;
-    width: 380px;
+    max-width: 25%;
+    flex: 1;
     backdrop-filter: blur(5px);
 }
 
-.participant .info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 20px;
-}
 
 .participant .userInfo {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    gap: 14px
+    gap: 40px
 }
 
 .participant .avatar {
+    position: relative;
     height: 74px;
     width: 74px;
     border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.participant .avatar .crown {
+    position: absolute;
+    top: -25px;
+    left: -29px;
+    z-index: 1;
+    height: 130px;
+    width: 130px;
+}
+
+.participant .avatar .crown:after {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    color: #1A1C21CC;
+}
+
+.participant .avatar .crown:after {
+    content: attr(data-place);
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    bottom: 15px;
+    left: calc(50% - 16px);
+}
+
+.participant .avatar .crown[data-place="1"]:after {
+    background-color: #F5C260;
+}
+
+.participant .avatar .crown[data-place="2"]:after {
+    background-color: #DEDEDE;
+}
+
+.participant .avatar .crown[data-place="3"]:after {
+    background-color: #CA7B00;
 }
 
 .participant .detailedInfo {
@@ -573,30 +622,6 @@
     color: #FFFFFFCC;
 }
 
-.participant .detailedInfo .subscribers {
-    font-family: 'Samsung Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    color: #FFFFFFB2;
-}
-
-.participant .detailedInfo button {
-    border: none;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-family: 'Samsung Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 18px;
-    color: #FFFFFF;
-    cursor: pointer;
-}
-
 .participant .competitionInfo {
     display: flex;
     flex-direction: column;
@@ -605,35 +630,11 @@
     gap: 8px;
 }
 
-.participant .place {
-    font-family: 'Samsung Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #FFFFFF;
-}
-
-.participant .prize {
-    padding: 9px 14px;
-    display: flex;
-    align-items: center;
-    font-family: 'Samsung Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    color: #FFFFFF;
-    border: 1px solid #FFFFFF66;
-    border-radius: 8px;
-}
-
 .participant .stats {
-    padding-top: 20px;
-    border-top: 1px solid #FFFFFF66;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 }
 
 .participant button {
@@ -650,20 +651,22 @@
     cursor: pointer;
 }
 
-.participant .stats>div {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-}
-
-.participant .stats>div div {
+.participant .stats .stat {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 6px;
 }
 
-.participant .stats>div div span:first-child {
+.participant .stats .stat:first-child {
+    align-items: flex-start;
+}
+
+.participant .stats .stat:last-child {
+    align-items: flex-end;
+}
+
+.participant .stats .stat span:first-child {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
@@ -672,7 +675,7 @@
     color: #FFFFFF99;
 }
 
-.participant .stats>div div span:last-child {
+.participant .stats .stat span:last-child {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
@@ -951,4 +954,99 @@
     content: url(/icons/roi-negative.svg);
     position: absolute;
     left: -20px;
+}
+
+@media screen and (max-width: 425px) {
+    .currentCompetition {
+        padding: 20px 16px;
+        border-radius: 0;
+    }
+
+    .currentCompetition h1 {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: #FFFFFF;
+        align-self: flex-start;
+    }
+
+    .currentCompetition .leaders {
+        gap: 60px;
+    }
+
+    .currentCompetition .share,
+    .currentCompetition .steps,
+    .currentCompetition h2,
+    .currentCompetition .separator,
+    .currentCompetition .duration .text {
+        display: none;
+    }
+
+    .sideColumn {
+        display: none;
+    }
+
+    .mainColumn,
+    .bottomBlock {
+        margin-left: 0;
+        grid-column-end: 13;
+        padding: 0 16px;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .tipster button {
+        display: none;
+    }
+
+    .previousCompetitions {
+        padding: 23px 16px;
+        gap: 24px
+    }
+
+    .previousCompetitions .header h2 {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #FFFFFF;
+    }
+
+    .previousCompetitions .slide {
+        gap: 24px;
+    }
+
+    .previousCompetitions .slide .title {
+        margin-left: 44px;
+        margin-right: 44px;
+    }
+
+    .previousCompetitions .slide .title h2 {
+        font-family: Samsung Sans;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #FFFFFF;
+    }
+
+    .previousCompetitions .slide .title span {
+        font-family: Samsung Sans;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .participant {
+        max-width: unset;
+    }
+
 }

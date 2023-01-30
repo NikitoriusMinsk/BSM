@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { trpc } from "src/utils/trpc";
 import styles from "@styles/pages/TipsterCompetition.module.css";
 import Image from "next/future/image";
-import { CurrentCompetition, PreviousCompetitions, Tipsters } from "src/types/queryTypes";
+import {
+	CurrentCompetition,
+	PreviousCompetitions,
+	Tipsters,
+} from "src/types/queryTypes";
 import Moment from "react-moment";
 import { PortalContext } from "src/utils/portalContext";
 import TextField from "@components/ui/TextField";
@@ -21,9 +25,16 @@ import { createSSGHelpers } from "@trpc/react/ssg";
 import { appRouter } from "src/server/router";
 import { createContext } from "src/server/router/context";
 import superjson from "superjson";
+import useWindowSize from "src/utils/useWindowSize";
 
-const InPortal = dynamic(async () => (await import("react-reverse-portal")).InPortal, { ssr: false });
-const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, { ssr: false });
+const InPortal = dynamic(
+	async () => (await import("react-reverse-portal")).InPortal,
+	{ ssr: false }
+);
+const OutPortal = dynamic(
+	async () => (await import("react-reverse-portal")).OutPortal,
+	{ ssr: false }
+);
 
 const TableDropdownItems = [
 	{
@@ -143,19 +154,70 @@ const columns = [
 	columnHelper.accessor("roi", {
 		cell: (info) =>
 			info.getValue() > 0 ? (
-				<span className={`${styles.roi} ${styles.positive}`}>{info.getValue()}</span>
+				<span className={`${styles.roi} ${styles.positive}`}>
+					{info.getValue()}
+				</span>
 			) : (
-				<span className={`${styles.roi} ${styles.negative}`}>{info.getValue()}</span>
+				<span className={`${styles.roi} ${styles.negative}`}>
+					{info.getValue()}
+				</span>
+			),
+		header: () => <span>ROI</span>,
+	}),
+];
+
+const mobileColumns = [
+	columnHelper.display({
+		id: "index",
+		header: "#",
+		cell: (props) =>
+			props.row.index === 0 ? (
+				<div>
+					<Image
+						src="/icons/crown-violet.svg"
+						height={24}
+						width={24}
+						alt=""
+					/>
+				</div>
+			) : (
+				props.row.index + 1
+			),
+		enableSorting: false,
+	}),
+	columnHelper.accessor((row) => ({ ...row }), {
+		id: "user",
+		cell: (info) => {
+			return <TipsterInfo {...info.getValue()} />;
+		},
+		header: () => <span>Tipster</span>,
+		enableSorting: false,
+	}),
+	columnHelper.accessor("roi", {
+		cell: (info) =>
+			info.getValue() > 0 ? (
+				<span className={`${styles.roi} ${styles.positive}`}>
+					{info.getValue()}
+				</span>
+			) : (
+				<span className={`${styles.roi} ${styles.negative}`}>
+					{info.getValue()}
+				</span>
 			),
 		header: () => <span>ROI</span>,
 	}),
 ];
 
 const TipsterCompetition: NextPage = () => {
-	const { data: currentCompetition, isLoading: currentCompetitionLoading } = trpc.useQuery(["competitions.getCurrent"]);
-	const { data: tipsters, isLoading: tipstersLoading } = trpc.useQuery(["tipsters.getAll"]);
-	const { data: previousCompetition, isLoading: previousCompetitionLoading } = trpc.useQuery(["competitions.getPrevious"]);
+	const { data: currentCompetition, isLoading: currentCompetitionLoading } =
+		trpc.useQuery(["competitions.getCurrent"]);
+	const { data: tipsters, isLoading: tipstersLoading } = trpc.useQuery([
+		"tipsters.getAll",
+	]);
+	const { data: previousCompetition, isLoading: previousCompetitionLoading } =
+		trpc.useQuery(["competitions.getPrevious"]);
 	const portalNode = usePortal();
+	const { width } = useWindowSize();
 
 	if (currentCompetitionLoading || tipstersLoading || previousCompetitionLoading) {
 		return <div>Loading...</div>;
@@ -179,7 +241,7 @@ const TipsterCompetition: NextPage = () => {
 							<TextField
 								icon="/icons/search.svg"
 								placeholder="Search for tipsters"
-								minWidth={400}
+								minWidth={350}
 							/>
 							<div>
 								<Dropdown
@@ -192,7 +254,7 @@ const TipsterCompetition: NextPage = () => {
 						</div>
 						<Table
 							data={tipsters}
-							columns={columns}
+							columns={width > 425 ? columns : mobileColumns}
 							pageSize={10}
 							sortable={true}
 						/>
@@ -202,22 +264,6 @@ const TipsterCompetition: NextPage = () => {
 					<GetStarted />
 				</div>
 				<div className={styles.bottomBlock}>
-					<h2>The winners of previous competitions</h2>
-					<div className={styles.controls}>
-						<div>
-							<Dropdown
-								items={CompetitionDropdownItems}
-								onSelect={() => {}}
-								label="Time"
-							/>
-						</div>
-						<div>
-							<Dropdown
-								items={CompetitionSportItems}
-								onSelect={() => {}}
-							/>
-						</div>
-					</div>
 					<PreviousCompetitions competitions={previousCompetition} />
 				</div>
 			</PortalContext.Provider>
@@ -261,8 +307,12 @@ const CurrentCompetition: React.FC<CurrentCompetition> = (props) => {
 					/>
 					!
 				</span>
-				<span>You can join Optimo Bet Free Tipster Competition at any time</span>
-				<span>You are only Allowed to have one tipster account per person</span>
+				<span>
+					You can join Optimo Bet Free Tipster Competition at any time
+				</span>
+				<span>
+					You are only Allowed to have one tipster account per person
+				</span>
 			</div>
 			<h2 className={styles.rewardDistribution}>Reward Distribution</h2>
 			<div className={styles.leaders}>
@@ -302,10 +352,12 @@ const CurrentCompetition: React.FC<CurrentCompetition> = (props) => {
 					</div>
 				</div>
 				<span className={styles.text}>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tristique hendrerit ligula, vitae finibus odio aliquet
-					sit amet. Mauris semper arcu vitae neque sollicitudin lobortis vitae sit amet quam. Proin viverra nulla in tellus dictum
-					faucibus. Proin a dictum nulla. Duis euismod venenatis semper. Mauris sed volutpat elit, eget egestas nulla.
-					Pellentesque vitae consequat ipsum.
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+					tristique hendrerit ligula, vitae finibus odio aliquet sit amet.
+					Mauris semper arcu vitae neque sollicitudin lobortis vitae sit
+					amet quam. Proin viverra nulla in tellus dictum faucibus. Proin a
+					dictum nulla. Duis euismod venenatis semper. Mauris sed volutpat
+					elit, eget egestas nulla. Pellentesque vitae consequat ipsum.
 				</span>
 			</div>
 		</div>
@@ -444,11 +496,44 @@ const CompetitionStep: React.FC<{
 	);
 };
 
-const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (props) => {
+const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
+	props
+) => {
 	const { competitions } = props;
+
+	const { width } = useWindowSize();
+
+	function ArrayToChunks(
+		arr: inferArrayElementType<PreviousCompetitions>["users"],
+		size: number
+	) {
+		return Array.from(new Array(Math.ceil(arr.length / size)), (_, i) =>
+			arr.slice(i * size, i * size + size)
+		);
+	}
 
 	return (
 		<div className={styles.previousCompetitions}>
+			<div className={styles.header}>
+				<h2>The winners of previous competitions</h2>
+				<div className={styles.controls}>
+					<div>
+						<Dropdown
+							items={CompetitionDropdownItems}
+							onSelect={() => {}}
+							label="Time"
+							style={"light"}
+						/>
+					</div>
+					<div>
+						<Dropdown
+							items={CompetitionSportItems}
+							onSelect={() => {}}
+							style={"light"}
+						/>
+					</div>
+				</div>
+			</div>
 			<div className={styles.background}>
 				<Image
 					src="/images/previous-competitions-background.png"
@@ -461,18 +546,19 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 			</div>
 			<Slider
 				loop={true}
-				autoPlay={true}
+				// autoPlay={true}
 				showArrows={true}
 				showPagination={false}
+				swipable={false}
 				arrowOptions={{
 					offset: {
 						next: {
-							top: 24,
-							side: 24,
+							top: width > 425 ? 125 : 155,
+							side: width > 425 ? 304 : 34,
 						},
 						prev: {
-							top: 24,
-							side: 24,
+							top: width > 425 ? 125 : 155,
+							side: 0,
 						},
 					},
 				}}
@@ -496,15 +582,21 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 								/>
 							</span>
 						</div>
-						<div className={styles.participants}>
-							{users.map((user, index) => (
-								<CompetitionParticipant
-									{...user}
-									place={index + 1}
-									key={`participant_${index}`}
-								/>
-							))}
-						</div>
+						<Slider swipable={true}>
+							{ArrayToChunks(users, width > 425 ? 4 : 1).map(
+								(chunk, chunkIndex) => (
+									<div className={styles.participantsContainer}>
+										{chunk.map((user, index) => (
+											<CompetitionParticipant
+												{...user}
+												place={chunkIndex + index + 1}
+												key={`participant_${index}`}
+											/>
+										))}
+									</div>
+								)
+							)}
+						</Slider>
 					</div>
 				))}
 			</Slider>
@@ -513,18 +605,23 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 };
 
 interface CompetitionParticipantProps {
-	name: string;
-	image: string;
-	prize: number;
-	subscriptionCost: number;
-	winrate: number;
-	avgProfit: number;
-	subscriberCount: number;
 	place: number;
 }
 
-const CompetitionParticipant: React.FC<CompetitionParticipantProps> = (props) => {
-	const { avgProfit, image, name, prize, subscriberCount, subscriptionCost, winrate, place } = props;
+const CompetitionParticipant: React.FC<
+	inferArrayElementType<inferArrayElementType<PreviousCompetitions>["users"]> &
+		CompetitionParticipantProps
+> = (props) => {
+	const {
+		avgProfit,
+		image,
+		name,
+		prize,
+		subscriberCount,
+		subscriptionCost,
+		winrate,
+		place,
+	} = props;
 	const [modalOpen, setModalOpen] = useState(false);
 
 	return (
@@ -552,56 +649,55 @@ const CompetitionParticipant: React.FC<CompetitionParticipantProps> = (props) =>
 				}
 			</PortalContext.Consumer>
 			<div className={styles.participant}>
-				<div className={styles.info}>
-					<div className={styles.userInfo}>
-						<div className={styles.avatar}>
+				<div className={styles.userInfo}>
+					<div className={styles.avatar}>
+						<div
+							className={styles.crown}
+							data-place={place}
+						>
 							<Image
-								src={image}
-								height={74}
-								width={74}
+								src={`/images/competition-crown-${
+									place <= 3 ? place : "other"
+								}.svg`}
+								fill
 								alt=""
 							/>
 						</div>
-						<div className={styles.detailedInfo}>
-							<span className={styles.name}>{name}</span>
-							<span className={styles.subscribers}>{shortenNumber(subscriberCount, 0)} subscribers</span>
-							<button>
-								<Image
-									src="/icons/follow-white.svg"
-									height={20}
-									width={20}
-									alt=""
-								/>
-								Follow
-							</button>
-						</div>
+						<Image
+							src={image}
+							height={74}
+							width={74}
+							alt=""
+						/>
 					</div>
-					<div className={styles.competitionInfo}>
-						<span className={styles.place}>{place === 1 ? "Winner" : `Place ${place}`}</span>
-						<span className={styles.prize}>
+					<div className={styles.detailedInfo}>
+						<span className={styles.name}>{name}</span>
+					</div>
+				</div>
+				<div className={styles.stats}>
+					<div className={styles.stat}>
+						<span>Hitrate</span>
+						<span>{winrate * 100}%</span>
+					</div>
+					<div className={styles.stat}>
+						<span>
 							<Image
 								src="/icons/cup.svg"
 								height={26}
 								width={26}
 								alt=""
 							/>
-							$ {prize}
 						</span>
+						<span>$ {prize}</span>
+					</div>
+					<div className={styles.stat}>
+						<span>Subscribers</span>
+						<span>{shortenNumber(subscriberCount, 0)}</span>
 					</div>
 				</div>
-				<div className={styles.stats}>
-					<button onClick={() => setModalOpen(true)}>$ {subscriptionCost}/MO</button>
-					<div>
-						<div className={styles.stat}>
-							<span>Hitrate</span>
-							<span>{winrate * 100}%</span>
-						</div>
-						<div className={styles.stat}>
-							<span>Profit</span>
-							<span>$ {avgProfit}</span>
-						</div>
-					</div>
-				</div>
+				<button onClick={() => setModalOpen(true)}>
+					$ {subscriptionCost}/MO
+				</button>
 			</div>
 		</>
 	);
@@ -636,7 +732,9 @@ const TipsterInfo: React.FC<inferArrayElementType<Tipsters>> = (props) => {
 					onMouseEnter={() => setIsHovering(true)}
 					onMouseLeave={() => setIsHovering(false)}
 				>
-					<AnimatePresence initial={false}>{isHovering && <UserHover {...props} />}</AnimatePresence>
+					<AnimatePresence initial={false}>
+						{isHovering && <UserHover {...props} />}
+					</AnimatePresence>
 					<div className={styles.avatar}>
 						<Image
 							src={image}
@@ -647,7 +745,9 @@ const TipsterInfo: React.FC<inferArrayElementType<Tipsters>> = (props) => {
 					</div>
 					<div className={styles.userInfo}>
 						<span className={styles.name}>{name}</span>
-						<span className={styles.subscribers}>{shortenNumber(subscriberCount, 0)} subscribers</span>
+						<span className={styles.subscribers}>
+							{shortenNumber(subscriberCount, 0)} subscribers
+						</span>
 					</div>
 				</div>
 				<button onClick={() => setModalOpen(!modalOpen)}>
@@ -692,7 +792,11 @@ const UserHover: React.FC<inferArrayElementType<Tipsters>> = (props) => {
 			animate="open"
 			exit="closed"
 		>
-			<div className={`${styles.profit} ${avgProfit > 0 ? styles.positive : styles.negative}`}>
+			<div
+				className={`${styles.profit} ${
+					avgProfit > 0 ? styles.positive : styles.negative
+				}`}
+			>
 				<span>Avg. Monthly Profit</span>
 				<span>$ {avgProfit}</span>
 			</div>

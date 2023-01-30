@@ -6,6 +6,11 @@ body {
         Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+/* debug */
+* {
+    /* outline: 1px solid greenyellow; */
+}
+
 /* width */
 body *::-webkit-scrollbar {
     width: 5px;

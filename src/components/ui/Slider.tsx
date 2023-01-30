@@ -21,6 +21,7 @@ interface SliderProps {
 	showPagination?: boolean;
 	autoPlay?: boolean;
 	loop?: boolean;
+	swipable?: boolean;
 	arrowOptions?: {
 		offset: {
 			next?: {
@@ -49,10 +50,9 @@ const Slider: React.FC<SliderProps> = (props) => {
 		autoPlay = false,
 		loop = false,
 		arrowOptions,
+		swipable = false,
 	} = props;
-	const portalNode = usePortal(
-		"position: absolute; width: 100%; z-index: 1;"
-	);
+	const portalNode = usePortal("position: absolute; width: 100%; z-index: 1;");
 
 	return (
 		<>
@@ -67,6 +67,7 @@ const Slider: React.FC<SliderProps> = (props) => {
 				infiniteLoop={loop}
 				stopOnHover={true}
 				interval={5000}
+				swipeable={swipable}
 				emulateTouch
 				renderIndicator={(clickHandler, isSelected, index) => (
 					<Dot
@@ -166,9 +167,7 @@ const ArrowNext: React.FC<ArrowProps> = (props) => {
 
 	return (
 		<div
-			className={`${styles.arrow} ${styles.next} ${
-				hasNext && styles.active
-			}`}
+			className={`${styles.arrow} ${styles.next} ${hasNext && styles.active}`}
 			onClick={clickHandler}
 			style={{
 				top: offset?.top ?? undefined,
@@ -208,9 +207,7 @@ const ArrowPrev: React.FC<ArrowProps> = (props) => {
 
 	return (
 		<div
-			className={`${styles.arrow} ${styles.prev} ${
-				hasPrev && styles.active
-			}`}
+			className={`${styles.arrow} ${styles.prev} ${hasPrev && styles.active}`}
 			onClick={clickHandler}
 			style={{
 				top: offset?.top ?? undefined,

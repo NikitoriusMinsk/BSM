@@ -90,3 +90,9 @@
     line-height: 19px;
     color: #FFFFFF;
 }
+
+@media screen and (max-width: 425px) {
+    .container {
+        display: none;
+    }
+}
