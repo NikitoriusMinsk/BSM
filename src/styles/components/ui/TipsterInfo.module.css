@@ -1,0 +1,352 @@
+/* User */
+
+.tipster {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.tipster button {
+    padding: 8px 24px 8px 24px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #1A1C21;
+    border: 1px solid #1A1C2133;
+    border-radius: 4px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.user .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+}
+
+.user .userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.user .userInfo .name {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1A1C21CC;
+}
+
+.user .userInfo .subscribers {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #1A1C21B2;
+}
+
+/* User Hover Container */
+
+.hoverContainer {
+    position: absolute;
+    bottom: 130%;
+    left: -10px;
+    z-index: 101;
+    background-color: #FFFFFF;
+    min-width: 422px;
+    border-radius: 16px;
+}
+
+.hoverContainer:after {
+    content: url(/icons/modal-corner.svg);
+    position: absolute;
+    top: calc(100% - 7px);
+    left: 20px;
+    width: 0;
+    height: 0;
+    background-color: #FFFFFF;
+}
+
+.hoverContainer .profit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 24px 6px;
+    overflow: hidden;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.hoverContainer .profit span:first-child {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+}
+
+.hoverContainer .profit span:last-child {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+}
+
+.hoverContainer .profit.positive {
+    background-color: #2CD114;
+}
+
+.hoverContainer .profit.negative {
+    background-color: #CF1F1F;
+}
+
+.hoverContainer .userDetailed {
+    padding: 20px 24px;
+    border: 1px solid #1A1C211A;
+    border-top: none;
+    overflow: hidden;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.hoverContainer .infoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.hoverContainer .user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.hoverContainer .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.hoverContainer .userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    justify-content: center;
+}
+
+.hoverContainer .name {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #1A1C21CC;
+}
+
+.hoverContainer .sport {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1A1C21B2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hoverContainer .followers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.hoverContainer .followers button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border: none;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #7F3FFC;
+    cursor: pointer;
+}
+
+.hoverContainer .followers span {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #1A1C21B2;
+}
+
+.hoverContainer .additionalInfo {
+    display: none;
+    flex-direction: column;
+    gap: 21px;
+}
+
+@media screen and (max-width:425px) {
+    .tipster {
+        position: unset
+    }
+
+    .hoverContainer .profit {
+        display: none;
+    }
+
+    .hoverContainer .additionalInfo .info .profit {
+        display: flex;
+        border-radius: 16px;
+        padding: 12px 18px;
+    }
+
+    .hoverContainer .userDetailed {
+        border: 1px solid #1A1C211A;
+        border-top-right-radius: 16px;
+        border-top-left-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .hoverContainer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .tipster .subscribeButton {
+        display: none;
+    }
+
+    .hoverContainer .additionalInfo {
+        display: flex;
+    }
+
+    .hoverContainer .subscriptionInfo {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hoverContainer .subscriptionInfo span {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 29px;
+        color: #1A1C21;
+    }
+
+    .hoverContainer .subscriptionInfo button {
+        background-color: #7F3FFC;
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #FFFFFF;
+    }
+
+    .hoverContainer .additionalInfo .info .stat {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 12px 18px;
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: rgba(26, 28, 33, 0.7);
+        border-radius: 8px;
+    }
+
+    .hoverContainer .additionalInfo .info .stat:nth-child(odd) {
+        background-color: #F2F2F24D;
+    }
+
+    .roi {
+        position: relative;
+    }
+
+    .roi.negative {
+        color: #CF1F1F;
+    }
+
+    .roi.negative:before {
+        content: url(/icons/roi-negative.svg);
+        position: absolute;
+        left: -20px;
+    }
+
+    .roi.positive {
+        color: #2CD114;
+    }
+
+    .roi.positive:before {
+        content: url(/icons/roi-positive.svg);
+        position: absolute;
+        left: -20px;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .form .dot {
+        height: 8px;
+        width: 8px;
+        border-radius: 100%;
+    }
+
+    .form .dot.positive {
+        background-color: #2CD114;
+    }
+
+    .form .dot.negative {
+        background-color: #CF1F1F;
+    }
+}

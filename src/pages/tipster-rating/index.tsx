@@ -27,6 +27,7 @@ import { createSSGHelpers } from "@trpc/react/ssg";
 import { appRouter } from "src/server/router";
 import { createContext } from "src/server/router/context";
 import superjson from "superjson";
+import TipsterInfo from "@components/ui/TipsterInfo";
 
 const InPortal = dynamic(
 	async () => (await import("react-reverse-portal")).InPortal,
@@ -269,11 +270,11 @@ const VerifiedTipsters: React.FC<{
 			<span className={styles.verifiedTipstersSubtitle}>
 				Betting on sports can be really profitable if you have the right
 				knowledge in place. Following betting tipsters is certainly wise
-				decision as it helps you leverage their expertise and analyses
-				in your favor. Here you can find and follow verified by us
-				tipsters. By starting to follow some of the betting experts you
-				will receive optional notification each time they post a new
-				betting tip on the site.
+				decision as it helps you leverage their expertise and analyses in
+				your favor. Here you can find and follow verified by us tipsters. By
+				starting to follow some of the betting experts you will receive
+				optional notification each time they post a new betting tip on the
+				site.
 			</span>
 			<div className={styles.verifiedTipstersSlider}>
 				<Slider
@@ -356,9 +357,7 @@ const TipsterCard: React.FC<inferArrayElementType<Tipsters>> = (props) => {
 									width={20}
 									alt=""
 								/>
-								<span>
-									{following ? "Following" : "Follow"}
-								</span>
+								<span>{following ? "Following" : "Follow"}</span>
 							</button>
 						</div>
 						<div className={styles.stats}>
@@ -399,8 +398,7 @@ const CountdownTimer: React.FC<CurrentCompetition> = (props) => {
 		const currentTime = new Date().getTime();
 		const startTime = startedOn.getTime();
 		const targetTime = endsOn.getTime();
-		const res =
-			((currentTime - startTime) / (targetTime - startTime)) * 100;
+		const res = ((currentTime - startTime) / (targetTime - startTime)) * 100;
 		setProgress(res);
 	}
 
@@ -470,46 +468,43 @@ const PageTips: React.FC = () => {
 				<h2>7 Reasons to Follow Our Betting Tips and Predictions</h2>
 				<ol>
 					<li>
-						In today’s high paced world is really important to
-						ensure that we use our time efficiently. In order to win
-						regularly from sports betting, you definitely have to
-						commit a lot of time in researching, building data
-						models and know what is happening with each team or
-						player. This indeed is very challenging and only a very
-						few people are successful with that. By following
-						betting tips provided by experts you are using their
-						knowledge in your favour while not spending any time on
-						doing the hard work. It won’t be crazy if we assume that
-						by betting with the right information and tips in our
+						In today’s high paced world is really important to ensure
+						that we use our time efficiently. In order to win regularly
+						from sports betting, you definitely have to commit a lot of
+						time in researching, building data models and know what is
+						happening with each team or player. This indeed is very
+						challenging and only a very few people are successful with
+						that. By following betting tips provided by experts you are
+						using their knowledge in your favour while not spending any
+						time on doing the hard work. It won’t be crazy if we assume
+						that by betting with the right information and tips in our
 						hands we are increasing our chance of winning quite
-						significantly. Therefore, this is our reason number 1
-						why to follow betting tips.
+						significantly. Therefore, this is our reason number 1 why to
+						follow betting tips.
 					</li>
 					<li>
-						If you are willing to commit the hard work and be the
-						person who knows a certain sport in depth this is great
-						you will not need betting tips for your chosen sport.
-						But if you are treating sports betting as an investment
-						there is a huge chance that you will want to see your
-						betting portfolio well diversified meaning that you
-						should bet on more than one sport. Therefore, you will
-						need again an expert who will provide you with well
-						researched betting tips on different sports. Certainly,
-						this is the right way to build sustainable portfolio by
-						using your own knowledge and leverage other people’s
-						expertise. This is reason number 2 why it is wise to use
-						betting tips as part of your betting activities.
+						If you are willing to commit the hard work and be the person
+						who knows a certain sport in depth this is great you will not
+						need betting tips for your chosen sport. But if you are
+						treating sports betting as an investment there is a huge
+						chance that you will want to see your betting portfolio well
+						diversified meaning that you should bet on more than one
+						sport. Therefore, you will need again an expert who will
+						provide you with well researched betting tips on different
+						sports. Certainly, this is the right way to build sustainable
+						portfolio by using your own knowledge and leverage other
+						people’s expertise. This is reason number 2 why it is wise to
+						use betting tips as part of your betting activities.
 					</li>
 					<li>
-						Take calculated risk. Sports betting is not about
-						gambling, it is about making educated decisions that
-						will likely result in long term profits. By following
-						betting tips, you are ensuring to always be informed
-						when placing your bets and reduce the risk factor to the
-						very minimum. At the end of the day, betting is a game
-						of chances but it is always good to know the odds are in
-						your favour and betting tips are the tool that will help
-						you achieve that.
+						Take calculated risk. Sports betting is not about gambling,
+						it is about making educated decisions that will likely result
+						in long term profits. By following betting tips, you are
+						ensuring to always be informed when placing your bets and
+						reduce the risk factor to the very minimum. At the end of the
+						day, betting is a game of chances but it is always good to
+						know the odds are in your favour and betting tips are the
+						tool that will help you achieve that.
 					</li>
 				</ol>
 			</div>
@@ -517,198 +512,55 @@ const PageTips: React.FC = () => {
 				<h2>How to Turn Our Sports Betting Tips to Profit?</h2>
 				<div>
 					<span>
-						Sports betting is a hugely popular way to increase the
-						amount of fun you have when you watch your favourite
-						sports. Alongside this, while we would not recommend
-						trying to make sports betting a second source of income
-						as it can be a fickle hobby, it is entirely possible to
-						make a good profit from betting on your favourite
-						sports.
+						Sports betting is a hugely popular way to increase the amount
+						of fun you have when you watch your favourite sports.
+						Alongside this, while we would not recommend trying to make
+						sports betting a second source of income as it can be a
+						fickle hobby, it is entirely possible to make a good profit
+						from betting on your favourite sports.
 					</span>
 					<span>
-						To do this, you need to be supremely disciplined when
-						you come to betting. Many bettors will look to employ
-						strategies when they bet, such as only backing or
-						avoiding specific markets or teams, they will only wager
-						on certain events and will likely stay away from betting
-						tips that are too short or too long.
+						To do this, you need to be supremely disciplined when you
+						come to betting. Many bettors will look to employ strategies
+						when they bet, such as only backing or avoiding specific
+						markets or teams, they will only wager on certain events and
+						will likely stay away from betting tips that are too short or
+						too long.
 					</span>
 					<span>
-						With regard to sports betting odds, it is always
-						important to understand what the odds mean. For example,
-						an odds-on bet means that a side is likely to win that
-						particular game or event, while very long odds mean the
-						chances of the bet coming off a very lower. With a long
-						odds bet offers a big potential return but a huge risk
-						to your wager amount, and a short odds bet offering a
-						safer path but with a smaller return, many bettors will
-						look to play somewhere in the middle of this, in an area
-						where the potential risk and reward and weight together
-						well.
+						With regard to sports betting odds, it is always important to
+						understand what the odds mean. For example, an odds-on bet
+						means that a side is likely to win that particular game or
+						event, while very long odds mean the chances of the bet
+						coming off a very lower. With a long odds bet offers a big
+						potential return but a huge risk to your wager amount, and a
+						short odds bet offering a safer path but with a smaller
+						return, many bettors will look to play somewhere in the
+						middle of this, in an area where the potential risk and
+						reward and weight together well.
 					</span>
 					<span>
-						Importantly, if you are not overly confident when it
-						comes to betting on your own, then you can wager on our
-						sports betting tips and betting predictions to help
-						swell your wins. You can then use these sports betting
-						tips at home on your laptop or on the move on your
-						phone, whilst utilising a bookmaker’s betting app is
-						also a great way to keep up to date with the biggest
-						games.
+						Importantly, if you are not overly confident when it comes to
+						betting on your own, then you can wager on our sports betting
+						tips and betting predictions to help swell your wins. You can
+						then use these sports betting tips at home on your laptop or
+						on the move on your phone, whilst utilising a bookmaker’s
+						betting app is also a great way to keep up to date with the
+						biggest games.
 					</span>
 					<span>
-						The use of betting calculators alongside using strong
-						money management is vital to ensure you stay in profit
-						when it comes to betting. When it comes to your money
-						management, we recommend that you set limits for
-						yourself when it comes to depositing, whilst you should
-						not only ever bet huge amounts of money all in one bet.
-						You can also track your performance in betting too, with
-						this showing you where and when you are losing/gaining
-						money.
+						The use of betting calculators alongside using strong money
+						management is vital to ensure you stay in profit when it
+						comes to betting. When it comes to your money management, we
+						recommend that you set limits for yourself when it comes to
+						depositing, whilst you should not only ever bet huge amounts
+						of money all in one bet. You can also track your performance
+						in betting too, with this showing you where and when you are
+						losing/gaining money.
 					</span>
 				</div>
 			</div>
 		</div>
-	);
-};
-
-const TipsterInfo: React.FC<inferArrayElementType<Tipsters>> = (props) => {
-	const { name, image, subscriberCount } = props;
-	const [modalOpen, setModalOpen] = useState(false);
-	const [isHovering, setIsHovering] = useState(false);
-
-	return (
-		<>
-			<PortalContext.Consumer>
-				{({ portalNode }) =>
-					portalNode && (
-						<InPortal node={portalNode}>
-							<AnimatePresence>
-								{modalOpen && (
-									<TipsterModal
-										{...props}
-										onClose={() => setModalOpen(false)}
-									/>
-								)}
-							</AnimatePresence>
-						</InPortal>
-					)
-				}
-			</PortalContext.Consumer>
-			<div className={styles.tipster}>
-				<div
-					className={styles.user}
-					onMouseEnter={() => setIsHovering(true)}
-					onMouseLeave={() => setIsHovering(false)}
-				>
-					<AnimatePresence initial={false}>
-						{isHovering && <UserHover {...props} />}
-					</AnimatePresence>
-					<div className={styles.avatar}>
-						<Image
-							src={image}
-							height={36}
-							width={36}
-							alt={name}
-						/>
-					</div>
-					<div className={styles.userInfo}>
-						<span className={styles.name}>{name}</span>
-						<span className={styles.subscribers}>
-							{shortenNumber(subscriberCount, 0)} subscribers
-						</span>
-					</div>
-				</div>
-				<button onClick={() => setModalOpen(!modalOpen)}>
-					<Image
-						src="/icons/plus-gray.svg"
-						height={18}
-						width={18}
-						alt=""
-					/>
-					Subscribe
-				</button>
-			</div>
-		</>
-	);
-};
-
-const UserHoverVariants = {
-	open: {
-		opacity: [0, 1],
-		transition: {
-			duration: 0.3,
-			ease: "easeInOut",
-		},
-	},
-	closed: {
-		opacity: [1, 0],
-		transition: {
-			duration: 0.3,
-			ease: "easeInOut",
-		},
-	},
-};
-
-const UserHover: React.FC<inferArrayElementType<Tipsters>> = (props) => {
-	const { avgProfit, name, image, sport, followerCount } = props;
-
-	return (
-		<motion.div
-			className={styles.hoverContainer}
-			variants={UserHoverVariants}
-			initial="closed"
-			animate="open"
-			exit="closed"
-		>
-			<div
-				className={`${styles.profit} ${
-					avgProfit > 0 ? styles.positive : styles.negative
-				}`}
-			>
-				<span>Avg. Monthly Profit</span>
-				<span>$ {avgProfit}</span>
-			</div>
-			<div className={styles.userDetailed}>
-				<div className={styles.infoContainer}>
-					<div className={styles.user}>
-						<div className={styles.avatar}>
-							<Image
-								src={image}
-								height={60}
-								width={60}
-								alt=""
-							/>
-						</div>
-						<div className={styles.userInfo}>
-							<span className={styles.name}>{name}</span>
-							<span className={styles.sport}>
-								Top {sport.name} Tipster
-								<Image
-									src={sport.image}
-									height={24}
-									width={24}
-									alt=""
-								/>
-							</span>
-						</div>
-					</div>
-					<div className={styles.followers}>
-						<button>
-							<Image
-								src="/icons/follow.svg"
-								height={20}
-								width={20}
-								alt=""
-							/>
-							Follow
-						</button>
-						<span>{shortenNumber(followerCount, 0)} followers</span>
-					</div>
-				</div>
-			</div>
-		</motion.div>
 	);
 };
 
