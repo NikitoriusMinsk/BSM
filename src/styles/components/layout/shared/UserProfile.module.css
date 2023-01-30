@@ -21,6 +21,7 @@
 
 .notifications {
     position: relative;
+    gap: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,7 +42,7 @@
     padding: 16px 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 25px;
 }
 
 .notification {
@@ -51,22 +52,87 @@
     width: max-content;
 }
 
-.notificationTime {
-    font-family: 'Samsung Sans';
+.notificationSubTitle {
+    font-family: Samsung Sans;
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
-    color: #1A1C21;
+    color: rgba(26, 28, 33, 0.7);
+}
+
+.notificationTime {
+    font-family: Samsung Sans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #7F3FFC;
 }
 
 .notificationText {
-    font-family: 'Samsung Sans';
+    font-family: Samsung Sans;
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #1A1C21B2;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1A1C21;
+}
+
+.notificationContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notificationInfo {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.back {
+    display: none;
+    transform: rotateZ(180deg);
+    cursor: pointer;
+}
+
+.notificationsHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.notificationsHeaderText {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.notificationsBubble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+    border-radius: 100%;
+    background-color: #7F3FFC;
+    font-family: Samsung Sans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+}
+
+.notificationsHeader h2 {
+    font-family: Samsung Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #1A1C21;
 }
 
 .profile {
@@ -185,28 +251,6 @@
     line-height: 18px;
 }
 
-.back {
-    display: none;
-    transform: rotateZ(180deg);
-    cursor: pointer;
-}
-
-.notificationsHeader {
-    display: none;
-    flex-direction: row;
-    align-items: center;
-    gap: 33%;
-}
-
-.notificationsHeader h2 {
-    font-family: Samsung Sans;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    color: #1A1C21;
-}
-
 @media screen and (max-width: 425px) {
     .container {
         gap: 25px;
@@ -261,6 +305,7 @@
 
     .notificationsHeader {
         display: flex;
+        gap: 33%;
     }
 
 }

@@ -4,18 +4,15 @@ import Image from "next/future/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-
-const NotificationsList = [
-	{ text: "You have a new message", date: "10:00", id: 1 },
-	{ text: "You have a new message", date: "10:00", id: 2 },
-	{ text: "You have a new message", date: "10:00", id: 3 },
-	{ text: "You have a new message", date: "10:00", id: 4 },
-	{ text: "You have a new message", date: "10:00", id: 5 },
-	{ text: "You have a new message", date: "10:00", id: 6 },
-];
+import { UserNotifications } from "src/types/queryTypes";
+import { trpc } from "src/utils/trpc";
+import Moment from "react-moment";
 
 const UserProfile: React.FC = () => {
 	const { data: session } = useSession();
+	const { data: notifications, isLoading: matchesLoading } = trpc.useQuery([
+		"user.getNotifications",
+	]);
 
 	if (!session?.user) {
 		return (
@@ -39,7 +36,7 @@ const UserProfile: React.FC = () => {
 				/>
 				228
 			</div>
-			<Notifications items={NotificationsList} />
+			{notifications && <Notifications items={notifications} />}
 			<Profile
 				name={session.user.name}
 				id={1}
@@ -50,7 +47,7 @@ const UserProfile: React.FC = () => {
 };
 
 interface NotificationsProps {
-	items: { text: string; date: string; id: number }[];
+	items: UserNotifications;
 }
 
 const NotificationVariants = {
@@ -130,21 +127,72 @@ const Notifications: React.FC<NotificationsProps> = (props) => {
 									alt="Back"
 								/>
 							</div>
-							<h2>Notifications</h2>
-						</div>
-						{items.map((item) => (
-							<div
-								key={item.id}
-								className={styles.notification}
-							>
-								<span className={styles.notificationTime}>
-									{item.date}
-								</span>
-								<span className={styles.notificationText}>
-									{item.text}
-								</span>
+							<div className={styles.notificationsHeaderText}>
+								<h2>Notifications</h2>
+
+								<div className={styles.notificationsBubble}>
+									{items.new.length}
+								</div>
 							</div>
-						))}
+						</div>
+						<div className={styles.notificationContainer}>
+							<span className={styles.notificationSubTitle}>New</span>
+							{items.new.map((item) => (
+								<div
+									key={item.id}
+									className={styles.notification}
+								>
+									<Image
+										src={item.image}
+										height={52}
+										width={52}
+										alt="Notification Image"
+										className={styles.notificationImage}
+									/>
+									<div className={styles.notificationInfo}>
+										<span className={styles.notificationText}>
+											{item.message}
+										</span>
+										<Moment
+											fromNow
+											className={styles.notificationTime}
+										>
+											{item.date}
+										</Moment>
+									</div>
+								</div>
+							))}
+						</div>
+						<div className={styles.notificationContainer}>
+							<span className={styles.notificationSubTitle}>
+								Earlier
+							</span>
+							{items.new.map((item) => (
+								<div
+									key={item.id}
+									className={styles.notification}
+								>
+									<Image
+										src={item.image}
+										height={52}
+										width={52}
+										alt="Notification Image"
+										className={styles.notificationImage}
+									/>
+									<div className={styles.notificationInfo}>
+										<span className={styles.notificationText}>
+											{item.message}
+										</span>
+										<Moment
+											format="DD MMM"
+											className={styles.notificationTime}
+										>
+											{item.date}
+										</Moment>
+									</div>
+								</div>
+							))}
+						</div>
 					</motion.div>
 				)}
 			</AnimatePresence>

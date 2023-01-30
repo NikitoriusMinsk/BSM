@@ -6,7 +6,11 @@ import { createProtectedRouter } from "../protected-router";
 
 // THIS IS A TEMPORARY FUNCTION FOR GENERATING DATES
 function getOffsetDate(days: number, months: number, years: number) {
-	return new Date(new Date().getFullYear() + years, new Date().getMonth() + months, new Date().getDate() + days);
+	return new Date(
+		new Date().getFullYear() + years,
+		new Date().getMonth() + months,
+		new Date().getDate() + days
+	);
 }
 
 const UserInfo = {
@@ -86,34 +90,174 @@ const WithdrawInfo = {
 	availableBalance: 523,
 	totalEarned: 12523,
 	history: [
-		{ id: 253946301635, amount: 228, date: new Date(), status: TransactionStatus.Pending },
-		{ id: 253946301634, amount: 28, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301633, amount: 1238, date: new Date(), status: TransactionStatus.Blocked },
-		{ id: 253946301632, amount: 345, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301631, amount: 78, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301630, amount: 8, date: new Date(), status: TransactionStatus.Pending },
-		{ id: 253946301629, amount: 123, date: new Date(), status: TransactionStatus.Blocked },
-		{ id: 253946301635, amount: 228, date: new Date(), status: TransactionStatus.Pending },
-		{ id: 253946301634, amount: 28, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301633, amount: 1238, date: new Date(), status: TransactionStatus.Blocked },
-		{ id: 253946301632, amount: 345, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301631, amount: 78, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301630, amount: 8, date: new Date(), status: TransactionStatus.Pending },
-		{ id: 253946301629, amount: 123, date: new Date(), status: TransactionStatus.Blocked },
-		{ id: 253946301635, amount: 228, date: new Date(), status: TransactionStatus.Pending },
-		{ id: 253946301634, amount: 28, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301633, amount: 1238, date: new Date(), status: TransactionStatus.Blocked },
-		{ id: 253946301632, amount: 345, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301631, amount: 78, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301630, amount: 8, date: new Date(), status: TransactionStatus.Pending },
-		{ id: 253946301629, amount: 123, date: new Date(), status: TransactionStatus.Blocked },
-		{ id: 253946301635, amount: 228, date: new Date(), status: TransactionStatus.Pending },
-		{ id: 253946301634, amount: 28, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301633, amount: 1238, date: new Date(), status: TransactionStatus.Blocked },
-		{ id: 253946301632, amount: 345, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301631, amount: 78, date: new Date(), status: TransactionStatus.Success },
-		{ id: 253946301630, amount: 8, date: new Date(), status: TransactionStatus.Pending },
-		{ id: 253946301629, amount: 123, date: new Date(), status: TransactionStatus.Blocked },
+		{
+			id: 253946301635,
+			amount: 228,
+			date: new Date(),
+			status: TransactionStatus.Pending,
+		},
+		{
+			id: 253946301634,
+			amount: 28,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301633,
+			amount: 1238,
+			date: new Date(),
+			status: TransactionStatus.Blocked,
+		},
+		{
+			id: 253946301632,
+			amount: 345,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301631,
+			amount: 78,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301630,
+			amount: 8,
+			date: new Date(),
+			status: TransactionStatus.Pending,
+		},
+		{
+			id: 253946301629,
+			amount: 123,
+			date: new Date(),
+			status: TransactionStatus.Blocked,
+		},
+		{
+			id: 253946301635,
+			amount: 228,
+			date: new Date(),
+			status: TransactionStatus.Pending,
+		},
+		{
+			id: 253946301634,
+			amount: 28,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301633,
+			amount: 1238,
+			date: new Date(),
+			status: TransactionStatus.Blocked,
+		},
+		{
+			id: 253946301632,
+			amount: 345,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301631,
+			amount: 78,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301630,
+			amount: 8,
+			date: new Date(),
+			status: TransactionStatus.Pending,
+		},
+		{
+			id: 253946301629,
+			amount: 123,
+			date: new Date(),
+			status: TransactionStatus.Blocked,
+		},
+		{
+			id: 253946301635,
+			amount: 228,
+			date: new Date(),
+			status: TransactionStatus.Pending,
+		},
+		{
+			id: 253946301634,
+			amount: 28,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301633,
+			amount: 1238,
+			date: new Date(),
+			status: TransactionStatus.Blocked,
+		},
+		{
+			id: 253946301632,
+			amount: 345,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301631,
+			amount: 78,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301630,
+			amount: 8,
+			date: new Date(),
+			status: TransactionStatus.Pending,
+		},
+		{
+			id: 253946301629,
+			amount: 123,
+			date: new Date(),
+			status: TransactionStatus.Blocked,
+		},
+		{
+			id: 253946301635,
+			amount: 228,
+			date: new Date(),
+			status: TransactionStatus.Pending,
+		},
+		{
+			id: 253946301634,
+			amount: 28,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301633,
+			amount: 1238,
+			date: new Date(),
+			status: TransactionStatus.Blocked,
+		},
+		{
+			id: 253946301632,
+			amount: 345,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301631,
+			amount: 78,
+			date: new Date(),
+			status: TransactionStatus.Success,
+		},
+		{
+			id: 253946301630,
+			amount: 8,
+			date: new Date(),
+			status: TransactionStatus.Pending,
+		},
+		{
+			id: 253946301629,
+			amount: 123,
+			date: new Date(),
+			status: TransactionStatus.Blocked,
+		},
 	],
 };
 
@@ -121,38 +265,168 @@ const FollowersInfo = {
 	count: 1782,
 	difference: 0.0293,
 	followers: [
-		{ name: "John Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: false },
-		{ name: "Jane Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Jack Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: false },
-		{ name: "Jill Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: false },
-		{ name: "Joe Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: false },
-		{ name: "Juan Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Julie Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Jenny Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: false },
-		{ name: "Lee Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Juan Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Jane Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "John Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: false },
-		{ name: "Julie Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
+		{
+			name: "John Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: false,
+		},
+		{
+			name: "Jane Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Jack Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: false,
+		},
+		{
+			name: "Jill Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: false,
+		},
+		{
+			name: "Joe Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: false,
+		},
+		{
+			name: "Juan Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Julie Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Jenny Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: false,
+		},
+		{
+			name: "Lee Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Juan Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Jane Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "John Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: false,
+		},
+		{
+			name: "Julie Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
 	],
 };
 
 const FollowingInfo = {
 	count: 395,
 	followers: [
-		{ name: "John Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Jane Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Jack Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Jill Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Joe Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Juan Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Julie Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Jenny Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Lee Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Juan Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Jane Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "John Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
-		{ name: "Julie Doe", image: "/images/profile-placeholder.png", follower_count: 2000, following: true },
+		{
+			name: "John Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Jane Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Jack Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Jill Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Joe Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Juan Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Julie Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Jenny Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Lee Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Juan Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Jane Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "John Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
+		{
+			name: "Julie Doe",
+			image: "/images/profile-placeholder.png",
+			follower_count: 2000,
+			following: true,
+		},
 	],
 };
 
@@ -268,13 +542,48 @@ const ProfileVisitsInfo = {
 	count: 395,
 	difference: 0.0293,
 	visitors: [
-		{ name: "John Doe", image: "/images/profile-placeholder.png", date: getOffsetDate(0, 0, 0), following: true },
-		{ name: "Jane Doe", image: "/images/profile-placeholder.png", date: getOffsetDate(-1, 0, 0), following: true },
-		{ name: "Jill Doe", image: "/images/profile-placeholder.png", date: getOffsetDate(-1, 0, 0), following: false },
-		{ name: "Jack Doe", image: "/images/profile-placeholder.png", date: getOffsetDate(-2, 0, 0), following: true },
-		{ name: "James Doe", image: "/images/profile-placeholder.png", date: getOffsetDate(-3, 0, 0), following: false },
-		{ name: "Jonathan Doe", image: "/images/profile-placeholder.png", date: getOffsetDate(-4, 0, 0), following: true },
-		{ name: "Jefferey Doe", image: "/images/profile-placeholder.png", date: getOffsetDate(-5, 0, 0), following: false },
+		{
+			name: "John Doe",
+			image: "/images/profile-placeholder.png",
+			date: getOffsetDate(0, 0, 0),
+			following: true,
+		},
+		{
+			name: "Jane Doe",
+			image: "/images/profile-placeholder.png",
+			date: getOffsetDate(-1, 0, 0),
+			following: true,
+		},
+		{
+			name: "Jill Doe",
+			image: "/images/profile-placeholder.png",
+			date: getOffsetDate(-1, 0, 0),
+			following: false,
+		},
+		{
+			name: "Jack Doe",
+			image: "/images/profile-placeholder.png",
+			date: getOffsetDate(-2, 0, 0),
+			following: true,
+		},
+		{
+			name: "James Doe",
+			image: "/images/profile-placeholder.png",
+			date: getOffsetDate(-3, 0, 0),
+			following: false,
+		},
+		{
+			name: "Jonathan Doe",
+			image: "/images/profile-placeholder.png",
+			date: getOffsetDate(-4, 0, 0),
+			following: true,
+		},
+		{
+			name: "Jefferey Doe",
+			image: "/images/profile-placeholder.png",
+			date: getOffsetDate(-5, 0, 0),
+			following: false,
+		},
 	],
 };
 
@@ -291,8 +600,16 @@ const TrackingTips = [
 			tracking: true,
 			match: {
 				teams: [
-					{ name: "EIN", score: 2, image: "/images/team-1-placeholder.svg" },
-					{ name: "FCB", score: 0, image: "/images/team-2-placeholder.svg" },
+					{
+						name: "EIN",
+						score: 2,
+						image: "/images/team-1-placeholder.svg",
+					},
+					{
+						name: "FCB",
+						score: 0,
+						image: "/images/team-2-placeholder.svg",
+					},
 				],
 				date: getOffsetDate(2, 0, 0),
 				league: "Bundesliga",
@@ -408,8 +725,16 @@ const TrackingTips = [
 			tracking: true,
 			match: {
 				teams: [
-					{ name: "EIN", score: 2, image: "/images/team-1-placeholder.svg" },
-					{ name: "FCB", score: 0, image: "/images/team-2-placeholder.svg" },
+					{
+						name: "EIN",
+						score: 2,
+						image: "/images/team-1-placeholder.svg",
+					},
+					{
+						name: "FCB",
+						score: 0,
+						image: "/images/team-2-placeholder.svg",
+					},
 				],
 				date: getOffsetDate(2, 0, 0),
 				league: "Bundesliga",
@@ -489,8 +814,16 @@ const PendingTips = [
 			tracking: false,
 			match: {
 				teams: [
-					{ name: "EIN", score: null, image: "/images/team-1-placeholder.svg" },
-					{ name: "FCB", score: null, image: "/images/team-2-placeholder.svg" },
+					{
+						name: "EIN",
+						score: null,
+						image: "/images/team-1-placeholder.svg",
+					},
+					{
+						name: "FCB",
+						score: null,
+						image: "/images/team-2-placeholder.svg",
+					},
 				],
 				date: getOffsetDate(2, 0, 0),
 				league: "Bundesliga",
@@ -606,8 +939,16 @@ const PendingTips = [
 			tracking: false,
 			match: {
 				teams: [
-					{ name: "EIN", score: null, image: "/images/team-1-placeholder.svg" },
-					{ name: "FCB", score: null, image: "/images/team-2-placeholder.svg" },
+					{
+						name: "EIN",
+						score: null,
+						image: "/images/team-1-placeholder.svg",
+					},
+					{
+						name: "FCB",
+						score: null,
+						image: "/images/team-2-placeholder.svg",
+					},
 				],
 				date: getOffsetDate(2, 0, 0),
 				league: "Bundesliga",
@@ -687,8 +1028,16 @@ const HistoricalTips = [
 			tracking: true,
 			match: {
 				teams: [
-					{ name: "EIN", score: 2, image: "/images/team-1-placeholder.svg" },
-					{ name: "FCB", score: 0, image: "/images/team-2-placeholder.svg" },
+					{
+						name: "EIN",
+						score: 2,
+						image: "/images/team-1-placeholder.svg",
+					},
+					{
+						name: "FCB",
+						score: 0,
+						image: "/images/team-2-placeholder.svg",
+					},
 				],
 				date: getOffsetDate(2, 0, 0),
 				league: "Bundesliga",
@@ -804,8 +1153,16 @@ const HistoricalTips = [
 			tracking: true,
 			match: {
 				teams: [
-					{ name: "EIN", score: 2, image: "/images/team-1-placeholder.svg" },
-					{ name: "FCB", score: 0, image: "/images/team-2-placeholder.svg" },
+					{
+						name: "EIN",
+						score: 2,
+						image: "/images/team-1-placeholder.svg",
+					},
+					{
+						name: "FCB",
+						score: 0,
+						image: "/images/team-2-placeholder.svg",
+					},
 				],
 				date: getOffsetDate(2, 0, 0),
 				league: "Bundesliga",
@@ -871,6 +1228,73 @@ const HistoricalTips = [
 		},
 	},
 ];
+
+const UserNotifications = {
+	new: [
+		{
+			message: "You have a new message",
+			date: getOffsetDate(-1, 0, 0),
+			image: "/images/profile-placeholder.png",
+			id: 1,
+		},
+		{
+			message: "You have a new message",
+			date: getOffsetDate(-2, 0, 0),
+			image: "/images/profile-placeholder.png",
+			id: 2,
+		},
+		{
+			message: "You have a new message",
+			date: getOffsetDate(-3, 0, 0),
+			image: "/images/profile-placeholder.png",
+			id: 3,
+		},
+	],
+	old: [
+		{
+			message: "You have a new message",
+			date: getOffsetDate(-1, 0, 0),
+			image: "/images/profile-placeholder.png",
+			id: 7,
+		},
+		{
+			message: "You have a new message",
+			date: getOffsetDate(-1, 0, 0),
+			image: "/images/profile-placeholder.png",
+			id: 8,
+		},
+		{
+			message: "You have a new message",
+			date: getOffsetDate(-2, 0, 0),
+			image: "/images/profile-placeholder.png",
+			id: 9,
+		},
+		{
+			message: "You have a new message",
+			date: getOffsetDate(-3, 0, 0),
+			image: "/images/profile-placeholder.png",
+			id: 10,
+		},
+		{
+			message: "You have a new message",
+			date: getOffsetDate(-3, 0, 0),
+			image: "/images/profile-placeholder.png",
+			id: 11,
+		},
+		{
+			message: "You have a new message",
+			date: getOffsetDate(-5, 0, 0),
+			image: "/images/profile-placeholder.png",
+			id: 12,
+		},
+		{
+			message: "You have a new message",
+			date: getOffsetDate(-5, 0, 0),
+			image: "/images/profile-placeholder.png",
+			id: 13,
+		},
+	],
+};
 
 export const userRouter = createProtectedRouter()
 	.query("getInfo", {
@@ -997,5 +1421,10 @@ export const userRouter = createProtectedRouter()
 	.query("getHistoricalTips", {
 		async resolve() {
 			return HistoricalTips;
+		},
+	})
+	.query("getNotifications", {
+		async resolve() {
+			return UserNotifications;
 		},
 	});
