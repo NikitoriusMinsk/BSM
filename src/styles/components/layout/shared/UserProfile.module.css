@@ -166,9 +166,36 @@
 .menuHeader {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     gap: 24px;
+}
+
+.user {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
+
+.user .profileImage {
+    height: 52px;
+    width: 52px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+}
+
+.followers {
+    font-family: Samsung Sans;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(26, 28, 33, 0.7);
 }
 
 .name {
@@ -180,26 +207,6 @@
     color: #1A1C21;
     white-space: nowrap;
     width: max-content;
-}
-
-.menuHeader button {
-    display: flex;
-    flex-direction: row;
-    gap: 9px;
-    align-items: center;
-    cursor: pointer;
-    background-color: #7F3FFC;
-    border-radius: 4px;
-    border: none;
-    padding: 14px 20px;
-    width: max-content;
-    white-space: nowrap;
-    font-family: 'Samsung Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    color: #fff;
 }
 
 .menuSection {

@@ -283,16 +283,22 @@ const Profile: React.FC<ProfileProps> = (props) => {
 									alt="Back"
 								/>
 							</div>
-							<div className={styles.name}>{name}</div>
-							<button>
-								<Image
-									src="/icons/plus.svg"
-									alt="plus"
-									width={16}
-									height={16}
-								/>
-								Bet Now
-							</button>
+							<div className={styles.user}>
+								<div className={styles.profileImage}>
+									<Image
+										src={image}
+										alt="profile"
+										width={52}
+										height={52}
+									/>
+								</div>
+								<div className={styles.userInfo}>
+									<div className={styles.name}>{name}</div>
+									<div className={styles.followers}>
+										Followers 1337
+									</div>
+								</div>
+							</div>
 						</div>
 						<div className={styles.menuSection}>
 							<div className={styles.column}>
