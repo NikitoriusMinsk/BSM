@@ -29,6 +29,7 @@ import { createContext } from "src/server/router/context";
 import superjson from "superjson";
 import TipsterInfo from "@components/ui/TipsterInfo";
 import useWindowSize from "src/utils/useWindowSize";
+import FilterModal from "@components/ui/FilterModal";
 
 const InPortal = dynamic(
 	async () => (await import("react-reverse-portal")).InPortal,
@@ -236,23 +237,79 @@ const TipsterRating: NextPage = () => {
 							<TextField
 								placeholder="Search for tipsters"
 								icon="/icons/search.svg"
-								minWidth={300}
 							/>
-							<div className={styles.dropdowns}>
-								<Dropdown
-									items={SportItems}
-									label="Sport:"
-									onSelect={() => {}}
-									minWidth={200}
+							{width > 425 ? (
+								<div className={styles.dropdowns}>
+									<Dropdown
+										items={SportItems}
+										label="Sport:"
+										onSelect={() => {}}
+										minWidth={200}
+									/>
+									<Dropdown
+										items={TimeItems}
+										label="Tipsters by:"
+										onSelect={() => {}}
+										minWidth={250}
+									/>
+									<button>Reset</button>
+								</div>
+							) : (
+								<FilterModal
+									onApply={() => {}}
+									portalNode={portalNode}
+									filters={[
+										{
+											key: "months",
+											type: "buttons",
+											label: "Tipster by month",
+											items: [
+												{ id: 1, label: "All" },
+												{ id: 2, label: "1-10 Months" },
+												{ id: 3, label: "10-100 Months" },
+												{ id: 4, label: "100+ Months" },
+											],
+										},
+										{
+											key: "sports",
+											type: "singleChoice",
+											label: "Choose sport",
+											items: [
+												{
+													id: 1,
+													label: "All",
+													image: "/icons/star-black.svg",
+												},
+												{
+													id: 2,
+													label: "Football",
+													image: "/icons/star-black.svg",
+												},
+												{
+													id: 3,
+													label: "Basketball",
+													image: "/icons/star-black.svg",
+												},
+												{
+													id: 4,
+													label: "Rugby",
+													image: "/icons/star-black.svg",
+												},
+												{
+													id: 5,
+													label: "Badminton",
+													image: "/icons/star-black.svg",
+												},
+												{
+													id: 6,
+													label: "Baseball",
+													image: "/icons/star-black.svg",
+												},
+											],
+										},
+									]}
 								/>
-								<Dropdown
-									items={TimeItems}
-									label="Tipsters by:"
-									onSelect={() => {}}
-									minWidth={250}
-								/>
-								<button>Reset</button>
-							</div>
+							)}
 						</div>
 						<Table
 							data={tipsters}

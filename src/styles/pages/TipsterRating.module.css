@@ -541,9 +541,8 @@
     }
 
     .tableContainer .controls {
-        flex-direction: column;
         height: unset;
-        gap: 20px;
+        gap: 12px;
         padding: 0 20px;
     }
 

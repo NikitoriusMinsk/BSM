@@ -1,0 +1,191 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid rgba(26, 28, 33, 0.2);
+    border-radius: 8px;
+    width: min-content;
+    background-color: transparent;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    width: 100%;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+    background-color: #FFFFFF;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    color: #1A1C21;
+}
+
+.close {
+    cursor: pointer;
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: 100%;
+    flex: 1;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+}
+
+.controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 24px;
+    flex: 1;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.controls button.clear {
+    color: #1A1C21;
+    border: 1px solid #1A1C2133;
+    background-color: #FFFFFF;
+}
+
+.controls button.apply {
+    color: #FFFFFF;
+    border: 1px solid #7F3FFC;
+    background-color: #7F3FFC;
+}
+
+/* Filter Shared */
+
+.filterLabel {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: rgba(26, 28, 33, 0.7);
+}
+
+.filterContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Buttons Filter */
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.buttonContainer button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 24px;
+    width: calc(50% - 6px);
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid rgba(26, 28, 33, 0.2);
+    cursor: pointer;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+    transition: all .3s ease-in-out;
+}
+
+.buttonContainer button.active {
+    background-color: #7F3FFC;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
+}
+
+/* Single Choice Filter */
+
+.choiceContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 150px;
+    overflow-y: scroll;
+}
+
+.choiceContainer .option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.choiceContainer .option.active {
+    background-color: #7F3FFC;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
+}
