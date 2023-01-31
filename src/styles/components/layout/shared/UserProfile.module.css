@@ -168,6 +168,9 @@
     flex-direction: row;
     align-items: center;
     gap: 24px;
+    background-color: #F2F2F24D;
+    border-radius: 8px;
+    padding: 12px;
 }
 
 .user {
@@ -217,6 +220,10 @@
     padding: 27px 23px;
     background-color: #F2F2F24D;
     border-radius: 8px;
+}
+
+.menuSection:last-child {
+    background-color: transparent;
 }
 
 .column {
@@ -282,6 +289,10 @@
 
     .column {
         gap: 12px;
+    }
+
+    .menuHeader {
+        background-color: transparent;
     }
 
     .menuItem {

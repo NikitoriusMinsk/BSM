@@ -28,6 +28,7 @@ import { appRouter } from "src/server/router";
 import { createContext } from "src/server/router/context";
 import superjson from "superjson";
 import TipsterInfo from "@components/ui/TipsterInfo";
+import useWindowSize from "src/utils/useWindowSize";
 
 const InPortal = dynamic(
 	async () => (await import("react-reverse-portal")).InPortal,
@@ -149,6 +150,48 @@ const columns = [
 	}),
 ];
 
+const mobileColumns = [
+	columnHelper.display({
+		id: "index",
+		header: "#",
+		cell: (props) =>
+			props.row.index === 0 ? (
+				<div>
+					<Image
+						src="/icons/crown-violet.svg"
+						height={24}
+						width={24}
+						alt=""
+					/>
+				</div>
+			) : (
+				props.row.index + 1
+			),
+		enableSorting: false,
+	}),
+	columnHelper.accessor((row) => ({ ...row }), {
+		id: "user",
+		cell: (info) => {
+			return <TipsterInfo {...info.getValue()} />;
+		},
+		header: () => <span>Tipster</span>,
+		enableSorting: false,
+	}),
+	columnHelper.accessor("roi", {
+		cell: (info) =>
+			info.getValue() > 0 ? (
+				<span className={`${styles.roi} ${styles.positive}`}>
+					{info.getValue()}
+				</span>
+			) : (
+				<span className={`${styles.roi} ${styles.negative}`}>
+					{info.getValue()}
+				</span>
+			),
+		header: () => <span>ROI</span>,
+	}),
+];
+
 const TipsterRating: NextPage = () => {
 	const { data: tipsters, isLoading: tipstersLoading } = trpc.useQuery([
 		"tipsters.getAll",
@@ -162,6 +205,7 @@ const TipsterRating: NextPage = () => {
 	const { data: currentCompetition, isLoading: currentCompetitionLoading } =
 		trpc.useQuery(["competitions.getCurrent"]);
 	const portalNode = usePortal();
+	const { width } = useWindowSize();
 
 	if (
 		tipstersLoading ||
@@ -192,7 +236,7 @@ const TipsterRating: NextPage = () => {
 							<TextField
 								placeholder="Search for tipsters"
 								icon="/icons/search.svg"
-								minWidth={400}
+								minWidth={300}
 							/>
 							<div className={styles.dropdowns}>
 								<Dropdown
@@ -212,13 +256,13 @@ const TipsterRating: NextPage = () => {
 						</div>
 						<Table
 							data={tipsters}
-							columns={columns}
+							columns={width > 425 ? columns : mobileColumns}
 							sortable={true}
 						/>
 					</div>
 					<Banner
-						image="/images/banner-placeholder-1.png"
-						height={200}
+						image={"/images/banner-placeholder-1.png"}
+						height={width > 425 ? 200 : 400}
 					/>
 					<PageTips />
 				</div>
@@ -241,7 +285,8 @@ const VerifiedTipsters: React.FC<{
 	portalNode: HtmlPortalNode | null;
 }> = (props) => {
 	const { tipsters } = props;
-	const _tipsters = sliceIntoChunks(tipsters, 3);
+
+	const { width } = useWindowSize();
 
 	function sliceIntoChunks(arr: Tipsters, chunkSize: number) {
 		const res = [];
@@ -282,19 +327,21 @@ const VerifiedTipsters: React.FC<{
 					loop={true}
 					autoPlay={true}
 				>
-					{_tipsters.map((tipstersChunk, index) => (
-						<div
-							className={styles.tipsterSlide}
-							key={`tipster_slide_${index}`}
-						>
-							{tipstersChunk.map((tipster, index) => (
-								<TipsterCard
-									key={`tipster_slide_item_${index}`}
-									{...tipster}
-								/>
-							))}
-						</div>
-					))}
+					{sliceIntoChunks(tipsters, width > 425 ? 3 : 1).map(
+						(tipstersChunk, index) => (
+							<div
+								className={styles.tipsterSlide}
+								key={`tipster_slide_${index}`}
+							>
+								{tipstersChunk.map((tipster, index) => (
+									<TipsterCard
+										key={`tipster_slide_item_${index}`}
+										{...tipster}
+									/>
+								))}
+							</div>
+						)
+					)}
 				</Slider>
 			</div>
 		</div>
