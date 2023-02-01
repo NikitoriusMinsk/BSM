@@ -431,7 +431,7 @@
     .header {
         padding: 16px;
         gap: 20px;
-        justify-content: unset;
+        justify-content: space-between;
     }
 
     .teamImages {
