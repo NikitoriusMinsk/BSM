@@ -27,6 +27,7 @@ import { createContext } from "src/server/router/context";
 import superjson from "superjson";
 import useWindowSize from "src/utils/useWindowSize";
 import TipsterInfo from "@components/ui/TipsterInfo";
+import ArrayToChunks from "src/utils/ArrayToChunks";
 
 const InPortal = dynamic(
 	async () => (await import("react-reverse-portal")).InPortal,
@@ -503,15 +504,6 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 	const { competitions } = props;
 
 	const { width } = useWindowSize();
-
-	function ArrayToChunks(
-		arr: inferArrayElementType<PreviousCompetitions>["users"],
-		size: number
-	) {
-		return Array.from(new Array(Math.ceil(arr.length / size)), (_, i) =>
-			arr.slice(i * size, i * size + size)
-		);
-	}
 
 	return (
 		<div className={styles.previousCompetitions}>
