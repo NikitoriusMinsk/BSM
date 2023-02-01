@@ -101,7 +101,11 @@ const Home: NextPage = () => {
 							/>
 						</div>
 						<div className={styles.matches}>
-							<Matches leagues={matches} />
+							<Matches
+								leagues={matches}
+								h2={"Top Matches"}
+								h3={"Today"}
+							/>
 							<Predictions
 								leagues={predictions}
 								h2="Best Predictions"
@@ -301,7 +305,7 @@ const MostTips: React.FC<{ tips: MostTips }> = (props) => {
 				autoPlay={true}
 				loop={true}
 			>
-				{ArrayToChunks(tips, width > 425 ? 4 : 1).map((chunk, index) => (
+				{ArrayToChunks(tips, width > 425 ? 3 : 1).map((chunk, index) => (
 					<div className={styles.mostTipsList}>
 						{chunk.map((tip, index) => (
 							<MatchTipsCard

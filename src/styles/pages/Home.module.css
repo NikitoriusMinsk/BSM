@@ -494,11 +494,13 @@
     .mainColumn {
         grid-column-start: 1;
         grid-column-end: 13;
+        margin-bottom: 0;
     }
 
     .sideColumn {
         grid-column-start: 1;
         grid-column-end: 13;
+        padding: 0 16px;
     }
 
     .matchesFilters {
@@ -507,6 +509,7 @@
 
     .matches {
         grid-column-start: 1;
+        grid-column-end: 12;
     }
 
     .paddedContainer {
