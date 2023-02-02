@@ -149,6 +149,9 @@
     overflow: hidden;
     border: 2px solid #7F3FFC;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu {

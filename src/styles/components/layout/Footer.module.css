@@ -96,11 +96,19 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width:768px) {
     .container {
         margin-bottom: 98px;
         padding: 40px 16px 30px;
     }
+
+    .row {
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 425px) {
+
 
     .container .row:first-child {
         flex-direction: column;

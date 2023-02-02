@@ -33,7 +33,7 @@ function MyApp(appProps: AppProps<{ session: Session }>) {
 			return <Component {...pageProps} />;
 		}
 
-		if (width <= 425) {
+		if (width <= 768) {
 			return (
 				<MobileLayout>
 					<Component {...pageProps} />

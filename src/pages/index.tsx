@@ -69,7 +69,7 @@ const Home: NextPage = () => {
 
 	return (
 		<>
-			<div className={styles.mainColumn}>
+			<div className={styles.topSection}>
 				<div className={styles.slider}>
 					<Slider
 						autoPlay={true}
@@ -80,12 +80,16 @@ const Home: NextPage = () => {
 						))}
 					</Slider>
 				</div>
-				<div className={styles.paddedContainer}>
-					<MostTips tips={tips.slice(0, 3)} />
+				<div className={styles.topSectionInfo}>
+					<MostTips tips={tips} />
 					<Banner
 						height={width > 425 ? 200 : 420}
 						image="/images/banner-placeholder-1.png"
 					/>
+				</div>
+			</div>
+			<div className={styles.mainColumn}>
+				<div className={styles.paddedContainer}>
 					<div className={styles.matchesContainer}>
 						<div className={styles.matchesFilters}>
 							<Filter
@@ -120,7 +124,7 @@ const Home: NextPage = () => {
 				<TopTipsters tipsters={tipsters} />
 				<LiveMatches matches={liveMatches} />
 				<Banner
-					height={463}
+					height={width > 768 ? 463 : 900}
 					image="/images/banner-placeholder-2.png"
 				/>
 				<BestBookmakers bookmakers={bookmakers} />
@@ -305,16 +309,18 @@ const MostTips: React.FC<{ tips: MostTips }> = (props) => {
 				autoPlay={true}
 				loop={true}
 			>
-				{ArrayToChunks(tips, width > 425 ? 3 : 1).map((chunk, index) => (
-					<div className={styles.mostTipsList}>
-						{chunk.map((tip, index) => (
-							<MatchTipsCard
-								{...tip}
-								key={`tip_${index}`}
-							/>
-						))}
-					</div>
-				))}
+				{ArrayToChunks(tips, width <= 768 ? 2 : width > 425 ? 3 : 1).map(
+					(chunk, index) => (
+						<div className={styles.mostTipsList}>
+							{chunk.map((tip, index) => (
+								<MatchTipsCard
+									{...tip}
+									key={`tip_${index}`}
+								/>
+							))}
+						</div>
+					)
+				)}
 			</Slider>
 		</div>
 	);

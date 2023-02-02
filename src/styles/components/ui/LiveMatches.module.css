@@ -158,3 +158,41 @@
     line-height: 18px;
     color: #1A1C21;
 }
+
+.otherMatches {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.otherMatches .matchInfo {
+    display: none;
+}
+
+@media screen and (max-width:768px) {
+    .liveMatchesList {
+        flex-direction: row;
+    }
+
+    .otherMatches {
+        width: 100%;
+    }
+
+    .otherMatches .liveMatchesItem:nth-child(odd) {
+        background-color: #F2F2F2;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .liveMatchesList {
+        flex-direction: column;
+    }
+
+    .otherMatches {
+        width: 100%;
+    }
+
+    .otherMatches .liveMatchesItem:nth-child(odd) {
+        background-color: #FFFFFF;
+    }
+}
