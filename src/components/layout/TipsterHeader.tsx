@@ -13,6 +13,7 @@ import Moment from "react-moment";
 import dynamic from "next/dynamic";
 import { trpc } from "src/utils/trpc";
 import UserProfile from "./shared/UserProfile";
+import useWindowSize from "src/utils/useWindowSize";
 // const UserProfile = dynamic(() => import('@components/layout/shared/UserProfile'))
 
 const links = [
@@ -23,6 +24,7 @@ const links = [
 const TipsterHeader: React.FC = () => {
 	const router = useRouter();
 	const { data: Timezones } = trpc.useQuery(["navigation.getTimezones"]);
+	const { width } = useWindowSize();
 
 	return (
 		<div className={styles.container}>
@@ -48,30 +50,34 @@ const TipsterHeader: React.FC = () => {
 			</div>
 			<nav>
 				<div className={styles.controls}>
-					{Timezones && (
-						<Dropdown
-							items={Timezones.map((tz) => ({
-								name: (
-									<Moment
-										date={tz.date}
-										tz={tz.name}
-										format={"DD.MM Z"}
-									/>
-								),
-								label: (
-									<Moment
-										date={tz.date}
-										format={"HH:mm"}
-										tz={tz.name}
-									/>
-								),
-								id: tz.id,
-							}))}
-							onSelect={(id) => {}}
-							minWidth={200}
-						/>
+					{width > 1024 && (
+						<>
+							{Timezones && (
+								<Dropdown
+									items={Timezones.map((tz) => ({
+										name: (
+											<Moment
+												date={tz.date}
+												tz={tz.name}
+												format={"DD.MM Z"}
+											/>
+										),
+										label: (
+											<Moment
+												date={tz.date}
+												format={"HH:mm"}
+												tz={tz.name}
+											/>
+										),
+										id: tz.id,
+									}))}
+									onSelect={(id) => {}}
+									minWidth={200}
+								/>
+							)}
+							<Settings />
+						</>
 					)}
-					<Settings />
 					<UserProfile />
 				</div>
 			</nav>

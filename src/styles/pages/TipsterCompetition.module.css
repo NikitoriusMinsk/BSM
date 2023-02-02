@@ -740,6 +740,43 @@
     left: -20px;
 }
 
+@media screen and (max-width: 1024px) {
+
+    .currentCompetition .steps,
+    .currentCompetition .duration .text {
+        display: none;
+    }
+
+    .sideColumn {
+        display: none;
+    }
+
+    .mainColumn,
+    .bottomBlock {
+        margin-left: 0;
+        grid-column-end: 13;
+        padding: 0 16px;
+    }
+
+    .previousCompetitions {
+        padding: 23px 16px;
+        gap: 24px
+    }
+
+    .participant {
+        max-width: unset;
+    }
+
+    .previousCompetitions .header h2 {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #FFFFFF;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .currentCompetition {
         padding: 20px 16px;
@@ -761,41 +798,14 @@
     }
 
     .currentCompetition .share,
-    .currentCompetition .steps,
     .currentCompetition h2,
-    .currentCompetition .separator,
-    .currentCompetition .duration .text {
+    .currentCompetition .separator {
         display: none;
-    }
-
-    .sideColumn {
-        display: none;
-    }
-
-    .mainColumn,
-    .bottomBlock {
-        margin-left: 0;
-        grid-column-end: 13;
-        padding: 0 16px;
     }
 
     .controls {
         flex-direction: column;
         gap: 12px;
-    }
-
-    .previousCompetitions {
-        padding: 23px 16px;
-        gap: 24px
-    }
-
-    .previousCompetitions .header h2 {
-        font-family: 'Samsung Sans';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 15px;
-        line-height: 18px;
-        color: #FFFFFF;
     }
 
     .previousCompetitions .slide {
@@ -823,10 +833,6 @@
         font-size: 14px;
         line-height: 17px;
         color: rgba(255, 255, 255, 0.9);
-    }
-
-    .participant {
-        max-width: unset;
     }
 
 }

@@ -546,11 +546,11 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 				arrowOptions={{
 					offset: {
 						next: {
-							top: width > 425 ? 125 : 155,
-							side: width > 425 ? 304 : 34,
+							top: width >= 1024 ? 100 : width >= 425 ? 155 : 155,
+							side: width >= 1024 ? 34 : width >= 425 ? 34 : 34,
 						},
 						prev: {
-							top: width > 425 ? 125 : 155,
+							top: width >= 1024 ? 100 : width >= 425 ? 155 : 155,
 							side: 0,
 						},
 					},
@@ -576,24 +576,24 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 							</span>
 						</div>
 						<Slider swipable={true}>
-							{ArrayToChunks(users, width > 425 ? 4 : 1).map(
-								(chunk) => (
-									<div className={styles.participantsContainer}>
-										{chunk.map((user, index) => (
-											<CompetitionParticipant
-												{...user}
-												place={
-													users.findIndex(
-														(_user) =>
-															_user.id === user.id
-													) + 1
-												}
-												key={`participant_${user.id}`}
-											/>
-										))}
-									</div>
-								)
-							)}
+							{ArrayToChunks(
+								users,
+								width >= 1024 ? 3 : width >= 425 ? 1 : 4
+							).map((chunk) => (
+								<div className={styles.participantsContainer}>
+									{chunk.map((user, index) => (
+										<CompetitionParticipant
+											{...user}
+											place={
+												users.findIndex(
+													(_user) => _user.id === user.id
+												) + 1
+											}
+											key={`participant_${user.id}`}
+										/>
+									))}
+								</div>
+							))}
 						</Slider>
 					</div>
 				))}
