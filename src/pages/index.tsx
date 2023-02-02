@@ -124,7 +124,7 @@ const Home: NextPage = () => {
 				<TopTipsters tipsters={tipsters} />
 				<LiveMatches matches={liveMatches} />
 				<Banner
-					height={width < 1024 ? 900 : width < 768 ? 463 : 250}
+					height={width >= 1024 ? 900 : width >= 768 ? 463 : 250}
 					image="/images/banner-placeholder-2.png"
 				/>
 				<BestBookmakers bookmakers={bookmakers} />
