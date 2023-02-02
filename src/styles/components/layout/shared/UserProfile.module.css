@@ -268,6 +268,12 @@
     line-height: 18px;
 }
 
+@media screen and (max-width: 1280px) {
+    .container {
+        gap: 24px;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .container {
         gap: 25px;

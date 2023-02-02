@@ -96,7 +96,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:1280px) {
     .container {
         margin-bottom: 98px;
         padding: 40px 16px 30px;

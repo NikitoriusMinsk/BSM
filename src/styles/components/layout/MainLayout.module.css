@@ -13,3 +13,9 @@
     /* margin is 5px less than design to adjust to scrollbar width */
     margin-right: 135px;
 }
+
+@media screen and (max-width:1440px) {
+    .content {
+        margin-right: 0;
+    }
+}

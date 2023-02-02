@@ -5,14 +5,22 @@ import Fuse from "fuse.js";
 
 // THIS IS A TEMPORARY FUNCTION FOR GENERATING DATES
 function getOffsetDate(days: number, months: number, years: number) {
-	return new Date(new Date().getFullYear() + years, new Date().getMonth() + months, new Date().getDate() + days);
+	return new Date(
+		new Date().getFullYear() + years,
+		new Date().getMonth() + months,
+		new Date().getDate() + days
+	);
 }
 
 const LiveMatchesTemp = [
 	{
 		teams: [
 			{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-			{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+			{
+				name: "Manchester City",
+				image: "/images/team-2-placeholder.svg",
+				score: 1,
+			},
 		],
 		id: 1,
 		duration: "48:32",
@@ -21,7 +29,11 @@ const LiveMatchesTemp = [
 	{
 		teams: [
 			{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-			{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 0 },
+			{
+				name: "Manchester City",
+				image: "/images/team-2-placeholder.svg",
+				score: 0,
+			},
 		],
 		id: 2,
 		duration: "48:32",
@@ -30,7 +42,24 @@ const LiveMatchesTemp = [
 	{
 		teams: [
 			{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 0 },
-			{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+			{
+				name: "Manchester City",
+				image: "/images/team-2-placeholder.svg",
+				score: 1,
+			},
+		],
+		id: 3,
+		duration: "48:32",
+		viewer_count: 8,
+	},
+	{
+		teams: [
+			{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 0 },
+			{
+				name: "Manchester City",
+				image: "/images/team-2-placeholder.svg",
+				score: 1,
+			},
 		],
 		id: 3,
 		duration: "48:32",
@@ -42,7 +71,11 @@ const MatchesTemp = [
 	{
 		teams: [
 			{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-			{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+			{
+				name: "Manchester City",
+				image: "/images/team-2-placeholder.svg",
+				score: 1,
+			},
 		],
 		id: 1,
 		date: "2020.01.01 12:00",
@@ -56,7 +89,11 @@ const MatchesTemp = [
 	{
 		teams: [
 			{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-			{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 0 },
+			{
+				name: "Manchester City",
+				image: "/images/team-2-placeholder.svg",
+				score: 0,
+			},
 		],
 		id: 2,
 		date: "2020.01.01 17:22",
@@ -70,7 +107,11 @@ const MatchesTemp = [
 	{
 		teams: [
 			{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 0 },
-			{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+			{
+				name: "Manchester City",
+				image: "/images/team-2-placeholder.svg",
+				score: 1,
+			},
 		],
 		id: 3,
 		date: "2020.01.01 13:00",
@@ -96,8 +137,16 @@ const MatchesByLeague = [
 		matches: [
 			{
 				teams: [
-					{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-					{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
 				],
 				id: 1,
 				date: "2020.01.01 12:00",
@@ -111,8 +160,16 @@ const MatchesByLeague = [
 			},
 			{
 				teams: [
-					{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-					{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
 				],
 				id: 1,
 				date: "2020.01.01 12:00",
@@ -126,8 +183,16 @@ const MatchesByLeague = [
 			},
 			{
 				teams: [
-					{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-					{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
 				],
 				id: 1,
 				date: "2020.01.01 12:00",
@@ -152,8 +217,16 @@ const MatchesByLeague = [
 		matches: [
 			{
 				teams: [
-					{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-					{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
 				],
 				id: 1,
 				date: "2020.01.01 12:00",
@@ -167,8 +240,16 @@ const MatchesByLeague = [
 			},
 			{
 				teams: [
-					{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-					{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
 				],
 				id: 1,
 				date: "2020.01.01 12:00",
@@ -182,8 +263,16 @@ const MatchesByLeague = [
 			},
 			{
 				teams: [
-					{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-					{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
 				],
 				id: 1,
 				date: "2020.01.01 12:00",
@@ -208,8 +297,16 @@ const MatchesByLeague = [
 		matches: [
 			{
 				teams: [
-					{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-					{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
 				],
 				id: 1,
 				date: "2020.01.01 12:00",
@@ -223,8 +320,16 @@ const MatchesByLeague = [
 			},
 			{
 				teams: [
-					{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-					{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
 				],
 				id: 1,
 				date: "2020.01.01 12:00",
@@ -238,8 +343,16 @@ const MatchesByLeague = [
 			},
 			{
 				teams: [
-					{ name: "Liverpool", image: "/images/team-1-placeholder.svg", score: 1 },
-					{ name: "Manchester City", image: "/images/team-2-placeholder.svg", score: 1 },
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
 				],
 				id: 1,
 				date: "2020.01.01 12:00",
@@ -373,8 +486,16 @@ const MatchTips = [
 			tracking: true,
 			match: {
 				teams: [
-					{ name: "EIN", score: 2, image: "/images/team-1-placeholder.svg" },
-					{ name: "FCB", score: 0, image: "/images/team-2-placeholder.svg" },
+					{
+						name: "EIN",
+						score: 2,
+						image: "/images/team-1-placeholder.svg",
+					},
+					{
+						name: "FCB",
+						score: 0,
+						image: "/images/team-2-placeholder.svg",
+					},
 				],
 				date: getOffsetDate(2, 0, 0),
 				league: "Bundesliga",

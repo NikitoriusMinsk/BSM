@@ -124,7 +124,7 @@ const Home: NextPage = () => {
 				<TopTipsters tipsters={tipsters} />
 				<LiveMatches matches={liveMatches} />
 				<Banner
-					height={width > 768 ? 463 : 900}
+					height={width < 1024 ? 900 : width < 768 ? 463 : 250}
 					image="/images/banner-placeholder-2.png"
 				/>
 				<BestBookmakers bookmakers={bookmakers} />
@@ -246,14 +246,18 @@ const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
 									height={65}
 								/>
 							</div>
-							<span className={styles.topTipsterName}>
-								{tipster.name}
-							</span>
-							<div className={styles.topTipsterWinrate}>
-								<span className={styles.winrateLabel}>Winrate</span>
-								<span className={styles.winratePercent}>
-									{tipster.winrate * 100}%
+							<div className={styles.topTipsterInfo}>
+								<span className={styles.topTipsterName}>
+									{tipster.name}
 								</span>
+								<div className={styles.topTipsterWinrate}>
+									<span className={styles.winrateLabel}>
+										Winrate
+									</span>
+									<span className={styles.winratePercent}>
+										{tipster.winrate * 100}%
+									</span>
+								</div>
 							</div>
 						</div>
 					))}
@@ -289,8 +293,8 @@ const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
 							</div>
 						</div>
 					))}
-					<a className={styles.topTipstersMore}>See All</a>
 				</div>
+				<a className={styles.topTipstersMore}>See All</a>
 			</div>
 		</div>
 	);
@@ -309,7 +313,7 @@ const MostTips: React.FC<{ tips: MostTips }> = (props) => {
 				autoPlay={true}
 				loop={true}
 			>
-				{ArrayToChunks(tips, width <= 768 ? 2 : width > 425 ? 3 : 1).map(
+				{ArrayToChunks(tips, width <= 425 ? 1 : width <= 768 ? 2 : 3).map(
 					(chunk, index) => (
 						<div className={styles.mostTipsList}>
 							{chunk.map((tip, index) => (

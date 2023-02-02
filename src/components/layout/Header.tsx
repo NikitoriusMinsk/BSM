@@ -14,11 +14,13 @@ import "moment-timezone";
 import Moment from "react-moment";
 import debounce from "src/utils/debounce";
 import UserProfile from "./shared/UserProfile";
+import useWindowSize from "src/utils/useWindowSize";
 
 const Header: React.FC = () => {
 	const router = useRouter();
 	const { data: links } = trpc.useQuery(["navigation.getSports"]);
 	const { data: Timezones } = trpc.useQuery(["navigation.getTimezones"]);
+	const { width } = useWindowSize();
 
 	return (
 		<div className={styles.container}>
@@ -35,41 +37,45 @@ const Header: React.FC = () => {
 			<nav>
 				{links && (
 					<div className={styles.links}>
-						{links.slice(0, 6).map((link) => (
+						{links.slice(0, width <= 1024 ? 4 : 6).map((link) => (
 							<MenuLink
 								key={link.label}
 								{...link}
 								active={router.pathname.includes(link.href)}
 							/>
 						))}
-						<More items={links.slice(6)} />
+						<More items={links.slice(width <= 1024 ? 4 : 6)} />
 					</div>
 				)}
 				<div className={styles.controls}>
-					{Timezones && (
-						<Dropdown
-							items={Timezones.map((tz) => ({
-								name: (
-									<Moment
-										date={tz.date}
-										tz={tz.name}
-										format={"DD.MM Z"}
-									/>
-								),
-								label: (
-									<Moment
-										date={tz.date}
-										format={"HH:mm"}
-										tz={tz.name}
-									/>
-								),
-								id: tz.id,
-							}))}
-							onSelect={(id) => {}}
-							minWidth={200}
-						/>
+					{width > 1024 && (
+						<>
+							{Timezones && (
+								<Dropdown
+									items={Timezones.map((tz) => ({
+										name: (
+											<Moment
+												date={tz.date}
+												tz={tz.name}
+												format={"DD.MM Z"}
+											/>
+										),
+										label: (
+											<Moment
+												date={tz.date}
+												format={"HH:mm"}
+												tz={tz.name}
+											/>
+										),
+										id: tz.id,
+									}))}
+									onSelect={(id) => {}}
+									minWidth={200}
+								/>
+							)}
+							<Settings />
+						</>
 					)}
-					<Settings />
 					<UserProfile />
 				</div>
 			</nav>
