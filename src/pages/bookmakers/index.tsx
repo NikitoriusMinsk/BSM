@@ -9,13 +9,16 @@ import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import { appRouter } from "src/server/trpc/router/_app";
 import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
+import Slider from "@components/ui/Slider";
+import ArrayToChunks from "src/utils/ArrayToChunks";
+import useWindowSize from "src/utils/useWindowSize";
 
 const Bookmakers: NextPage = () => {
 	const { data: bestBookmakers, isLoading: bestBookmakersLoading } =
 		trpc.bookmakers.getTop.useQuery();
 	const { data: bookmakers, isLoading: bookmakersLoading } =
 		trpc.bookmakers.getAll.useQuery();
-
+	const { width } = useWindowSize();
 	if (bestBookmakersLoading || bookmakersLoading) {
 		return <div>Loading...</div>;
 	}
@@ -42,12 +45,26 @@ const Bookmakers: NextPage = () => {
 					<h2>Best Bookmakers</h2>
 				</div>
 				<div className={styles.bookmakers}>
-					{bestBookmakers.map((bookmaker, index) => (
-						<BestBookmaker
-							key={`best_bookmaker_${index}`}
-							{...bookmaker}
-						/>
-					))}
+					<Slider
+						swipable={true}
+						showPagination={true}
+					>
+						{ArrayToChunks(bestBookmakers, width >= 1920 ? 3 : 1).map(
+							(chunk, index) => (
+								<div
+									className={styles.bestBookmakersSlide}
+									key={index}
+								>
+									{chunk.map((bookmaker, index) => (
+										<BestBookmaker
+											key={`best_bookmaker_${index}`}
+											{...bookmaker}
+										/>
+									))}
+								</div>
+							)
+						)}
+					</Slider>
 				</div>
 			</div>
 			<div className={styles.allBookmakers}>
