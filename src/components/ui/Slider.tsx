@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode, useMemo } from "react";
 import styles from "@styles/components/ui/Slider.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import Image from "next/future/image";
+import Image from "next/image";
 import usePortal from "src/utils/usePortal";
 import dynamic from "next/dynamic";
 

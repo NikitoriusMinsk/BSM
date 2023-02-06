@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import styles from "@styles/components/dashboard/FollowersTab.module.css";
 import sharedStyles from "@styles/components/dashboard/shared.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { trpc } from "src/utils/trpc";
 import debounce from "src/utils/debounce";
 import { FollowersInfo } from "src/types/queryTypes";

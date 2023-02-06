@@ -3,7 +3,7 @@ import { Tipsters } from "src/types/queryTypes";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import { motion } from "framer-motion";
 import styles from "@styles/components/ui/TipsterModal.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import Moment from "react-moment";
 
 interface TipsterModalProps extends inferArrayElementType<Tipsters> {

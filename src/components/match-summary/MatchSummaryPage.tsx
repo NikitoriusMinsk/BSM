@@ -1,5 +1,5 @@
 import styles from "../../styles/components/match-summary/MatchSummaryPage.module.css"
-import Image from "next/image"
+import Image from "next/legacy/image";
 import React, { useEffect, useState } from "react"
 
 const MatchSummaryPage: React.FC = () => {

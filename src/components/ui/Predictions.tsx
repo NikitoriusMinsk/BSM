@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "@styles/components/ui/Predictions.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { Predictions } from "src/types/queryTypes";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import { motion } from "framer-motion";

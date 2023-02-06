@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "@styles/components/ui/BestBookmakers.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { BestBookmakers } from "src/types/queryTypes";
 
 const BestBookmakers: React.FC<{ bookmakers: BestBookmakers }> = (props) => {

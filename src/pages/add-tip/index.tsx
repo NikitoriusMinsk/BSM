@@ -7,7 +7,7 @@ import React, {
 	VoidFunctionComponent,
 } from "react";
 import styles from "@styles/pages/AddTip.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import { Matches, Sports } from "src/types/queryTypes";
 import { trpc } from "src/utils/trpc";

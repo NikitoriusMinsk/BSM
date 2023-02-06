@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "@styles/components/layout/MobileHeader.module.css";
 import Link from "next/link";
-import Image from "next/future/image";
+import Image from "next/image";
 import UserProfile from "./shared/UserProfile";
 import { trpc } from "src/utils/trpc";
 import MenuLink from "./shared/MenuLink";

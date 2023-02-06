@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import styles from "@styles/components/dashboard/SubscriptionTab.module.css";
 import sharedStyles from "@styles/components/dashboard/shared.module.css";
 import { trpc } from "src/utils/trpc";
-import Image from "next/future/image";
+import Image from "next/image";
 import debounce from "src/utils/debounce";
 import { createColumnHelper } from "@tanstack/react-table";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";

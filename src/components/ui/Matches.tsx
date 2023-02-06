@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "@styles/components/ui/Matches.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { MatchesByLeague } from "src/types/queryTypes";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import { motion } from "framer-motion";

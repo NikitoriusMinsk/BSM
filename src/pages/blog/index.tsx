@@ -1,7 +1,7 @@
 import type { GetStaticProps, NextPage } from "next";
 import React from "react";
 import styles from "@styles/pages/Blog.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { trpc } from "src/utils/trpc";
 import Moment from "react-moment";
 import shortenString from "src/utils/shortenString";

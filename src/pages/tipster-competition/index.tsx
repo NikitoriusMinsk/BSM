@@ -2,7 +2,7 @@ import { GetStaticProps, NextPage } from "next";
 import React, { useState } from "react";
 import { trpc } from "src/utils/trpc";
 import styles from "@styles/pages/TipsterCompetition.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import {
 	CurrentCompetition,
 	PreviousCompetitions,

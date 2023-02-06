@@ -3,7 +3,7 @@ import type { GetStaticProps, NextPage } from "next";
 import { trpc } from "../utils/trpc";
 import styles from "@styles/pages/Home.module.css";
 import Slider from "@components/ui/Slider";
-import Image from "next/future/image";
+import Image from "next/image";
 import { useSession } from "next-auth/react";
 import BestBookmakers from "@components/ui/BestBookmakers";
 import LiveMatches from "@components/ui/LiveMatches";

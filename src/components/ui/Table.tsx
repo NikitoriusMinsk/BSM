@@ -10,7 +10,7 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 import styles from "@styles/components/ui/Table.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 
 interface TableProps {
 	data: any[];

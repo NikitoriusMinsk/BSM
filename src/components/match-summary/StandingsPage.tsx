@@ -1,5 +1,5 @@
 import styles from "../../styles/components/match-summary/StandingsPage.module.css"
-import Image from "next/image"
+import Image from "next/legacy/image";
 import React, { useEffect, useState } from "react"
 import StandingsFilter from "@components/ui/match-summary/StandingsFilter"
 import { motion } from "framer-motion"

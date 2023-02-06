@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react";
 import styles from "@styles/pages/UserDashboard.module.css";
 import { trpc } from "src/utils/trpc";
 import { UserInfo } from "src/types/queryTypes";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import DashboardTab from "@components/dashboard/DashboardTab";
 import WithdrawTab from "@components/dashboard/WithdrawTab";
 import FollowersTab from "@components/dashboard/FollowersTab";

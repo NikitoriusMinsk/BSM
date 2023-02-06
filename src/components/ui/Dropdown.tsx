@@ -1,7 +1,7 @@
 import React, { ChangeEvent, ReactNode, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import styles from "../../styles/components/ui/Dropdown.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import TextField from "./TextField";
 import debounce from "src/utils/debounce";
 import Fuse from "fuse.js";

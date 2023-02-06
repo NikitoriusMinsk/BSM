@@ -1,7 +1,7 @@
 import type { NextPage } from "next"
 import Head from "next/head"
 import styles from "../../styles/pages/MatchSummary.module.css"
-import Image from "next/image"
+import Image from "next/legacy/image";
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"

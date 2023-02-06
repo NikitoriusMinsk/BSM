@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "@styles/components/ui/Filter.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 interface FilterProps {

@@ -1,7 +1,7 @@
 import styles from "@styles/components/ui/TipsterInfo.module.css";
 import { AnimatePresence, motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import Image from "next/future/image";
+import Image from "next/image";
 import { useState } from "react";
 import { Tipsters } from "src/types/queryTypes";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";

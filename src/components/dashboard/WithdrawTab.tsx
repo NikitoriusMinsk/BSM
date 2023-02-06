@@ -1,4 +1,4 @@
-import Image from "next/future/image";
+import Image from "next/image";
 import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { trpc } from "src/utils/trpc";
 import styles from "@styles/components/dashboard/WithdrawTab.module.css";

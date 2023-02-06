@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "@styles/pages/Bookmakers.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import { BestBookmakers, Bookmakers } from "src/types/queryTypes";
 import { GetStaticProps, NextPage } from "next";

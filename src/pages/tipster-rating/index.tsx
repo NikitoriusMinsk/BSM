@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "@styles/pages/TipsterRating.module.css";
 import { trpc } from "src/utils/trpc";
-import Image from "next/future/image";
+import Image from "next/image";
 import Slider from "@components/ui/Slider";
 import type { CurrentCompetition, Tipsters } from "src/types/queryTypes";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";

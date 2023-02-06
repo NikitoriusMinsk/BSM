@@ -1,6 +1,6 @@
 import styles from "../../styles/components/ui/TextField.module.css";
 import { useState } from "react";
-import Image from "next/future/image";
+import Image from "next/image";
 
 const PasswordField: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (
 	props

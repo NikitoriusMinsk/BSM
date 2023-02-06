@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "@styles/components/dashboard/ProfileVisitsTab.module.css";
 import sharedStyles from "@styles/components/dashboard/shared.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { trpc } from "src/utils/trpc";
 import { createColumnHelper } from "@tanstack/react-table";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";

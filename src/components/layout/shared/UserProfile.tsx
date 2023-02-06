@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "@styles/components/layout/shared/UserProfile.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";

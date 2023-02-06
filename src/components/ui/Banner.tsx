@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "@styles/components/ui/Banner.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 
 interface BannerProps {
 	height: number;

@@ -9,7 +9,7 @@ import {
 } from "src/types/queryTypes";
 import Slider from "@components/ui/Slider";
 import MatchTipsCard from "@components/ui/MatchTipsCard";
-import Image from "next/future/image";
+import Image from "next/image";
 import BestBookmakers from "@components/ui/BestBookmakers";
 import Banner from "@components/ui/Banner";
 import Filter from "@components/ui/Filter";

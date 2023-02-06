@@ -3,7 +3,7 @@ import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import styles from "@styles/components/ui/FilterModal.module.css";
 import { HtmlPortalNode } from "react-reverse-portal";
 import dynamic from "next/dist/shared/lib/dynamic";
-import Image from "next/future/image";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import TextField from "./TextField";
 

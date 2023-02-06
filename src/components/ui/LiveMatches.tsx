@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "@styles/components/ui/LiveMatches.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { LiveMatches } from "src/types/queryTypes";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 

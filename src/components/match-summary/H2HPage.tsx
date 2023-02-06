@@ -1,5 +1,5 @@
 import styles from "../../styles/components/match-summary/H2HPage.module.css"
-import Image from "next/image"
+import Image from "next/legacy/image";
 import React, { useEffect, useState } from "react"
 import H2HFilter from "@components/ui/match-summary/H2HFilter"
 import { motion } from "framer-motion"

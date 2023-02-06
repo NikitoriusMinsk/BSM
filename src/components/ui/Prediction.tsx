@@ -3,7 +3,7 @@ import styles from "@styles/components/ui/Prediction.module.css";
 import { HistoricalPredictions, PendingPredictions, TrackingPredictions, MatchPredictions } from "src/types/queryTypes";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import Moment from "react-moment";
-import Image from "next/future/image";
+import Image from "next/image";
 import TextField from "./TextField";
 
 type CommentType = inferArrayElementType<

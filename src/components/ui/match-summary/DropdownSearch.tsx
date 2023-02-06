@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import styles from '../../../styles/components/ui/match-summary/DropdownSearch.module.css'
-import Image from "next/image"
+import Image from "next/legacy/image";
 
 interface DropdownProps {
     items: { name: string, id: string, image: string }[];

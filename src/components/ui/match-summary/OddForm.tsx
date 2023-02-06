@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styles from '../../../styles/components/ui/match-summary/OddForm.module.css'
 import { motion, AnimatePresence } from "framer-motion"
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import { Dispatch, SetStateAction } from "react"
 
 interface OddFormProps {

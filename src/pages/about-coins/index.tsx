@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 import styles from "@styles/pages/AboutCoins.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import { Methods } from "src/types/queryTypes";
 import { trpc } from "src/utils/trpc";

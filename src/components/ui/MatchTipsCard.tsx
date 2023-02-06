@@ -3,7 +3,7 @@ import { MostTips } from "src/types/queryTypes";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import styles from "@styles/components/ui/MatchTipsCard.module.css";
 import { MatchStatus } from "src/types/matchStatus";
-import Image from "next/future/image";
+import Image from "next/image";
 
 const MatchTipsCard: React.FC<inferArrayElementType<MostTips>> = (props) => {
 	const { date, league, status, teams, tipAmount, duration } = props;

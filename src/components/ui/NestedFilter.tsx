@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LeaguesByCountry } from "src/types/queryTypes";
 import styles from "@styles/components/ui/NestedFilter.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import { motion } from "framer-motion";
 

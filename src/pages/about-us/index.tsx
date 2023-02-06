@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 import styles from "@styles/pages/AboutUs.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 
 const AboutUs: NextPage = () => {
 	return (

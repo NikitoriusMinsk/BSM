@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ReactSVG } from "react-svg";
 import { useRouter } from "next/router";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/future/image";
+import Image from "next/image";
 import Settings from "./shared/Settings";
 
 const links = [

@@ -1,5 +1,5 @@
 import styles from "../../styles/components/ui/TextField.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 
 interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	type?: "text" | "email" | string;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "@styles/components/layout/Footer.module.css";
 import Link from "next/link";
-import Image from "next/future/image";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const GeneralLinks = [

@@ -1,5 +1,5 @@
 import styles from "../../styles/components/ui/SubmitButton.module.css";
-import Image from "next/future/image";
+import Image from "next/image";
 
 const SubmitButton: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>> = (
 	props
