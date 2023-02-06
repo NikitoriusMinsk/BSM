@@ -17,7 +17,7 @@ const ProfitabilityFilterItems = [
 ]
 
 const TrackingTipsTab: React.FC = () => {
-    const { data, isLoading } = trpc.useQuery(['user.getTrackingTips'])
+    const { data, isLoading } = trpc.user.getTrackingTips.useQuery()
 
     if (isLoading) {
         return <div>Loading...</div>

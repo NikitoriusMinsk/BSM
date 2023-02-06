@@ -72,9 +72,7 @@ const NavigationItems = [
 ];
 
 const UserDashboard: NextPage = () => {
-	const { data: userInfo, isLoading: userInfoLoading } = trpc.useQuery([
-		"user.getInfo",
-	]);
+	const { data: userInfo, isLoading: userInfoLoading } = trpc.user.getInfo.useQuery();
 	const [currentPage, setCurrentPage] = useState(Tabs.Dashboard);
 	const memoizedPage = useMemo(() => {
 		switch (currentPage) {

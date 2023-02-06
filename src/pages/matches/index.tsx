@@ -9,28 +9,23 @@ import DatePicker from "@components/ui/DatePicker";
 import LiveMatches from "@components/ui/LiveMatches";
 import Matches from "@components/ui/Matches";
 import NestedFilter from "@components/ui/NestedFilter";
-import { createSSGHelpers } from "@trpc/react/ssg";
-import { appRouter } from "src/server/router";
-import { createContext } from "src/server/router/context";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { appRouter } from "src/server/trpc/router/_app";
+import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
 
 const MatchesPage: NextPage = () => {
-	const { data: tips, isLoading: tipsLoading } = trpc.useQuery(["tips.getAll"]);
-	const { data: matches, isLoading: matchesLoading } = trpc.useQuery([
-		"matches.getAllByLeague",
-	]);
-	const { data: bookmakers, isLoading: bookmakersLoading } = trpc.useQuery([
-		"bookmakers.getTop",
-	]);
-	const { data: leagues, isLoading: leaguesLoading } = trpc.useQuery([
-		"filters.getLeaguesByCountry",
-	]);
-	const { data: sports, isLoading: sportsLoading } = trpc.useQuery([
-		"filters.getSports",
-	]);
-	const { data: liveMatches, isLoading: liveMatchesLoading } = trpc.useQuery([
-		"matches.getAllLive",
-	]);
+	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery();
+	const { data: matches, isLoading: matchesLoading } =
+		trpc.matches.getAllByLeague.useQuery();
+	const { data: bookmakers, isLoading: bookmakersLoading } =
+		trpc.bookmakers.getTop.useQuery();
+	const { data: leagues, isLoading: leaguesLoading } =
+		trpc.filters.getLeaguesByCountry.useQuery();
+	const { data: sports, isLoading: sportsLoading } =
+		trpc.filters.getSports.useQuery();
+	const { data: liveMatches, isLoading: liveMatchesLoading } =
+		trpc.matches.getAllLive.useQuery();
 
 	if (
 		tipsLoading ||
@@ -94,18 +89,18 @@ const MatchesPage: NextPage = () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createSSGHelpers({
+	const ssg = createProxySSGHelpers({
 		router: appRouter,
 		ctx: await createContext(),
 		transformer: superjson,
 	});
 
-	await ssg.prefetchQuery("tips.getAll");
-	await ssg.prefetchQuery("matches.getAllByLeague");
-	await ssg.prefetchQuery("bookmakers.getTop");
-	await ssg.prefetchQuery("filters.getLeaguesByCountry");
-	await ssg.prefetchQuery("filters.getSports");
-	await ssg.prefetchQuery("matches.getAllLive");
+	await ssg.tips.getAll.prefetch();
+	await ssg.matches.getAllByLeague.prefetch();
+	await ssg.bookmakers.getTop.prefetch();
+	await ssg.filters.getLeaguesByCountry.prefetch();
+	await ssg.filters.getSports.prefetch();
+	await ssg.matches.getAllLive.prefetch();
 
 	return {
 		props: {

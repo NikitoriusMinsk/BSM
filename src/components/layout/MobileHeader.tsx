@@ -8,7 +8,7 @@ import MenuLink from "./shared/MenuLink";
 import { useRouter } from "next/router";
 
 const MobileHeader: React.FC = () => {
-	const { data: links } = trpc.useQuery(["navigation.getSports"]);
+	const { data: links } = trpc.navigation.getSports.useQuery();
 	const router = useRouter();
 
 	return (

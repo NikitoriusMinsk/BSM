@@ -8,7 +8,7 @@ import styles from "@styles/components/dashboard/DashboardTab.module.css";
 import sharedStyles from "@styles/components/dashboard/shared.module.css";
 
 const DashboardTab: React.FC = () => {
-	const { data, isLoading } = trpc.useQuery(["user.getDashboardInfo"]);
+	const { data, isLoading } = trpc.user.getDashboardInfo.useQuery();
 
 	if (isLoading) {
 		return <div>Loading...</div>;

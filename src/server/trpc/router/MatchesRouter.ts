@@ -1,7 +1,7 @@
-import { createRouter } from "../context";
 import { z } from "zod";
 import { MatchStatus } from "src/types/matchStatus";
 import Fuse from "fuse.js";
+import { publicProcedure, router } from "../trpc";
 
 // THIS IS A TEMPORARY FUNCTION FOR GENERATING DATES
 function getOffsetDate(days: number, months: number, years: number) {
@@ -562,28 +562,24 @@ const MatchTips = [
 	},
 ];
 
-export const matchesRouter = createRouter()
-	.query("getAllLive", {
-		async resolve() {
-			return LiveMatchesTemp;
-		},
-	})
-	.query("getAll", {
-		async resolve() {
-			return MatchesTemp;
-		},
-	})
-	.query("getAllByLeague", {
-		async resolve() {
-			return MatchesByLeague;
-		},
-	})
-	.query("search", {
-		input: z.object({
-			searchString: z.string(),
-			sport: z.string().nullish(),
-		}),
-		async resolve({ input }) {
+export const matchesRouter = router({
+	getAllLive: publicProcedure.query(async ({ ctx, input }) => {
+		return LiveMatchesTemp;
+	}),
+	getAll: publicProcedure.query(async ({ ctx, input }) => {
+		return MatchesTemp;
+	}),
+	getAllByLeague: publicProcedure.query(async ({ ctx, input }) => {
+		return MatchesByLeague;
+	}),
+	search: publicProcedure
+		.input(
+			z.object({
+				searchString: z.string(),
+				sport: z.string().nullish(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
 			const { searchString, sport } = input;
 
 			const options = {
@@ -596,10 +592,8 @@ export const matchesRouter = createRouter()
 			const result = fuse.search(searchString).map((item) => item.item);
 
 			return result;
-		},
-	})
-	.query("getMatchTips", {
-		async resolve() {
-			return MatchTips;
-		},
-	});
+		}),
+	getMatchTips: publicProcedure.query(async ({ ctx, input }) => {
+		return MatchTips;
+	}),
+});

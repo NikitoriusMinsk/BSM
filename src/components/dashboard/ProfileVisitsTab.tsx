@@ -56,7 +56,7 @@ const columns = [
 ];
 
 export default function ProfileVisitsTab() {
-	const { data, isLoading } = trpc.useQuery(["user.getProfileVisitsInfo"]);
+	const { data, isLoading } = trpc.user.getProfileVisitsInfo.useQuery();
 
 	if (isLoading) {
 		return <div>Loading...</div>;

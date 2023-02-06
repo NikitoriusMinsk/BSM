@@ -21,9 +21,9 @@ import Table from "@components/ui/Table";
 import { createColumnHelper } from "@tanstack/react-table";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import dynamic from "next/dynamic";
-import { createSSGHelpers } from "@trpc/react/ssg";
-import { appRouter } from "src/server/router";
-import { createContext } from "src/server/router/context";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { appRouter } from "src/server/trpc/router/_app";
+import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
 import useWindowSize from "src/utils/useWindowSize";
 import TipsterInfo from "@components/ui/TipsterInfo";
@@ -212,12 +212,11 @@ const mobileColumns = [
 
 const TipsterCompetition: NextPage = () => {
 	const { data: currentCompetition, isLoading: currentCompetitionLoading } =
-		trpc.useQuery(["competitions.getCurrent"]);
-	const { data: tipsters, isLoading: tipstersLoading } = trpc.useQuery([
-		"tipsters.getAll",
-	]);
+		trpc.competitions.getCurrent.useQuery();
+	const { data: tipsters, isLoading: tipstersLoading } =
+		trpc.tipsters.getAll.useQuery();
 	const { data: previousCompetition, isLoading: previousCompetitionLoading } =
-		trpc.useQuery(["competitions.getPrevious"]);
+		trpc.competitions.getPrevious.useQuery();
 	const portalNode = usePortal();
 	const { width } = useWindowSize();
 
@@ -579,8 +578,11 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 							{ArrayToChunks(
 								users,
 								width >= 1024 ? 3 : width >= 425 ? 1 : 4
-							).map((chunk) => (
-								<div className={styles.participantsContainer}>
+							).map((chunk, index) => (
+								<div
+									className={styles.participantsContainer}
+									key={index}
+								>
 									{chunk.map((user, index) => (
 										<CompetitionParticipant
 											{...user}
@@ -702,15 +704,15 @@ const CompetitionParticipant: React.FC<
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createSSGHelpers({
+	const ssg = createProxySSGHelpers({
 		router: appRouter,
 		ctx: await createContext(),
 		transformer: superjson,
 	});
 
-	await ssg.prefetchQuery("competitions.getCurrent");
-	await ssg.prefetchQuery("tipsters.getAll");
-	await ssg.prefetchQuery("competitions.getPrevious");
+	await ssg.competitions.getCurrent.prefetch();
+	await ssg.competitions.getPrevious.prefetch();
+	await ssg.tipsters.getAll.prefetch();
 
 	return {
 		props: {

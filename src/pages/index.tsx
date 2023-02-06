@@ -1,6 +1,5 @@
 import Banner from "@components/ui/Banner";
 import type { GetStaticProps, NextPage } from "next";
-import { trpc } from "../utils/trpc";
 import styles from "@styles/pages/Home.module.css";
 import Slider from "@components/ui/Slider";
 import Image from "next/image";
@@ -13,34 +12,29 @@ import { MostTips, Tipsters } from "src/types/queryTypes";
 import MatchTipsCard from "@components/ui/MatchTipsCard";
 import Matches from "@components/ui/Matches";
 import Link from "next/link";
-import { createSSGHelpers } from "@trpc/react/ssg";
-import { appRouter } from "src/server/router";
-import { createContext } from "src/server/router/context";
+import { appRouter } from "src/server/trpc/router/_app";
+import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
 import useWindowSize from "src/utils/useWindowSize";
 import ArrayToChunks from "src/utils/ArrayToChunks";
+import { trpc } from "src/utils/trpc";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
-	const { data: bookmakers, isLoading: bookmakersLoading } = trpc.useQuery([
-		"bookmakers.getTop",
-	]);
-	const { data: filters, isLoading: filtersLoading } = trpc.useQuery([
-		"filters.getLeagues",
-	]);
-	const { data: predictions, isLoading: predictionsLoading } = trpc.useQuery([
-		"predictions.getAll",
-	]);
-	const { data: liveMatches, isLoading: liveMatchesLoading } = trpc.useQuery([
-		"matches.getAllLive",
-	]);
-	const { data: matches, isLoading: matchesLoading } = trpc.useQuery([
-		"matches.getAllByLeague",
-	]);
-	const { data: tips, isLoading: tipsLoading } = trpc.useQuery(["tips.getAll"]);
-	const { data: tipsters, isLoading: tipstersLoading } = trpc.useQuery([
-		"tipsters.getAll",
-	]);
+	const { data: bookmakers, isLoading: bookmakersLoading } =
+		trpc.bookmakers.getTop.useQuery();
+	const { data: filters, isLoading: filtersLoading } =
+		trpc.filters.getLeagues.useQuery();
+	const { data: predictions, isLoading: predictionsLoading } =
+		trpc.predictions.getAll.useQuery();
+	const { data: liveMatches, isLoading: liveMatchesLoading } =
+		trpc.matches.getAllLive.useQuery();
+	const { data: matches, isLoading: matchesLoading } =
+		trpc.matches.getAllByLeague.useQuery();
+	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery();
+	const { data: tipsters, isLoading: tipstersLoading } =
+		trpc.tipsters.getAll.useQuery();
 	const { width } = useWindowSize();
 
 	if (
@@ -210,7 +204,7 @@ const Slide: React.FC = () => {
 
 const SignUpPropose: React.FC = () => {
 	return (
-        <div className={styles.signUpPropose}>
+		<div className={styles.signUpPropose}>
 			<h2>Join with us!</h2>
 			<span>
 				Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -218,11 +212,14 @@ const SignUpPropose: React.FC = () => {
 				ever since the 1500s, when an unknown printer took a galley of type
 				and scrambled it to make a type specimen book.
 			</span>
-			<Link href="/sign-up" legacyBehavior>
+			<Link
+				href="/sign-up"
+				legacyBehavior
+			>
 				<button>Sign Up</button>
 			</Link>
 		</div>
-    );
+	);
 };
 
 const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
@@ -315,7 +312,10 @@ const MostTips: React.FC<{ tips: MostTips }> = (props) => {
 			>
 				{ArrayToChunks(tips, width <= 425 ? 1 : width <= 768 ? 2 : 3).map(
 					(chunk, index) => (
-						<div className={styles.mostTipsList}>
+						<div
+							className={styles.mostTipsList}
+							key={index}
+						>
 							{chunk.map((tip, index) => (
 								<MatchTipsCard
 									{...tip}
@@ -331,19 +331,19 @@ const MostTips: React.FC<{ tips: MostTips }> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createSSGHelpers({
+	const ssg = createProxySSGHelpers({
 		router: appRouter,
 		ctx: await createContext(),
 		transformer: superjson,
 	});
 
-	await ssg.prefetchQuery("bookmakers.getTop");
-	await ssg.prefetchQuery("filters.getLeagues");
-	await ssg.prefetchQuery("predictions.getAll");
-	await ssg.prefetchQuery("matches.getAllLive");
-	await ssg.prefetchQuery("matches.getAllByLeague");
-	await ssg.prefetchQuery("tips.getAll");
-	await ssg.prefetchQuery("tipsters.getAll");
+	await ssg.bookmakers.getTop.prefetch();
+	await ssg.filters.getLeagues.prefetch();
+	await ssg.predictions.getAll.prefetch();
+	await ssg.matches.getAllLive.prefetch();
+	await ssg.matches.getAllByLeague.prefetch();
+	await ssg.tips.getAll.prefetch();
+	await ssg.tipsters.getAll.prefetch();
 
 	return {
 		props: {

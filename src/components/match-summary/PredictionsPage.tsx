@@ -7,7 +7,7 @@ import { trpc } from 'src/utils/trpc'
 import Prediction from '@components/ui/Prediction'
 
 const PredictionsPage: React.FC = () => {
-    const { data, isLoading } = trpc.useQuery(['matches.getMatchTips'])
+    const { data, isLoading } = trpc.matches.getMatchTips.useQuery()
 
     return (
         <div className={styles.pageContainer}>

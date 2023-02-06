@@ -24,7 +24,7 @@ const StatusFilterItems = [
 ]
 
 const HistoricalTipsTab: React.FC = () => {
-    const { data, isLoading } = trpc.useQuery(['user.getHistoricalTips'])
+    const { data, isLoading } = trpc.user.getHistoricalTips.useQuery()
 
     if (isLoading) {
         return <div>Loading...</div>

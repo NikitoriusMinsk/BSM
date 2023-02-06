@@ -2,7 +2,7 @@ import { createRouter } from "../context";
 import { z } from "zod";
 import { TransactionStatus } from "src/types/transactionStatus";
 import Fuse from "fuse.js";
-import { createProtectedRouter } from "../protected-router";
+import { protectedProcedure, router } from "../trpc";
 
 // THIS IS A TEMPORARY FUNCTION FOR GENERATING DATES
 function getOffsetDate(days: number, months: number, years: number) {
@@ -1296,32 +1296,26 @@ const UserNotifications = {
 	],
 };
 
-export const userRouter = createProtectedRouter()
-	.query("getInfo", {
-		async resolve() {
-			return UserInfo;
-		},
-	})
-	.query("getDashboardInfo", {
-		async resolve() {
-			return DashboardInfo;
-		},
-	})
-	.query("getWithdrawInfo", {
-		async resolve() {
-			return WithdrawInfo;
-		},
-	})
-	.query("getFollowersInfo", {
-		async resolve() {
-			return FollowersInfo;
-		},
-	})
-	.query("searchFollowers", {
-		input: z.object({
-			searchString: z.string(),
-		}),
-		async resolve({ input }) {
+export const userRouter = router({
+	getInfo: protectedProcedure.query(async ({ ctx, input }) => {
+		return UserInfo;
+	}),
+	getDashboardInfo: protectedProcedure.query(async ({ ctx, input }) => {
+		return DashboardInfo;
+	}),
+	getWithdrawInfo: protectedProcedure.query(async ({ ctx, input }) => {
+		return WithdrawInfo;
+	}),
+	getFollowersInfo: protectedProcedure.query(async ({ ctx, input }) => {
+		return FollowersInfo;
+	}),
+	searchFollowers: protectedProcedure
+		.input(
+			z.object({
+				searchString: z.string(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
 			const { searchString } = input;
 
 			const options = {
@@ -1334,18 +1328,17 @@ export const userRouter = createProtectedRouter()
 			const result = fuse.search(searchString).map((item) => item.item);
 
 			return result;
-		},
-	})
-	.query("getFollowingInfo", {
-		async resolve() {
-			return FollowingInfo;
-		},
-	})
-	.query("searchFollowing", {
-		input: z.object({
-			searchString: z.string(),
 		}),
-		async resolve({ input }) {
+	getFollowingInfo: protectedProcedure.query(async ({ ctx, input }) => {
+		return FollowingInfo;
+	}),
+	searchFollowing: protectedProcedure
+		.input(
+			z.object({
+				searchString: z.string(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
 			const { searchString } = input;
 
 			const options = {
@@ -1358,18 +1351,17 @@ export const userRouter = createProtectedRouter()
 			const result = fuse.search(searchString).map((item) => item.item);
 
 			return result;
-		},
-	})
-	.query("getSubscriptionInfo", {
-		async resolve() {
-			return SubscriptionInfo;
-		},
-	})
-	.query("searchSubscribers", {
-		input: z.object({
-			searchString: z.string(),
 		}),
-		async resolve({ input }) {
+	getSubscriptionInfo: protectedProcedure.query(async ({ ctx, input }) => {
+		return SubscriptionInfo;
+	}),
+	searchSubscribers: protectedProcedure
+		.input(
+			z.object({
+				searchString: z.string(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
 			const { searchString } = input;
 
 			const options = {
@@ -1382,13 +1374,14 @@ export const userRouter = createProtectedRouter()
 			const result = fuse.search(searchString).map((item) => item.item);
 
 			return result;
-		},
-	})
-	.query("searchSubscriptions", {
-		input: z.object({
-			searchString: z.string(),
 		}),
-		async resolve({ input }) {
+	searchSubscriptions: protectedProcedure
+		.input(
+			z.object({
+				searchString: z.string(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
 			const { searchString } = input;
 
 			const options = {
@@ -1401,30 +1394,20 @@ export const userRouter = createProtectedRouter()
 			const result = fuse.search(searchString).map((item) => item.item);
 
 			return result;
-		},
-	})
-	.query("getProfileVisitsInfo", {
-		async resolve() {
-			return ProfileVisitsInfo;
-		},
-	})
-	.query("getTrackingTips", {
-		async resolve() {
-			return TrackingTips;
-		},
-	})
-	.query("getPendingTips", {
-		async resolve() {
-			return PendingTips;
-		},
-	})
-	.query("getHistoricalTips", {
-		async resolve() {
-			return HistoricalTips;
-		},
-	})
-	.query("getNotifications", {
-		async resolve() {
-			return UserNotifications;
-		},
-	});
+		}),
+	getProfileVisitsInfo: protectedProcedure.query(async ({ ctx, input }) => {
+		return ProfileVisitsInfo;
+	}),
+	getTrackingTips: protectedProcedure.query(async ({ ctx, input }) => {
+		return TrackingTips;
+	}),
+	getPendingTips: protectedProcedure.query(async ({ ctx, input }) => {
+		return PendingTips;
+	}),
+	getHistoricalTips: protectedProcedure.query(async ({ ctx, input }) => {
+		return HistoricalTips;
+	}),
+	getNotifications: protectedProcedure.query(async ({ ctx, input }) => {
+		return UserNotifications;
+	}),
+});

@@ -79,7 +79,7 @@ const columns = [
 ];
 
 const WithdrawTab: React.FC = () => {
-	const { data, isLoading } = trpc.useQuery(["user.getWithdrawInfo"]);
+	const { data, isLoading } = trpc.user.getWithdrawInfo.useQuery();
 	const portalNode = usePortal();
 
 	if (isLoading) {

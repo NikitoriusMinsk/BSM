@@ -232,7 +232,7 @@ const TabVariants = {
 };
 
 const TimezoneTab: React.FC = (props) => {
-	const { data: timezones } = trpc.useQuery(["navigation.getTimezones"]);
+	const { data: timezones } = trpc.navigation.getTimezones.useQuery();
 
 	const [active, setActive] = useState("0");
 	const [isOpen, setIsOpen] = useState(false);
@@ -317,6 +317,7 @@ const TimezoneTab: React.FC = (props) => {
 										selected === tz.id && styles.selected
 									}`}
 									onClick={() => setSelected(tz.id)}
+									key={tz.id}
 								>
 									<Moment
 										date={tz.date}
@@ -405,6 +406,7 @@ const LanguageTab: React.FC = (props) => {
 									className={`${styles.option} ${
 										selected === lang.id && styles.selected
 									}`}
+									key={lang.id}
 									onClick={() => setSelected(lang.id)}
 								>
 									{lang.label}

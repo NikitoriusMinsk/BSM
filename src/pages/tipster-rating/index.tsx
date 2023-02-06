@@ -23,9 +23,9 @@ import shortenNumber from "src/utils/shortenNumber";
 import Table from "@components/ui/Table";
 import dynamic from "next/dynamic";
 import { HtmlPortalNode } from "react-reverse-portal";
-import { createSSGHelpers } from "@trpc/react/ssg";
-import { appRouter } from "src/server/router";
-import { createContext } from "src/server/router/context";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { appRouter } from "src/server/trpc/router/_app";
+import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
 import TipsterInfo from "@components/ui/TipsterInfo";
 import useWindowSize from "src/utils/useWindowSize";
@@ -194,17 +194,14 @@ const mobileColumns = [
 ];
 
 const TipsterRating: NextPage = () => {
-	const { data: tipsters, isLoading: tipstersLoading } = trpc.useQuery([
-		"tipsters.getAll",
-	]);
-	const { data: bookmakers, isLoading: bookmakersLoading } = trpc.useQuery([
-		"bookmakers.getTop",
-	]);
-	const { data: liveMatches, isLoading: liveMatchesLoading } = trpc.useQuery([
-		"matches.getAllLive",
-	]);
+	const { data: tipsters, isLoading: tipstersLoading } =
+		trpc.tipsters.getAll.useQuery();
+	const { data: bookmakers, isLoading: bookmakersLoading } =
+		trpc.bookmakers.getTop.useQuery();
+	const { data: liveMatches, isLoading: liveMatchesLoading } =
+		trpc.matches.getAllLive.useQuery();
 	const { data: currentCompetition, isLoading: currentCompetitionLoading } =
-		trpc.useQuery(["competitions.getCurrent"]);
+		trpc.competitions.getCurrent.useQuery();
 	const portalNode = usePortal();
 	const { width } = useWindowSize();
 
@@ -669,16 +666,16 @@ const PageTips: React.FC = () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createSSGHelpers({
+	const ssg = createProxySSGHelpers({
 		router: appRouter,
 		ctx: await createContext(),
 		transformer: superjson,
 	});
 
-	await ssg.prefetchQuery("tipsters.getAll");
-	await ssg.prefetchQuery("bookmakers.getTop");
-	await ssg.prefetchQuery("matches.getAllLive");
-	await ssg.prefetchQuery("competitions.getCurrent");
+	await ssg.tipsters.getAll.prefetch();
+	await ssg.bookmakers.getTop.prefetch();
+	await ssg.matches.getAllLive.prefetch();
+	await ssg.competitions.getCurrent.prefetch();
 
 	return {
 		props: {
