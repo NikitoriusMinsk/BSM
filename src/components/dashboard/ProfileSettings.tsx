@@ -7,7 +7,7 @@ import PasswordField from "@components/ui/PasswordField";
 import Dropdown from "@components/ui/Dropdown";
 
 const ProfileSettings: React.FC = () => {
-	const { data, isLoading } = trpc.useQuery(["user.getInfo"]);
+	const { data, isLoading } = trpc.user.getInfo.useQuery();
 	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 	const [isSportModalOpen, setIsSportModalOpen] = useState(false);
 
@@ -261,15 +261,9 @@ const PasswordModal: React.FC<{ onClose: () => void }> = (props) => {
 
 const SportModal: React.FC<{ onClose: () => void }> = (props) => {
 	const { onClose } = props;
-	const { data: sports, isLoading: sportsLoading } = trpc.useQuery([
-		"filters.getSports",
-	]);
-	const { data: clubs, isLoading: clubsLoading } = trpc.useQuery([
-		"filters.getSportClubs",
-	]);
-	const { data: countries, isLoading: countriesLoading } = trpc.useQuery([
-		"filters.getCountries",
-	]);
+	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
+	const { data: clubs, isLoading: clubsLoading } = trpc.filters.getSportClubs.useQuery();
+	const { data: countries, isLoading: countriesLoading } = trpc.filters.getCountries.useQuery();
 
 	if (sportsLoading || clubsLoading || countriesLoading) {
 		return <></>;

@@ -18,8 +18,8 @@ import useWindowSize from "src/utils/useWindowSize";
 
 const Header: React.FC = () => {
 	const router = useRouter();
-	const { data: links } = trpc.useQuery(["navigation.getSports"]);
-	const { data: Timezones } = trpc.useQuery(["navigation.getTimezones"]);
+	const { data: links } = trpc.navigation.getSports.useQuery();
+	const { data: Timezones } = trpc.navigation.getTimezones.useQuery();
 	const { width } = useWindowSize();
 
 	return (

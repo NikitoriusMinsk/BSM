@@ -206,6 +206,7 @@ const UserHover: React.FC<inferArrayElementType<Tipsters> & UserHoverProps> = (
 										className={`${styles.dot} ${
 											el ? styles.positive : styles.negative
 										}`}
+										key={`form_${name}_${index}`}
 									/>
 								))}
 							</span>

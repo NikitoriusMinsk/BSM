@@ -14,9 +14,16 @@ export const authOptions: NextAuthOptions = {
 				password: { label: "Password", type: "password" },
 			},
 			async authorize(credentials, req) {
-				if (credentials?.email === "qwe@qwe.qwe" && credentials.password === "qwerty") {
+				const user = {
+					id: "1",
+					name: "John Doe",
+					email: "johndoe@john.com",
+				};
+				if (
+					credentials?.email === "qwe@qwe.qwe" &&
+					credentials?.password === "qwerty"
+				) {
 					// handle user auth here
-					const user = { id: 1, name: "John Doe", email: credentials?.email };
 					return user;
 				} else {
 					return null;

@@ -98,12 +98,9 @@ const columns = [
 
 const SubscriptionTab: React.FC = () => {
 	const [searchString, setSearchString] = useState<string>("");
-	const { data, isLoading } = trpc.useQuery(["user.getSubscriptionInfo"]);
+	const { data, isLoading } = trpc.user.getSubscriptionInfo.useQuery();
 	const { data: searchResults, isLoading: searchResultsLoading } =
-		trpc.useQuery([
-			"user.searchSubscribers",
-			{ searchString: searchString },
-		]);
+		trpc.user.searchSubscribers.useQuery({ searchString: searchString });
 	const [shouldShowSearchResuts, setShouldShowSearchResults] =
 		useState(false);
 

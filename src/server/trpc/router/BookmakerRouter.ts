@@ -1,5 +1,5 @@
-import { createRouter } from "../context";
 import { z } from "zod";
+import { publicProcedure, router } from "../trpc";
 
 const BookmakersTopTemp = [
 	{
@@ -76,14 +76,11 @@ const BookmakersTemp = [
 	},
 ];
 
-export const bookmakerRouter = createRouter()
-	.query("getTop", {
-		async resolve() {
-			return BookmakersTopTemp;
-		},
-	})
-	.query("getAll", {
-		async resolve() {
-			return BookmakersTemp;
-		},
-	});
+export const bookmakerRouter = router({
+	getTop: publicProcedure.query(async ({ ctx, input }) => {
+		return BookmakersTopTemp;
+	}),
+	getAll: publicProcedure.query(async ({ ctx, input }) => {
+		return BookmakersTemp;
+	}),
+});

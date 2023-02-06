@@ -60,8 +60,8 @@ const columns = [
 const FollowersTab: React.FC = () => {
 	const [searchString, setSearchString] = useState<string>("");
 	const { data: searchResults, isLoading: searchResultsLoading } =
-		trpc.useQuery(["user.searchFollowers", { searchString: searchString }]);
-	const { data, isLoading } = trpc.useQuery(["user.getFollowersInfo"]);
+		trpc.user.searchFollowers.useQuery({ searchString: searchString });
+	const { data, isLoading } = trpc.user.getFollowersInfo.useQuery();
 	const [shouldShowSearchResuts, setShouldShowSearchResults] =
 		useState(false);
 
