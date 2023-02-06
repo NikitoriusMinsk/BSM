@@ -27,17 +27,17 @@ const TipsterHeader: React.FC = () => {
 	const { width } = useWindowSize();
 
 	return (
-		<div className={styles.container}>
-			<Link href={"/"}>
-				<a className={styles.logo}>
-					<Image
-						src="/logo.svg"
-						height={32}
-						width={188}
-						alt=""
-					/>
-				</a>
-			</Link>
+        <div className={styles.container}>
+			<Link href={"/"} className={styles.logo}>
+
+                <Image
+                    src="/logo.svg"
+                    height={32}
+                    width={188}
+                    alt=""
+                />
+
+            </Link>
 			<div className={styles.links}>
 				{links.map(({ href, label }) => (
 					<MenuLink
@@ -82,7 +82,7 @@ const TipsterHeader: React.FC = () => {
 				</div>
 			</nav>
 		</div>
-	);
+    );
 };
 
 export default TipsterHeader;

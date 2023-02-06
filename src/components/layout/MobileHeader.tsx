@@ -12,18 +12,18 @@ const MobileHeader: React.FC = () => {
 	const router = useRouter();
 
 	return (
-		<div className={styles.container}>
+        <div className={styles.container}>
 			<div className={styles.row}>
-				<Link href={"/"}>
-					<a className={styles.logo}>
-						<Image
-							src="/logo.svg"
-							height={32}
-							width={188}
-							alt=""
-						/>
-					</a>
-				</Link>
+				<Link href={"/"} className={styles.logo}>
+
+                    <Image
+                        src="/logo.svg"
+                        height={32}
+                        width={188}
+                        alt=""
+                    />
+
+                </Link>
 				<UserProfile />
 			</div>
 			{links && (
@@ -38,7 +38,7 @@ const MobileHeader: React.FC = () => {
 				</nav>
 			)}
 		</div>
-	);
+    );
 };
 
 export default MobileHeader;

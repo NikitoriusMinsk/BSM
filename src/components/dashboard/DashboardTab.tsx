@@ -19,7 +19,7 @@ const DashboardTab: React.FC = () => {
 	}
 
 	return (
-		<div className={styles.dashboardTab}>
+        <div className={styles.dashboardTab}>
 			<div className={sharedStyles.row}>
 				<div
 					id={styles.profit}
@@ -85,7 +85,7 @@ const DashboardTab: React.FC = () => {
 							and how to get it, visit the “About Coin” page
 						</span>
 						<Link href="/about-coins">
-							<a>View more about coin</a>
+							View more about coin
 						</Link>
 					</div>
 				</div>
@@ -233,7 +233,7 @@ const DashboardTab: React.FC = () => {
 				/>
 			</div>
 		</div>
-	);
+    );
 };
 
 const StatisticsChart: React.FC<{ data: { time: number; value: number }[] }> = (

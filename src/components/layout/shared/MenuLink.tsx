@@ -13,12 +13,15 @@ const MenuLink: React.FC<LinkProps> = (props) => {
     const { href, label, active, live } = props;
 
     return (
-        <Link href={href} key={label}>
-            <a className={`${styles.link} ${active && styles.active} ${live && styles.live}`}>
-                {label}
-            </a>
-        </Link>
-    )
+        (<Link
+            href={href}
+            key={label}
+            className={`${styles.link} ${active && styles.active} ${live && styles.live}`}>
+
+            {label}
+
+        </Link>)
+    );
 }
 
 export default MenuLink;

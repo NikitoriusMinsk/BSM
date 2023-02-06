@@ -98,31 +98,31 @@ const MenuLink: React.FC<MenuLinkProps> = (props) => {
 	const { href, label, active, expanded } = props;
 
 	return (
-		<Link href={href}>
-			<a className={`${styles.menuLink} ${active && styles.active}`}>
-				<ReactSVG
-					className={styles.menuLinkIcon}
-					src={props.image}
-					alt={label}
-					height={10}
-					width={10}
-				/>
-				<AnimatePresence initial={false}>
-					{expanded && (
-						<motion.div
-							className={styles.menuLinkLabel}
-							variants={MenuTextVariants}
-							initial="closed"
-							animate="open"
-							exit="closed"
-						>
-							{label}
-						</motion.div>
-					)}
-				</AnimatePresence>
-			</a>
-		</Link>
-	);
+        (<Link href={href} className={`${styles.menuLink} ${active && styles.active}`}>
+
+            <ReactSVG
+                className={styles.menuLinkIcon}
+                src={props.image}
+                alt={label}
+                height={10}
+                width={10}
+            />
+            <AnimatePresence initial={false}>
+                {expanded && (
+                    <motion.div
+                        className={styles.menuLinkLabel}
+                        variants={MenuTextVariants}
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                    >
+                        {label}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+        </Link>)
+    );
 };
 
 export default Sidebar;

@@ -247,7 +247,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
 	}, []);
 
 	return (
-		<div
+        <div
 			className={styles.profile}
 			ref={dropdownRef}
 		>
@@ -331,17 +331,17 @@ const Profile: React.FC<ProfileProps> = (props) => {
 								</div>
 							</div>
 							<div className={styles.column}>
-								<Link href="/user-dashboard">
-									<a className={styles.menuItem}>
-										<Image
-											src="/icons/profile/dashboard.svg"
-											alt="profile"
-											width={24}
-											height={24}
-										/>
-										<span>My Dashboard</span>
-									</a>
-								</Link>
+								<Link href="/user-dashboard" className={styles.menuItem}>
+
+                                    <Image
+                                        src="/icons/profile/dashboard.svg"
+                                        alt="profile"
+                                        width={24}
+                                        height={24}
+                                    />
+                                    <span>My Dashboard</span>
+
+                                </Link>
 								<div className={styles.menuItem}>
 									<Image
 										src="/icons/profile/tips.svg"
@@ -371,7 +371,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
 				)}
 			</AnimatePresence>
 		</div>
-	);
+    );
 };
 
 export default UserProfile;

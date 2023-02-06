@@ -199,13 +199,11 @@ interface LinkProps {
 const ColumnLink: React.FC<LinkProps> = (props) => {
 	const { href, text } = props;
 	return (
-		<Link href={href}>
-			<a
-				href={href}
-				className={styles.link}
-			>
-				{text}
-			</a>
+		<Link
+			href={href}
+			className={styles.link}
+		>
+			{text}
 		</Link>
 	);
 };
@@ -217,19 +215,17 @@ interface SocialLinkProps extends LinkProps {
 const SocialLink: React.FC<SocialLinkProps> = (props) => {
 	const { href, text, image } = props;
 	return (
-		<Link href={href}>
-			<a
-				href={href}
-				className={styles.socialLink}
-			>
-				<Image
-					src={image}
-					alt={text}
-					height={24}
-					width={24}
-				/>
-				{text}
-			</a>
+		<Link
+			href={href}
+			className={styles.socialLink}
+		>
+			<Image
+				src={image}
+				alt={text}
+				height={24}
+				width={24}
+			/>
+			{text}
 		</Link>
 	);
 };

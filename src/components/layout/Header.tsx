@@ -23,17 +23,17 @@ const Header: React.FC = () => {
 	const { width } = useWindowSize();
 
 	return (
-		<div className={styles.container}>
-			<Link href={"/"}>
-				<a className={styles.logo}>
-					<Image
-						src="/logo.svg"
-						height={32}
-						width={188}
-						alt=""
-					/>
-				</a>
-			</Link>
+        <div className={styles.container}>
+			<Link href={"/"} className={styles.logo}>
+
+                <Image
+                    src="/logo.svg"
+                    height={32}
+                    width={188}
+                    alt=""
+                />
+
+            </Link>
 			<nav>
 				{links && (
 					<div className={styles.links}>
@@ -80,7 +80,7 @@ const Header: React.FC = () => {
 				</div>
 			</nav>
 		</div>
-	);
+    );
 };
 
 interface MoreProps {
@@ -145,7 +145,7 @@ const More: React.FC<MoreProps> = (props) => {
 	}, []);
 
 	return (
-		<div
+        <div
 			className={styles.more}
 			ref={dropdownRef}
 		>
@@ -174,18 +174,15 @@ const More: React.FC<MoreProps> = (props) => {
 							onChange={debounce(handleSearch, 500)}
 						/>
 						{filteredItems.map((item) => (
-							<Link
-								href={item.href}
-								key={item.label}
-							>
-								<a className={styles.moreItem}>{item.label}</a>
+							<Link href={item.href} key={item.label} className={styles.moreItem}>
+								{item.label}
 							</Link>
 						))}
 					</motion.div>
 				)}
 			</AnimatePresence>
 		</div>
-	);
+    );
 };
 
 export default Header;

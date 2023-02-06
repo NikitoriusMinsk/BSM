@@ -210,7 +210,7 @@ const Slide: React.FC = () => {
 
 const SignUpPropose: React.FC = () => {
 	return (
-		<div className={styles.signUpPropose}>
+        <div className={styles.signUpPropose}>
 			<h2>Join with us!</h2>
 			<span>
 				Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -218,11 +218,11 @@ const SignUpPropose: React.FC = () => {
 				ever since the 1500s, when an unknown printer took a galley of type
 				and scrambled it to make a type specimen book.
 			</span>
-			<Link href="/sign-up">
+			<Link href="/sign-up" legacyBehavior>
 				<button>Sign Up</button>
 			</Link>
 		</div>
-	);
+    );
 };
 
 const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
