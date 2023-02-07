@@ -16,6 +16,12 @@
     background-size: cover;
 }
 
+#followers .info {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+}
+
 #followers .text {
     display: flex;
     flex-direction: column;
@@ -139,6 +145,22 @@
     color: #1A1C21CC;
 }
 
+.user .info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+}
+
+.user .info span:last-child {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(26, 28, 33, 0.7);
+}
+
 .buttonContainer {
     display: flex;
     justify-content: flex-end;
@@ -178,4 +200,19 @@
 
 .followButton.following::before {
     content: url(/icons/following-gray.svg);
+}
+
+@media screen and (max-width: 425px) {
+    #followers {
+        flex-direction: column;
+    }
+
+    #followers .info {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #followers .search {
+        width: 100%;
+    }
 }
