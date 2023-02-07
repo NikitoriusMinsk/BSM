@@ -8,6 +8,7 @@ import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import { ProfileVisitsInfo } from "src/types/queryTypes";
 import Moment from "react-moment";
 import Table from "@components/ui/Table";
+import useWindowSize from "src/utils/useWindowSize";
 
 const columnHelper =
 	createColumnHelper<inferArrayElementType<ProfileVisitsInfo["visitors"]>>();
@@ -55,8 +56,50 @@ const columns = [
 	}),
 ];
 
+const mobileColumns = [
+	columnHelper.accessor((row) => ({ ...row }), {
+		id: "user",
+		cell: (info) => {
+			const { image, name, date } = info.getValue();
+			return (
+				<div className={styles.user}>
+					<div className={styles.avatar}>
+						<Image
+							src={image}
+							height={36}
+							width={36}
+							alt=""
+						/>
+					</div>
+					<div className={styles.info}>
+						<span>{name}</span>
+						<Moment format="DD MMM YYYY HH:mm">{date}</Moment>
+					</div>
+				</div>
+			);
+		},
+	}),
+	columnHelper.accessor("following", {
+		cell: (info) => {
+			const following = info.getValue();
+			return (
+				<div className={styles.buttonContainer}>
+					<button
+						className={`${styles.followButton} ${
+							following ? styles.following : styles.follow
+						}`}
+					>
+						{following ? "Following" : "Follow"}
+					</button>
+				</div>
+			);
+		},
+	}),
+];
+
 export default function ProfileVisitsTab() {
 	const { data, isLoading } = trpc.user.getProfileVisitsInfo.useQuery();
+	const { width } = useWindowSize();
 
 	if (isLoading) {
 		return <div>Loading...</div>;
@@ -104,7 +147,7 @@ export default function ProfileVisitsTab() {
 			<Table
 				data={data.visitors}
 				pageSize={10}
-				columns={columns}
+				columns={width <= 425 ? mobileColumns : columns}
 				header={false}
 			/>
 		</div>
