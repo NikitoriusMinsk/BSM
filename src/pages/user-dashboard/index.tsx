@@ -14,6 +14,9 @@ import TrackingTipsTab from "@components/dashboard/TrackingTipsTab";
 import PendingTipsTab from "@components/dashboard/PendingTipsTab";
 import HistoricalTipsTab from "@components/dashboard/HistoricalTipsTab";
 import ProfileSettings from "@components/dashboard/ProfileSettings";
+import Slider from "@components/ui/Slider";
+import ArrayToChunks from "src/utils/ArrayToChunks";
+import useWindowSize from "src/utils/useWindowSize";
 
 enum Tabs {
 	Dashboard = "Dashboard",
@@ -72,7 +75,8 @@ const NavigationItems = [
 ];
 
 const UserDashboard: NextPage = () => {
-	const { data: userInfo, isLoading: userInfoLoading } = trpc.user.getInfo.useQuery();
+	const { data: userInfo, isLoading: userInfoLoading } =
+		trpc.user.getInfo.useQuery();
 	const [currentPage, setCurrentPage] = useState(Tabs.Dashboard);
 	const memoizedPage = useMemo(() => {
 		switch (currentPage) {
@@ -132,6 +136,8 @@ const Navigation: React.FC<{
 }> = (props) => {
 	const { userInfo, currentPage, onPageChange } = props;
 
+	const { width } = useWindowSize();
+
 	return (
 		<div className={styles.navigation}>
 			<div className={styles.userInfo}>
@@ -183,23 +189,35 @@ const Navigation: React.FC<{
 				</div>
 			</div>
 			<nav>
-				{NavigationItems.map(({ icon, activeIcon, page }) => (
-					<MenuItem
-						key={page}
-						page={page}
-						icon={icon}
-						activeIcon={activeIcon}
-						active={currentPage === page}
-						onNavigate={() => onPageChange(page)}
-						counter={
-							page === Tabs.TrackingTips
-								? userInfo.tips.tracking_count
-								: page === Tabs.PendingTips
-								? userInfo.tips.pending_count
-								: undefined
-						}
-					/>
-				))}
+				<Slider
+					swipable={true}
+					showPagination={false}
+				>
+					{ArrayToChunks(
+						NavigationItems,
+						width <= 425 ? 2 : NavigationItems.length
+					).map((chunk, index) => (
+						<div className={styles.chunk}>
+							{chunk.map(({ icon, activeIcon, page }) => (
+								<MenuItem
+									key={page}
+									page={page}
+									icon={icon}
+									activeIcon={activeIcon}
+									active={currentPage === page}
+									onNavigate={() => onPageChange(page)}
+									counter={
+										page === Tabs.TrackingTips
+											? userInfo.tips.tracking_count
+											: page === Tabs.PendingTips
+											? userInfo.tips.pending_count
+											: undefined
+									}
+								/>
+							))}
+						</div>
+					))}
+				</Slider>
 			</nav>
 		</div>
 	);
