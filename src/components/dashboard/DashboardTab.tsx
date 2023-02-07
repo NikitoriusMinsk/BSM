@@ -19,7 +19,7 @@ const DashboardTab: React.FC = () => {
 	}
 
 	return (
-        <div className={styles.dashboardTab}>
+		<div className={styles.dashboardTab}>
 			<div className={sharedStyles.row}>
 				<div
 					id={styles.profit}
@@ -81,11 +81,11 @@ const DashboardTab: React.FC = () => {
 					</div>
 					<div className={styles.description}>
 						<span>
-							If you want to know more about the local currency
-							and how to get it, visit the “About Coin” page
+							If you want to know more about the local currency and how
+							to get it, visit the “About Coin” page
 						</span>
 						<Link href="/about-coins">
-							View more about coin
+							<span>View more about coin</span>
 						</Link>
 					</div>
 				</div>
@@ -167,65 +167,70 @@ const DashboardTab: React.FC = () => {
 					id={styles.bets}
 					className={`${sharedStyles.block} ${sharedStyles.wide}`}
 				>
-					<div className={`${styles.progressBar} ${styles.won}`}>
-						<CircularProgressbarWithChildren
-							value={(data.bets.won / data.bets.total) * 360}
-							maxValue={360}
-							styles={{
-								path: {
-									strokeLinecap: "round",
-									strokeWidth: "2px",
-									stroke: "#7F3FFC",
-								},
-							}}
-						>
-							<h3>Won</h3>
-							<span>{data.bets.won}</span>
-						</CircularProgressbarWithChildren>
+					<div className={styles.info}>
+						<h5>Bet Outcome</h5>
 					</div>
-					<div className={`${styles.progressBar} ${styles.pending}`}>
-						<CircularProgressbarWithChildren
-							value={(data.bets.pending / data.bets.total) * 360}
-							maxValue={360}
-							styles={{
-								path: {
-									strokeLinecap: "round",
-									strokeWidth: "2px",
-									stroke: "#FFB82D",
-								},
-								root: {
-									transform: `rotate(${
-										360 -
-										(data.bets.won / data.bets.total) * 360
-									}deg)`,
-								},
-							}}
-						>
-							<h3>Pending</h3>
-							<span>{data.bets.pending}</span>
-						</CircularProgressbarWithChildren>
-					</div>
-					<div className={`${styles.progressBar} ${styles.lost}`}>
-						<CircularProgressbarWithChildren
-							value={(data.bets.lost / data.bets.total) * 360}
-							maxValue={360}
-							styles={{
-								path: {
-									strokeLinecap: "round",
-									strokeWidth: "2px",
-									stroke: "#FF5018",
-								},
-								root: {
-									transform: `rotate(${
-										360 -
-										(data.bets.lost / data.bets.total) * 360
-									}deg)`,
-								},
-							}}
-						>
-							<h3>Lost</h3>
-							<span>{data.bets.lost}</span>
-						</CircularProgressbarWithChildren>
+					<div className={styles.progressBarContainer}>
+						<div className={`${styles.progressBar} ${styles.won}`}>
+							<CircularProgressbarWithChildren
+								value={(data.bets.won / data.bets.total) * 360}
+								maxValue={360}
+								styles={{
+									path: {
+										strokeLinecap: "round",
+										strokeWidth: "2px",
+										stroke: "#7F3FFC",
+									},
+								}}
+							>
+								<h3>Won</h3>
+								<span>{data.bets.won}</span>
+							</CircularProgressbarWithChildren>
+						</div>
+						<div className={`${styles.progressBar} ${styles.pending}`}>
+							<CircularProgressbarWithChildren
+								value={(data.bets.pending / data.bets.total) * 360}
+								maxValue={360}
+								styles={{
+									path: {
+										strokeLinecap: "round",
+										strokeWidth: "2px",
+										stroke: "#FFB82D",
+									},
+									root: {
+										transform: `rotate(${
+											360 -
+											(data.bets.won / data.bets.total) * 360
+										}deg)`,
+									},
+								}}
+							>
+								<h3>Pending</h3>
+								<span>{data.bets.pending}</span>
+							</CircularProgressbarWithChildren>
+						</div>
+						<div className={`${styles.progressBar} ${styles.lost}`}>
+							<CircularProgressbarWithChildren
+								value={(data.bets.lost / data.bets.total) * 360}
+								maxValue={360}
+								styles={{
+									path: {
+										strokeLinecap: "round",
+										strokeWidth: "2px",
+										stroke: "#FF5018",
+									},
+									root: {
+										transform: `rotate(${
+											360 -
+											(data.bets.lost / data.bets.total) * 360
+										}deg)`,
+									},
+								}}
+							>
+								<h3>Lost</h3>
+								<span>{data.bets.lost}</span>
+							</CircularProgressbarWithChildren>
+						</div>
 					</div>
 				</div>
 				<div
@@ -233,7 +238,7 @@ const DashboardTab: React.FC = () => {
 				/>
 			</div>
 		</div>
-    );
+	);
 };
 
 const StatisticsChart: React.FC<{ data: { time: number; value: number }[] }> = (

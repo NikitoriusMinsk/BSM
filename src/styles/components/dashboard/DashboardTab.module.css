@@ -299,12 +299,28 @@
 
 #bets {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     background-image: url(/images/dashboard/masks/bets-mask.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    gap: 40px;
+}
+
+#bets .info h5 {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: rgba(26, 28, 33, 0.7);
+}
+
+#bets .progressBarContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #bets .progressBar {
@@ -344,4 +360,52 @@
 #bets .progressBar.lost h3,
 #bets .progressBar.lost span {
     color: #FF5018;
+}
+
+@media screen and (max-width: 425px) {
+    #stats {
+        flex-direction: column;
+        gap: 48px;
+    }
+
+    #stats .stat {
+        gap: 12px;
+    }
+
+    #coins {
+        justify-content: space-between;
+    }
+
+    #coins .description span {
+        display: none;
+    }
+
+    #coins .description {
+        justify-content: center;
+    }
+
+    #bookmaker,
+    #sport {
+        flex-direction: row;
+    }
+
+    #sport .info {
+        align-items: flex-start;
+    }
+
+    #bets {
+        position: relative;
+    }
+
+    #bets .progressBar {
+        height: 91px;
+        width: 91px;
+    }
+
+    #bets span {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
 }

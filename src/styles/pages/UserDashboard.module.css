@@ -232,3 +232,21 @@
     background-color: #FFFFFF;
     color: #1A1C21;
 }
+
+@media screen and (max-width: 425px) {
+    .sideColumn {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end: 13;
+        padding: 16px;
+    }
+
+    .mainColumn {
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 13;
+        padding: 16px;
+    }
+}
