@@ -260,4 +260,9 @@
     .navigation nav .chunk {
         flex-direction: row;
     }
+
+    .menuItem {
+        padding: 12px;
+        background-color: #FFFFFF;
+    }
 }
