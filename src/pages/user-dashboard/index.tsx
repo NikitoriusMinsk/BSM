@@ -197,7 +197,10 @@ const Navigation: React.FC<{
 						NavigationItems,
 						width <= 425 ? 2 : NavigationItems.length
 					).map((chunk, index) => (
-						<div className={styles.chunk}>
+						<div
+							className={styles.chunk}
+							key={`chunk_${index}`}
+						>
 							{chunk.map(({ icon, activeIcon, page }) => (
 								<MenuItem
 									key={page}
