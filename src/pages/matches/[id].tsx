@@ -12,6 +12,7 @@ import H2HPage from "@components/match-summary/H2HPage"
 import StandingsPage from "@components/match-summary/StandingsPage"
 import PredictionsPage from "@components/match-summary/PredictionsPage"
 import BookmakersPage from "@components/match-summary/BookmakersPage"
+import PagesSlider from "@components/ui/match-summary/PagesSlider";
 
 const pages = [
     {
@@ -93,81 +94,81 @@ const MatchSummary: NextPage = () => {
             </Head>
             <main className={styles.main}>
                 <div className={styles.matchPreview}>
-                        <Image 
-                            //test img link
-                            src="/testimg/football.jpg"
-                            layout="fill"
-                            objectFit="cover"
-                        />
-                        <div className={styles.matchInfo}>
-                            <div className={styles.matchHeader}>
-                                <div 
-                                    className={styles.buttonBack}
-                                    onClick={() => router.back()}
-                                >
-                                    <Image 
-                                        src="/icons/arrow-narrow-left.svg"
-                                        width={24}
-                                        height={24}
-                                    />
-                                </div>
-                                <div className={styles.championship}>
-                                    <span className={styles.country}>
-                                        Country
-                                    </span>
-                                    <span className={styles.tournament}>
-                                        Tournament - 1
-                                    </span>
-                                </div>
+                    <Image 
+                        //test img link
+                        src="/testimg/football.jpg"
+                        layout="fill"
+                        objectFit="cover"
+                    />
+                    <div className={styles.matchInfo}>
+                        <div className={styles.matchHeader}>
+                            <div 
+                                className={styles.buttonBack}
+                                onClick={() => router.back()}
+                            >
+                                <Image 
+                                    src="/icons/arrow-narrow-left.svg"
+                                    width={24}
+                                    height={24}
+                                />
                             </div>
-                            <div className={styles.matchData}>
-                                <div className={styles.club}>
-                                    <div className={styles.clubLogo}>
-                                        <Image
-                                            src="/testimg/club1.png"
-                                            width={60}
-                                            height={60}
-                                            objectFit="contain"
-                                            objectPosition="center center"
-                                        />
-                                    </div>
-                                    <span>
-                                        Club 1
-                                    </span>
-                                </div>
-                                <div className={styles.result}>
-                                    <span className={styles.score}>
-                                        1 : 2
-                                    </span>
-                                    <div className={styles.currentTime}>
-                                        <span>
-                                            1ST HALF
-                                        </span>
-                                        <span>
-                                            42:44
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className={styles.club}>
-                                    <div className={styles.clubLogo}>
-                                        <Image
-                                            src="/testimg/club2.png"
-                                            width={60}
-                                            height={60}
-                                            objectFit="contain"
-                                            objectPosition="center center"
-                                        />
-                                    </div>
-                                    <span>
-                                        Club 2
-                                    </span>
-                                </div>
+                            <div className={styles.championship}>
+                                <span className={styles.country}>
+                                    Country
+                                </span>
+                                <span className={styles.tournament}>
+                                    Tournament - 1
+                                </span>
                             </div>
                         </div>
+                        <div className={styles.matchData}>
+                            <div className={styles.club}>
+                                <div className={styles.clubLogo}>
+                                    <Image
+                                        src="/testimg/club1.png"
+                                        width={60}
+                                        height={60}
+                                        objectFit="contain"
+                                        objectPosition="center center"
+                                    />
+                                </div>
+                                <span>
+                                    Club 1
+                                </span>
+                            </div>
+                            <div className={styles.result}>
+                                <span className={styles.score}>
+                                    1 : 2
+                                </span>
+                                <div className={styles.currentTime}>
+                                    <span>
+                                        1ST HALF
+                                    </span>
+                                    <span>
+                                        42:44
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={styles.club}>
+                                <div className={styles.clubLogo}>
+                                    <Image
+                                        src="/testimg/club2.png"
+                                        width={60}
+                                        height={60}
+                                        objectFit="contain"
+                                        objectPosition="center center"
+                                    />
+                                </div>
+                                <span>
+                                    Club 2
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className={styles.matchStatPages}>
-                    <div className={styles.pageSelector}>
+                    <PagesSlider>
                         {pages.map((page, index) => (
                             <span 
                                 className={`${styles.page} ${index == selectedPage && styles.pageActive}`}
@@ -181,7 +182,7 @@ const MatchSummary: NextPage = () => {
                                 }
                             </span>
                         ))}
-                    </div>
+                    </PagesSlider>
                     <AnimatePresence exitBeforeEnter>
                         <motion.div
                             key={selectedPage ? selectedPage : "empty"}

@@ -9,17 +9,17 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    grid-column-start: 4;
-    grid-column-end: 13;
+    grid-column-start: 1;
+    grid-column-end: 10;
     grid-row-start: 1;
     grid-row-end: 2;
-    margin-top: 20px;
     margin-bottom: 100px;
 }
 .matchPreview{
     position: relative;
     height: 450px;
-    border-radius: 16px;
+    border-top-left-radius: 16px;    
+    border-bottom-right-radius: 16px;
     overflow: hidden;
     padding: 20px;
 }
@@ -151,16 +151,24 @@
 .matchStatPages{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: calc(100% - 60px);
+    margin-left: 60px;
 }
 .pageSelector{
+    overflow-x: auto;
+    width: calc(100% + 60px);
+    margin-left: -60px;
+    padding-left: 60px;
+    padding-top: 9px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.pagesLine {
     display: flex;
     gap: 60px;
-    overflow-x: auto;
-    width: 100%;
-    padding-top: 9px;
     border-bottom: 1px solid rgba(26, 28, 33, 0.1);
-    margin-bottom: 20px;
+    width: max-content;
+    min-width: 100%;
 }
 .pageSelector::-webkit-scrollbar{
     display: none;
