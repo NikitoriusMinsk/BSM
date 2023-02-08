@@ -9,11 +9,10 @@ import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import { SubscriptionInfo } from "src/types/queryTypes";
 import Moment from "react-moment";
 import Table from "@components/ui/Table";
+import useWindowSize from "src/utils/useWindowSize";
 
 const columnHelper =
-	createColumnHelper<
-		inferArrayElementType<SubscriptionInfo["subscribers"]>
-	>();
+	createColumnHelper<inferArrayElementType<SubscriptionInfo["subscribers"]>>();
 
 const columns = [
 	columnHelper.accessor((row) => ({ ...row }), {
@@ -36,11 +35,9 @@ const columns = [
 		},
 	}),
 	columnHelper.accessor("amount", {
-		cell: (info) => (
-			<span className={styles.price}>$ {info.getValue()}</span>
-		),
+		cell: (info) => <span className={styles.price}>$ {info.getValue()}</span>,
 	}),
-	columnHelper.accessor((row) => ({ ...row }), {
+	columnHelper.accessor((row) => row, {
 		id: "duration",
 		cell: (info) => {
 			const { endsOn, startedOn } = info.getValue();
@@ -53,10 +50,8 @@ const columns = [
 							style={{
 								width: `${
 									100 -
-									((new Date().getTime() -
-										startedOn.getTime()) /
-										(endsOn.getTime() -
-											startedOn.getTime())) *
+									((new Date().getTime() - startedOn.getTime()) /
+										(endsOn.getTime() - startedOn.getTime())) *
 										100
 								}%`,
 							}}
@@ -86,9 +81,82 @@ const columns = [
 		id: "button",
 		cell: (info) => (
 			<div className={styles.buttonContainer}>
-				<button
-					className={`${styles.subscribeButton} ${styles.subscribed}`}
-				>
+				<button className={`${styles.subscribeButton} ${styles.subscribed}`}>
+					Subscribed
+				</button>
+			</div>
+		),
+	}),
+];
+
+const mobileColumns = [
+	columnHelper.accessor((row) => ({ ...row }), {
+		id: "user",
+		cell: (info) => {
+			const { image, name, amount } = info.getValue();
+			return (
+				<div className={styles.user}>
+					<div className={styles.avatar}>
+						<Image
+							src={image}
+							height={36}
+							width={36}
+							alt=""
+						/>
+					</div>
+					<div className={styles.info}>
+						<span>{name}</span>
+						<span className={styles.userPrice}>${amount}</span>
+					</div>
+				</div>
+			);
+		},
+	}),
+	columnHelper.accessor((row) => row, {
+		id: "duration",
+		cell: (info) => {
+			const { endsOn, startedOn } = info.getValue();
+			return (
+				<div className={styles.durationContainer}>
+					<div className={styles.timeLeft}>
+						<b>
+							<Moment
+								duration={new Date()}
+								format="DD"
+							>
+								{endsOn}
+							</Moment>
+						</b>{" "}
+						days left
+					</div>
+					<div className={styles.duration}>
+						<Moment format="DD MMM YYYY">{startedOn}</Moment>
+						<div className={styles.progress}>
+							<div
+								className={styles.progressBar}
+								style={{
+									width: `${
+										100 -
+										((new Date().getTime() -
+											startedOn.getTime()) /
+											(endsOn.getTime() -
+												startedOn.getTime())) *
+											100
+									}%`,
+								}}
+							/>
+						</div>
+						<Moment format="DD MMM YYYY">{endsOn}</Moment>
+					</div>
+				</div>
+			);
+		},
+	}),
+	columnHelper.accessor((row) => ({ ...row }), {
+		id: "button",
+		cell: (info) => (
+			<div className={styles.buttonContainer}>
+				<button className={`${styles.subscribeButton} ${styles.subscribed}`}>
 					Subscribed
 				</button>
 			</div>
@@ -98,14 +166,11 @@ const columns = [
 
 const SubscriptionTab: React.FC = () => {
 	const [searchString, setSearchString] = useState<string>("");
-	const { data, isLoading } = trpc.useQuery(["user.getSubscriptionInfo"]);
+	const { data, isLoading } = trpc.user.getSubscriptionInfo.useQuery();
 	const { data: searchResults, isLoading: searchResultsLoading } =
-		trpc.useQuery([
-			"user.searchSubscribers",
-			{ searchString: searchString },
-		]);
-	const [shouldShowSearchResuts, setShouldShowSearchResults] =
-		useState(false);
+		trpc.user.searchSubscribers.useQuery({ searchString: searchString });
+	const [shouldShowSearchResuts, setShouldShowSearchResults] = useState(false);
+	const { width } = useWindowSize();
 
 	function handleSearch(e: ChangeEvent<HTMLInputElement>) {
 		const value = e.target.value;
@@ -132,31 +197,32 @@ const SubscriptionTab: React.FC = () => {
 					id={styles.subscribers}
 					className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
 				>
-					<div className={sharedStyles.image}>
-						<Image
-							src="/images/dashboard/subscribers.svg"
-							height={80}
-							width={80}
-							alt=""
-						/>
-					</div>
-					<div className={styles.text}>
-						<div>
-							<h3>Subscribers</h3>
-							<h2>{data.subscribers_count}</h2>
+					<div className={styles.info}>
+						<div className={sharedStyles.image}>
+							<Image
+								src="/images/dashboard/subscribers.svg"
+								height={80}
+								width={80}
+								alt=""
+							/>
 						</div>
-						<div>
-							<h4>From last month</h4>
-							<span
-								className={
-									data.subscribers_difference > 0
-										? styles.positive
-										: styles.negative
-								}
-							>
-								{(data.subscribers_difference * 100).toFixed(2)}
-								%
-							</span>
+						<div className={styles.text}>
+							<div>
+								<h3>Subscribers</h3>
+								<h2>{data.subscribers_count}</h2>
+							</div>
+							<div>
+								<h4>From last month</h4>
+								<span
+									className={
+										data.subscribers_difference > 0
+											? styles.positive
+											: styles.negative
+									}
+								>
+									{(data.subscribers_difference * 100).toFixed(2)}%
+								</span>
+							</div>
 						</div>
 					</div>
 					<div className={styles.search}>
@@ -178,13 +244,11 @@ const SubscriptionTab: React.FC = () => {
 			</div>
 			<Table
 				data={
-					shouldShowSearchResuts &&
-					searchResults &&
-					!searchResultsLoading
+					shouldShowSearchResuts && searchResults && !searchResultsLoading
 						? searchResults
 						: data.subscribers
 				}
-				columns={columns}
+				columns={width <= 425 ? mobileColumns : columns}
 				pageSize={10}
 				header={false}
 			/>

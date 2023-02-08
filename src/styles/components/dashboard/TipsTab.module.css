@@ -34,3 +34,11 @@
 .filter.search input {
     max-height: 42px;
 }
+
+@media screen and (max-width: 425px) {
+    .filters {
+        flex-direction: row-reverse;
+        align-items: center;
+        gap: 12px;
+    }
+}

@@ -10,9 +10,7 @@ import Moment from "react-moment";
 
 const UserProfile: React.FC = () => {
 	const { data: session } = useSession();
-	const { data: notifications, isLoading: matchesLoading } = trpc.useQuery([
-		"user.getNotifications",
-	]);
+	const { data: notifications, isLoading: matchesLoading } = trpc.user.getNotifications.useQuery();
 
 	if (!session?.user) {
 		return (

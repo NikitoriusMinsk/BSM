@@ -13,6 +13,7 @@ import { PortalContext } from "src/utils/portalContext";
 import { AnimatePresence, motion } from "framer-motion";
 import Table from "@components/ui/Table";
 import dynamic from "next/dynamic";
+import useWindowSize from "src/utils/useWindowSize";
 
 const InPortal = dynamic(
 	async () => (await import("react-reverse-portal")).InPortal,
@@ -46,9 +47,7 @@ const columns = [
 		enableSorting: false,
 	}),
 	columnHelper.accessor("amount", {
-		cell: (info) => (
-			<span className={styles.amount}>{info.getValue()}</span>
-		),
+		cell: (info) => <span className={styles.amount}>{info.getValue()}</span>,
 		header: () => <span>Amount</span>,
 		enableSorting: false,
 	}),
@@ -66,9 +65,7 @@ const columns = [
 		cell: (info) => {
 			const status = info.getValue();
 			return (
-				<span
-					className={`${styles.status} ${getStyleByStatus(status)}`}
-				>
+				<span className={`${styles.status} ${getStyleByStatus(status)}`}>
 					{info.getValue()}
 				</span>
 			);
@@ -78,9 +75,46 @@ const columns = [
 	}),
 ];
 
+const mobileColumns = [
+	columnHelper.accessor((row) => row, {
+		id: "index",
+		header: "",
+		cell: (props) => (
+			<div className={styles.transactionInfo}>
+				<span className={styles.amount}>${props.getValue().amount}</span>
+				<span className={styles.id}>{props.getValue().id}</span>
+			</div>
+		),
+		enableSorting: false,
+	}),
+	columnHelper.accessor("date", {
+		cell: (info) => (
+			<Moment
+				date={info.getValue()}
+				format="DD MMM YYYY"
+			/>
+		),
+		header: "",
+		enableSorting: false,
+	}),
+	columnHelper.accessor("status", {
+		cell: (info) => {
+			const status = info.getValue();
+			return (
+				<span className={`${styles.status} ${getStyleByStatus(status)}`}>
+					{info.getValue()}
+				</span>
+			);
+		},
+		header: "",
+		enableSorting: false,
+	}),
+];
+
 const WithdrawTab: React.FC = () => {
-	const { data, isLoading } = trpc.useQuery(["user.getWithdrawInfo"]);
+	const { data, isLoading } = trpc.user.getWithdrawInfo.useQuery();
 	const portalNode = usePortal();
+	const { width } = useWindowSize();
 
 	if (isLoading) {
 		return <div>Loading...</div>;
@@ -116,9 +150,7 @@ const WithdrawTab: React.FC = () => {
 							</div>
 							<div>
 								<h5>Cash that can be withdrawn right now</h5>
-								<WithdrawButton
-									balance={data.availableBalance}
-								/>
+								<WithdrawButton balance={data.availableBalance} />
 							</div>
 						</div>
 						<div
@@ -142,7 +174,7 @@ const WithdrawTab: React.FC = () => {
 					<h2>Historical Withdraws</h2>
 					<Table
 						data={data.history}
-						columns={columns}
+						columns={width <= 425 ? mobileColumns : columns}
 						pageSize={10}
 					/>
 				</div>

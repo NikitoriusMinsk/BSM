@@ -18,9 +18,9 @@ import DateInput from "@components/ui/DatePicker";
 import usePortal from "src/utils/usePortal";
 import dynamic from "next/dynamic";
 import superjson from "superjson";
-import { createSSGHelpers } from "@trpc/react/ssg";
-import { appRouter } from "src/server/router";
-import { createContext } from "src/server/router/context";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { appRouter } from "src/server/trpc/router/_app";
+import { createContext } from "src/server/trpc/context";
 
 const InPortal = dynamic(
 	async () => (await import("react-reverse-portal")).InPortal,
@@ -35,9 +35,8 @@ const OutPortal = dynamic(
 // fix prop drilling
 
 const AddTip: NextPage = () => {
-	const { data: sports, isLoading: sportsLoading } = trpc.useQuery([
-		"filters.getSports",
-	]);
+	const { data: sports, isLoading: sportsLoading } =
+		trpc.filters.getSports.useQuery();
 	const [step, setStep] = useState(1);
 	const portalNode = usePortal();
 
@@ -98,8 +97,8 @@ const AddTip: NextPage = () => {
 					<span className={styles.disclaimer}>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 						Etiam nisi quam, pretium imperdiet erat nec, malesuada
-						scelerisque arcu. Proin quis varius orci. Donec ut
-						suscipit orci.
+						scelerisque arcu. Proin quis varius orci. Donec ut suscipit
+						orci.
 					</span>
 				</div>
 			</PortalContext.Provider>
@@ -111,10 +110,9 @@ const SearchBar: React.FC<{ sports: Sports }> = (props) => {
 	const { sports } = props;
 	const [searchValue, setSearchValue] = useState<string>("");
 	const [selectedSports, setSelectedSports] = useState<string[]>([]);
-	const { data: searchResults, refetch } = trpc.useQuery([
-		"matches.search",
-		{ searchString: searchValue },
-	]);
+	const { data: searchResults, refetch } = trpc.matches.search.useQuery({
+		searchString: searchValue,
+	});
 
 	function handleSearch(e: ChangeEvent<HTMLInputElement>) {
 		const value = e.target.value;
@@ -139,55 +137,53 @@ const SearchBar: React.FC<{ sports: Sports }> = (props) => {
 			/>
 			{searchResults && (
 				<div className={styles.results}>
-					{searchResults.map(
-						({ sport, date, teams, league }, index) => (
-							<div
-								key={`result_${index}`}
-								className={styles.result}
-							>
-								<div className={styles.league}>
-									<Image
-										src={sport.image}
-										height={24}
-										width={24}
-										alt=""
-									/>
-									<div className={styles.info}>
-										<span>{sport.name}</span>
-										<span>{league}</span>
-									</div>
-								</div>
-								<div className={styles.time}>{date}</div>
-								<div className={styles.teams}>
-									<div className={styles.images}>
-										{teams.map(({ image }, index) => (
-											<div
-												key={`team_image_${index}`}
-												className={styles.image}
-											>
-												<Image
-													src={image}
-													height={36}
-													width={36}
-													alt=""
-												/>
-											</div>
-										))}
-									</div>
-									<div className={styles.names}>
-										{teams.map(({ name }, index) => (
-											<span
-												className={styles.name}
-												key={`team_name_${index}`}
-											>
-												{name}
-											</span>
-										))}
-									</div>
+					{searchResults.map(({ sport, date, teams, league }, index) => (
+						<div
+							key={`result_${index}`}
+							className={styles.result}
+						>
+							<div className={styles.league}>
+								<Image
+									src={sport.image}
+									height={24}
+									width={24}
+									alt=""
+								/>
+								<div className={styles.info}>
+									<span>{sport.name}</span>
+									<span>{league}</span>
 								</div>
 							</div>
-						)
-					)}
+							<div className={styles.time}>{date}</div>
+							<div className={styles.teams}>
+								<div className={styles.images}>
+									{teams.map(({ image }, index) => (
+										<div
+											key={`team_image_${index}`}
+											className={styles.image}
+										>
+											<Image
+												src={image}
+												height={36}
+												width={36}
+												alt=""
+											/>
+										</div>
+									))}
+								</div>
+								<div className={styles.names}>
+									{teams.map(({ name }, index) => (
+										<span
+											className={styles.name}
+											key={`team_name_${index}`}
+										>
+											{name}
+										</span>
+									))}
+								</div>
+							</div>
+						</div>
+					))}
 				</div>
 			)}
 			<button className={styles.searchButton}>
@@ -235,9 +231,7 @@ const Filter: React.FC<{
 				className={`${styles.filter} ${isOpen && styles.open}`}
 			>
 				<Image
-					src={
-						isOpen ? "/icons/filter-white.svg" : "/icons/filter.svg"
-					}
+					src={isOpen ? "/icons/filter-white.svg" : "/icons/filter.svg"}
 					height={24}
 					width={24}
 					alt=""
@@ -272,8 +266,7 @@ const FilterModal: React.FC<{
 	defaultSelected: string[];
 }> = (props) => {
 	const { sports, onClose, onChange, defaultSelected } = props;
-	const [selectedItems, setSelectedItems] =
-		useState<string[]>(defaultSelected);
+	const [selectedItems, setSelectedItems] = useState<string[]>(defaultSelected);
 
 	function handleSelect(id: string) {
 		if (selectedItems.includes(id)) {
@@ -356,13 +349,13 @@ const FilterModal: React.FC<{
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createSSGHelpers({
+	const ssg = createProxySSGHelpers({
 		router: appRouter,
 		ctx: await createContext(),
 		transformer: superjson,
 	});
 
-	await ssg.prefetchQuery("filters.getSports");
+	await ssg.filters.getSports.prefetch();
 
 	return {
 		props: {

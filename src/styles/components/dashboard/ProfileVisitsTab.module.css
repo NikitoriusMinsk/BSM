@@ -101,6 +101,22 @@
     color: #1A1C21CC;
 }
 
+.user .info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+}
+
+.user .info time {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(26, 28, 33, 0.7);
+}
+
 .buttonContainer {
     display: flex;
     justify-content: flex-end;

@@ -84,19 +84,20 @@ const MenuLink: React.FC<MenuLinkProps> = (props) => {
 	const { href, label, active } = props;
 
 	return (
-        (<Link href={href} className={`${styles.menuLink} ${active && styles.active}`}>
-
-            <ReactSVG
-                className={styles.menuLinkIcon}
-                src={props.image}
-                alt={label}
-                height={10}
-                width={10}
-            />
-            <span>{label}</span>
-
-        </Link>)
-    );
+		<Link
+			href={href}
+			className={`${styles.menuLink} ${active && styles.active}`}
+		>
+			<ReactSVG
+				className={styles.menuLinkIcon}
+				src={props.image}
+				alt={label}
+				height={10}
+				width={10}
+			/>
+			<span>{label}</span>
+		</Link>
+	);
 };
 
 interface MenuProps {
@@ -126,7 +127,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 	const { onClose } = props;
 
 	return (
-        <motion.div
+		<motion.div
 			className={styles.menu}
 			variants={MenuVariants}
 			initial="closed"
@@ -149,41 +150,44 @@ const Menu: React.FC<MenuProps> = (props) => {
 			</div>
 			<div className={styles.menuSection}>
 				<div className={styles.column}>
-					<Link href="/live-matches" className={styles.menuItem}>
-
-                        <Image
-                            src="/images/menu/live-events.svg"
-                            alt="profile"
-                            width={24}
-                            height={24}
-                        />
-                        <span>Live Events</span>
-
-                    </Link>
-					<Link href="/blog" className={styles.menuItem}>
-
-                        <Image
-                            src="/images/menu/blog.svg"
-                            alt="profile"
-                            width={24}
-                            height={24}
-                        />
-                        <span>Blog</span>
-
-                    </Link>
+					<Link
+						href="/live-matches"
+						className={styles.menuItem}
+					>
+						<Image
+							src="/images/menu/live-events.svg"
+							alt="profile"
+							width={24}
+							height={24}
+						/>
+						<span>Live Events</span>
+					</Link>
+					<Link
+						href="/blog"
+						className={styles.menuItem}
+					>
+						<Image
+							src="/images/menu/blog.svg"
+							alt="profile"
+							width={24}
+							height={24}
+						/>
+						<span>Blog</span>
+					</Link>
 				</div>
 				<div className={styles.column}>
-					<Link href="/bookmakers" className={styles.menuItem}>
-
-                        <Image
-                            src="/images/menu/bookmakers.svg"
-                            alt="profile"
-                            width={24}
-                            height={24}
-                        />
-                        <span>Bookmakers</span>
-
-                    </Link>
+					<Link
+						href="/bookmakers"
+						className={styles.menuItem}
+					>
+						<Image
+							src="/images/menu/bookmakers.svg"
+							alt="profile"
+							width={24}
+							height={24}
+						/>
+						<span>Bookmakers</span>
+					</Link>
 					<Settings />
 				</div>
 			</div>
@@ -193,6 +197,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 					<a
 						href="https://facebook.com"
 						target={"_blank"}
+						rel={"noreferrer"}
 					>
 						<Image
 							src={"/icons/social/facebook.svg"}
@@ -205,6 +210,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 					<a
 						href="https://instagram.com"
 						target={"_blank"}
+						rel={"noreferrer"}
 					>
 						<Image
 							src={"/icons/social/instagram.svg"}
@@ -217,6 +223,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 					<a
 						href="https://twitter.com"
 						target={"_blank"}
+						rel={"noreferrer"}
 					>
 						<Image
 							src={"/icons/social/twitter.svg"}
@@ -229,6 +236,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 					<a
 						href="https://telegram.com"
 						target={"_blank"}
+						rel={"noreferrer"}
 					>
 						<Image
 							src={"/icons/social/telegram.svg"}
@@ -241,7 +249,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 				</div>
 			</div>
 		</motion.div>
-    );
+	);
 };
 
 export default MobileNavbar;

@@ -8,9 +8,7 @@ import { trpc } from "src/utils/trpc";
 import { MethodStatus } from "src/types/methodStatus";
 
 const AboutCoins: NextPage = () => {
-	const { data: methods, isLoading: methodsLoading } = trpc.useQuery([
-		"coins.getMethods",
-	]);
+	const { data: methods, isLoading: methodsLoading } = trpc.coins.getMethods.useQuery();
 
 	if (methodsLoading) {
 		return <div>Loading...</div>;

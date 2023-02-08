@@ -23,7 +23,7 @@ const links = [
 
 const TipsterHeader: React.FC = () => {
 	const router = useRouter();
-	const { data: Timezones } = trpc.useQuery(["navigation.getTimezones"]);
+	const { data: Timezones } = trpc.navigation.getTimezones.useQuery();
 	const { width } = useWindowSize();
 
 	return (

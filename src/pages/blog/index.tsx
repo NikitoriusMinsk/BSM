@@ -6,14 +6,15 @@ import { trpc } from "src/utils/trpc";
 import Moment from "react-moment";
 import shortenString from "src/utils/shortenString";
 import { MatchStatus } from "src/types/matchStatus";
-import { createSSGHelpers } from "@trpc/react/ssg";
-import { appRouter } from "src/server/router";
-import { createContext } from "src/server/router/context";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { appRouter } from "src/server/trpc/router/_app";
+import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
 
 const BlogPage: NextPage = () => {
-	const { data: news, isLoading: newsLoading } = trpc.useQuery(["news.getAll"]);
-	const { data: matches, isLoading: matchesLoading } = trpc.useQuery(["matches.getAll"]);
+	const { data: news, isLoading: newsLoading } = trpc.news.getAll.useQuery();
+	const { data: matches, isLoading: matchesLoading } =
+		trpc.matches.getAll.useQuery();
 
 	if (newsLoading || matchesLoading) {
 		return <div>Loading...</div>;
@@ -145,7 +146,9 @@ const SideNews: React.FC<SideNewsProps> = (props) => {
 						<span className={styles.date}>
 							<Moment format="DD MMM YYYY">{news[0].date}</Moment>
 						</span>
-						<h2 className={styles.title}>{shortenString(news[0].title, 75)}</h2>
+						<h2 className={styles.title}>
+							{shortenString(news[0].title, 75)}
+						</h2>
 					</div>
 				</div>
 			)}
@@ -169,7 +172,9 @@ const SideNews: React.FC<SideNewsProps> = (props) => {
 						<span className={styles.date}>
 							<Moment format="DD MMM YYYY">{news.date}</Moment>
 						</span>
-						<h2 className={styles.title}>{shortenString(news.title, 45)}</h2>
+						<h2 className={styles.title}>
+							{shortenString(news.title, 45)}
+						</h2>
 						<div className={styles.stats}>
 							<span className={styles.stat}>
 								<Image
@@ -433,7 +438,9 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 								<span className={styles.date}>
 									<Moment format="DD MMM YYYY">{news.date}</Moment>
 								</span>
-								<h2 className={styles.title}>{shortenString(news.title, 45)}</h2>
+								<h2 className={styles.title}>
+									{shortenString(news.title, 45)}
+								</h2>
 								<div className={styles.stats}>
 									<span className={styles.stat}>
 										<Image
@@ -464,14 +471,14 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createSSGHelpers({
+	const ssg = createProxySSGHelpers({
 		router: appRouter,
 		ctx: await createContext(),
 		transformer: superjson,
 	});
 
-	await ssg.prefetchQuery("news.getAll");
-	await ssg.prefetchQuery("matches.getAll");
+	await ssg.news.getAll.prefetch();
+	await ssg.matches.getAll.prefetch();
 
 	return {
 		props: {

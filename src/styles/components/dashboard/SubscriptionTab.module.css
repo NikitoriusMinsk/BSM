@@ -16,6 +16,13 @@
     background-size: cover;
 }
 
+#subscribers .info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 36px;
+}
+
 #subscribers .text {
     display: flex;
     flex-direction: column;
@@ -139,6 +146,22 @@
     color: #1A1C21CC;
 }
 
+.user .info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+}
+
+.user .info .userPrice {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #7F3FFC;
+}
+
 .subscribeButton {
     display: flex;
     align-items: center;
@@ -157,6 +180,7 @@
     align-items: center;
     gap: 12px;
     min-height: 40px;
+    width: 100%;
 }
 
 .duration {
@@ -233,4 +257,35 @@
 
 .subscribeButton.subscribed::before {
     content: url(/icons/check-gray.svg);
+}
+
+@media screen and (max-width: 425px) {
+    #subscribers {
+        flex-direction: column;
+    }
+
+    #subscribers .info {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #subscribers .search {
+        width: 100%;
+    }
+
+    .subscriptionTab tr {
+        position: relative;
+    }
+
+    .user,
+    .price,
+    .buttonContainer {
+        padding-bottom: 50px;
+    }
+
+    .durationContainer {
+        position: absolute;
+        left: 16px;
+        width: calc(100% - 32px);
+    }
 }
