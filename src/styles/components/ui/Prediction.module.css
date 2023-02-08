@@ -533,7 +533,7 @@
     margin-left: 70px;
 }
 
-.betNow{
+.betNow {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -549,4 +549,61 @@
     font-size: 15px;
     line-height: 18px;
     color: #FFFFFF;
+}
+
+@media screen and (max-width: 425px) {
+    .header .info {
+        gap: 25px;
+    }
+
+    .header button {
+        display: none;
+    }
+
+    .matchInfo {
+        padding: 20px;
+    }
+
+    .predictionText {
+        margin: 0 12px;
+        padding: 12px 0;
+    }
+
+    .outcomes {
+        padding: 12px;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: unset;
+    }
+
+    .outcomes .outcome:first-child {
+        width: 100%;
+    }
+
+    .outcomes .outcome,
+    .bookmaker,
+    .profit {
+        width: calc(50% - 10px)
+    }
+
+    .bookmaker {
+        justify-content: space-between;
+    }
+
+    .profit {
+        justify-content: flex-end;
+    }
+
+    .stats {
+        padding: 12px;
+    }
+
+    .commentsContainer {
+        padding: 12px;
+    }
+
+    .comments {
+        padding: 0;
+    }
+
 }

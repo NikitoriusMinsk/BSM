@@ -129,7 +129,9 @@
     align-items: center;
     justify-content: center;
     padding: 13px 24px;
-    width: calc(50% - 6px);
+    min-width: calc(33% - 7px);
+    max-width: calc(50% - 6px);
+    flex: 1;
     background-color: #FFFFFF;
     border-radius: 8px;
     border: 1px solid rgba(26, 28, 33, 0.2);
