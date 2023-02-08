@@ -111,6 +111,11 @@ const HistoricalTipsTab: React.FC = () => {
 										{ id: 3, label: "Lost" },
 									],
 								},
+								{
+									key: "date",
+									type: "date",
+									label: "Date",
+								},
 							]}
 						/>
 					)}

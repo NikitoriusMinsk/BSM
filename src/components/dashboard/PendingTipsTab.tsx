@@ -88,6 +88,11 @@ const PendingTipsTab: React.FC = () => {
 										{ id: 2, label: "Lowest to Biggest" },
 									],
 								},
+								{
+									key: "date",
+									type: "date",
+									label: "Date",
+								},
 							]}
 						/>
 					)}

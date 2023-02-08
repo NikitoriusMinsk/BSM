@@ -6,6 +6,7 @@ import dynamic from "next/dist/shared/lib/dynamic";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import TextField from "./TextField";
+import DateInput from "./DatePicker";
 
 const InPortal = dynamic(
 	async () => (await import("react-reverse-portal")).InPortal,
@@ -16,8 +17,8 @@ interface FilterModalProps {
 	filters: {
 		key: string;
 		label: string;
-		type: "buttons" | "singleChoice" | "multipleChoice";
-		items: {
+		type: "buttons" | "singleChoice" | "multipleChoice" | "date";
+		items?: {
 			id: number;
 			label: string;
 			image?: string;
@@ -98,6 +99,16 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 			case "multipleChoice":
 				return (
 					<MultipleChoiceFilter
+						key={key}
+						items={items}
+						selected={selected[key] ?? []}
+						onChange={(selected) => setSelected({ key, selected })}
+						label={label}
+					/>
+				);
+			case "date":
+				return (
+					<DateFilter
 						key={key}
 						items={items}
 						selected={selected[key] ?? []}
@@ -198,7 +209,7 @@ const ButtonsFilter: React.FC<FilterProps> = (props) => {
 		<div className={styles.filterContainer}>
 			<span className={styles.filterLabel}>{label}</span>
 			<div className={styles.buttonContainer}>
-				{items.map((item) => (
+				{items?.map((item) => (
 					<button
 						className={
 							selected.includes(item.id) ? styles.active : undefined
@@ -225,7 +236,7 @@ const SingleChoiceFilter: React.FC<FilterProps> = (props) => {
 				icon="/icons/search.svg"
 			/>
 			<div className={styles.choiceContainer}>
-				{items.map((item) => (
+				{items?.map((item) => (
 					<div
 						className={`${styles.option} ${
 							selected.includes(item.id) ? styles.active : undefined
@@ -266,7 +277,7 @@ const MultipleChoiceFilter: React.FC<FilterProps> = (props) => {
 				icon="/icons/search.svg"
 			/>
 			<div className={styles.choiceContainer}>
-				{items.map((item) => (
+				{items?.map((item) => (
 					<div
 						className={`${styles.option} ${
 							selected.includes(item.id) ? styles.active : undefined
@@ -284,6 +295,21 @@ const MultipleChoiceFilter: React.FC<FilterProps> = (props) => {
 					</div>
 				))}
 			</div>
+		</div>
+	);
+};
+
+const DateFilter: React.FC<FilterProps> = (props) => {
+	const { label, onChange, selected } = props;
+
+	return (
+		<div className={styles.filterContainer}>
+			<span className={styles.filterLabel}>{label}</span>
+			<DateInput
+				onChange={(date) => onChange([date.getTime()])}
+				defaultDate={selected[0]}
+				onlyDropdown={true}
+			/>
 		</div>
 	);
 };
