@@ -31,6 +31,7 @@
 		"react-responsive-carousel": "^3.2.23",
 		"react-reverse-portal": "^2.1.1",
 		"react-svg": "^15.1.5",
+		"react-use-draggable-scroll": "^0.4.7",
 		"recharts": "2.1.12",
 		"sharp": "^0.31.0",
 		"superjson": "^1.9.1",
