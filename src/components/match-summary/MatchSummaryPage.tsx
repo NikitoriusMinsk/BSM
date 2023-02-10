@@ -14,28 +14,30 @@ const MatchSummaryPage: React.FC = () => {
                         0 - 0
                     </span>
                 </div>
-                <div className={styles.statLine}>
-                    <span>
-                        13'
-                    </span>
-                    <div>
-                        ICON
-                    </div>                    
-                    <span>
-                        Some Action
-                    </span>
-                </div>
-                <div className={styles.statLine} style={{flexDirection:'row-reverse'}}>
-                    <span>
-                        26'
-                    </span>
-                    <div>
-                        ICON
-                    </div>                    
-                    <span>
-                        Some Action
-                    </span>
-                </div>
+                <div className={styles.stageStat}>
+                    <div className={styles.statLine}>
+                        <span>
+                            13'
+                        </span>
+                        <div>
+                            ICON
+                        </div>                    
+                        <span>
+                            Some Action
+                        </span>
+                    </div>
+                    <div className={styles.statLine} style={{flexDirection:'row-reverse'}}>
+                        <span>
+                            26'
+                        </span>
+                        <div>
+                            ICON
+                        </div>                    
+                        <span>
+                            Some Action
+                        </span>
+                    </div>
+                </div>                
                 <div className={styles.stage}>
                     <span>
                         2ND HALF
@@ -44,66 +46,68 @@ const MatchSummaryPage: React.FC = () => {
                         0 - 0
                     </span>
                 </div>
-                <div className={styles.statLine}>
-                    <span>
-                        56'
-                    </span>
-                    <div>
-                        ICON
-                    </div>                    
-                    <span>
-                        Some Action
-                    </span>
-                </div>
-                <div className={styles.statLine}>
-                    <span>
-                        56'
-                    </span>
-                    <div>
-                        ICON
-                    </div>                    
-                    <span>
-                        Some Action
-                    </span>                   
-                    <span style={{fontWeight:400}}>
-                        Some Action
-                    </span>
-                </div>
-                <div className={styles.statLine}>
-                    <span>
-                        56'
-                    </span>
-                    <div className={styles.iconWithText}>
-                        <div>ICON</div>
-                        1 - 0
-                    </div>                    
-                    <span>
-                        Some Action
-                    </span>
-                </div>
-                <div className={styles.statLine} style={{flexDirection:'row-reverse'}}>
-                    <span>
-                        78'
-                    </span>
-                    <div>
-                        ICON
-                    </div>                    
-                    <span>
-                        Some Action
-                    </span>
-                </div>
-                <div className={styles.statLine} style={{flexDirection:'row-reverse'}}>
-                    <span>
-                        85'
-                    </span>
-                    <div className={styles.iconWithText} style={{flexDirection:'row-reverse'}}>
-                        <div>ICON</div>
-                        1 - 0
-                    </div>                    
-                    <span>
-                        Some Action
-                    </span>
-                </div>
+                <div className={styles.stageStat}>
+                    <div className={styles.statLine}>
+                        <span>
+                            56'
+                        </span>
+                        <div>
+                            ICON
+                        </div>                    
+                        <span>
+                            Some Action
+                        </span>
+                    </div>
+                    <div className={styles.statLine}>
+                        <span>
+                            56'
+                        </span>
+                        <div>
+                            ICON
+                        </div>                    
+                        <span>
+                            Some Action
+                        </span>                   
+                        <span style={{fontWeight:400}}>
+                            Some Action
+                        </span>
+                    </div>
+                    <div className={styles.statLine}>
+                        <span>
+                            56'
+                        </span>
+                        <div className={styles.iconWithText}>
+                            <div>ICON</div>
+                            1 - 0
+                        </div>                    
+                        <span>
+                            Some Action
+                        </span>
+                    </div>
+                    <div className={styles.statLine} style={{flexDirection:'row-reverse'}}>
+                        <span>
+                            78'
+                        </span>
+                        <div>
+                            ICON
+                        </div>                    
+                        <span>
+                            Some Action
+                        </span>
+                    </div>
+                    <div className={styles.statLine} style={{flexDirection:'row-reverse'}}>
+                        <span>
+                            85'
+                        </span>
+                        <div className={styles.iconWithText} style={{flexDirection:'row-reverse'}}>
+                            <div>ICON</div>
+                            1 - 0
+                        </div>                    
+                        <span>
+                            Some Action
+                        </span>
+                    </div>
+                </div>                
             </div>
             <div className={styles.infoLink}>
                 <span className={styles.infoTitle}>
