@@ -1,7 +1,7 @@
 /* Dropdown with search */
 .dropContainer{
     border: 1px solid rgba(26, 28, 33, 0.1);
-    border-radius: 4px;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;

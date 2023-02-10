@@ -1,13 +1,16 @@
 import styles from "../../styles/components/match-summary/OddsPage.module.css"
 import Image from "next/legacy/image";
-import React, { useEffect, useState } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import DropdownSearch from "@components/ui/match-summary/DropdownSearch"
 import OddsFilter from "@components/ui/match-summary/OddsFilter"
 import OddForm from "@components/ui/match-summary/OddForm"
 import { motion, AnimatePresence } from "framer-motion"
+import { useDraggable } from "react-use-draggable-scroll";
 
 const OddsPage: React.FC = () => {
     const [oddInProcess, setOddInProcess] = useState()
+    const sliderRef = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+    const { events } = useDraggable(sliderRef);
 
     const createOdd = (key:any) => {
         if (oddInProcess)
@@ -18,7 +21,7 @@ const OddsPage: React.FC = () => {
 
     return (
         <div className={styles.pageContainer}>
-            <div className={styles.oddsFilter}>
+            <div className={styles.oddsFilter} {...events} ref={sliderRef}>
                 <DropdownSearch 
                     items={[
                         {
@@ -79,7 +82,7 @@ const OddsPage: React.FC = () => {
                     }
                 </AnimatePresence>
                 <div className={styles.oddsBlock}>
-                    <span className={styles.oddsBlockTitle}>
+                    <span className={styles.oddsBlockTitle} style={{fontSize: '18px', lineHeight: '22px'}}>
                         Main
                     </span>
                     <div key={"1"} className={`${styles.odd} ${"1"==oddInProcess && styles.oddActive}`} onClick={() => createOdd("1")}>
@@ -125,7 +128,7 @@ const OddsPage: React.FC = () => {
                         <span>2.1</span>
                     </div>
                 </div>
-                <div className={styles.oddsBlock} aria-colcount={3}>
+                <div className={styles.oddsBlock} aria-mobile="true" aria-colcount={3}>
                     <span className={styles.oddsBlockTitle}>
                         Total
                     </span>

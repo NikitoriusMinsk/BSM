@@ -10,6 +10,11 @@
     display: flex;
     align-items: stretch;
     gap: 10px;
+    overflow-x: auto;
+    width: 100%;
+}
+.oddsFilter::-webkit-scrollbar{
+    display: none;
 }
 .oddsContent{
     margin-top: 20px;
@@ -36,9 +41,9 @@
     width: 100%;
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
     color: #1A1C21;
     grid-column: 1 / -1;
 }
@@ -49,7 +54,7 @@
     padding: 10px 16px;
     gap: 24px;
     background: rgba(242, 242, 242, 0.5);
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     flex: 1 1;
@@ -60,6 +65,10 @@
     font-size: 15px;
     line-height: 18px;
     color: #1A1C21;
+}
+.odd > *:last-child {
+    font-size: 16px;
+    line-height: 22px;
 }
 .oddsColTitle{
     text-align: center;
@@ -82,19 +91,41 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 14px;
+    padding: 10px 16px;
     background: rgba(242, 242, 242, 0.5);
-    border-radius: 4px;
+    border-radius: 8px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
+    font-size: 16px;
+    line-height: 22px;
     color: #1A1C21;
 }
 .odd.oddActive, .oddValue.oddActive {
     background: #7F3FFC;
     color: #FFFFFF;
+}
+
+@media screen and (max-width: 600px) {
+    .pageContainer {
+        margin-left: 16px;
+        margin-right: 16px;
+        width: calc(100% - 32px);
+    }
+    .oddsFilter {
+        margin: 0px -16px;
+        width: calc(100% + 32px);
+        padding: 0px 16px;
+    }
+    .oddsBlock[aria-colcount="2"] {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .oddsContent {
+        gap: 32px;
+    }
+    .oddsBlock[aria-colcount="3"]:not([aria-mobile="true"]) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
