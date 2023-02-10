@@ -35,23 +35,24 @@
 
 #accountSettings .content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 24px;
 }
 
 #accountSettings {
     grid-column-start: 1;
-    grid-column-end: 8;
+    grid-column-end: 13;
 }
 
 #sportDetails {
-    grid-column-start: 8;
+    grid-column-start: 1;
     grid-column-end: 13;
 }
 
 #sportDetails .content {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -63,6 +64,24 @@
     padding: 16px;
     background-color: #FFFFFF;
     border-radius: 8px;
+    width: calc(50% - 10px)
+}
+
+#sportDetails .sportBlockMain {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#sportDetails .sportBlockMain .name {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #1A1C21;
 }
 
 #sportDetails .sportBlock .label {
@@ -140,7 +159,8 @@
 .info {
     flex: 1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -158,13 +178,14 @@
     line-height: 18px;
     color: #1A1C21;
     cursor: pointer;
+    width: calc(50% - 10px);
 }
 
 /* Profile Field */
 
 .profileField {
     position: relative;
-    width: 100%;
+    width: calc(50% - 10px);
     display: flex;
     align-items: center;
 }
@@ -219,7 +240,7 @@
 /* Password Modal */
 
 .modalContainer {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     display: flex;
@@ -235,7 +256,8 @@
     padding: 28px;
     background-color: #FFFFFF;
     border-radius: 16px;
-    width: 520px;
+    max-width: 520px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -283,4 +305,33 @@
     font-size: 15px;
     line-height: 18px;
     color: #FFFFFF;
+}
+
+@media screen and (max-width: 425px) {
+    .profileSettings {
+        gap: 0;
+        row-gap: 40px;
+    }
+
+    .info {
+        flex-direction: column;
+    }
+
+    .profileField,
+    .changePassword {
+        width: 100%;
+    }
+
+    #sportDetails .content {
+        flex-direction: column;
+    }
+
+    #sportDetails .sportBlock {
+        width: 100%;
+    }
+
+    .modalContainer .modal {
+        height: 100vh;
+        border-radius: 0;
+    }
 }

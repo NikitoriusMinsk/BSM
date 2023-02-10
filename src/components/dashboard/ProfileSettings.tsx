@@ -23,9 +23,7 @@ const ProfileSettings: React.FC = () => {
 		<>
 			<AnimatePresence initial={false}>
 				{isPasswordModalOpen && (
-					<PasswordModal
-						onClose={() => setIsPasswordModalOpen(false)}
-					/>
+					<PasswordModal onClose={() => setIsPasswordModalOpen(false)} />
 				)}
 				{isSportModalOpen && (
 					<SportModal onClose={() => setIsSportModalOpen(false)} />
@@ -66,12 +64,8 @@ const ProfileSettings: React.FC = () => {
 								defaultValue={data.nickname}
 							/>
 							<ProfileField
-								label="Name"
+								label="Full Name"
 								defaultValue={data.name.split(" ")[0]}
-							/>
-							<ProfileField
-								label="Surname"
-								defaultValue={data.name.split(" ")[1]}
 							/>
 							<ProfileField
 								label="Email"
@@ -111,21 +105,16 @@ const ProfileSettings: React.FC = () => {
 						</div>
 					</div>
 					<div className={styles.content}>
-						<div className={styles.sportBlock}>
-							<span className={styles.label}>Sport</span>
-							<div className={styles.details}>
-								<div className={styles.image}>
-									<Image
-										src={data.sport.image}
-										height={34}
-										width={34}
-										alt=""
-									/>
-								</div>
-								<span className={styles.name}>
-									{data.sport.name}
-								</span>
+						<div className={styles.sportBlockMain}>
+							<div className={styles.image}>
+								<Image
+									src={data.sport.image}
+									height={180}
+									width={180}
+									alt=""
+								/>
 							</div>
+							<span className={styles.name}>{data.sport.name}</span>
 						</div>
 						<div className={styles.sportBlock}>
 							<span className={styles.label}>Club</span>
@@ -138,9 +127,7 @@ const ProfileSettings: React.FC = () => {
 										alt=""
 									/>
 								</div>
-								<span className={styles.name}>
-									{data.club.name}
-								</span>
+								<span className={styles.name}>{data.club.name}</span>
 							</div>
 						</div>
 						<div className={styles.sportBlock}>
@@ -166,9 +153,7 @@ const ProfileSettings: React.FC = () => {
 	);
 };
 
-const ProfileField: React.FC<{ label: string; defaultValue?: string }> = (
-	props
-) => {
+const ProfileField: React.FC<{ label: string; defaultValue?: string }> = (props) => {
 	const { label, defaultValue } = props;
 	const [editable, setEditable] = useState(false);
 
@@ -261,9 +246,12 @@ const PasswordModal: React.FC<{ onClose: () => void }> = (props) => {
 
 const SportModal: React.FC<{ onClose: () => void }> = (props) => {
 	const { onClose } = props;
-	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
-	const { data: clubs, isLoading: clubsLoading } = trpc.filters.getSportClubs.useQuery();
-	const { data: countries, isLoading: countriesLoading } = trpc.filters.getCountries.useQuery();
+	const { data: sports, isLoading: sportsLoading } =
+		trpc.filters.getSports.useQuery();
+	const { data: clubs, isLoading: clubsLoading } =
+		trpc.filters.getSportClubs.useQuery();
+	const { data: countries, isLoading: countriesLoading } =
+		trpc.filters.getCountries.useQuery();
 
 	if (sportsLoading || clubsLoading || countriesLoading) {
 		return <></>;
