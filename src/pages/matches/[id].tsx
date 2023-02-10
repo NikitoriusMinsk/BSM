@@ -196,6 +196,9 @@ const MatchSummary: NextPage = () => {
                     </AnimatePresence>
                 </div>
             </main>
+            <div className={styles.sideBar}>
+
+            </div>
         </>
     );
 };
