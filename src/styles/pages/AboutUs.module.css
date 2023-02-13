@@ -58,6 +58,10 @@
     gap: 12px;
 }
 
+.predictionOffers .content .block .mobileText h3 {
+    display: none;
+}
+
 .predictionOffers .content .block h3 {
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -136,8 +140,8 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 13px;
-    height: 24px;
-    width: 24px;
+    min-height: 24px;
+    min-width: 24px;
     background-color: #7F3FFC;
     border-radius: 100%;
 }
@@ -148,8 +152,8 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 13px;
-    height: 24px;
-    width: 24px;
+    min-height: 24px;
+    min-width: 24px;
     background-color: #7F3FFC;
     border-radius: 100%;
 }
@@ -160,10 +164,44 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 18px;
-    height: 24px;
-    width: 24px;
+    min-height: 24px;
+    min-width: 24px;
 }
 
 .ourGoals span b {
     color: #7F3FFC;
+}
+
+@media screen and (max-width: 425px) {
+    .predictionOffers {
+        padding: 16px;
+        margin-right: 0;
+    }
+
+    .predictionOffers .content .block {
+        width: 100%;
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .predictionOffers .content .block .text h3 {
+        display: none;
+    }
+
+    .predictionOffers .content .block .mobileText {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .predictionOffers .content .block .mobileText h3 {
+        display: block;
+    }
+
+    .ourGoals {
+        margin: 0;
+        padding: 16px;
+    }
 }
