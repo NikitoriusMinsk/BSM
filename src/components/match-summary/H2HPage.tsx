@@ -1,13 +1,18 @@
 import styles from "../../styles/components/match-summary/H2HPage.module.css"
 import Image from "next/legacy/image";
-import React, { useEffect, useState } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import H2HFilter from "@components/ui/match-summary/H2HFilter"
 import { motion } from "framer-motion"
+import { useDraggable } from "react-use-draggable-scroll";
+import useWindowSize from "src/utils/useWindowSize";
 
 const H2HPage: React.FC = () => {
+    const sliderRef = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+    const { events } = useDraggable(sliderRef);
+
     return (
         <div className={styles.pageContainer}>
-            <div className={styles.filter}>
+            <div className={styles.filter} {...events} ref={sliderRef}>
                 <H2HFilter 
                     items={[
                         {
@@ -37,6 +42,7 @@ const H2HPage: React.FC = () => {
 
 const MatchesBlock: React.FC = () => {
     const [seeMore, setSeeMore] = useState(false)
+    const { width } = useWindowSize()
     
     // test
     let itemCount = 6
@@ -46,7 +52,7 @@ const MatchesBlock: React.FC = () => {
             height: "100%"
         },
         close: {
-            height: itemCount > 2 ? 234 : (itemCount == 2 ? 156 : 78)
+            height: itemCount > 2 ? (width<=600 ? 276 : 234) : (itemCount == 2 ? (width<=600 ? 184 : 156) : (width<=600 ? 92 : 78))
         }
     }
 
@@ -84,22 +90,42 @@ const MatchesBlock: React.FC = () => {
                                     </span>
                                 </div>
                             </div>
-                            <div className={styles.teams}>
-                                <div className={styles.teamLogo}>
+                            <div className={styles.dateChampMobile}>
+                                <div className={styles.champLogo}>
                                     <Image 
-                                        src="/testimg/club1.png"
-                                        width={20}
-                                        height={20}
+                                        src="/testimg/world.png"
+                                        width={24}
+                                        height={24}
                                         objectFit="contain"
                                     />
                                 </div>
-                                <div className={styles.teamLogo}>
-                                    <Image 
-                                        src="/testimg/club2.png"
-                                        width={20}
-                                        height={20}
-                                        objectFit="contain"
-                                    />
+                                <div className={styles.champ}>
+                                    <span className={styles.champName}>
+                                        Champ
+                                    </span>
+                                    <span className={styles.date}>
+                                        13.09.22
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={styles.teams}>
+                                <div className={styles.teamsLogos}>
+                                    <div className={styles.teamLogo}>
+                                        <Image 
+                                            src="/testimg/club1.png"
+                                            width={20}
+                                            height={20}
+                                            objectFit="contain"
+                                        />
+                                    </div>
+                                    <div className={styles.teamLogo}>
+                                        <Image 
+                                            src="/testimg/club2.png"
+                                            width={20}
+                                            height={20}
+                                            objectFit="contain"
+                                        />
+                                    </div>
                                 </div>
                                 <div className={styles.teamsNames}>
                                     <span className={styles.winner}>
@@ -144,22 +170,42 @@ const MatchesBlock: React.FC = () => {
                                     </span>
                                 </div>
                             </div>
-                            <div className={styles.teams}>
-                                <div className={styles.teamLogo}>
+                            <div className={styles.dateChampMobile}>
+                                <div className={styles.champLogo}>
                                     <Image 
-                                        src="/testimg/club1.png"
-                                        width={20}
-                                        height={20}
+                                        src="/testimg/world.png"
+                                        width={24}
+                                        height={24}
                                         objectFit="contain"
                                     />
                                 </div>
-                                <div className={styles.teamLogo}>
-                                    <Image 
-                                        src="/testimg/club2.png"
-                                        width={20}
-                                        height={20}
-                                        objectFit="contain"
-                                    />
+                                <div className={styles.champ}>
+                                    <span className={styles.champName}>
+                                        Champ
+                                    </span>
+                                    <span className={styles.date}>
+                                        13.09.22
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={styles.teams}>
+                                <div className={styles.teamsLogos}>
+                                    <div className={styles.teamLogo}>
+                                        <Image 
+                                            src="/testimg/club1.png"
+                                            width={20}
+                                            height={20}
+                                            objectFit="contain"
+                                        />
+                                    </div>
+                                    <div className={styles.teamLogo}>
+                                        <Image 
+                                            src="/testimg/club2.png"
+                                            width={20}
+                                            height={20}
+                                            objectFit="contain"
+                                        />
+                                    </div>
                                 </div>
                                 <div className={styles.teamsNames}>
                                     <span>
@@ -204,22 +250,42 @@ const MatchesBlock: React.FC = () => {
                                     </span>
                                 </div>
                             </div>
-                            <div className={styles.teams}>
-                                <div className={styles.teamLogo}>
+                            <div className={styles.dateChampMobile}>
+                                <div className={styles.champLogo}>
                                     <Image 
-                                        src="/testimg/club1.png"
-                                        width={20}
-                                        height={20}
+                                        src="/testimg/world.png"
+                                        width={24}
+                                        height={24}
                                         objectFit="contain"
                                     />
                                 </div>
-                                <div className={styles.teamLogo}>
-                                    <Image 
-                                        src="/testimg/club2.png"
-                                        width={20}
-                                        height={20}
-                                        objectFit="contain"
-                                    />
+                                <div className={styles.champ}>
+                                    <span className={styles.champName}>
+                                        Champ
+                                    </span>
+                                    <span className={styles.date}>
+                                        13.09.22
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={styles.teams}>
+                                <div className={styles.teamsLogos}>
+                                    <div className={styles.teamLogo}>
+                                        <Image 
+                                            src="/testimg/club1.png"
+                                            width={20}
+                                            height={20}
+                                            objectFit="contain"
+                                        />
+                                    </div>
+                                    <div className={styles.teamLogo}>
+                                        <Image 
+                                            src="/testimg/club2.png"
+                                            width={20}
+                                            height={20}
+                                            objectFit="contain"
+                                        />
+                                    </div>
                                 </div>
                                 <div className={styles.teamsNames}>
                                     <span>

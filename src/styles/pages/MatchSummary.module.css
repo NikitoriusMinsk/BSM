@@ -242,6 +242,7 @@
     .matchPreview {
         height: 60vw;
         padding: 16px;
+        border-radius: 0px;
     }
     .buttonBack {
         width: 36px;
