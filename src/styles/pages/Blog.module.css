@@ -6,7 +6,6 @@
     gap: 40px;
     margin-left: 60px;
     padding-top: 20px;
-    margin-bottom: 100px;
 }
 
 .sideColumn {
@@ -38,8 +37,10 @@
 .mainNews {
     position: relative;
     min-height: 540px;
-    border-radius: 16px;
+    border-radius: 16px 0 16px 0;
     overflow: hidden;
+    margin-left: -60px;
+    margin-top: -20px;
 }
 
 .mainNewsLabel {
@@ -399,8 +400,29 @@
 
 .newsBlockHeader {
     display: flex;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: space-between;
+}
+
+.newsBlockHeading {
+    display: flex;
     flex-direction: column;
     gap: 4px;
+}
+
+.newsBlockHeader button {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+    padding: 13px 24px 13px 24px;
+    border-radius: 8px;
+    border: 1px solid #1A1C2133;
+    background-color: #FFFFFF;
+    cursor: pointer;
 }
 
 .newsBlockHeader h3 {
@@ -516,8 +538,29 @@
 
 .fullWidthNewsBlockHeader {
     display: flex;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: space-between;
+}
+
+.fullWidthnewsBlockHeading {
+    display: flex;
     flex-direction: column;
     gap: 4px;
+}
+
+.fullWidthNewsBlockHeader button {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+    padding: 13px 24px 13px 24px;
+    border-radius: 8px;
+    border: 1px solid #1A1C2133;
+    background-color: #FFFFFF;
+    cursor: pointer;
 }
 
 .fullWidthNewsBlockHeader h3 {
@@ -558,7 +601,7 @@
     flex: 1;
     border-radius: 16px;
     overflow: hidden;
-    height: 370px;
+    min-height: 370px;
 }
 
 .fullWidthNewsBlockContent .main .news .info {
@@ -679,4 +722,125 @@
     font-size: 14px;
     line-height: 17px;
     color: #1A1C21B2;
+}
+
+@media screen and (max-width: 425px) {
+    .sideColumn {
+        padding: 16px;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 13;
+        margin-bottom: 0;
+    }
+
+    .mainColumn.top {
+        gap: 0;
+    }
+
+    .topMatches {
+        display: none;
+    }
+
+    .mainColumn {
+        grid-column-end: 13;
+        margin-left: 0;
+    }
+
+    .mainNews {
+        margin-top: 0;
+        margin-left: 0;
+        border-radius: 0;
+        min-height: 200px;
+        margin-bottom: 180px;
+        overflow: visible;
+    }
+
+    .mainNewsInfo {
+        bottom: calc(80px - 180px);
+        left: 16px;
+    }
+
+    .mainNewsStats {
+        right: unset;
+        left: 16px;
+        bottom: calc(30px - 180px);
+    }
+
+    .mainNewsDate {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: rgba(26, 28, 33, 0.7);
+    }
+
+    .mainNewsTitle {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: #1A1C21;
+    }
+
+    .mainNewsStats {
+        width: calc(100% - 32px);
+        justify-content: space-between;
+    }
+
+    .mainNewsStat {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #1A1C21;
+    }
+
+    .mainNewsStat img {
+        filter: invert();
+    }
+
+    .newsBlock {
+        padding: 16px;
+    }
+
+    .newsBlockContent .news {
+        width: 100%;
+    }
+
+    .fullWidthNewsBlock {
+        margin-right: 0;
+        padding: 16px;
+        grid-row-start: 3;
+        grid-row-end: 4;
+    }
+
+    .fullWidthNewsBlockContent {
+        flex-direction: column;
+    }
+
+    .fullWidthNewsBlockContent .main {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .fullWidthNewsBlockContent .main .news {
+        min-height: 210px;
+    }
+
+    .fullWidthNewsBlockContent .side {
+        width: 100%;
+    }
+
+    .mainColumn.bottom {
+        grid-row-start: 4;
+        grid-row-end: 5;
+    }
+
+    .mainColumn.bottom .newsBlockContent .news {
+        width: 100%;
+    }
 }
