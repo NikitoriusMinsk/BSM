@@ -308,8 +308,11 @@ const NewsBlock: React.FC<NewsBlockProps> = (props) => {
 		<div className={styles.newsBlock}>
 			{(h2 || h3) && (
 				<div className={styles.newsBlockHeader}>
-					{h3 && <h3>{h3}</h3>}
-					{h2 && <h2>{h2}</h2>}
+					<div className={styles.newsBlockHeading}>
+						{h3 && <h3>{h3}</h3>}
+						{h2 && <h2>{h2}</h2>}
+					</div>
+					<button className={styles.seeAll}>See All</button>
 				</div>
 			)}
 			<div className={styles.newsBlockContent}>
@@ -369,8 +372,11 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 		<div className={styles.fullWidthNewsBlock}>
 			{(h2 || h3) && (
 				<div className={styles.fullWidthNewsBlockHeader}>
-					{h3 && <h3>{h3}</h3>}
-					{h2 && <h2>{h2}</h2>}
+					<div className={styles.fullWidthnewsBlockHeading}>
+						{h3 && <h3>{h3}</h3>}
+						{h2 && <h2>{h2}</h2>}
+					</div>
+					<button>See All</button>
 				</div>
 			)}
 			<div className={styles.fullWidthNewsBlockContent}>

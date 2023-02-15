@@ -104,11 +104,14 @@
     padding: 24px;
     background-color: #F2F2F24D;
     border-radius: 16px;
+    gap: 24px;
 }
 
 .method .info {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
     gap: 24px;
 }
 
@@ -116,6 +119,23 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+}
+
+.method .textMobile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+
+.method .textMobile h4 {
+    display: none;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #1A1C21;
 }
 
 .method .info .text h4 {
@@ -150,6 +170,7 @@
     padding: 12px 16px;
     border-radius: 8px;
     border: none;
+    min-width: max-content;
 }
 
 .method button.available {
@@ -186,4 +207,51 @@
     font-size: 15px;
     line-height: 18px;
     color: #2CD114;
+}
+
+@media screen and (max-width: 425px) {
+    .header {
+        padding: 0;
+        margin-right: 0;
+        height: 120px;
+    }
+
+    .header .coins {
+        left: 0;
+    }
+
+    .header h2 {
+        text-align: center;
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 18px;
+        color: #FFFFFF;
+    }
+
+    .header span {
+        display: none;
+    }
+
+    .mainColumn {
+        padding: 16px;
+    }
+
+    .method {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .method .info .text h4 {
+        display: none;
+    }
+
+    .method .textMobile h4 {
+        display: block;
+    }
+
+    .method .textMobile {
+        width: 100%;
+    }
 }

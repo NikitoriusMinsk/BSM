@@ -20,6 +20,17 @@ import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import { appRouter } from "src/server/trpc/router/_app";
 import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
+import ArrayToChunks from "src/utils/ArrayToChunks";
+import useWindowSize from "src/utils/useWindowSize";
+import FilterModal from "@components/ui/FilterModal";
+import dynamic from "next/dynamic";
+import usePortal from "src/utils/usePortal";
+import { PortalContext } from "src/utils/portalContext";
+
+const OutPortal = dynamic(
+	async () => (await import("react-reverse-portal")).OutPortal,
+	{ ssr: false }
+);
 
 const SortItems = [
 	{
@@ -69,6 +80,8 @@ const PredictionsPage: NextPage = () => {
 				onSuccess: (data) => setPreviousPredictions(data),
 			}
 		);
+	const { width } = useWindowSize();
+	const portalNode = usePortal();
 
 	if (tipsLoading || bookmakersLoading || leaguesLoading || sportsLoading) {
 		return <div>Loading...</div>;
@@ -80,80 +93,156 @@ const PredictionsPage: NextPage = () => {
 
 	return (
 		<>
-			<div className={styles.mainBlock}>
-				<TipsSlider tips={tips} />
-			</div>
-			<div className={styles.mainColumn}>
-				<div className={styles.filters}>
-					<h4>Filter</h4>
-					<div className={styles.search}>
-						<TextField
-							placeholder="Search"
-							icon="/icons/search.svg"
+			<PortalContext.Provider value={{ portalNode }}>
+				{portalNode && <OutPortal node={portalNode} />}
+				<div className={styles.mainBlock}>
+					<TipsSlider tips={tips} />
+				</div>
+				<div className={styles.mainColumn}>
+					<div className={styles.filters}>
+						<h4>Filter</h4>
+						<div className={styles.search}>
+							<TextField
+								placeholder="Search"
+								icon="/icons/search.svg"
+							/>
+							<button>Reset</button>
+						</div>
+						<h5>SORT BY</h5>
+						<SortButtons
+							items={SortItems}
+							onChange={() => {}}
 						/>
-						<button>Reset</button>
+						<h5>Date</h5>
+						<DatePicker onChange={() => {}} />
+						<h5>Type</h5>
+						<SortButtons
+							items={TypeItems}
+							onChange={() => {}}
+						/>
+						<Filter
+							items={leagues}
+							h3="CHOOSE LEAGUE"
+							onChange={() => {}}
+						/>
 					</div>
-					<h5>SORT BY</h5>
-					<SortButtons
-						items={SortItems}
-						onChange={() => {}}
-					/>
-					<h5>Date</h5>
-					<DatePicker onChange={() => {}} />
-					<h5>Type</h5>
-					<SortButtons
-						items={TypeItems}
-						onChange={() => {}}
-					/>
-					<Filter
-						items={leagues}
-						h3="CHOOSE LEAGUE"
-						onChange={() => {}}
+					<div className={styles.predictions}>
+						{width > 425 ? (
+							<SportsSider
+								sports={[
+									{ name: "All", image: "", id: "0" },
+									...sports,
+								]}
+								onChange={() => {}}
+							/>
+						) : (
+							<div className={styles.mobileFilters}>
+								<TextField
+									icon="/icons/search.svg"
+									placeholder="Search"
+								/>
+								<FilterModal
+									onApply={() => {}}
+									portalNode={portalNode}
+									filters={[
+										{
+											key: "sortBy",
+											type: "buttons",
+											label: "Sort By",
+											items: [
+												{ id: 1, label: "Upcoming" },
+												{ id: 2, label: "Most" },
+												{ id: 3, label: "Multiple" },
+											],
+										},
+										{
+											key: "type",
+											type: "buttons",
+											label: "Type",
+											items: [
+												{
+													id: 1,
+													label: "All",
+												},
+												{
+													id: 2,
+													label: "Free",
+												},
+												{
+													id: 3,
+													label: "Paid",
+												},
+											],
+										},
+										{
+											key: "sport",
+											type: "singleChoice",
+											label: "Status",
+											items: [
+												{ id: 1, label: "Football" },
+												{ id: 2, label: "Basketball" },
+												{ id: 3, label: "Badminton" },
+											],
+										},
+										{
+											key: "country",
+											type: "singleChoice",
+											label: "Country",
+											items: [
+												{ id: 1, label: "Georgia" },
+												{ id: 2, label: "Spain" },
+												{ id: 3, label: "England" },
+											],
+										},
+										{
+											key: "league",
+											type: "singleChoice",
+											label: "League",
+											items: [
+												{ id: 1, label: "Premier League" },
+												{ id: 2, label: "Ligue 1" },
+												{ id: 3, label: "Bundesliga" },
+											],
+										},
+										{
+											key: "date",
+											type: "date",
+											label: "Date",
+										},
+									]}
+								/>
+							</div>
+						)}
+						{predictions && !predictionsLoading ? (
+							<Predictions leagues={predictions} />
+						) : (
+							previousPredictions && (
+								<Predictions leagues={previousPredictions} />
+							)
+						)}
+						<button
+							className={styles.showMore}
+							onClick={() => setLimit(limit + 3)}
+						>
+							Show more
+						</button>
+					</div>
+				</div>
+				<div className={styles.sideColumn}>
+					<BestBookmakers bookmakers={bookmakers} />
+					<Banner
+						height={463}
+						image="/images/banner-placeholder-2.png"
 					/>
 				</div>
-				<div className={styles.predictions}>
-					<SportsSider
-						sports={[{ name: "All", image: "", id: "0" }, ...sports]}
-						onChange={() => {}}
-					/>
-					{predictions && !predictionsLoading ? (
-						<Predictions leagues={predictions} />
-					) : (
-						previousPredictions && (
-							<Predictions leagues={previousPredictions} />
-						)
-					)}
-					<button
-						className={styles.showMore}
-						onClick={() => setLimit(limit + 3)}
-					>
-						Show more
-					</button>
-				</div>
-			</div>
-			<div className={styles.sideColumn}>
-				<BestBookmakers bookmakers={bookmakers} />
-				<Banner
-					height={463}
-					image="/images/banner-placeholder-2.png"
-				/>
-			</div>
+			</PortalContext.Provider>
 		</>
 	);
 };
 
 const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 	const { tips } = props;
-	const _tips = sliceIntoChunks(tips, 4);
-
-	function sliceIntoChunks(arr: MostTips, chunkSize: number) {
-		const res = [];
-		for (let i = 0; i < arr.length; i += chunkSize) {
-			const chunk = arr.slice(i, i + chunkSize);
-			res.push(chunk);
-		}
-		return res;
-	}
+	const { width } = useWindowSize();
 
 	return (
 		<div className={styles.tipsSlider}>
@@ -171,8 +260,9 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 			<div className={styles.sliderContainer}>
 				<Slider
 					loop={true}
+					swipable={true}
 					autoPlay={true}
-					showArrows={true}
+					showArrows={width > 425 ? true : false}
 					arrowOptions={{
 						offset: {
 							next: {
@@ -190,19 +280,21 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 						},
 					}}
 				>
-					{_tips.map((tipsChunk, index) => (
-						<div
-							className={styles.slide}
-							key={`slide_${index}`}
-						>
-							{tipsChunk.map((tip, index) => (
-								<MatchTipsCard
-									{...tip}
-									key={`tip_${index}`}
-								/>
-							))}
-						</div>
-					))}
+					{ArrayToChunks(tips, width <= 425 ? 1 : 4).map(
+						(tipsChunk, index) => (
+							<div
+								className={styles.slide}
+								key={`slide_${index}`}
+							>
+								{tipsChunk.map((tip, index) => (
+									<MatchTipsCard
+										{...tip}
+										key={`tip_${index}`}
+									/>
+								))}
+							</div>
+						)
+					)}
 				</Slider>
 			</div>
 		</div>
