@@ -189,6 +189,7 @@
     padding-top: 2px !important;
     position: relative !important;
     width: 100% !important;
+    transform: unset !important;
 }
 
 .datePickerPopperRelative .react-datepicker {

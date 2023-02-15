@@ -246,3 +246,51 @@
     color: #FFFFFF;
     border-color: #7F3FFC;
 }
+
+.mobileFilters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 425px) {
+    .tipsSlider {
+        padding: 20px 16px;
+        border-radius: 0;
+    }
+
+    .mainColumn {
+        margin-left: 0;
+    }
+
+    .mainColumn .filters {
+        display: none;
+    }
+
+    .sportsSlider {
+        display: none;
+    }
+
+    .mainColumn {
+        grid-column-start: 1;
+        grid-column-end: 13;
+        padding: 16px;
+        margin-bottom: 0;
+        gap: 0;
+    }
+
+    .mainColumn .predictions {
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+
+    .sideColumn {
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        padding: 16px;
+    }
+}
