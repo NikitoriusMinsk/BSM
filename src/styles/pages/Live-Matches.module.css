@@ -12,3 +12,27 @@
     padding-top: 20px;
     margin-bottom: 100px;
 }
+
+.mobileFilters {
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 425px) {
+    .sideColumn {
+        display: none;
+    }
+
+    .mainColumn {
+        grid-column-start: 1;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .mobileFilters {
+        display: flex;
+    }
+}
