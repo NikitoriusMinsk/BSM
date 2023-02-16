@@ -8,9 +8,19 @@
     align-items: stretch;
     gap: 10px;
     margin-bottom: 20px;
+    overflow-x: auto;
+    width: 100%;
 }
 .predictions{
     display: flex;
     flex-direction: column;
     gap: 40px;
+}
+
+@media screen and (max-width: 600px) {
+    .pageContainer {
+        margin-left: 16px;
+        margin-right: 16px;
+        width: calc(100% - 32px);
+    }
 }

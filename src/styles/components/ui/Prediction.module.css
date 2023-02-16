@@ -81,8 +81,8 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 17px;
     color: #1A1C21CC;
 }
 
@@ -228,10 +228,10 @@
 .predictionText {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    color: #1A1C21B2;
+    color: #1A1C21;
     padding: 20px 0;
     margin: 0 30px;
     border-bottom: 1px solid #1A1C211A;
@@ -247,15 +247,15 @@
 .outcomes .outcome {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
 }
 
 .outcomes .outcome span:first-child {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 17px;
     color: #1A1C21B2;
 }
 
@@ -291,13 +291,14 @@
     background-color: #FFFFFF;
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
+    height: 100%;
 }
 
 .profit {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 2px;
+    gap: 4px;
 }
 
 .profit span:first-child {
@@ -456,6 +457,8 @@
 .commentContainer .info .content .controls {
     transform: rotate(90deg);
     cursor: pointer;
+    width: 24px;
+    height: 24px;
 }
 
 .commentContainer .comment .info .data {
@@ -551,13 +554,44 @@
     color: #FFFFFF;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
+    .header {
+        background: rgba(242, 242, 242, 0.3);
+        padding: 16px 12px;
+    }
+
     .header .info {
         gap: 25px;
     }
 
     .header button {
         display: none;
+    }
+
+    .header .user .avatar, .header .user .avatar * {
+        width: 34px;
+        height: 34px;
+    }
+
+    .header .date .part:first-child {
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    .header .date .part:last-child {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .header .user .userDetails span:first-child {
+        font-size: 15px;
+        line-height: 18px;
+        color: rgba(26, 28, 33, 0.7);
+    }
+
+    .header .user .userDetails span:last-child {
+        font-size: 12px;
+        line-height: 14px;
     }
 
     .matchInfo {
@@ -572,12 +606,18 @@
     .outcomes {
         padding: 12px;
         flex-wrap: wrap;
-        gap: 20px;
+        gap: 12px;
         justify-content: unset;
     }
 
     .outcomes .outcome:first-child {
         width: 100%;
+    }
+
+    .outcome, .profit {
+        padding: 10px 12px;
+        background: rgba(242, 242, 242, 0.3);
+        border-radius: 8px;
     }
 
     .outcomes .outcome,
@@ -590,20 +630,38 @@
         justify-content: space-between;
     }
 
-    .profit {
-        justify-content: flex-end;
-    }
-
     .stats {
         padding: 12px;
     }
 
+    .betNow {
+        flex-grow: 1;
+    }
+
     .commentsContainer {
         padding: 12px;
+        background-color: initial;
     }
 
     .comments {
         padding: 0;
     }
 
+    .commentContainer .comment .avatar, .commentContainer .comment .avatar * {
+        width: 42px;
+        height: 42px;
+    }
+
+    .commentsContainer .replies {
+        margin-left: 10px;
+    }
+
+    .commentContainer .comment {
+        gap: 12px;
+    }
+
+    .commentContainer .comment .info .name, .commentContainer .comment .info .text {
+        font-size: 15px;
+        line-height: 18px;
+    }
 }
