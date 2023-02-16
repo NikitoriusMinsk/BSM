@@ -1,0 +1,143 @@
+.menuContainer {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;    
+}
+.menuTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.chevron {
+    display: flex;
+    align-items: center;
+}
+.back {
+    background: rgba(26, 28, 33, 0.2);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+}
+.menuArea {
+    background: #FFFFFF;
+    width: 100%;
+    height: 336px;
+    max-height: 100vh;
+    display: flex;
+
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 9999;
+    border-radius: 16px 16px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.stick {
+    background: rgba(26, 28, 33, 0.1);
+    border-radius: 3px;
+    width: 47px;
+    height: 6px;
+}
+.stickArea {
+    padding: 8px;
+    padding-bottom: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.applyButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 32px);
+    margin: 24px 16px;
+    height: 48px;
+    background: #7F3FFC;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
+    transition: all 0.2s ease-in-out;
+}
+/* Wheel picker styles */
+.items {
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+.items p{
+    padding: 0px;
+}
+.items > ul {
+    padding: 0px;
+    z-index: 1;
+    perspective: 300px;
+}
+.items > ul::-webkit-scrollbar {
+    display: none;
+}
+.items > ul > li > span {
+    display: none;
+}
+.items > ul > li {
+    align-items: center;
+    justify-content: center;
+}
+.items > ul > li > p {
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    transition: all .1s ease-in-out;
+}
+.centerLine {
+    background: rgba(242, 242, 242, 0.5);
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: calc(50% - 20px);
+}
+.items:before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0px;
+    width: 100%;
+    height: 45px;
+    background: linear-gradient(180deg, #fff, transparent);
+    z-index: 2;
+    pointer-events: none;
+}
+.items:after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0px;
+    width: 100%;
+    height: 45px;
+    background: linear-gradient(180deg, transparent, #fff);
+    z-index: 2;
+    pointer-events: none;
+}
+.items > ul > li[aria-selected="false"] > p {    
+    transform: scale(0.9);
+}
+/* Wheel picker styles - end */

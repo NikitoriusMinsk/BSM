@@ -8,6 +8,11 @@
     align-items: stretch;
     gap: 10px;
     margin-bottom: 20px;
+    overflow-x: auto;
+    width: 100%;
+}
+.filter::-webkit-scrollbar{
+    display: none;
 }
 .standingsTable{
 
@@ -24,14 +29,20 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    color: rgba(26, 28, 33, 0.7);
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
     text-align: center;
 }
 .standingsTable tbody td {
     padding-top: 20px;
     padding-bottom: 20px;
+}
+.standingsTable tbody td:first-child {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(26, 28, 33, 0.7);
 }
 .standingsTable td:first-child, .standingsTable th:first-child {
     padding-left: 20px;
@@ -80,6 +91,7 @@
     align-items: center;
     justify-content: center;
     padding: 4px;
+    flex-shrink: 0;
 }
 .questionBox{
     display: flex;
@@ -97,4 +109,36 @@
     font-size: 15px;
     line-height: 18px;
     color: #FFFFFF;
+}
+
+@media screen and (max-width: 600px) {
+    .pageContainer {
+    }
+    .filter {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .standingsTable tbody tr:nth-child(2n-1) td:first-child, .standingsTable tbody tr:nth-child(2n-1) td:last-child { 
+        border-radius: 0px;
+    }
+    .standingsTable td:first-child, .standingsTable th:first-child {
+        padding-left: 16px;
+    }
+    .standingsTable td:last-child, .standingsTable th:last-child {
+        padding-right: 16px;
+    }
+    .standingsTable td:last-child {
+        border-left: 1px solid rgba(26, 28, 33, 0.1);
+    }
+    .standingsTable tbody td {
+        font-weight: 600;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .standingsTable tbody td:first-child {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        color: rgba(26, 28, 33, 0.7);
+    }
 }
