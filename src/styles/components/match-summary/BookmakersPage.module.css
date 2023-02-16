@@ -55,6 +55,7 @@
     padding: 10px;
     background: #193052;
     border-radius: 8px;
+    flex-shrink: 0;
 }
 .bets{
     display: flex;
@@ -95,4 +96,44 @@
 .grayBet{
     background: rgba(242, 242, 242, 0.8);
     border: 1px solid rgba(242, 242, 242, 0.8);
+}
+
+@media screen and (max-width: 600px) {
+    .header {
+        margin-left: 16px;
+        margin-right: 16px;
+        width: calc(100% - 32px);
+        font-size: 14px;
+        line-height: 17px;
+        gap: 16px;
+    }
+    .bookmaker {
+        padding: 16px;
+        gap: 16px;
+    }
+    .bets, .colsHeader {
+        gap: 16px;
+    }
+    .logo {
+        padding: 7px 9px;
+    }
+    .logo * {
+        width: 56px!important;
+        height: 20px!important;
+    }
+    .bet {
+        gap: 0px;
+        min-height: 34px;
+        font-size: 14px;
+        line-height: 17px;
+        min-width: 70px;
+        padding: 6px 9px;
+    }
+    .colsHeader > * {        
+        min-width: 70px;
+    }
+    .centerArrow, .centerArrow * {
+        width: 16px!important;
+        height: 16px!important;
+    }
 }
