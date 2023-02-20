@@ -1,7 +1,3 @@
-// src/pages/_app.tsx
-import { withTRPC } from "@trpc/next";
-import type { AppRouter } from "../server/trpc/router/_app";
-import superjson from "superjson";
 import { SessionProvider } from "next-auth/react";
 import "@styles/date-picker-reset.css";
 import "@styles/globals.css";
