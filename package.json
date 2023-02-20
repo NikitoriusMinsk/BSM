@@ -14,7 +14,6 @@
 		"@tanstack/react-table": "^8.5.11",
 		"@trpc/client": "^10.10.0",
 		"@trpc/next": "^10.10.0",
-		"@trpc/react": "^9.27.4",
 		"@trpc/react-query": "^10.10.0",
 		"@trpc/server": "^10.10.0",
 		"framer-motion": "^7.0.1",
