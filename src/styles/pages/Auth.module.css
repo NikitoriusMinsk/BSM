@@ -19,7 +19,7 @@
 }
 
 .form {
-    width: 500px;
+    width: 530px;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -246,11 +246,104 @@
 .header {
     position: fixed;
     top: 27px;
-    left: calc((44% - 490px) / 2);
+    left: calc((44% - 520px) / 2);
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
     line-height: 26px;
     color: #1E2025;
+}
+
+@media screen and (max-width:1440px) {
+    .pageImg {
+        width: 54%;
+    }
+    .formArea {
+        width: 46%;
+    }
+    .form {
+        width: 420px;
+    }
+    .header {
+        left: calc((46% - 410px) / 2);
+    }
+}
+
+@media screen and (max-width:1366px) {
+    .form {
+        width: 404px;
+    }
+    .header {
+        left: calc((46% - 394px) / 2);
+    }
+}
+
+@media screen and (max-width:1280px) {
+    .form {
+        width: 374px;
+    }
+    .header {
+        left: calc((46% - 364px) / 2);
+    }
+    .socials{
+        gap: 28px;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .pageImg {
+        width: 46%;
+    }
+    .formArea {
+        width: 54%;
+    }
+    .form {
+        width: 378px;
+    }
+    .header {
+        left: calc((54% - 368px) / 2);
+    }
+    .socials{
+        gap: 22px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .container {
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+    }
+    .pageImg {
+        width: 100%;
+        height: 35vh;
+    }
+    .pageImg img {
+        object-position: center 10%;
+    }
+    .formArea {
+        width: 100%;
+    }
+    .form {
+        width: 100%;
+        padding: 60px 15%;
+        margin-top: 0;
+    }
+    .header {
+        top: 12px;
+        left: 24px;
+        z-index: 2;
+        color: #FFFFFF;
+    }
+    .socials{
+        gap: 22px;
+    }
+    .formBtns {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 30px;
+    }
+    .formBtns > button {
+        width: 100%;
+    }
 }
