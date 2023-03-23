@@ -350,6 +350,9 @@
     .fields > div {
         width: calc(50% - 12px);
     }
+    .fields > div:first-child:last-child {
+        width: 100%;
+    }
     .row {
         flex-direction: row;
         width: 100%!important;

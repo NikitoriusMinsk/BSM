@@ -121,7 +121,7 @@ const Forgot: NextPage = () => {
                         className={styles.formBtns}
                         style={{ marginTop: 32 }}
                     >
-                        <SubmitButton style={{ marginLeft: "auto" }}>
+                        <SubmitButton>
                             Save new password
                         </SubmitButton>
                     </div>
