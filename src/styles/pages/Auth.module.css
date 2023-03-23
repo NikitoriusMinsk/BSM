@@ -19,15 +19,15 @@
 }
 
 .form {
-    width: 530px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     margin-top: 80px;
     padding-top: 40px;
     padding-bottom: 120px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: calc((100% - 520px)/2);
+    padding-right: calc((100% - 520px)/2);
 }
 
 .form::-webkit-scrollbar {
@@ -263,7 +263,8 @@
         width: 46%;
     }
     .form {
-        width: 420px;
+        padding-left: calc((100% - 410px)/2);
+        padding-right: calc((100% - 410px)/2);
     }
     .header {
         left: calc((46% - 410px) / 2);
@@ -272,7 +273,8 @@
 
 @media screen and (max-width:1366px) {
     .form {
-        width: 404px;
+        padding-left: calc((100% - 394px)/2);
+        padding-right: calc((100% - 394px)/2);
     }
     .header {
         left: calc((46% - 394px) / 2);
@@ -281,7 +283,15 @@
 
 @media screen and (max-width:1280px) {
     .form {
-        width: 374px;
+        padding-left: calc((100% - 364px)/2);
+        padding-right: calc((100% - 364px)/2);
+    }
+    .row {
+        flex-direction: column;
+        gap: 24px;
+    }
+    .row > div {
+        width: 100%;
     }
     .header {
         left: calc((46% - 364px) / 2);
@@ -299,7 +309,8 @@
         width: 54%;
     }
     .form {
-        width: 378px;
+        padding-left: calc((100% - 368px)/2);
+        padding-right: calc((100% - 368px)/2);
     }
     .header {
         left: calc((54% - 368px) / 2);
@@ -313,6 +324,9 @@
     .container {
         flex-direction: column-reverse;
         justify-content: flex-end;
+        min-height: 100vh;
+        height: auto;
+        width: 100%;
     }
     .pageImg {
         width: 100%;
@@ -329,11 +343,23 @@
         padding: 60px 15%;
         margin-top: 0;
     }
+    .fields {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .fields > div {
+        width: calc(50% - 12px);
+    }
+    .row {
+        flex-direction: row;
+        width: 100%!important;
+    }
     .header {
         top: 12px;
         left: 24px;
         z-index: 2;
         color: #FFFFFF;
+        position: absolute;
     }
     .socials{
         gap: 22px;
@@ -345,5 +371,43 @@
     }
     .formBtns > button {
         width: 100%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .formArea {
+        min-width: initial;
+    }
+    .form {
+        width: 100%;
+        padding: 60px 16px;
+        margin-top: 36px;
+    }
+    .header {
+        font-size: 16px;
+        line-height: 19px;
+        color: #1A1C21;
+        left: 0px;
+        top: 0px;
+        padding: 18px 16px;
+        width: 100%;
+        background: #fff;
+        position: fixed;
+    }
+    .fields {
+        flex-direction: column;
+    }
+    .fields > div {
+        width: 100%;
+    }
+    .row {
+        flex-direction: column;
+    }
+    .pageImg {
+        display: none;
+    }
+    .loginTitle {
+        font-size: 28px;
+        line-height: 34px;
     }
 }
