@@ -21,7 +21,7 @@ const ItemsVariants = {
 		height: "auto",
 	},
 	closed: {
-		height: 390,
+		height: 405,
 	},
 };
 
@@ -60,6 +60,7 @@ const Filter: React.FC<FilterProps> = (props) => {
 				variants={ItemsVariants}
 				initial={"closed"}
 				animate={isOpen ? "open" : "closed"}
+				transition={{ease:'easeInOut'}}
 			>
 				{items.map((item) => (
 					<div
@@ -74,8 +75,8 @@ const Filter: React.FC<FilterProps> = (props) => {
 								<Image
 									src={item.image}
 									alt={item.name}
-									width={40}
-									height={40}
+									width={38}
+									height={38}
 								/>
 							</div>
 							<div className={styles.titles}>
@@ -103,6 +104,7 @@ const Filter: React.FC<FilterProps> = (props) => {
 					variants={CevronVariants}
 					initial={"closed"}
 					animate={isOpen ? "open" : "closed"}
+					transition={{ease:'easeInOut'}}
 				>
 					<Image
 						src="/icons/chevron.svg"

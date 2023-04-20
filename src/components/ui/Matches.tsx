@@ -29,6 +29,7 @@ const Matches: React.FC<MatchesInfoProps> = (props) => {
 	} = props;
 
 	const [selectedDate, setSelectedDate] = useState(new Date());
+	const [modeState, setModeState] = useState<"live" | "odds" | "stats">("odds");
 
 	function nextDate() {
 		const _date = new Date(
@@ -59,7 +60,10 @@ const Matches: React.FC<MatchesInfoProps> = (props) => {
 				)}
 				<div className={styles.matchesOptions}>
 					{withLiveMatchesButton && (
-						<button>
+						<button
+							className={modeState == "live" ? styles.activeMode : ""}
+							onClick={() => setModeState("live")}
+						>
 							<div className={styles.image}>
 								<Image
 									src="/icons/live-matches.svg"
@@ -71,7 +75,10 @@ const Matches: React.FC<MatchesInfoProps> = (props) => {
 							<span>Live Matches</span>
 						</button>
 					)}
-					<button>
+					<button
+						className={modeState == "odds" ? styles.activeMode : ""}
+						onClick={() => setModeState("odds")}
+					>
 						<div className={styles.image}>
 							<Image
 								src="/icons/chart-bubble.svg"
@@ -82,7 +89,10 @@ const Matches: React.FC<MatchesInfoProps> = (props) => {
 						</div>
 						<span>Odds</span>
 					</button>
-					<button>
+					<button
+						className={modeState == "stats" ? styles.activeMode : ""}
+						onClick={() => setModeState("stats")}
+					>
 						<div className={styles.image}>
 							<Image
 								src="/icons/chart-line.svg"
@@ -129,6 +139,7 @@ const Matches: React.FC<MatchesInfoProps> = (props) => {
 				return league.matches.map((match) => (
 					<Match
 						{...match}
+						mode={modeState}
 						key={match.id}
 					/>
 				));
