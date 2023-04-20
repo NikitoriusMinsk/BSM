@@ -1,19 +1,9 @@
-.mainColumn {
-    position: relative;
-    grid-column-start: 1;
-    grid-column-end: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    margin-bottom: 100px;
-}
-
 .sideColumn {
     position: relative;
     grid-column-start: 10;
     grid-column-end: 13;
     grid-row-start: 1;
-    grid-row-end: 3;
+    grid-row-end: 5;
     padding-top: 20px;
     display: flex;
     flex-direction: column;
@@ -21,56 +11,86 @@
     margin-bottom: 100px;
 }
 
-.topSection {
+#slider {
     position: relative;
+    grid-row-start: 1;
     grid-column-start: 1;
     grid-column-end: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.topSectionInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    margin-left: 60px;
-}
-
-.slider {
     border-top-left-radius: 16px;
     border-bottom-right-radius: 16px;
     overflow: hidden;
 }
 
-.paddedContainer {
-    margin-left: 60px;
+#mostTips {
+    position: relative;
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 10;
+    border-top-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    overflow: hidden;
+}
+
+#wideBanner {
+    position: relative;
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-column-end: 10;
+    border-top-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    overflow: hidden;
+}
+
+#matchesFilters {
     display: flex;
     flex-direction: column;
     gap: 40px;
-}
-
-.matchesContainer {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-gap: 40px;
-    width: 100%;
-}
-
-.matchesFilters {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    grid-row-start: 4;
     grid-column-start: 1;
     grid-column-end: 5;
 }
 
-.matches {
+#matches {
     display: flex;
     flex-direction: column;
     gap: 40px;
+    grid-row-start: 4;
     grid-column-start: 5;
+    grid-column-end: 10;
+}
+
+#signUp {
+    grid-row-start: 1;
+    grid-column-start: 10;
     grid-column-end: 13;
+}
+
+#liveMatches {
+    grid-row-start: 2;
+    grid-column-start: 10;
+    grid-column-end: 13;
+}
+
+#topTipsters {
+    grid-row-start: 3;
+    grid-column-start: 10;
+    grid-column-end: 13;
+}
+
+#tallBanner {
+    grid-row-start: 4;
+    grid-column-start: 10;
+    grid-column-end: 13;
+}
+
+#bookmakers {
+    grid-row-start: 5;
+    grid-column-start: 10;
+    grid-column-end: 13;
+}
+
+.sideMargin {
+    margin-left: 60px;
 }
 
 /* Slide */

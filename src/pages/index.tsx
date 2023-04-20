@@ -19,6 +19,7 @@ import useWindowSize from "src/utils/useWindowSize";
 import ArrayToChunks from "src/utils/ArrayToChunks";
 import { trpc } from "src/utils/trpc";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import DisaperingContainer from "@components/helpers/DisaperingContainer";
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
@@ -63,66 +64,86 @@ const Home: NextPage = () => {
 
 	return (
 		<>
-			<div className={styles.topSection}>
-				<div className={styles.slider}>
-					<Slider
-						autoPlay={true}
-						loop={true}
-					>
-						{[1, 2, 3, 4, 5].map((i) => (
-							<Slide key={`slide_${i}`} />
-						))}
-					</Slider>
-				</div>
-				<div className={styles.topSectionInfo}>
-					<MostTips tips={tips} />
-					<Banner
-						height={width > 425 ? 200 : 420}
-						image="/images/banner-placeholder-1.png"
-					/>
-				</div>
+			<div id={`${styles.slider}`}>
+				<Slider
+					autoPlay={true}
+					loop={true}
+				>
+					{[1, 2, 3, 4, 5].map((i) => (
+						<Slide key={`slide_${i}`} />
+					))}
+				</Slider>
 			</div>
-			<div className={styles.mainColumn}>
-				<div className={styles.paddedContainer}>
-					<div className={styles.matchesContainer}>
-						<div className={styles.matchesFilters}>
-							<Filter
-								h3="Top Leagues"
-								h2="Football Leagues"
-								items={filters}
-								onChange={(id) => {}}
-							/>
-							<Filter
-								h3="Leagues"
-								items={filters}
-								onChange={(id) => {}}
-							/>
-						</div>
-						<div className={styles.matches}>
-							<Matches
-								leagues={matches}
-								h2={"Top Matches"}
-								h3={"Today"}
-							/>
-							<Predictions
-								leagues={predictions}
-								h2="Best Predictions"
-								h3="Today"
-							/>
-						</div>
-					</div>
-				</div>
+			<div
+				id={styles.mostTips}
+				className={styles.sideMargin}
+			>
+				<MostTips tips={tips} />
 			</div>
-			<div className={styles.sideColumn}>
-				{!session && <SignUpPropose />}
-				<TopTipsters tipsters={tipsters} />
-				<LiveMatches matches={liveMatches} />
+			<div
+				id={styles.wideBanner}
+				className={styles.sideMargin}
+			>
 				<Banner
-					height={width >= 1024 ? 900 : width >= 768 ? 463 : 250}
-					image="/images/banner-placeholder-2.png"
+					height={width > 425 ? 200 : 420}
+					image="/images/banner-placeholder-1.png"
 				/>
-				<BestBookmakers bookmakers={bookmakers} />
 			</div>
+			<div
+				id={styles.matchesFilters}
+				className={styles.sideMargin}
+			>
+				<Filter
+					h3="Top Leagues"
+					h2="Football Leagues"
+					items={filters}
+					onChange={(id) => {}}
+				/>
+				<Filter
+					h3="Leagues"
+					items={filters}
+					onChange={(id) => {}}
+				/>
+			</div>
+			<div id={styles.matches}>
+				<Matches
+					leagues={matches}
+					h2={"Top Matches"}
+					h3={"Today"}
+				/>
+				<Predictions
+					leagues={predictions}
+					h2="Best Predictions"
+					h3="Today"
+				/>
+			</div>
+			<DisaperingContainer
+				className={styles.sideColumn}
+				condition={true}
+			>
+				<>
+					{!session && (
+						<div id={styles.signUp}>
+							<SignUpPropose />
+						</div>
+					)}
+					<div id={styles.topTipsters}>
+						<TopTipsters tipsters={tipsters} />
+					</div>
+					<div id={styles.liveMatches}>
+						<LiveMatches matches={liveMatches} />
+					</div>
+					<div id={styles.tallBanner}>
+						<Banner
+							height={width >= 1024 ? 900 : width >= 768 ? 463 : 250}
+							image="/images/banner-placeholder-2.png"
+						/>
+					</div>
+					<div id={styles.bookmakers}>
+						<BestBookmakers bookmakers={bookmakers} />
+					</div>
+				</>
+			</DisaperingContainer>
 		</>
 	);
 };
@@ -164,9 +185,7 @@ const Slide: React.FC = () => {
 			<div className={styles.slideSummary}>
 				<div className={styles.slideSummaryTitle}>
 					<span className={styles.slideSummaryTitleCountry}>Germany</span>
-					<span className={styles.slideSummaryTitleLeague}>
-						Bunes League
-					</span>
+					<span className={styles.slideSummaryTitleLeague}>Bunes League</span>
 				</div>
 				<div className={styles.slideSummaryTeams}>
 					<div className={styles.slideSummaryTeam}>
@@ -192,9 +211,7 @@ const Slide: React.FC = () => {
 								height={36}
 							/>
 						</div>
-						<span className={styles.slideSummaryTeamName}>
-							Bayern Munich
-						</span>
+						<span className={styles.slideSummaryTeamName}>Bayern Munich</span>
 					</div>
 				</div>
 			</div>
@@ -207,10 +224,10 @@ const SignUpPropose: React.FC = () => {
 		<div className={styles.signUpPropose}>
 			<h2>Join with us!</h2>
 			<span>
-				Lorem Ipsum is simply dummy text of the printing and typesetting
-				industry. Lorem Ipsum has been the industry's standard dummy text
-				ever since the 1500s, when an unknown printer took a galley of type
-				and scrambled it to make a type specimen book.
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+				Lorem Ipsum has been the industry's standard dummy text ever since the
+				1500s, when an unknown printer took a galley of type and scrambled it to
+				make a type specimen book.
 			</span>
 			<Link
 				href="/sign-up"
@@ -248,9 +265,7 @@ const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
 									{tipster.name}
 								</span>
 								<div className={styles.topTipsterWinrate}>
-									<span className={styles.winrateLabel}>
-										Winrate
-									</span>
+									<span className={styles.winrateLabel}>Winrate</span>
 									<span className={styles.winratePercent}>
 										{tipster.winrate * 100}%
 									</span>
@@ -266,10 +281,7 @@ const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
 							key={`tipster_${index + 4}`}
 						>
 							<div className={styles.otherContent}>
-								<div className={styles.otherIndex}>
-									{" "}
-									{index + 4}{" "}
-								</div>
+								<div className={styles.otherIndex}> {index + 4} </div>
 								<div className={styles.otherInfo}>
 									<div className={styles.topOtherImage}>
 										<Image
