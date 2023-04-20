@@ -541,4 +541,149 @@
         margin-left: 40px;
     }
 
+    .topThreeTipsters {
+        gap: 19px;
+    }
+
+    #tallBanner>div {
+        height: 363px !important;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    #matchesFilters {
+        display: none;
+    }
+
+    #matches {
+        grid-column-start: 1;
+        margin-left: 30px;
+    }
+
+    .sideMargin {
+        margin-left: 30px;
+    }
+
+    #tallBanner>div {
+        height: 351px !important;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    #slider {
+        grid-column-end: 13;
+        margin-right: -30px;
+    }
+
+    .sideColumn {
+        grid-row-start: 2;
+    }
+
+    .sideMargin {
+        margin-left: 40px;
+    }
+
+    .topTipstersOther {
+        display: none;
+    }
+
+    .topThreeTipsters {
+        flex-direction: column;
+    }
+
+    .topTipster {
+        flex-direction: row;
+    }
+
+    .topTipsterWinrate {
+        height: unset !important;
+        border: none;
+        background-color: transparent !important;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: flex-start;
+    }
+
+    .topTipsterInfo {
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .topTipsterImage img {
+        height: 44px;
+        width: 44px;
+    }
+
+    .topTipsterImage {
+        height: 50px;
+        width: 50px;
+    }
+
+    .topTipsterWinrate .winratePercent,
+    .topTipsterWinrate .winrateLabel {
+        color: #1A1C21CC !important;
+    }
+
+    .topTipsterName {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    .topTipsterWinrate {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 22px;
+        text-align: center;
+    }
+
+    .topTipster:first-child .topTipsterImage::after {
+        content: url(/icons/crown.svg);
+        background-color: #7F3FFC;
+    }
+
+    .topTipster:first-child .topTipsterImage {
+        border-color: #7F3FFC;
+    }
+
+    .topTipster:nth-child(2) .topTipsterImage::after {
+        content: '2';
+        background-color: #1A1C211A;
+        color: #1A1C21CC;
+        border: none;
+    }
+
+    .topTipster:nth-child(2) .topTipsterImage {
+        border-color: #1A1C211A;
+    }
+
+    #tallBanner>div {
+        height: 323px !important;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .sideMargin {
+        margin-left: 20px;
+    }
+
+    #mostTips {
+        grid-column-end: 13;
+    }
+
+    #wideBanner {
+        grid-column-end: 13;
+    }
+
+    #slider {
+        margin-right: 0;
+    }
+
+    .sideColumn {
+        grid-row-start: 4;
+    }
 }

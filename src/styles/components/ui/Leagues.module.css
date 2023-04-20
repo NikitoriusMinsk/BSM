@@ -175,7 +175,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 28px 24px 28px 31px;
+    padding: 28px 20px;
 }
 
 .info {
@@ -258,7 +258,7 @@
 .teamNames {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 12px;
 }
 
 .teamNames .teamName:first-child {
@@ -456,6 +456,54 @@
 .outcome.score span:last-child {
     color: rgba(26, 28, 33, 0.7);
     font-weight: 400;
+}
+
+@media screen and (max-width: 1440px) {
+    .controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .controls .matchesOptions {
+        width: 100%;
+        gap: 30px;
+    }
+
+    .controls .matchesOptions button {
+        flex: 1;
+    }
+
+    .score {
+        padding-right: 16px;
+    }
+
+    .details {
+        gap: 26px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .controls {
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .controls .matchesOptions {
+        width: unset;
+        gap: 30px;
+    }
+
+    .controls .matchesOptions button {
+        flex: unset;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .controls .matchesOptions button span {
+        display: none;
+    }
 }
 
 @media screen and (max-width:425px) {

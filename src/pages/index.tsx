@@ -136,7 +136,7 @@ const Home: NextPage = () => {
 					</div>
 					<div id={styles.tallBanner}>
 						<Banner
-							height={width >= 1024 ? 900 : width >= 768 ? 463 : 250}
+							height={463}
 							image="/images/banner-placeholder-2.png"
 						/>
 					</div>
