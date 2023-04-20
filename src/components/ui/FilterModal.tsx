@@ -8,10 +8,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import TextField from "./TextField";
 import DateInput from "./DatePicker";
 
-const InPortal = dynamic(
-	async () => (await import("react-reverse-portal")).InPortal,
-	{ ssr: false }
-);
+const InPortal = dynamic(async () => (await import("react-reverse-portal")).InPortal, {
+	ssr: false,
+});
 
 interface FilterModalProps {
 	filters: {
@@ -60,10 +59,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 	) {
 		if (action === "clear") {
 			return Object.fromEntries(
-				Object.entries(state).map(([key, value]) => [
-					key,
-					new Array<number>(),
-				])
+				Object.entries(state).map(([key, value]) => [key, new Array<number>()])
 			);
 		}
 
@@ -211,9 +207,7 @@ const ButtonsFilter: React.FC<FilterProps> = (props) => {
 			<div className={styles.buttonContainer}>
 				{items?.map((item) => (
 					<button
-						className={
-							selected.includes(item.id) ? styles.active : undefined
-						}
+						className={selected.includes(item.id) ? styles.active : undefined}
 						key={`button_${item.id}`}
 						onClick={() => onChange([item.id])}
 					>

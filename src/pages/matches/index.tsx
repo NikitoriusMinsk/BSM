@@ -20,10 +20,9 @@ import { PortalContext } from "src/utils/portalContext";
 import TextField from "@components/ui/TextField";
 import FilterModal from "@components/ui/FilterModal";
 
-const OutPortal = dynamic(
-	async () => (await import("react-reverse-portal")).OutPortal,
-	{ ssr: false }
-);
+const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
+	ssr: false,
+});
 
 const MatchesPage: NextPage = () => {
 	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery();
@@ -33,8 +32,7 @@ const MatchesPage: NextPage = () => {
 		trpc.bookmakers.getTop.useQuery();
 	const { data: leagues, isLoading: leaguesLoading } =
 		trpc.filters.getLeaguesByCountry.useQuery();
-	const { data: sports, isLoading: sportsLoading } =
-		trpc.filters.getSports.useQuery();
+	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
 	const { data: liveMatches, isLoading: liveMatchesLoading } =
 		trpc.matches.getAllLive.useQuery();
 	const { width } = useWindowSize();

@@ -1,8 +1,8 @@
 import { createContext } from "react";
-import { HtmlPortalNode } from 'react-reverse-portal';
+import { HtmlPortalNode } from "react-reverse-portal";
 
 interface IPortalContext {
-    portalNode: HtmlPortalNode | null
+	portalNode: HtmlPortalNode | null;
 }
 
 export const PortalContext = createContext<IPortalContext>({ portalNode: null });
