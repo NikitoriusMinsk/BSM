@@ -13,6 +13,7 @@ interface MatchesInfoProps {
 	h2?: string;
 	withLiveMatchesButton?: boolean;
 	withDatePicker?: boolean;
+	mode?: "live" | "odds" | "stats";
 }
 
 type LeagueType = inferArrayElementType<MatchesByLeague>;
@@ -25,6 +26,7 @@ const Leagues: React.FC<MatchesInfoProps> = (props) => {
 		h3,
 		withLiveMatchesButton = true,
 		withDatePicker = true,
+		mode
 	} = props;
 
 	return (
@@ -40,6 +42,7 @@ const Leagues: React.FC<MatchesInfoProps> = (props) => {
 					league={league}
 					withDatePicker={withDatePicker}
 					withLiveMatchesButton={withLiveMatchesButton}
+					mode={mode}
 					key={`league_${leagueIndex}`}
 				/>
 			))}
@@ -51,9 +54,11 @@ const League: React.FC<{
 	league: LeagueType;
 	withLiveMatchesButton: boolean;
 	withDatePicker: boolean;
+	mode?: "live" | "odds" | "stats";
 }> = (props) => {
-	const { league, withDatePicker, withLiveMatchesButton } = props;
+	const { league, withDatePicker, withLiveMatchesButton, mode } = props;
 	const [selectedDate, setSelectedDate] = useState(new Date());
+	const [modeState, setModeState] = useState(mode || "odds")
 
 	function nextDate() {
 		const _date = new Date(
@@ -80,8 +85,8 @@ const League: React.FC<{
 					<div className={styles.image}>
 						<Image
 							src={league.image}
-							height={40}
-							width={40}
+							height={38}
+							width={38}
 							alt={league.name}
 						/>
 					</div>
@@ -94,7 +99,10 @@ const League: React.FC<{
 				</div>
 				<div className={styles.matchesOptions}>
 					{withLiveMatchesButton && (
-						<button>
+						<button 
+							className={modeState=='live' ? styles.activeMode : ''}
+							onClick={()=>setModeState('live')}
+						>
 							<div className={styles.image}>
 								<Image
 									src="/icons/live-matches.svg"
@@ -106,7 +114,10 @@ const League: React.FC<{
 							<span>Live Matches</span>
 						</button>
 					)}
-					<button>
+					<button 
+						className={modeState=='odds' ? styles.activeMode : ''}
+						onClick={()=>setModeState('odds')}
+					>
 						<div className={styles.image}>
 							<Image
 								src="/icons/chart-bubble.svg"
@@ -117,7 +128,10 @@ const League: React.FC<{
 						</div>
 						<span>Odds</span>
 					</button>
-					<button>
+					<button 
+						className={modeState=='stats' ? styles.activeMode : ''}
+						onClick={()=>setModeState('stats')}
+					>
 						<div className={styles.image}>
 							<Image
 								src="/icons/chart-line.svg"
@@ -164,6 +178,7 @@ const League: React.FC<{
 				{league.matches.map((match, index) => (
 					<Match
 						{...match}
+						mode={modeState}
 						key={`league_match_${index}`}
 					/>
 				))}
@@ -172,8 +187,8 @@ const League: React.FC<{
 	);
 };
 
-const Match: React.FC<MatchType> = (props) => {
-	const { status, teams, date, odds, tip_count } = props;
+const Match: React.FC<MatchType & {mode?: "live" | "odds" | "stats"}> = (props) => {
+	const { status, teams, date, odds, tip_count, mode } = props;
 	const [isOpen, setIsOpen] = useState(false);
 
 	function getTag(status: MatchStatus) {
@@ -211,41 +226,67 @@ const Match: React.FC<MatchType> = (props) => {
 						))}
 					</div>
 					<div className={styles.teamNames}>
-						{teams.map((team, index) => (
-							<div
-								key={index}
-								className={styles.teamName}
-							>
-								{team.name}
-							</div>
-						))}
+						<div className={`${styles.teamName} ${((teams[0]?.score || 0) - (teams[1]?.score || 0)) && styles.win}`}>
+							{teams[0]?.name}
+						</div>
+						<div className={`${styles.teamName} ${((teams[1]?.score || 0) - (teams[0]?.score || 0)) && styles.win}`}>
+							{teams[1]?.name}
+						</div>
 					</div>
 				</div>
-				<div className={styles.details}>
+				<div className={styles.details} style={mode=="odds" ? {gap: '20px'} : {}}>
 					<div className={`${styles.outcome} ${styles.score}`}>
-						<span>{teams[0]?.score}</span>
-						<span>{teams[1]?.score}</span>
+						<span className={`${((teams[0]?.score || 0) - (teams[1]?.score || 0)) && styles.win}`}>{teams[0]?.score}</span>
+						<span className={`${((teams[1]?.score || 0) - (teams[0]?.score || 0)) && styles.win}`}>{teams[1]?.score}</span>
 					</div>
-					<div className={styles.outcome}>
-						<span>Home</span>
-						<span>{odds.home * 100}%</span>
-					</div>
-					<div className={styles.outcome}>
-						<span>Draw</span>
-						<span>{odds.draw * 100}%</span>
-					</div>
-					<div className={styles.outcome}>
-						<span>Away</span>
-						<span>{odds.away * 100}%</span>
-					</div>
-					<div
-						className={`${styles.total} ${
-							isOpen ? styles.open : styles.closed
-						}`}
-						onClick={() => setIsOpen(!isOpen)}
-					>
-						{tip_count} Tip{tip_count > 1 ? "s" : ""}
-					</div>
+					{mode=="odds" && 
+						<>
+							<div className={styles.outcome} style={{gap:'4px', marginTop:'-10px'}}>
+								<span>Home</span>
+								<span className={styles.oddVal}>{odds.home}</span>
+							</div>
+							<div className={styles.outcome} style={{gap:'4px', marginTop:'-10px'}}>
+								<span>Draw</span>
+								<span className={styles.oddVal}>{odds.draw}</span>
+							</div>
+							<div className={styles.outcome} style={{gap:'4px', marginTop:'-10px'}}>
+								<span>Away</span>
+								<span className={styles.oddVal}>{odds.away}</span>
+							</div>
+							<div
+								className={`${styles.total} ${
+									isOpen ? styles.open : styles.closed
+								}`}
+								onClick={() => setIsOpen(!isOpen)}
+							>
+								+ 0000
+							</div>
+						</>
+					}
+					{mode=="stats" && 
+						<>
+							<div className={styles.outcome}>
+								<span>Home</span>
+								<span>{odds.home * 100}%</span>
+							</div>
+							<div className={styles.outcome}>
+								<span>Draw</span>
+								<span>{odds.draw * 100}%</span>
+							</div>
+							<div className={styles.outcome}>
+								<span>Away</span>
+								<span>{odds.away * 100}%</span>
+							</div>
+							<div
+								className={`${styles.total} ${
+									isOpen ? styles.open : styles.closed
+								}`}
+								onClick={() => setIsOpen(!isOpen)}
+							>
+								{tip_count} Tip{tip_count > 1 ? "s" : ""}
+							</div>
+						</>
+					}
 				</div>
 			</div>
 		</div>
