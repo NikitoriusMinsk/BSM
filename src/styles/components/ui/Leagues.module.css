@@ -5,6 +5,17 @@
     width: 100%;
 }
 
+.container.noGap {
+    gap: 0;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .matchLive {
     padding: 8px 14px 8px 13px;
     font-family: 'Samsung Sans';
@@ -74,7 +85,7 @@
 .titles h3 {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
     line-height: 19px;
     color: #1A1C2180;
@@ -83,9 +94,10 @@
 .titles h2 {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    text-transform: capitalize;
     color: #1A1C21;
 }
 
@@ -173,6 +185,28 @@
     align-items: center;
 }
 
+.matchDate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.matchDate time:first-child {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.matchDate time:last-child {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+}
+
 .time {
     display: flex;
     flex-direction: column;
@@ -248,6 +282,7 @@
 .details {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 40px;
 }
 
@@ -377,7 +412,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     gap: 7px;
 }
 
@@ -387,21 +422,29 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
-    color: rgba(26, 28, 33, 0.7);
+    color: #1A1C21B2;
 }
 
 .outcome span:last-child {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 18px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
     color: #1A1C21;
+    background-color: #1A1C211A;
+    padding: 8px;
+    border-radius: 4px;
 }
 
-.outcome.score {
+.score {
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     padding-right: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
 }
 
 .outcome.score span:first-child {

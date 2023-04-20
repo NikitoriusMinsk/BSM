@@ -172,7 +172,7 @@ const League: React.FC<{
 	);
 };
 
-const Match: React.FC<MatchType> = (props) => {
+export const Match: React.FC<MatchType> = (props) => {
 	const { status, teams, date, odds, tip_count } = props;
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -181,9 +181,19 @@ const Match: React.FC<MatchType> = (props) => {
 			case MatchStatus.live:
 				return <div className={styles.matchLive}>Live</div>;
 			case MatchStatus.upcoming:
-				return <span>{date}</span>;
+				return (
+					<div className={styles.matchDate}>
+						<Moment format="HH:mm">{date}</Moment>
+						<Moment format="DD MMM">{date}</Moment>
+					</div>
+				);
 			case MatchStatus.finished:
-				return <span>{date}</span>;
+				return (
+					<div className={styles.matchDate}>
+						<Moment format="HH:mm">{date}</Moment>
+						<Moment format="DD MMM">{date}</Moment>
+					</div>
+				);
 
 			default:
 				return <></>;
@@ -222,21 +232,21 @@ const Match: React.FC<MatchType> = (props) => {
 					</div>
 				</div>
 				<div className={styles.details}>
-					<div className={`${styles.outcome} ${styles.score}`}>
+					<div className={` ${styles.score}`}>
 						<span>{teams[0]?.score}</span>
 						<span>{teams[1]?.score}</span>
 					</div>
 					<div className={styles.outcome}>
 						<span>Home</span>
-						<span>{odds.home * 100}%</span>
+						<span>{odds.home}</span>
 					</div>
 					<div className={styles.outcome}>
 						<span>Draw</span>
-						<span>{odds.draw * 100}%</span>
+						<span>{odds.draw}</span>
 					</div>
 					<div className={styles.outcome}>
 						<span>Away</span>
-						<span>{odds.away * 100}%</span>
+						<span>{odds.away}</span>
 					</div>
 					<div
 						className={`${styles.total} ${

@@ -20,6 +20,7 @@ import ArrayToChunks from "src/utils/ArrayToChunks";
 import { trpc } from "src/utils/trpc";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import DisaperingContainer from "@components/helpers/DisaperingContainer";
+import Matches from "@components/ui/Matches";
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
@@ -106,7 +107,7 @@ const Home: NextPage = () => {
 				/>
 			</div>
 			<div id={styles.matches}>
-				<Leagues
+				<Matches
 					leagues={matches}
 					h2={"Top Matches"}
 					h3={"Today"}

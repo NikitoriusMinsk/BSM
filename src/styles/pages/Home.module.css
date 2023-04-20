@@ -47,7 +47,7 @@
     gap: 40px;
     grid-row-start: 4;
     grid-column-start: 1;
-    grid-column-end: 5;
+    grid-column-end: 4;
 }
 
 #matches {
@@ -55,7 +55,7 @@
     flex-direction: column;
     gap: 40px;
     grid-row-start: 4;
-    grid-column-start: 5;
+    grid-column-start: 4;
     grid-column-end: 10;
 }
 
