@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "@styles/components/ui/Matches.module.css";
+import styles from "@styles/components/ui/Leagues.module.css";
 import Image from "next/image";
 import { MatchesByLeague } from "src/types/queryTypes";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
@@ -16,11 +16,9 @@ interface MatchesInfoProps {
 }
 
 type LeagueType = inferArrayElementType<MatchesByLeague>;
-type MatchType = inferArrayElementType<
-	inferArrayElementType<MatchesByLeague>["matches"]
->;
+type MatchType = inferArrayElementType<inferArrayElementType<MatchesByLeague>["matches"]>;
 
-const Matches: React.FC<MatchesInfoProps> = (props) => {
+const Leagues: React.FC<MatchesInfoProps> = (props) => {
 	const {
 		leagues,
 		h2,
@@ -254,4 +252,4 @@ const Match: React.FC<MatchType> = (props) => {
 	);
 };
 
-export default Matches;
+export default Leagues;

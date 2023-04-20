@@ -7,7 +7,7 @@ import Banner from "@components/ui/Banner";
 import Filter from "@components/ui/Filter";
 import DatePicker from "@components/ui/DatePicker";
 import LiveMatches from "@components/ui/LiveMatches";
-import Matches from "@components/ui/Matches";
+import Matches from "@components/ui/Leagues";
 import NestedFilter from "@components/ui/NestedFilter";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import { appRouter } from "src/server/trpc/router/_app";

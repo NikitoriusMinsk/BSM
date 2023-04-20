@@ -10,7 +10,7 @@ import Filter from "@components/ui/Filter";
 import Predictions from "@components/ui/Predictions";
 import { MostTips, Tipsters } from "src/types/queryTypes";
 import MatchTipsCard from "@components/ui/MatchTipsCard";
-import Matches from "@components/ui/Matches";
+import Leagues from "@components/ui/Leagues";
 import Link from "next/link";
 import { appRouter } from "src/server/trpc/router/_app";
 import { createContext } from "src/server/trpc/context";
@@ -106,7 +106,7 @@ const Home: NextPage = () => {
 				/>
 			</div>
 			<div id={styles.matches}>
-				<Matches
+				<Leagues
 					leagues={matches}
 					h2={"Top Matches"}
 					h3={"Today"}

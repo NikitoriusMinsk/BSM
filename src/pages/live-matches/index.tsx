@@ -3,7 +3,7 @@ import styles from "@styles/pages/Live-Matches.module.css";
 import React from "react";
 import { trpc } from "src/utils/trpc";
 import Filter from "@components/ui/Filter";
-import Matches from "@components/ui/Matches";
+import Leagues from "@components/ui/Leagues";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import { appRouter } from "src/server/trpc/router/_app";
 import { createContext } from "src/server/trpc/context";
@@ -14,10 +14,9 @@ import { PortalContext } from "src/utils/portalContext";
 import dynamic from "next/dynamic";
 import usePortal from "src/utils/usePortal";
 
-const OutPortal = dynamic(
-	async () => (await import("react-reverse-portal")).OutPortal,
-	{ ssr: false }
-);
+const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
+	ssr: false,
+});
 const LiveMatches: NextPage = () => {
 	const { data: filters, isLoading: filtersLoading } =
 		trpc.filters.getLeagues.useQuery();
@@ -122,7 +121,7 @@ const LiveMatches: NextPage = () => {
 							]}
 						/>
 					</div>
-					<Matches
+					<Leagues
 						leagues={matches}
 						withLiveMatchesButton={false}
 						withDatePicker={false}
