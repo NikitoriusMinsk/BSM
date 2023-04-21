@@ -2,15 +2,23 @@ import React, { ReactElement } from "react";
 
 interface DisaperingContainerProps {
 	children: ReactElement[] | ReactElement;
-	className: string | undefined;
+	className?: string | undefined;
+	id?: string | undefined;
 	condition: boolean;
 }
 
 const DisaperingContainer: React.FC<DisaperingContainerProps> = (props) => {
-	const { children, className, condition } = props;
+	const { children, className, condition, id } = props;
 
-	if (condition) {
-		return <div className={className}>{children}</div>;
+	if (!condition) {
+		return (
+			<div
+				id={id}
+				className={className}
+			>
+				{children}
+			</div>
+		);
 	} else {
 		return <>{children}</>;
 	}

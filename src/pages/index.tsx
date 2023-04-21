@@ -106,29 +106,38 @@ const Home: NextPage = () => {
 					onChange={(id) => {}}
 				/>
 			</div>
-			<div id={styles.matches}>
-				<Matches
-					leagues={matches}
-					h2={"Top Matches"}
-					h3={"Today"}
-				/>
-				<Predictions
-					leagues={predictions}
-					h2="Best Predictions"
-					h3="Today"
-				/>
-			</div>
+			<DisaperingContainer
+				id={styles.matches}
+				condition={width <= 768}
+			>
+				<DisaperingContainer
+					id={styles.matchList}
+					condition={width > 768}
+				>
+					<Matches
+						leagues={matches}
+						h2={"Top Matches"}
+						h3={"Today"}
+					/>
+				</DisaperingContainer>
+				<DisaperingContainer
+					id={styles.predictionList}
+					condition={width > 768}
+				>
+					<Predictions
+						leagues={predictions}
+						h2="Best Predictions"
+						h3="Today"
+					/>
+				</DisaperingContainer>
+			</DisaperingContainer>
 			<DisaperingContainer
 				className={styles.sideColumn}
-				condition={true}
+				condition={width <= 768}
 			>
 				<>
-					{!session && (
-						<div id={styles.signUp}>
-							<SignUpPropose />
-						</div>
-					)}
 					<div id={styles.topTipsters}>
+						{!session && <SignUpPropose />}
 						<TopTipsters tipsters={tipsters} />
 					</div>
 					<div id={styles.liveMatches}>
