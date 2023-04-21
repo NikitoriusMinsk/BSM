@@ -227,6 +227,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 4px;
+    width: 51px;
 }
 
 .time span:first-child {

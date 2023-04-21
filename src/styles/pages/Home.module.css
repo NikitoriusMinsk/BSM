@@ -806,3 +806,37 @@
     }
 
 }
+
+@media screen and (max-width: 425px) {
+    #topTipsters {
+        padding: 0 12px;
+    }
+
+    #mostTips {
+        padding: 0 12px;
+    }
+
+    #wideBanner {
+        padding: 0 12px;
+    }
+
+    #matchList {
+        padding: 0 12px;
+    }
+
+    #liveMatches {
+        padding: 0 12px;
+    }
+
+    #tallBanner {
+        padding: 0 12px;
+    }
+
+    #bookmakers {
+        padding: 0 12px;
+    }
+
+    #predictionList {
+        padding: 0 12px;
+    }
+}

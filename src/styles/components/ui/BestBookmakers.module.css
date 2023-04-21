@@ -104,3 +104,30 @@
         flex: 1;
     }
 }
+
+@media screen and (max-width: 425px) {
+    .bestBookmakersList {
+        overflow: scroll;
+    }
+
+    .bestBookmaker {
+        flex: unset;
+        width: max-content;
+        gap: 10px;
+    }
+
+    .bestBookmakerImage {
+        min-height: 50px;
+        min-width: 140px;
+    }
+
+    /* Track */
+    .bestBookmakersList::-webkit-scrollbar-track {
+        display: none;
+    }
+
+    /* Handle */
+    .bestBookmakersList::-webkit-scrollbar-thumb {
+        display: none;
+    }
+}
