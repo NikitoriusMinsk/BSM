@@ -22,65 +22,79 @@ const Header: React.FC = () => {
 	const { data: Timezones } = trpc.navigation.getTimezones.useQuery();
 	const { width } = useWindowSize();
 
+	function GetSportCount(width: number) {
+		switch (true) {
+			case width >= 1920:
+				return 6;
+			case width >= 1440:
+				return 5;
+			case width >= 1366:
+				return 5;
+			case width >= 1280:
+				return 4;
+			case width >= 1024:
+				return 3;
+			default:
+				return 6;
+		}
+	}
+
 	return (
-        <div className={styles.container}>
-			<Link href={"/"} className={styles.logo}>
-
-                <Image
-                    src="/logo.svg"
-                    height={32}
-                    width={188}
-                    alt=""
-                />
-
-            </Link>
+		<div className={styles.container}>
+			<Link
+				href={"/"}
+				className={styles.logo}
+			>
+				<Image
+					src="/logo.svg"
+					height={32}
+					width={188}
+					alt=""
+				/>
+			</Link>
 			<nav>
 				{links && (
 					<div className={styles.links}>
-						{links.slice(0, width <= 1024 ? 4 : 6).map((link) => (
+						{links.slice(0, GetSportCount(width)).map((link) => (
 							<MenuLink
 								key={link.label}
 								{...link}
 								active={router.pathname.includes(link.href)}
 							/>
 						))}
-						<More items={links.slice(width <= 1024 ? 4 : 6)} />
+						<More items={links.slice(GetSportCount(width))} />
 					</div>
 				)}
-				<div className={styles.controls}>
-					{width > 1024 && (
-						<>
-							{Timezones && (
-								<Dropdown
-									items={Timezones.map((tz) => ({
-										name: (
-											<Moment
-												date={tz.date}
-												tz={tz.name}
-												format={"DD.MM Z"}
-											/>
-										),
-										label: (
-											<Moment
-												date={tz.date}
-												format={"HH:mm"}
-												tz={tz.name}
-											/>
-										),
-										id: tz.id,
-									}))}
-									onSelect={(id) => {}}
-									minWidth={200}
-								/>
-							)}
-							<Settings />
-						</>
-					)}
-					<UserProfile />
-				</div>
 			</nav>
+			<div className={styles.controls}>
+				{Timezones && (
+					<Dropdown
+						items={Timezones.map((tz) => ({
+							name: (
+								<Moment
+									date={tz.date}
+									tz={tz.name}
+									format={"DD.MM Z"}
+								/>
+							),
+							label: (
+								<Moment
+									date={tz.date}
+									format={"HH:mm"}
+									tz={tz.name}
+								/>
+							),
+							id: tz.id,
+						}))}
+						onSelect={(id) => {}}
+						minWidth={200}
+					/>
+				)}
+				<Settings />
+				<UserProfile />
+			</div>
 		</div>
-    );
+	);
 };
 
 interface MoreProps {
@@ -145,7 +159,7 @@ const More: React.FC<MoreProps> = (props) => {
 	}, []);
 
 	return (
-        <div
+		<div
 			className={styles.more}
 			ref={dropdownRef}
 		>
@@ -174,7 +188,11 @@ const More: React.FC<MoreProps> = (props) => {
 							onChange={debounce(handleSearch, 500)}
 						/>
 						{filteredItems.map((item) => (
-							<Link href={item.href} key={item.label} className={styles.moreItem}>
+							<Link
+								href={item.href}
+								key={item.label}
+								className={styles.moreItem}
+							>
 								{item.label}
 							</Link>
 						))}
@@ -182,7 +200,7 @@ const More: React.FC<MoreProps> = (props) => {
 				)}
 			</AnimatePresence>
 		</div>
-    );
+	);
 };
 
 export default Header;
