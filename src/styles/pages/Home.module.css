@@ -839,4 +839,9 @@
     #predictionList {
         padding: 0 12px;
     }
+
+    #tallBanner>div,
+    #wideBanner>div {
+        height: 418px !important;
+    }
 }
