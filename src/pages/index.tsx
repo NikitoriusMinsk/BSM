@@ -135,24 +135,22 @@ const Home: NextPage = () => {
 				className={styles.sideColumn}
 				condition={width <= 768}
 			>
-				<>
-					<div id={styles.topTipsters}>
-						{!session && <SignUpPropose />}
-						<TopTipsters tipsters={tipsters} />
-					</div>
-					<div id={styles.liveMatches}>
-						<LiveMatches matches={liveMatches} />
-					</div>
-					<div id={styles.tallBanner}>
-						<Banner
-							height={463}
-							image="/images/banner-placeholder-2.png"
-						/>
-					</div>
-					<div id={styles.bookmakers}>
-						<BestBookmakers bookmakers={bookmakers} />
-					</div>
-				</>
+				<div id={styles.topTipsters}>
+					{!session && <SignUpPropose />}
+					<TopTipsters tipsters={tipsters} />
+				</div>
+				<div id={styles.liveMatches}>
+					<LiveMatches matches={liveMatches} />
+				</div>
+				<div id={styles.tallBanner}>
+					<Banner
+						height={463}
+						image="/images/banner-placeholder-2.png"
+					/>
+				</div>
+				<div id={styles.bookmakers}>
+					<BestBookmakers bookmakers={bookmakers} />
+				</div>
 			</DisaperingContainer>
 		</>
 	);
@@ -251,18 +249,33 @@ const SignUpPropose: React.FC = () => {
 
 const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
 	const { tipsters } = props;
+	const { width } = useWindowSize();
+
+	function GetTipsterCount(width: number) {
+		switch (true) {
+			case width > 768:
+				return 3;
+			case width >= 320:
+				return tipsters.length;
+			default:
+				return 3;
+		}
+	}
 
 	return (
 		<div className={styles.topTipsters}>
 			<h2 className={styles.topTipstersTitle}>Top Tipsters</h2>
 			<div className={styles.topTipstersList}>
 				<div className={styles.topThreeTipsters}>
-					{tipsters.slice(0, 3).map((tipster, index) => (
+					{tipsters.slice(0, GetTipsterCount(width)).map((tipster, index) => (
 						<div
 							className={styles.topTipster}
 							key={`tipster_${index}`}
 						>
-							<div className={styles.topTipsterImage}>
+							<div
+								className={styles.topTipsterImage}
+								data-place={index + 1}
+							>
 								<Image
 									src={tipster.image}
 									alt={tipster.name}

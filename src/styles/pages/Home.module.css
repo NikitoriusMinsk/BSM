@@ -326,6 +326,26 @@
     justify-content: center;
 }
 
+.topThreeTipsters .topTipsterImage::after {
+    content: attr(data-place);
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    height: 20px;
+    width: 20px;
+    background-color: #1A1C211A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    color: #1A1C21CC;
+}
+
 .topTipster:first-child .topTipsterImage::after {
     content: '2';
     position: absolute;
@@ -346,7 +366,7 @@
     color: #1A1C21CC;
 }
 
-.topTipster:last-child .topTipsterImage::after {
+.topTipster:nth-child(3) .topTipsterImage::after {
     content: '3';
     position: absolute;
     right: -5px;
@@ -427,7 +447,7 @@
     height: 90px;
 }
 
-.topTipster:last-child .topTipsterWinrate {
+.topTipster:nth-child(3) .topTipsterWinrate {
     height: 70px;
 }
 
@@ -765,4 +785,24 @@
         margin-left: 0;
         padding: 0 24px;
     }
+
+    .topThreeTipsters {
+        flex-direction: row;
+        overflow: scroll;
+    }
+
+    /* Track */
+    .topThreeTipsters::-webkit-scrollbar-track {
+        display: none;
+    }
+
+    /* Handle */
+    .topThreeTipsters::-webkit-scrollbar-thumb {
+        display: none;
+    }
+
+    .topTipstersMore {
+        display: none;
+    }
+
 }
