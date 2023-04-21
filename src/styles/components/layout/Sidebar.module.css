@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 40px;
+    gap: 20px;
     height: calc(100vh - 85px);
     bottom: 0;
     left: 0;
@@ -61,8 +61,11 @@
     font-size: 14px;
     line-height: 17px;
     color: #1A1C21E5;
-    padding: 0 12px;
     gap: 8px;
+    height: 44px;
+    width: min-content;
+    padding: 0 12px;
+    transition: width 0.2s ease-in-out;
 }
 
 .menuLink.active {
@@ -70,7 +73,10 @@
     background-color: #7F3FFC;
     box-shadow: 0px 0px 20px rgba(127, 63, 252, 0.5);
     border-radius: 8px;
-    padding: 12px;
+}
+
+.menuLink.expanded {
+    width: 100%;
 }
 
 .menuLink.active .menuLinkIcon * {
@@ -81,6 +87,7 @@
     position: relative;
     height: 24px;
     width: 24px;
+    justify-self: center;
 }
 
 .menuLinkIconContainer {
@@ -92,4 +99,30 @@
     white-space: nowrap;
     overflow: hidden;
     width: 0;
+}
+
+@media screen and (max-width: 1366px) {
+    .container {
+        width: 70px;
+    }
+
+    .menu {
+        min-width: 70px;
+        padding: 0 10px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .container {
+        width: 60px;
+    }
+
+    .menu {
+        min-width: 60px;
+        padding: 0 10x;
+    }
+
+    .menuLink {
+        padding: 0 8px;
+    }
 }

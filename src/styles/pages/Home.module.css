@@ -683,6 +683,10 @@
         margin-right: 0;
     }
 
+    #matches {
+        margin-left: 20px;
+    }
+
     .sideColumn {
         grid-row-start: 4;
     }
