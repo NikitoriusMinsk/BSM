@@ -136,11 +136,11 @@ const Matches: React.FC<MatchesInfoProps> = (props) => {
 				</div>
 			</div>
 			{leagues.map((league, leagueIndex) => {
-				return league.matches.map((match) => (
+				return league.matches.map((match, index) => (
 					<Match
 						{...match}
 						mode={modeState}
-						key={match.id}
+						key={`matches_match_${index}`}
 					/>
 				));
 			})}
