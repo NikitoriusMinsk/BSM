@@ -153,7 +153,7 @@
     height: 100vh;
     z-index: 102;
     background-color: #FFFFFF;
-    padding: 16px;
+    padding: 24px 16px;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -217,7 +217,7 @@
 
 /* Tab component */
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 768px) {
     .settingsIcon span {
         display: block;
     }
@@ -245,6 +245,7 @@
         left: 0;
         height: 100vh;
         gap: 40px;
+        padding: 24px 16px;
     }
 
     #timezone {

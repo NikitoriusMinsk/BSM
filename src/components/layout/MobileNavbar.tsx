@@ -44,15 +44,11 @@ const MobileNavbar: React.FC = () => {
 							href={href}
 							label={label}
 							image={image}
-							active={
-								router.asPath.split("?")[0] === href && !isMenuOpen
-							}
+							active={router.asPath.split("?")[0] === href && !isMenuOpen}
 						/>
 					))}
 					<span
-						className={`${styles.menuLink} ${
-							isMenuOpen && styles.active
-						}`}
+						className={`${styles.menuLink} ${isMenuOpen && styles.active}`}
 						onClick={() => setIsMenuOpen(!isMenuOpen)}
 					>
 						<ReactSVG
@@ -135,17 +131,6 @@ const Menu: React.FC<MenuProps> = (props) => {
 			exit="closed"
 		>
 			<div className={styles.menuHeader}>
-				<div
-					className={styles.back}
-					onClick={onClose}
-				>
-					<Image
-						src={"/icons/arrow-narrow-right-black.svg"}
-						height={24}
-						width={24}
-						alt="Back"
-					/>
-				</div>
 				<h2>Navigation</h2>
 			</div>
 			<div className={styles.menuSection}>
