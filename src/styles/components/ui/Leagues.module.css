@@ -190,7 +190,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 28px 20px;
+    padding: 24px 20px;
 }
 
 .info {
@@ -274,7 +274,16 @@
 .teamNames {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 2px;
+}
+
+.teamNames .teamName {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21CC;
 }
 
 .teamNames .teamName.win {
@@ -284,15 +293,6 @@
     font-size: 15px;
     line-height: 18px;
     color: #1A1C21;
-}
-
-.teamNames .teamName:last-child {
-    font-family: 'Samsung Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 18px;
-    color: #1A1C21CC;
 }
 
 .details {
@@ -447,12 +447,12 @@
 .outcome span:last-child {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
     color: #1A1C21;
-    background-color: #1A1C211A;
-    padding: 8px;
+    /* background-color: #1A1C211A; */
+    /* padding: 8px; */
     border-radius: 4px;
 }
 
@@ -463,19 +463,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 7px;
+    gap: 2px;
 }
 
 .outcome.score span.win {
-    font-size: 15px;
     color: #1A1C21;
     font-weight: 600;
 }
 
 .outcome.score span {
-    font-size: 15px;
-    color: rgba(26, 28, 33, 0.7);
+    font-family: 'Samsung Sans';
+    font-style: normal;
     font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(26, 28, 33, 0.7);
 }
 
 @media screen and (max-width: 1440px) {
@@ -496,10 +498,6 @@
 
     .score {
         padding-right: 16px;
-    }
-
-    .details {
-        gap: 26px;
     }
 }
 
@@ -544,6 +542,10 @@
     cursor: pointer;
 }
 
+.timeMobile {
+    display: none;
+}
+
 @media screen and (max-width:425px) {
     .outcome {
         display: none;
@@ -579,5 +581,36 @@
     .matchesOptions button:nth-child(2),
     .matchesOptions button:nth-child(3) {
         display: none;
+    }
+
+    .matches {
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+    .matches .time {
+        display: none;
+    }
+    .info {
+        gap: 16px;
+    }
+    .teamNames {
+        gap: 4px;
+    }
+
+    .timeMobile {
+        display: flex;
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        color: #CF1F1F;
+    }
+    .outcome {
+        min-width: auto;
+    }
+    .details {        
+        margin-left: auto;
     }
 }

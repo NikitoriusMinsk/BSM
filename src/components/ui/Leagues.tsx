@@ -240,7 +240,7 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 					<div className={styles.teamNames}>
 						<div
 							className={`${styles.teamName} ${
-								(teams[0]?.score || 0) - (teams[1]?.score || 0) &&
+								((teams[0]?.score || 0) - (teams[1]?.score || 0)) > 0 &&
 								styles.win
 							}`}
 						>
@@ -248,7 +248,7 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 						</div>
 						<div
 							className={`${styles.teamName} ${
-								(teams[1]?.score || 0) - (teams[0]?.score || 0) &&
+								((teams[1]?.score || 0) - (teams[0]?.score || 0)) > 0 &&
 								styles.win
 							}`}
 						>
@@ -258,12 +258,11 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 				</div>
 				<div
 					className={styles.details}
-					style={mode == "odds" ? { gap: "20px" } : {}}
 				>
 					<div className={`${styles.outcome} ${styles.score}`}>
 						<span
 							className={`${
-								(teams[0]?.score || 0) - (teams[1]?.score || 0) &&
+								((teams[0]?.score || 0) - (teams[1]?.score || 0)) > 0 &&
 								styles.win
 							}`}
 						>
@@ -271,7 +270,7 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 						</span>
 						<span
 							className={`${
-								(teams[1]?.score || 0) - (teams[0]?.score || 0) &&
+								((teams[1]?.score || 0) - (teams[0]?.score || 0)) > 0 &&
 								styles.win
 							}`}
 						>
@@ -282,21 +281,21 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 						<>
 							<div
 								className={styles.outcome}
-								style={{ gap: "4px", marginTop: "-10px" }}
+								style={{ gap: "4px", marginTop: "-12px" }}
 							>
 								<span>Home</span>
 								<span className={styles.oddVal}>{odds.home}</span>
 							</div>
 							<div
 								className={styles.outcome}
-								style={{ gap: "4px", marginTop: "-10px" }}
+								style={{ gap: "4px", marginTop: "-12px" }}
 							>
 								<span>Draw</span>
 								<span className={styles.oddVal}>{odds.draw}</span>
 							</div>
 							<div
 								className={styles.outcome}
-								style={{ gap: "4px", marginTop: "-10px" }}
+								style={{ gap: "4px", marginTop: "-12px" }}
 							>
 								<span>Away</span>
 								<span className={styles.oddVal}>{odds.away}</span>
@@ -336,6 +335,9 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 						</>
 					)}
 				</div>
+				<span className={styles.timeMobile}>
+					56:45'
+				</span>
 			</div>
 		</div>
 	);
