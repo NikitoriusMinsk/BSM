@@ -242,7 +242,7 @@ const TipsterCompetition: NextPage = () => {
 							<TextField
 								icon="/icons/search.svg"
 								placeholder="Search for tipsters"
-								minWidth={350}
+								minWidth={320}
 							/>
 							<div>
 								<Dropdown
@@ -384,12 +384,13 @@ const Leader: React.FC<{
 						alt=""
 					/>
 				</div>
-				<Image
-					src={image}
-					height={place === 1 ? 86 : 68}
-					width={place === 1 ? 86 : 68}
-					alt={name}
-				/>
+				<div className={place === 1 ? styles.photo1 : styles.photo}>
+					<Image
+						src={image}
+						fill
+						alt={name}
+					/>
+				</div>
 			</div>
 			<span className={styles.prize}>$ {prize}</span>
 		</div>
@@ -467,14 +468,16 @@ const CompetitionStep: React.FC<{
 			exit="hide"
 			onClick={onClick}
 		>
-			<Image
-				src={`/images/tipster-competition-step-${step}.svg`}
-				height={46}
-				width={46}
-				alt=""
-			/>
 			<div className={styles.description}>
-				<h4>{`${step} STEP`}</h4>
+				<div className={styles.firstRow}>
+					<Image
+						src={`/images/tipster-competition-step-${step}.svg`}
+						height={46}
+						width={46}
+						alt=""
+					/>
+					<h4>{`${step} STEP`}</h4>
+				</div>
 				<span>{text}</span>
 			</div>
 			<div className={styles.dots}>
@@ -525,6 +528,17 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 						/>
 					</div>
 				</div>
+				<div className={styles.filterBtnWrap}>
+					<button className={styles.filterBtn}>
+						<Image 
+							src={'/icons/filter-white.svg'}
+							alt=""
+							width={20}
+							height={20}
+						/>
+						Filter
+					</button>
+				</div>
 			</div>
 			<div className={styles.background}>
 				<Image
@@ -536,70 +550,72 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 					}}
 				/>
 			</div>
-			<Slider
-				loop={true}
-				// autoPlay={true}
-				showArrows={true}
-				showPagination={false}
-				swipable={false}
-				arrowOptions={{
-					offset: {
-						next: {
-							top: width >= 1024 ? 100 : width >= 425 ? 155 : 155,
-							side: width >= 1024 ? 34 : width >= 425 ? 34 : 34,
+			<div className={styles.sliderWrap}>
+				<Slider
+					loop={true}
+					// autoPlay={true}
+					showArrows={true}
+					showPagination={false}
+					swipable={false}
+					arrowOptions={{
+						offset: {
+							next: {
+								top: 0,
+								side: width > 1440 ? 140 : width > 1024 ? 30 : width > 425 ? 20 : 16,
+							},
+							prev: {
+								top: 0,
+								side: width > 1440 ? 140 : width > 1366 ? 40 : width > 1024 ? 30 : width > 425 ? 20 : 16,
+							},
 						},
-						prev: {
-							top: width >= 1024 ? 100 : width >= 425 ? 155 : 155,
-							side: 0,
-						},
-					},
-				}}
-			>
-				{competitions.map(({ endsOn, name, startedOn, users }) => (
-					<div
-						key={`competition_${startedOn}_${endsOn}`}
-						className={styles.slide}
-					>
-						<div className={styles.title}>
-							<h2>{name}</h2>
-							<span>
-								<Moment
-									date={startedOn}
-									format="DD MMM YYYY"
-								/>{" "}
-								-{" "}
-								<Moment
-									date={endsOn}
-									format="DD MMM YYYY"
-								/>
-							</span>
+					}}
+				>
+					{competitions.map(({ endsOn, name, startedOn, users }) => (
+						<div
+							key={`competition_${startedOn}_${endsOn}`}
+							className={styles.slide}
+						>
+							<div className={styles.title}>
+								<h2>{name}</h2>
+								<span>
+									<Moment
+										date={startedOn}
+										format="DD MMM YYYY"
+									/>{" "}
+									-{" "}
+									<Moment
+										date={endsOn}
+										format="DD MMM YYYY"
+									/>
+								</span>
+							</div>
+							<Slider swipable={true} showPagination={width > 768 ? false : true}>
+								{ArrayToChunks(
+									users,
+									width > 1024 ? 4 : width > 768 ? 3 : width > 600 ? 2 : 1
+								).map((chunk, index) => (
+									<div
+										className={styles.participantsContainer}
+										key={index}
+									>
+										{chunk.map((user, index) => (
+											<CompetitionParticipant
+												{...user}
+												place={
+													users.findIndex(
+														(_user) => _user.id === user.id
+													) + 1
+												}
+												key={`participant_${user.id}`}
+											/>
+										))}
+									</div>
+								))}
+							</Slider>
 						</div>
-						<Slider swipable={true}>
-							{ArrayToChunks(
-								users,
-								width >= 1024 ? 3 : width >= 425 ? 1 : 4
-							).map((chunk, index) => (
-								<div
-									className={styles.participantsContainer}
-									key={index}
-								>
-									{chunk.map((user, index) => (
-										<CompetitionParticipant
-											{...user}
-											place={
-												users.findIndex(
-													(_user) => _user.id === user.id
-												) + 1
-											}
-											key={`participant_${user.id}`}
-										/>
-									))}
-								</div>
-							))}
-						</Slider>
-					</div>
-				))}
-			</Slider>
+					))}
+				</Slider>
+			</div>			
 		</div>
 	);
 };
@@ -675,11 +691,7 @@ const CompetitionParticipant: React.FC<
 					</div>
 				</div>
 				<div className={styles.stats}>
-					<div className={styles.stat}>
-						<span>Hitrate</span>
-						<span>{winrate * 100}%</span>
-					</div>
-					<div className={styles.stat}>
+					<div className={`${styles.stat} ${styles.centerStat}`}>
 						<span>
 							<Image
 								src="/icons/cup.svg"
@@ -691,12 +703,16 @@ const CompetitionParticipant: React.FC<
 						<span>$ {prize}</span>
 					</div>
 					<div className={styles.stat}>
+						<span>Hitrate</span>
+						<span>{winrate * 100}%</span>
+					</div>
+					<div className={styles.stat}>
 						<span>Subscribers</span>
 						<span>{shortenNumber(subscriberCount, 0)}</span>
 					</div>
 				</div>
 				<button onClick={() => setModalOpen(true)}>
-					$ {subscriptionCost}/MO
+					<span>$ {subscriptionCost}</span>/MO
 				</button>
 			</div>
 		</>

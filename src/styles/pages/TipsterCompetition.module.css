@@ -32,11 +32,10 @@
     grid-column-end: 13;
     grid-row-start: 3;
     grid-row-end: 4;
-    margin-left: 60px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-bottom: 100px;
+    margin-right: -135px;
 }
 
 .table {
@@ -60,6 +59,9 @@
     gap: 40px;
 }
 
+.header > .controls > div > div > div:first-child {
+    gap: 90px;
+}
 
 /* Current Competition */
 
@@ -72,7 +74,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
 }
 
 .currentCompetition .share {
@@ -101,9 +103,9 @@
     position: relative;
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 36px;
-    line-height: 43px;
+    line-height: 41px;
     color: #FFFFFF;
 }
 
@@ -119,8 +121,8 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 16px;
+    line-height: 19px;
     color: #FFFFFFE5;
     border: 1px solid #FFFFFF4D;
     overflow: hidden;
@@ -167,8 +169,8 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 22px;
     color: #FFFFFF;
 }
 
@@ -236,18 +238,19 @@
     font-size: 14px;
     line-height: 24px;
     color: #FFFFFF;
-    min-width: 172px;
+    min-width: 184px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 10px;
 }
 
 .currentCompetition .timeHint span:nth-child(2) {
-    margin-right: -8px;
+    margin-right: -10px;
 }
 
 .currentCompetition .timeHint span:last-child {
-    margin-right: -15px;
+    margin-right: -10px;
 }
 
 .currentCompetition .duration .text {
@@ -274,7 +277,7 @@
 .leader .name {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 16px;
     line-height: 19px;
     color: #FFFFFFCC;
@@ -363,6 +366,17 @@
     left: calc(50% - 15px);
 }
 
+.leader .photo {
+    position: relative;
+    width: 68px;
+    height: 68px;
+}
+.leader .photo1 {
+    position: relative;
+    width: 86px;
+    height: 86px;
+}
+
 /* Get Started */
 
 .getStarted {
@@ -382,7 +396,7 @@
 
 .getStarted .steps {
     position: relative;
-    min-height: 132px;
+    min-height: 180px;
 }
 
 /* Step */
@@ -395,7 +409,7 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    padding: 43px;
+    padding: 48px;
     background-color: #7F3FFC;
     border-radius: 16px;
     gap: 17px;
@@ -406,15 +420,21 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 3px;
+    gap: 13px;
+}
+
+.step .firstRow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
 .step .description h4 {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 18px;
+    line-height: 22px;
     color: #FFFFFFE5;
 }
 
@@ -422,8 +442,8 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 24px;
+    line-height: 29px;
     color: #FFFFFFE5;
 }
 
@@ -460,17 +480,16 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    min-height: 738px;
-    border-radius: 16px;
     overflow: hidden;
-    padding: 24px 140px;
+    padding: 24px 140px 40px;
 }
 
 .previousCompetitions .header {
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
+    margin-bottom: 40px;
 }
 
 .previousCompetitions .header h2 {
@@ -493,7 +512,7 @@
 .previousCompetitions .slide {
     display: flex;
     flex-direction: column;
-    gap: 96px;
+    gap: 28px;
     height: 100%;
 }
 
@@ -502,7 +521,6 @@
     flex-direction: column;
     gap: 10px;
     text-align: center;
-    margin-left: 70px;
 }
 
 .previousCompetitions .slide .title h2 {
@@ -527,7 +545,9 @@
     display: flex;
     flex-direction: row;
     gap: 40px;
-    padding-bottom: 50px;
+    /* padding-bottom: 50px; */
+    padding-left: 140px;
+    padding-right: 140px;
 }
 
 /* Participant */
@@ -535,13 +555,13 @@
 .participant {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 20px 14px;
+    gap: 40px;
+    padding: 45px 35px 28px;
     border: 1px solid #FFFFFF66;
-    border-radius: 8px;
-    max-width: 25%;
+    border-radius: 16px;
+    max-width: calc(25% - 30px);
     flex: 1;
-    backdrop-filter: blur(5px);
+    background: rgba(26, 28, 33, 0.3);
 }
 
 
@@ -549,13 +569,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px
+    gap: 40px;
 }
 
 .participant .avatar {
     position: relative;
-    height: 74px;
-    width: 74px;
+    height: 70px;
+    width: 70px;
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -564,11 +584,11 @@
 
 .participant .avatar .crown {
     position: absolute;
-    top: -25px;
-    left: -29px;
+    top: -35px;
+    left: -40px;
     z-index: 1;
-    height: 130px;
-    width: 130px;
+    height: 150px;
+    width: 150px;
 }
 
 .participant .avatar .crown:after {
@@ -635,30 +655,55 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    position: relative;
+    margin-top: 20px;
 }
 
 .participant button {
-    padding: 9px 24px;
+    padding: 10px 45px;
+    text-align: center;
     border-radius: 8px;
     background-color: #7F3FFC;
     border: none;
     font-family: 'Samsung Sans';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
+    font-style: normal;    
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
     color: #FFFFFF;
     cursor: pointer;
+    width: fit-content;
+    margin: auto;
+}
+
+.participant button span {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
 }
 
 .participant .stats .stat {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
     gap: 6px;
 }
 
-.participant .stats .stat:first-child {
+.centerStat {
+    position: absolute;
+    left: 0;
+    right: 0;    
+    margin: 0 auto;
+    bottom: 0;
+}
+
+.centerStat span {    
+    font-size: 28px!important;
+    line-height: 34px!important;
+}
+
+.participant .stats .stat:nth-child(2) {
     align-items: flex-start;
 }
 
@@ -740,8 +785,203 @@
     left: -20px;
 }
 
-@media screen and (max-width: 1024px) {
+.sliderWrap {
+    position: relative;
+    display: flex;
+    width: calc(100% + 280px);
+    margin-left: -140px;
+    margin-right: -140px;
+}
 
+.filterBtnWrap {
+    display: none;
+}
+
+.filterBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 11px 24px 11px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    background: transparent;
+    color: #FFFFFF;
+    gap: 12px;
+}
+
+@media screen and (max-width: 1440px) {
+    .participant {
+        gap: 30px;
+    }
+    .mainBlock {
+        margin-right: -30px;
+    }
+    .mainColumn {
+        margin-left: 40px;
+    }
+    .bottomBlock {
+        margin-right: -30px;
+    }
+    .previousCompetitions {
+        padding-left: 40px;
+        padding-right: 30px;
+    }
+    .centerStat {
+        position: relative;
+        width: 100%;
+        flex-direction: row!important;
+        justify-content: center!important;
+        gap: 10px!important;
+    }
+    .centerStat span {
+        font-size: 24px!important;
+        line-height: 29px!important;
+    }
+    .participant .stats {
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 0px;
+    }
+    .step .description span {
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .step {
+        padding: 46px 24px;
+    }
+    .getStarted .steps {        
+        min-height: 160px;
+    }
+    .currentCompetition {
+        border-radius: 0px;
+    }
+    .sliderWrap {
+        width: calc(100% + 70px);
+        margin-left: -40px;
+        margin-right: -30px; 
+    }
+    .previousCompetitions .slide .participantsContainer {
+        padding-left: 40px;
+        padding-right: 30px;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .currentCompetition {
+        padding: 24px 30px;
+        gap: 30px;
+    }
+    .currentCompetition .duration {
+        gap: 16px;
+    }
+    .currentCompetition .share {
+        top: 24px;
+        right: 30px;
+    }
+    .content {
+        margin-right: 30px;
+    }
+    .mainColumn {
+        margin-left: 30px;
+    }
+    .previousCompetitions .header {
+        margin-bottom: 30px;
+    }
+    .previousCompetitions {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .previousCompetitions .slide .participantsContainer {
+        gap: 30px;
+    }
+    .participant {
+        max-width: calc(25% - 23px);
+    }
+    .step {
+        padding: 43px 18px;
+    }
+    .getStarted .steps {        
+        min-height: 152px;
+    }
+    .sliderWrap {
+        width: calc(100% + 60px);
+        margin-left: -30px;
+        margin-right: -30px; 
+    }
+    .previousCompetitions .slide .participantsContainer {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+} 
+
+@media screen and (max-width: 1280px) {
+    .currentCompetition h1 {
+        font-size: 28px;
+        line-height: 34px;
+    }
+    .currentCompetition .steps {
+        gap: 28px;
+    }
+    .currentCompetition .steps span {
+        font-size: 15px;
+        line-height: 18px;
+    }
+    .leader .photo {
+        position: relative;
+        width: 58px;
+        height: 58px;
+    }
+    .leader .photo1 {
+        position: relative;
+        width: 70px;
+        height: 70px;
+    }
+    .leaders .leader:nth-child(1) .avatar .crown,
+    .leaders .leader:nth-child(3) .avatar .crown {
+        position: absolute;
+        top: -28px;
+        left: -35px;
+        z-index: 1;
+        height: 128px;
+        width: 128px;
+    }
+    .leaders .leader:nth-child(2) .avatar .crown {
+        position: absolute;
+        top: -34px;
+        left: -40px;
+        z-index: 1;
+        height: 148px;
+        width: 148px;
+    }
+    .currentCompetition .duration .text {
+        font-size: 14px;
+        line-height: 17px;
+    }
+    .currentCompetition h2 {
+        font-size: 15px;
+        line-height: 18px;
+    }
+    .currentCompetition .time {
+        font-size: 24px;
+        line-height: 29px;
+    }
+    .currentCompetition .timeHint {
+        min-width: 174px;
+    }
+    .leader {
+        gap: 24px;
+    }
+    .leader .prize {
+        margin-top: 12px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
     .currentCompetition .steps,
     .currentCompetition .duration .text {
         display: none;
@@ -751,35 +991,120 @@
         display: none;
     }
 
-    .mainColumn,
+    .mainBlock {
+        margin-right: 0px;
+    }
+
+    .mainColumn {
+        margin-right: 20px;
+        margin-left: 20px;
+        grid-column-end: 13;
+    }
+
     .bottomBlock {
         margin-left: 0;
+        margin-right: 0;
         grid-column-end: 13;
-        padding: 0 16px;
+    }
+
+    .sliderWrap {
+        width: calc(100% + 40px);
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
+    .previousCompetitions .slide .participantsContainer {        
+        padding-left: 20px;
+        padding-right: 20px;
+        gap: 22px;
     }
 
     .previousCompetitions {
-        padding: 23px 16px;
+        padding: 24px 16px 48px;
         gap: 24px
     }
 
     .participant {
-        max-width: unset;
+        max-width: calc(33.33% - 16px);;
     }
 
     .previousCompetitions .header h2 {
         font-family: 'Samsung Sans';
         font-style: normal;
         font-weight: 400;
-        font-size: 15px;
-        line-height: 18px;
+        font-size: 28px;
+        line-height: 34px;
         color: #FFFFFF;
     }
+
+    .currentCompetition h1 {
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    .currentCompetition h2 {
+        font-size: 18px;
+        line-height: 22px;
+    }
+    
+    .currentCompetition {
+        padding-bottom: 48px;
+    }
+
+    .table .controls {
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .currentCompetition h1 {
+        margin-right: auto;
+    }
+
+    .currentCompetition > h2 {
+        display: none;
+    }
+
+    .separator {
+        display: none;
+    }
+
+    .currentCompetition {
+        padding-bottom: 24px;
+    }
+
+    .table h2 {
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .participant {
+        max-width: calc(50% - 11px);
+    }
+
+    .leader .prize {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .currentCompetition h2 {
+        font-size: 15px;
+        line-height: 18px;
+    }
+}
+
+.slide > div:last-child > div {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.slide > div:last-child > div > ul {
+    position: relative;
 }
 
 @media screen and (max-width: 425px) {
     .currentCompetition {
-        padding: 20px 16px;
+        padding: 20px 16px 32px;
         border-radius: 0;
     }
 
@@ -798,7 +1123,6 @@
     }
 
     .currentCompetition .share,
-    .currentCompetition h2,
     .currentCompetition .separator {
         display: none;
     }
@@ -835,4 +1159,97 @@
         color: rgba(255, 255, 255, 0.9);
     }
 
+    .mainColumn {
+        margin-right: 16px;
+        margin-left: 16px;
+    }
+
+    .sliderWrap {
+        width: calc(100% + 32px);
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+
+    .previousCompetitions .slide .participantsContainer {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .previousCompetitions {
+        padding: 24px 16px;
+    }
+
+    .currentCompetition h2 {
+        font-size: 12px;
+        line-height: 14px;
+    }
+    .currentCompetition .timeHint {
+        font-size: 12px;
+        line-height: 14px;
+        min-width: 172px;
+    }
+
+    .leader .photo {
+        position: relative;
+        width: 50px;
+        height: 50px;
+    }
+    .leader .photo1 {
+        position: relative;
+        width: 50px;
+        height: 50px;
+    }
+    .leaders .leader .avatar .crown {
+        top: -24px!important;
+        left: -30px!important;
+        height: 110px!important;
+        width: 110px!important;
+    }
+    .leaders .leader .avatar .crown:after {
+        bottom: 5px!important;
+    }
+    .leader {
+        justify-content: flex-start;
+    }
+    .leader:first-child {
+        margin-top: 20px;
+    }
+    .leader:last-child {        
+        margin-top: 40px;
+    }
+    .participant {        
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .table h2 {
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .previousCompetitions .header h2 {
+        font-size: 15px;
+        line-height: 18px;
+    }
+    .previousCompetitions .controls {
+        display: none;
+    }
+
+    .filterBtnWrap {
+        display: block;
+    }
+    .previousCompetitions .header {
+        flex-direction: row;
+        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .table > div:last-child {
+        width: calc(100% + 32px);
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+    .table td {
+        border-radius: 0px!important;
+    }
 }
