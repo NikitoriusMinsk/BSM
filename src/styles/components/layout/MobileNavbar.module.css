@@ -69,7 +69,7 @@
     flex-direction: row;
     align-items: center;
     gap: 33%;
-    padding: 16px;
+    padding: 24px 16px;
 }
 
 .menuHeader h2 {

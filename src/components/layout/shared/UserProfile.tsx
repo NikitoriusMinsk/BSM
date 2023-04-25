@@ -10,7 +10,8 @@ import Moment from "react-moment";
 
 const UserProfile: React.FC = () => {
 	const { data: session } = useSession();
-	const { data: notifications, isLoading: matchesLoading } = trpc.user.getNotifications.useQuery();
+	const { data: notifications, isLoading: matchesLoading } =
+		trpc.user.getNotifications.useQuery();
 
 	if (!session?.user) {
 		return (
@@ -114,17 +115,6 @@ const Notifications: React.FC<NotificationsProps> = (props) => {
 						exit="closed"
 					>
 						<div className={styles.notificationsHeader}>
-							<div
-								className={styles.back}
-								onClick={() => setIsOpen(false)}
-							>
-								<Image
-									src={"/icons/arrow-narrow-right-black.svg"}
-									height={24}
-									width={24}
-									alt="Back"
-								/>
-							</div>
 							<div className={styles.notificationsHeaderText}>
 								<h2>Notifications</h2>
 
@@ -162,9 +152,7 @@ const Notifications: React.FC<NotificationsProps> = (props) => {
 							))}
 						</div>
 						<div className={styles.notificationContainer}>
-							<span className={styles.notificationSubTitle}>
-								Earlier
-							</span>
+							<span className={styles.notificationSubTitle}>Earlier</span>
 							{items.new.map((item) => (
 								<div
 									key={item.id}
@@ -245,7 +233,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
 	}, []);
 
 	return (
-        <div
+		<div
 			className={styles.profile}
 			ref={dropdownRef}
 		>
@@ -270,17 +258,6 @@ const Profile: React.FC<ProfileProps> = (props) => {
 						exit="closed"
 					>
 						<div className={styles.menuHeader}>
-							<div
-								className={styles.back}
-								onClick={() => setIsOpen(false)}
-							>
-								<Image
-									src={"/icons/arrow-narrow-right-black.svg"}
-									height={24}
-									width={24}
-									alt="Back"
-								/>
-							</div>
 							<div className={styles.user}>
 								<div className={styles.profileImage}>
 									<Image
@@ -292,9 +269,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
 								</div>
 								<div className={styles.userInfo}>
 									<div className={styles.name}>{name}</div>
-									<div className={styles.followers}>
-										Followers 1337
-									</div>
+									<div className={styles.followers}>Followers 1337</div>
 								</div>
 							</div>
 						</div>
@@ -329,17 +304,18 @@ const Profile: React.FC<ProfileProps> = (props) => {
 								</div>
 							</div>
 							<div className={styles.column}>
-								<Link href="/user-dashboard" className={styles.menuItem}>
-
-                                    <Image
-                                        src="/icons/profile/dashboard.svg"
-                                        alt="profile"
-                                        width={24}
-                                        height={24}
-                                    />
-                                    <span>My Dashboard</span>
-
-                                </Link>
+								<Link
+									href="/user-dashboard"
+									className={styles.menuItem}
+								>
+									<Image
+										src="/icons/profile/dashboard.svg"
+										alt="profile"
+										width={24}
+										height={24}
+									/>
+									<span>My Dashboard</span>
+								</Link>
 								<div className={styles.menuItem}>
 									<Image
 										src="/icons/profile/tips.svg"
@@ -349,27 +325,25 @@ const Profile: React.FC<ProfileProps> = (props) => {
 									/>
 									<span>Tracking Tips</span>
 								</div>
-							</div>
-						</div>
-						<div className={styles.menuSection}>
-							<div
-								className={styles.menuItem}
-								onClick={() => signOut()}
-							>
-								<Image
-									src="/icons/profile/logout.svg"
-									alt="logout"
-									width={24}
-									height={24}
-								/>
-								<span>Logout</span>
+								<div
+									className={styles.menuItem}
+									onClick={() => signOut()}
+								>
+									<Image
+										src="/icons/profile/logout.svg"
+										alt="logout"
+										width={24}
+										height={24}
+									/>
+									<span>Logout</span>
+								</div>
 							</div>
 						</div>
 					</motion.div>
 				)}
 			</AnimatePresence>
 		</div>
-    );
+	);
 };
 
 export default UserProfile;

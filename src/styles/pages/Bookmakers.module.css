@@ -114,7 +114,6 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    margin-bottom: 100px;
 }
 
 /* Best Bookmaker */
@@ -129,24 +128,24 @@
 
 .bestBookmaker .info {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding: 28px 40px;
     gap: 40px;
 }
 
-.bestBookmaker .info .column {
+.bestBookmaker .info .row {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 16px;
 }
 
-.bestBookmaker .info .column:first-child {
-    flex: 2;
-
+.bestBookmaker .row .rating {
+    width: min-content;
 }
 
-.bestBookmaker .info .column:last-child {
-    flex: 1;
+.bestBookmaker .row img {
+    width: unset;
 }
 
 .bestBookmaker .name {
@@ -165,6 +164,7 @@
     font-size: 22px;
     line-height: 26px;
     color: #FFFFFF;
+    text-align: start;
 }
 
 .bestBookmakers .rating {
@@ -190,13 +190,14 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 100px;
+    gap: 10px;
 }
 
 .bestBookmaker button {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     padding: 12px 20px;
     gap: 8px;
     font-family: 'Samsung Sans';
@@ -208,6 +209,11 @@
     border: none;
     flex: 1;
     cursor: pointer;
+    width: max-content;
+}
+
+.bestBookmaker button img {
+    width: unset !important;
 }
 
 .bestBookmaker button.visit {
@@ -250,14 +256,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 28px 40px;
+    padding: 19px 28px;
     gap: 12px;
     border-left: 1px solid #1A1C2133;
     border-right: 1px solid #1A1C2133;
     border-bottom: 1px solid #1A1C2133;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
-    gap: 40px;
 }
 
 .bookmaker .rating {
@@ -396,6 +401,53 @@
     height: 100%;
 }
 
+@media screen and (max-width: 1440px) {
+    .bestBookmakers {
+        margin-right: -30px;
+    }
+
+    .sports .sport {
+        width: calc(33% - 23px);
+    }
+
+    .allBookmakers,
+    .text {
+        margin-left: 40px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .bestBookmakers {
+        margin-right: 0px;
+        padding: 42px 21px;
+    }
+
+
+    .allBookmakers,
+    .text {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .bookmaker {
+        width: calc(33% - 24px);
+    }
+
+    .sports .sport {
+        width: calc(33% - 24px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .bookmaker {
+        width: calc(50% - 20px);
+    }
+
+    .sports .sport {
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .bestBookmakers {
         padding: 20px 16px;
@@ -411,30 +463,10 @@
         padding: 16px;
     }
 
-    .bestBookmaker .rating {
-        width: min-content;
-    }
-
-    .bestBookmaker .info .column:first-child {
-        align-items: flex-start;
-    }
-
-    .bestBookmaker .info .column:last-child {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .bestBookmaker .info .column:last-child img {
-        width: auto;
-    }
-
-    .bestBookmaker .info {
-        flex-direction: column-reverse;
-    }
-
     .allBookmakers,
     .text {
         margin-left: 0;
+        margin-right: 0;
         padding: 0 16px;
     }
 
@@ -450,10 +482,6 @@
     .sports {
         flex-direction: column;
         gap: 20px;
-    }
-
-    .sports .sport {
-        width: 100%;
     }
 
 }
