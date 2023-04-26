@@ -9,10 +9,9 @@ import { PortalContext } from "src/utils/portalContext";
 import shortenNumber from "src/utils/shortenNumber";
 import TipsterModal from "./TipsterModal";
 
-const InPortal = dynamic(
-	async () => (await import("react-reverse-portal")).InPortal,
-	{ ssr: false }
-);
+const InPortal = dynamic(async () => (await import("react-reverse-portal")).InPortal, {
+	ssr: false,
+});
 
 const TipsterInfo: React.FC<inferArrayElementType<Tipsters>> = (props) => {
 	const { name, image, subscriberCount } = props;
@@ -76,7 +75,7 @@ const TipsterInfo: React.FC<inferArrayElementType<Tipsters>> = (props) => {
 						width={18}
 						alt=""
 					/>
-					Subscribe
+					<span>Subscribe</span>
 				</button>
 			</div>
 		</>
@@ -104,9 +103,7 @@ const UserHoverVariants = {
 	},
 };
 
-const UserHover: React.FC<inferArrayElementType<Tipsters> & UserHoverProps> = (
-	props
-) => {
+const UserHover: React.FC<inferArrayElementType<Tipsters> & UserHoverProps> = (props) => {
 	const {
 		avgProfit,
 		name,
