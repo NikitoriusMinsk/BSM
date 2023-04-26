@@ -3,6 +3,7 @@
     grid-column-end: 13;
     grid-row-start: 1;
     grid-row-end: 2;
+    margin-right: -135px;
 }
 
 .mainColumn {
@@ -122,10 +123,9 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding: 41px 60px 0;
-    border-top-left-radius: 16px;
-    border-bottom-right-radius: 16px;
+    padding: 41px 0px 0px;
     overflow: hidden;
+    padding-bottom: 10px;
 }
 
 .tipsSlider h2 {
@@ -136,6 +136,8 @@
     font-size: 24px;
     line-height: 29px;
     color: #FFFFFF;
+    padding-left: 60px;
+    padding-right: 135px;
 }
 
 .tipsSlider .background {
@@ -146,16 +148,12 @@
     width: 100%;
 }
 
-.tipsSlider .sliderContainer {
-    margin: 0 -20px;
-}
-
 .tipsSlider .slide {
     position: relative;
     display: flex;
     flex-direction: row;
     gap: 40px;
-    padding: 0 20px 50px;
+    padding: 0 135px 50px 60px;
 }
 
 /* Sports Slider */
@@ -253,10 +251,75 @@
     justify-content: space-between;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 1440px) {
+    .mainBlock {
+        margin-right: -30px;
+    }
+    .tipsSlider .slide {
+        padding: 0 30px 50px 40px;
+        gap: 30px;
+    }
+    .tipsSlider h2 {
+        padding-left: 40px;
+        padding-right: 30px;
+    }
+} 
+
+@media screen and (max-width: 1366px) {
+    .mainBlock {
+        margin-right: -30px;
+    }
+    .tipsSlider .slide {
+        padding: 0 30px 50px;
+    }
+    .tipsSlider h2 {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+} 
+
+@media screen and (max-width: 1024px) {
+    .mainBlock {
+        margin-right: 0px;
+    }
+    .tipsSlider {        
+        padding-bottom: 15px;
+    }
+    .tipsSlider .slide {
+        padding: 0 20px 50px;
+        gap: 20px;
+    }
+    .tipsSlider h2 {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+} 
+
+@media screen and (max-width: 768px) {
     .tipsSlider {
-        padding: 20px 16px;
-        border-radius: 0;
+        padding-top: 30px;
+    }
+    .tipsSlider h2 {
+        text-align: center;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .tipsSlider h2 {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .tipsSlider .slide {
+        padding: 0 16px 40px;
+        gap: 16px;
+    }
+
+    .tipsSlider {
+        padding-bottom: 5px;
     }
 
     .mainColumn {

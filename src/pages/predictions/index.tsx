@@ -262,16 +262,16 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 					loop={true}
 					swipable={true}
 					autoPlay={true}
-					showArrows={width > 425 ? true : false}
+					showArrows={width > 768 ? true : false}
 					arrowOptions={{
 						offset: {
 							next: {
-								top: -48,
-								side: 100,
+								top: -54,
+								side: width>1440 ? 135 : width>1024 ? 30 : 20,
 							},
 							prev: {
-								top: -48,
-								side: "calc(100% - 170px)",
+								top: -54,
+								side: width>1440 ? "calc(100% - 210px)" : width>1024 ? "calc(100% - 100px)" : "calc(100% - 90px)",
 							},
 						},
 						size: {
@@ -280,7 +280,7 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 						},
 					}}
 				>
-					{ArrayToChunks(tips, width <= 425 ? 1 : 4).map(
+					{ArrayToChunks(tips, width <= 425 ? 1 : width <= 768 ? 2 : width <= 1366 ? 3 : 4).map(
 						(tipsChunk, index) => (
 							<div
 								className={styles.slide}
