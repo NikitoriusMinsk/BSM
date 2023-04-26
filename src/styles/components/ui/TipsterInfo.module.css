@@ -222,6 +222,16 @@
     gap: 21px;
 }
 
+@media screen and (max-width: 1024px) {
+    .subscribeButton span {
+        display: none;
+    }
+
+    .tipster .subscribeButton {
+        padding: 10px;
+    }
+}
+
 @media screen and (max-width:425px) {
     .tipster {
         position: unset
