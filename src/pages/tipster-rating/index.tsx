@@ -30,6 +30,7 @@ import superjson from "superjson";
 import TipsterInfo from "@components/ui/TipsterInfo";
 import useWindowSize from "src/utils/useWindowSize";
 import FilterModal from "@components/ui/FilterModal";
+import DisaperingContainer from "@components/helpers/DisaperingContainer";
 
 const InPortal = dynamic(async () => (await import("react-reverse-portal")).InPortal, {
 	ssr: false,
@@ -226,107 +227,143 @@ const TipsterRating: NextPage = () => {
 						portalNode={portalNode}
 					/>
 				</div>
-				<div className={styles.mainColumn}>
-					<div className={styles.tableContainer}>
-						<div className={styles.controls}>
-							<TextField
-								placeholder="Search for tipsters"
-								icon="/icons/search.svg"
-							/>
-							{width > 1024 ? (
-								<div className={styles.dropdowns}>
-									<Dropdown
-										items={SportItems}
-										label="Sport:"
-										onSelect={() => {}}
-										minWidth={200}
-									/>
-									<Dropdown
-										items={TimeItems}
-										label="Tipsters by:"
-										onSelect={() => {}}
-										minWidth={250}
-									/>
-									<button>Clear</button>
-								</div>
-							) : (
-								<FilterModal
-									onApply={() => {}}
-									portalNode={portalNode}
-									filters={[
-										{
-											key: "months",
-											type: "buttons",
-											label: "Tipster by month",
-											items: [
-												{ id: 1, label: "All" },
-												{ id: 2, label: "1-10 Months" },
-												{ id: 3, label: "10-100 Months" },
-												{ id: 4, label: "100+ Months" },
-											],
-										},
-										{
-											key: "sports",
-											type: "singleChoice",
-											label: "Choose sport",
-											items: [
-												{
-													id: 1,
-													label: "All",
-													image: "/icons/star-black.svg",
-												},
-												{
-													id: 2,
-													label: "Football",
-													image: "/icons/star-black.svg",
-												},
-												{
-													id: 3,
-													label: "Basketball",
-													image: "/icons/star-black.svg",
-												},
-												{
-													id: 4,
-													label: "Rugby",
-													image: "/icons/star-black.svg",
-												},
-												{
-													id: 5,
-													label: "Badminton",
-													image: "/icons/star-black.svg",
-												},
-												{
-													id: 6,
-													label: "Baseball",
-													image: "/icons/star-black.svg",
-												},
-											],
-										},
-									]}
-								/>
-							)}
-						</div>
-						<Table
-							data={tipsters}
-							columns={width > 425 ? columns : mobileColumns}
-							sortable={true}
+				{/* <div className={styles.mainColumn}> */}
+				<div
+					id={styles.tableContainer}
+					className={styles.sideMargin}
+				>
+					<div className={styles.controls}>
+						<TextField
+							placeholder="Search for tipsters"
+							icon="/icons/search.svg"
 						/>
+						{width > 1024 ? (
+							<div className={styles.dropdowns}>
+								<Dropdown
+									items={SportItems}
+									label="Sport:"
+									onSelect={() => {}}
+									minWidth={200}
+								/>
+								<Dropdown
+									items={TimeItems}
+									label="Tipsters by:"
+									onSelect={() => {}}
+									minWidth={250}
+								/>
+								<button>Clear</button>
+							</div>
+						) : (
+							<FilterModal
+								onApply={() => {}}
+								portalNode={portalNode}
+								filters={[
+									{
+										key: "months",
+										type: "buttons",
+										label: "Tipster by month",
+										items: [
+											{ id: 1, label: "All" },
+											{ id: 2, label: "1-10 Months" },
+											{ id: 3, label: "10-100 Months" },
+											{ id: 4, label: "100+ Months" },
+										],
+									},
+									{
+										key: "sports",
+										type: "singleChoice",
+										label: "Choose sport",
+										items: [
+											{
+												id: 1,
+												label: "All",
+												image: "/icons/star-black.svg",
+											},
+											{
+												id: 2,
+												label: "Football",
+												image: "/icons/star-black.svg",
+											},
+											{
+												id: 3,
+												label: "Basketball",
+												image: "/icons/star-black.svg",
+											},
+											{
+												id: 4,
+												label: "Rugby",
+												image: "/icons/star-black.svg",
+											},
+											{
+												id: 5,
+												label: "Badminton",
+												image: "/icons/star-black.svg",
+											},
+											{
+												id: 6,
+												label: "Baseball",
+												image: "/icons/star-black.svg",
+											},
+										],
+									},
+								]}
+							/>
+						)}
 					</div>
+					<Table
+						data={tipsters}
+						columns={width > 425 ? columns : mobileColumns}
+						sortable={true}
+					/>
+				</div>
+				<div
+					id={styles.wideBanner}
+					className={styles.sideMargin}
+				>
 					<Banner
 						image={"/images/banner-placeholder-1.png"}
 						height={width > 425 ? 200 : 400}
 					/>
+				</div>
+				<div
+					id={styles.tips}
+					className={styles.sideMargin}
+				>
 					<PageTips />
 				</div>
-				<div className={styles.sideColumn}>
-					<CountdownTimer {...currentCompetition} />
-					<BestBookmakers bookmakers={bookmakers} />
-					<LiveMatches matches={liveMatches} />
-					<Banner
-						image="/images/banner-placeholder-2.png"
-						height={463}
-					/>
-				</div>
+				{/* </div> */}
+				<DisaperingContainer
+					className={styles.sideColumn}
+					condition={width <= 768}
+				>
+					<div
+						id={styles.timer}
+						className={styles.sideMargin}
+					>
+						<CountdownTimer {...currentCompetition} />
+					</div>
+					<div
+						id={styles.bookmakers}
+						className={styles.sideMargin}
+					>
+						<BestBookmakers bookmakers={bookmakers} />
+					</div>
+					<div
+						id={styles.liveMatches}
+						className={styles.sideMargin}
+					>
+						<LiveMatches matches={liveMatches} />
+					</div>
+					<div
+						id={styles.tallBanner}
+						className={styles.sideMargin}
+					>
+						<Banner
+							image="/images/banner-placeholder-2.png"
+							height={463}
+						/>
+					</div>
+				</DisaperingContainer>
 			</PortalContext.Provider>
 		</>
 	);
@@ -381,6 +418,10 @@ const VerifiedTipsters: React.FC<{
 				return 3;
 			case width >= 1024:
 				return 2;
+			case width >= 768:
+				return 2;
+			case width >= 425:
+				return 1;
 			default:
 				return 3;
 		}
@@ -528,6 +569,7 @@ const CountdownTimer: React.FC<CurrentCompetition> = (props) => {
 			(endsOn.getTime() - startedOn.getTime())) *
 			100
 	);
+	const { width } = useWindowSize();
 
 	function calculateProgress() {
 		const currentTime = new Date().getTime();
@@ -559,34 +601,50 @@ const CountdownTimer: React.FC<CurrentCompetition> = (props) => {
 				<span>Left before the end of the tournament</span>
 			</div>
 			<div className={styles.progress}>
-				<CircularProgressbarWithChildren
-					value={progress}
-					maxValue={100}
-					counterClockwise
-					styles={{
-						path: {
-							strokeLinecap: "round",
-							strokeWidth: "4px",
-							stroke: "#2CD114",
-						},
-						trail: {
-							strokeWidth: "1px",
-							stroke: "#FFFFFF80",
-						},
-					}}
-				>
-					<Moment
-						className={styles.time}
-						duration={new Date()}
-						date={endsOn}
-						format={"DD : hh : mm"}
-					/>
-					<div className={styles.timeHint}>
-						<span>Days</span>
-						<span>Hours</span>
-						<span>Minutes</span>
+				{width > 768 || width <= 425 ? (
+					<CircularProgressbarWithChildren
+						value={progress}
+						maxValue={100}
+						counterClockwise
+						styles={{
+							path: {
+								strokeLinecap: "round",
+								strokeWidth: "4px",
+								stroke: "#2CD114",
+							},
+							trail: {
+								strokeWidth: "1px",
+								stroke: "#FFFFFF80",
+							},
+						}}
+					>
+						<Moment
+							className={styles.time}
+							duration={new Date()}
+							date={endsOn}
+							format={"DD : hh : mm"}
+						/>
+						<div className={styles.timeHint}>
+							<span>Days</span>
+							<span>Hours</span>
+							<span>Minutes</span>
+						</div>
+					</CircularProgressbarWithChildren>
+				) : (
+					<div>
+						<Moment
+							className={styles.time}
+							duration={new Date()}
+							date={endsOn}
+							format={"DD : hh : mm"}
+						/>
+						<div className={styles.timeHint}>
+							<span>Days</span>
+							<span>Hours</span>
+							<span>Minutes</span>
+						</div>
 					</div>
-				</CircularProgressbarWithChildren>
+				)}
 			</div>
 			<div className={styles.rules}>
 				<span>Take a tour of competition rules</span>

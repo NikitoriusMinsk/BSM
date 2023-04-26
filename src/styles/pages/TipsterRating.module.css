@@ -5,17 +5,6 @@
     grid-row-end: 2;
 }
 
-.mainColumn {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    grid-column-start: 1;
-    grid-column-end: 10;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    margin-left: 60px;
-}
-
 .sideColumn {
     display: flex;
     flex-direction: column;
@@ -23,29 +12,46 @@
     grid-column-start: 10;
     grid-column-end: 13;
     grid-row-start: 2;
-    grid-row-end: 3;
+    grid-row-end: 5;
 }
 
-.tableContainer {
+.sideMargin {
+    margin-left: 60px;
+}
+
+.sideColumn .sideMargin {
+    margin-left: 0;
+}
+
+#wideBanner {
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-column-end: 10;
+}
+
+#tableContainer {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 10;
 }
 
-.tableContainer .controls {
+#tableContainer .controls {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     height: 42px;
 }
 
-.tableContainer .controls .dropdowns {
+#tableContainer .controls .dropdowns {
     display: flex;
     flex-direction: row;
     gap: 20px;
 }
 
-.tableContainer .controls .dropdowns button {
+#tableContainer .controls .dropdowns button {
     border: none;
     background-color: #1A1C214D;
     padding: 12px 31px;
@@ -57,6 +63,12 @@
     color: #FFFFFF;
     cursor: pointer;
     border-radius: 8px;
+}
+
+#tips {
+    grid-row-start: 4;
+    grid-column-start: 1;
+    grid-column-end: 10;
 }
 
 /* Verified Tipsters */
@@ -418,6 +430,10 @@
     cursor: pointer;
 }
 
+.timer .progress {
+    position: relative;
+}
+
 /* Page Tips */
 
 .tips {
@@ -533,13 +549,13 @@
         margin-right: -30px;
     }
 
-    .mainColumn {
+    .sideMargin {
         margin-left: 40px;
     }
 }
 
 @media screen and (max-width: 1366px) {
-    .mainColumn {
+    .sideMargin {
         margin-left: 30px;
     }
 }
@@ -578,6 +594,90 @@
     }
 }
 
+@media screen and (max-width: 768px) {
+    #tableContainer {
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+
+    #timer {
+        grid-row-start: 3;
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+
+    #liveMatches {
+        grid-row-start: 4;
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+
+    #bookmakers {
+        grid-row-start: 5;
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+
+    #tallBanner {
+        grid-row-start: 6;
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+
+    #tallBanner>div {
+        height: 200px !important;
+    }
+
+    #bookmakers {
+        grid-row-start: 7;
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+
+    #wideBanner {
+        grid-row-start: 8;
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+
+    #tips {
+        grid-row-start: 9;
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+
+    .sideMargin {
+        margin-left: 24px;
+        margin-right: 24px;
+    }
+
+    .timer {
+        flex-direction: row;
+        padding: 40px;
+        justify-content: space-between;
+    }
+
+    .timer .progress {
+        min-width: max-content;
+    }
+
+    .timer .rules span {
+        display: none;
+    }
+
+    .timer .header {
+        width: 33%;
+    }
+
+    .timer .header h3 {
+        text-align: start;
+    }
+
+    .timer .header span {
+        text-align: start;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .mainColumn {
         grid-column-start: 1;
@@ -610,14 +710,39 @@
         width: 60px;
     }
 
-    .tableContainer .controls {
+    #tableContainer .controls {
         height: unset;
         gap: 12px;
-        padding: 0 20px;
     }
 
-    .tableContainer .controls .dropdowns {
+    #tableContainer .controls .dropdowns {
         flex-direction: column;
+    }
+
+    .timer {
+        flex-direction: column;
+        padding: 24px;
+        justify-content: space-between;
+    }
+
+    .timer .progress {
+        min-width: unset;
+    }
+
+    .timer .rules span {
+        display: flex;
+    }
+
+    .timer .header {
+        width: unset;
+    }
+
+    .timer .header h3 {
+        text-align: center;
+    }
+
+    .timer .header span {
+        text-align: center;
     }
 
 }
