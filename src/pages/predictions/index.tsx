@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { GetStaticProps, NextPage } from "next";
 import styles from "@styles/pages/Predictions.module.css";
 import { trpc } from "src/utils/trpc";
@@ -26,6 +26,7 @@ import FilterModal from "@components/ui/FilterModal";
 import dynamic from "next/dynamic";
 import usePortal from "src/utils/usePortal";
 import { PortalContext } from "src/utils/portalContext";
+import LeaguesMobileBlocks from "@components/ui/LeaguesMobileBlocks";
 
 const OutPortal = dynamic(
 	async () => (await import("react-reverse-portal")).OutPortal,
@@ -99,27 +100,125 @@ const PredictionsPage: NextPage = () => {
 					<TipsSlider tips={tips} />
 				</div>
 				<div className={styles.mainColumn}>
-					<div className={styles.filters}>
-						<h4>Filter</h4>
-						<div className={styles.search}>
+					<div className={styles.filtersMobile}>
+						<LeaguesMobileBlocks
+							items={leagues}
+							onChange={() => {}}
+						/>
+						<div className={styles.filtersBlockMobile}>
 							<TextField
 								placeholder="Search"
 								icon="/icons/search.svg"
 							/>
-							<button>Reset</button>
+							<div className={styles.dateMobile}>
+								<DatePicker onChange={() => {}} />
+							</div>
+							<div className={styles.filterBtnMobile}>
+								<FilterModal
+									onApply={() => {}}
+								portalNode={portalNode}
+								filters={[
+									{
+										key: "sortBy",
+										type: "buttons",
+										label: "Sort By",
+										items: [
+											{ id: 1, label: "Upcoming" },
+											{ id: 2, label: "Most" },
+											{ id: 3, label: "Multiple" },
+										],
+									},
+									{
+										key: "type",
+										type: "buttons",
+										label: "Type",
+										items: [
+											{
+												id: 1,
+												label: "All",
+											},
+											{
+												id: 2,
+												label: "Free",
+											},
+											{
+												id: 3,
+												label: "Paid",
+											},
+										],
+									},
+									{
+										key: "sport",
+										type: "singleChoice",
+										label: "Status",
+										items: [
+											{ id: 1, label: "Football" },
+											{ id: 2, label: "Basketball" },
+											{ id: 3, label: "Badminton" },
+										],
+									},
+									{
+										key: "country",
+										type: "singleChoice",
+										label: "Country",
+										items: [
+											{ id: 1, label: "Georgia" },
+											{ id: 2, label: "Spain" },
+											{ id: 3, label: "England" },
+										],
+									},
+									{
+										key: "league",
+										type: "singleChoice",
+										label: "League",
+										items: [
+											{ id: 1, label: "Premier League" },
+											{ id: 2, label: "Ligue 1" },
+											{ id: 3, label: "Bundesliga" },
+										],
+									},
+									{
+										key: "date",
+										type: "date",
+										label: "Date",
+									},
+									]}
+								/>
+							</div>
+							<button className={styles.resetBtnM}>
+								Reset
+							</button>
 						</div>
-						<h5>SORT BY</h5>
-						<SortButtons
-							items={SortItems}
-							onChange={() => {}}
-						/>
-						<h5>Date</h5>
-						<DatePicker onChange={() => {}} />
-						<h5>Type</h5>
-						<SortButtons
-							items={TypeItems}
-							onChange={() => {}}
-						/>
+					</div>
+					<div className={styles.filters}>
+						<div className={styles.filterBlock}>
+							<h4>Filter</h4>
+							<div className={styles.search}>
+								<TextField
+									placeholder="Search"
+									icon="/icons/search.svg"
+								/>
+								<button>Reset</button>
+							</div>
+						</div>
+						<div className={styles.filterBlock}>
+							<h5>SORT BY</h5>
+							<SortButtons
+								items={SortItems}
+								onChange={() => {}}
+							/>
+						</div>
+						<div className={styles.filterBlock}>
+							<h5>Date</h5>
+							<DatePicker onChange={() => {}} />
+						</div>
+						<div className={styles.filterBlock}>
+							<h5>Type</h5>
+							<SortButtons
+								items={TypeItems}
+								onChange={() => {}}
+							/>
+						</div>						
 						<Filter
 							items={leagues}
 							h3="CHOOSE LEAGUE"
@@ -127,7 +226,7 @@ const PredictionsPage: NextPage = () => {
 						/>
 					</div>
 					<div className={styles.predictions}>
-						{width > 425 ? (
+						{/* {width > 425 ? (
 							<SportsSider
 								sports={[
 									{ name: "All", image: "", id: "0" },
@@ -212,7 +311,7 @@ const PredictionsPage: NextPage = () => {
 									]}
 								/>
 							</div>
-						)}
+						)} */}
 						{predictions && !predictionsLoading ? (
 							<Predictions leagues={predictions} />
 						) : (
@@ -227,13 +326,20 @@ const PredictionsPage: NextPage = () => {
 							Show more
 						</button>
 					</div>
+					<div className={styles.bottom1024}>
+						<Banner
+							height={463}
+							image="/images/banner-placeholder-2.png"
+						/>
+						<BestBookmakers bookmakers={bookmakers} />					
+					</div>
 				</div>
 				<div className={styles.sideColumn}>
-					<BestBookmakers bookmakers={bookmakers} />
 					<Banner
 						height={463}
 						image="/images/banner-placeholder-2.png"
 					/>
+					<BestBookmakers bookmakers={bookmakers} />					
 				</div>
 			</PortalContext.Provider>
 		</>

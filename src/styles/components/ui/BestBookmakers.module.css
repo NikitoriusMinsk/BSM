@@ -7,7 +7,7 @@
 .bestBookmakersTitle {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 7px;
 }
@@ -38,17 +38,15 @@
 }
 
 .bestBookmakersTitle button {
-    padding: 10px 20px;
-    background-color: #FFFFFF;
+    padding: 4px;
+    background-color: transparent;
     color: #1A1C21;
-    border: 1px solid #1A1C2133;
+    border: none;
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
-    border-radius: 4px;
-    height: fit-content;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
     cursor: pointer;
 }
 
@@ -66,6 +64,12 @@
     padding: 25px 24px 25px 32px;
     background-color: #ccc;
     border-radius: 8px;
+    gap: 12px;
+}
+
+.bestBookmakerImage {
+    display: flex;
+    align-items: center;
 }
 
 .bestBookmakerRating {
@@ -79,8 +83,8 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 14px;
+    line-height: 16px;
     color: #1A1C21;
 }
 
@@ -92,6 +96,13 @@
 
     .bestBookmakersTitleText h2 {
         font-size: 20px;
+        line-height: 24px;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .bestBookmaker {
+        padding: 16px
     }
 }
 

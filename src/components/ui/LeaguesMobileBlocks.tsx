@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styles from "@styles/components/ui/LeaguesMobileBlocks.module.css";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { useDraggable } from "react-use-draggable-scroll";
 
 interface FilterProps {
 	items: {
@@ -19,6 +19,9 @@ const LeaguesMobileBlocks: React.FC<FilterProps> = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
+	const sliderRef = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+    const { events } = useDraggable(sliderRef);
+
 	function handleSelect(id: string) {
 		if (selectedItems.includes(id)) {
 			setSelectedItems(selectedItems.filter((item) => item !== id));
@@ -30,7 +33,7 @@ const LeaguesMobileBlocks: React.FC<FilterProps> = (props) => {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} {...events} ref={sliderRef}>
 			{items.map((item) => (
 				<div
 					key={item.id}

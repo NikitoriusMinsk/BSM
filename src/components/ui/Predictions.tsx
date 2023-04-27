@@ -164,7 +164,7 @@ const Match: React.FC<MatchType> = (props) => {
 								</div>
 							</div>
 						</div>
-						<div className={styles.comment}>
+						{prediction.comment && <div className={styles.comment}>
 							<Image
 								src="/icons/comment.svg"
 								alt="Comment"
@@ -172,13 +172,22 @@ const Match: React.FC<MatchType> = (props) => {
 								height={20}
 							/>
 							<span>
-								{prediction.comment
-									? "With Comment"
-									: "Without comment"}
+								With Comment
 							</span>
-						</div>
+						</div>}
 						<div className={styles.outcome}>
-							<span>{prediction.type} Prediction</span>
+							<span 
+								style={prediction.type == 'Paid' ? 
+									{
+										color: '#7F3FFC',
+										fontWeight: 500
+									} 
+									: 
+									{}
+								}
+							>
+								{prediction.type} Prediction
+							</span>
 							<span>{prediction.outcome}</span>
 						</div>
 					</div>
