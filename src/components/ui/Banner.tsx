@@ -13,14 +13,14 @@ const Banner: React.FC<BannerProps> = (props) => {
 	return (
 		<div
 			className={styles.container}
-			style={{ height: height }}
+			style={{ height: 'auto' }}
 		>
-			<Image
+			<img
 				src={image}
 				alt="banner"
-				fill
 				style={{
 					objectFit: "cover",
+					width: '100%'
 				}}
 			/>
 		</div>
