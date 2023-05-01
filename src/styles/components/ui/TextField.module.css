@@ -47,10 +47,10 @@
 }
 .shrinkSearch input {
     position: absolute;
-    z-index: 999;
+    z-index: 3;
 }
 .shrinkSearch .icon {
-    z-index: 999;
+    z-index: 3;
     left: 9px;
 }
 .shrinkSearch:first-child input {
