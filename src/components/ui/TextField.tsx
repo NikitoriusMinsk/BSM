@@ -1,3 +1,4 @@
+import useWindowSize from "src/utils/useWindowSize";
 import styles from "../../styles/components/ui/TextField.module.css";
 import Image from "next/image";
 
@@ -6,14 +7,21 @@ interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	icon?: string;
 	iconClick?: (...args: any[]) => void;
 	minWidth?: number | string;
+	searchShrink768?: true | false;
+	searchShrinkMobile?: true | false;
 }
 
 const TextField: React.FC<TextFieldProps> = (props) => {
-	const { iconClick, minWidth, ...inputProps } = props;
+	const { iconClick, minWidth, searchShrink768, searchShrinkMobile, ...inputProps } = props;
+	const { width } = useWindowSize()
 
 	return (
 		<div
-			className={styles.textFieldContainer}
+			className={
+				`${styles.textFieldContainer}`+
+				` ${searchShrink768 && width<=768 && styles.shrinkSearch }`+
+				` ${searchShrinkMobile && width<=425 && styles.shrinkSearch }`
+			}
 			style={{
 				minWidth: minWidth,
 			}}

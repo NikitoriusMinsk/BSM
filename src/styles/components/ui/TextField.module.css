@@ -39,4 +39,42 @@
     height: 24px;
     position: absolute;
     right: 24px;
+    pointer-events: none;
+}
+
+.shrinkSearch {
+    min-width: 42px;
+}
+.shrinkSearch input {
+    position: absolute;
+    z-index: 999;
+}
+.shrinkSearch .icon {
+    z-index: 999;
+    left: 9px;
+}
+.shrinkSearch:first-child input {
+    padding: 13px 0px 13px 41px;
+    padding-right: 0px!important;
+    transition: all .2s ease-in-out;
+    left: 0px;
+}
+.shrinkSearch:last-child input {
+    padding: 13px 41px 13px 0px;
+    padding-right: 41px!important;
+    transition: all .2s ease-in-out;
+    right: 0px;
+}
+.shrinkSearch:last-child input:focus {
+    padding-left: 13px;
+}
+@media screen and (max-width: 768px) {
+    .shrinkSearch input:focus {
+        width: calc(100vw - 40px);
+    }
+}
+@media screen and (max-width: 425px) {
+    .shrinkSearch input:focus {
+        width: calc(100vw - 32px);
+    }
 }
