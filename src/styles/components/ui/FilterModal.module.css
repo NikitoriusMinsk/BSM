@@ -61,6 +61,11 @@
     gap: 12px;
     height: 100%;
     flex: 1;
+    overflow-y: auto;
+}
+
+.filters::-webkit-scrollbar {
+    display: none;
 }
 
 .controls {

@@ -22,6 +22,7 @@ interface FilterModalProps {
 			label: string;
 			image?: string;
 		}[];
+		customClass?: string;
 	}[];
 	onApply: (selectedValues: { [k: string]: number[] }) => void;
 	portalNode: HtmlPortalNode<Component<any>> | null;
@@ -70,7 +71,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 	}
 
 	function getFilter(filter: inferArrayElementType<FilterModalProps["filters"]>) {
-		const { items, key, type, label } = filter;
+		const { items, key, type, label, customClass } = filter;
 		switch (type) {
 			case "buttons":
 				return (
@@ -80,6 +81,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 						selected={selected[key] ?? []}
 						onChange={(selected) => setSelected({ key, selected })}
 						label={label}
+						customClass={customClass}
 					/>
 				);
 			case "singleChoice":
@@ -90,6 +92,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 						selected={selected[key] ?? []}
 						onChange={(selected) => setSelected({ key, selected })}
 						label={label}
+						customClass={customClass}
 					/>
 				);
 			case "multipleChoice":
@@ -100,6 +103,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 						selected={selected[key] ?? []}
 						onChange={(selected) => setSelected({ key, selected })}
 						label={label}
+						customClass={customClass}
 					/>
 				);
 			case "date":
@@ -110,6 +114,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 						selected={selected[key] ?? []}
 						onChange={(selected) => setSelected({ key, selected })}
 						label={label}
+						customClass={customClass}
 					/>
 				);
 		}
@@ -196,13 +201,14 @@ interface FilterProps {
 	selected: number[];
 	onChange: (selected: number[]) => void;
 	label: string;
+	customClass?: string;
 }
 
 const ButtonsFilter: React.FC<FilterProps> = (props) => {
-	const { items, selected, onChange, label } = props;
+	const { items, selected, onChange, label, customClass } = props;
 
 	return (
-		<div className={styles.filterContainer}>
+		<div className={`${styles.filterContainer} ${customClass}`}>
 			<span className={styles.filterLabel}>{label}</span>
 			<div className={styles.buttonContainer}>
 				{items?.map((item) => (
@@ -220,10 +226,10 @@ const ButtonsFilter: React.FC<FilterProps> = (props) => {
 };
 
 const SingleChoiceFilter: React.FC<FilterProps> = (props) => {
-	const { selected, items, onChange, label } = props;
+	const { selected, items, onChange, label, customClass } = props;
 
 	return (
-		<div className={styles.filterContainer}>
+		<div className={`${styles.filterContainer} ${customClass}`}>
 			<span className={styles.filterLabel}>{label}</span>
 			<TextField
 				placeholder="Search"
@@ -253,7 +259,7 @@ const SingleChoiceFilter: React.FC<FilterProps> = (props) => {
 };
 
 const MultipleChoiceFilter: React.FC<FilterProps> = (props) => {
-	const { selected, items, onChange, label } = props;
+	const { selected, items, onChange, label, customClass } = props;
 
 	function handleChange(id: number) {
 		if (selected.includes(id)) {
@@ -264,7 +270,7 @@ const MultipleChoiceFilter: React.FC<FilterProps> = (props) => {
 	}
 
 	return (
-		<div className={styles.filterContainer}>
+		<div className={`${styles.filterContainer} ${customClass}`}>
 			<span className={styles.filterLabel}>{label}</span>
 			<TextField
 				placeholder="Search"
@@ -294,10 +300,10 @@ const MultipleChoiceFilter: React.FC<FilterProps> = (props) => {
 };
 
 const DateFilter: React.FC<FilterProps> = (props) => {
-	const { label, onChange, selected } = props;
+	const { label, onChange, selected, customClass } = props;
 
 	return (
-		<div className={styles.filterContainer}>
+		<div className={`${styles.filterContainer} ${customClass}`}>
 			<span className={styles.filterLabel}>{label}</span>
 			<DateInput
 				onChange={(date) => onChange([date.getTime()])}
