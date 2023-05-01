@@ -35,8 +35,8 @@ const Predictions: React.FC<PredictionsProps> = (props) => {
 						<div className={styles.image}>
 							<Image
 								src={league.image}
-								height={40}
-								width={40}
+								height={30}
+								width={30}
 								alt={league.name}
 							/>
 						</div>
@@ -99,8 +99,8 @@ const Match: React.FC<MatchType> = (props) => {
 								<Image
 									src={team.image}
 									alt={team.name}
-									width={40}
-									height={40}
+									width={30}
+									height={30}
 								/>
 							</div>
 						))}
@@ -150,8 +150,8 @@ const Match: React.FC<MatchType> = (props) => {
 									<Image
 										src={prediction.user.image}
 										alt={prediction.user.name}
-										width={40}
-										height={40}
+										width={30}
+										height={30}
 									/>
 								</div>
 								<div className={styles.userInfo}>
