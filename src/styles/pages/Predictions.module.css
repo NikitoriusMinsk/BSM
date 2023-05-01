@@ -377,6 +377,17 @@
         display: flex;
         gap: 12px;
         justify-content: space-between;
+        align-items: stretch;
+    }
+    .filtersBlockMobile > .dateMobile > div > div > input, 
+    .filtersBlockMobile > .dateMobile > div > div, 
+    .filtersBlockMobile > .dateMobile > div,
+    .filtersBlockMobile > .filterBtnMobile * {
+        height: 100%;
+    }
+    .filtersBlockMobile > .filterBtnMobile span {
+        display: flex;
+        align-items: center;
     }
     .dateMobile {
         width: 100%;
@@ -405,6 +416,21 @@
         font-size: 15px;
         line-height: 18px;
         color: #FFFFFF;
+    }
+    .tipsterFilter > div > button {
+        min-width: calc(50% - 12px);
+    }
+    .sportFilter {
+        margin-top: 18px;
+    }
+    .sportFilter > div:last-child {
+        max-height: max-content;
+        overflow-y: visible;
+    }
+    .sportFilter > div:last-child > div {
+        background: rgba(242, 242, 242, 0.3);
+        border-radius: 8px;
+        padding: 8px 16px;
     }
 }
 
