@@ -41,7 +41,7 @@ const Bookmakers: NextPage = () => {
 				return 2;
 			case width >= 768:
 				return 2;
-			case width >= 425:
+			case width >= 320:
 				return 1;
 			default:
 				return 3;
@@ -62,7 +62,7 @@ const Bookmakers: NextPage = () => {
 				return 6;
 			case width >= 768:
 				return 4;
-			case width >= 425:
+			case width >= 320:
 				return 4;
 			default:
 				return 8;
