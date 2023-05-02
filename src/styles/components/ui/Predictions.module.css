@@ -372,8 +372,8 @@
         display: none;
     }
 
-    .info {
-        gap: 20px;
+    .info, .user {
+        gap: 12px;
     }
 
     .teamImages {
@@ -383,5 +383,15 @@
     .teamImages .teamImage:not(:first-child) {
         margin-left: 0;
         margin-top: -10px;
+    }
+
+    .teamNames .teamName, .userInfo .userName, .leagueDescription .titles span  {
+        font-size: 13px!important;
+        line-height: 16px!important;
+    }
+
+    .time span:first-child {
+        font-size: 14px;
+        line-height: 17px;
     }
 }
