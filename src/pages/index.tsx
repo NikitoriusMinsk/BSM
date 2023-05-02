@@ -149,7 +149,7 @@ const Home: NextPage = () => {
 					/>
 				</div>
 				<div id={styles.bookmakers}>
-					<BestBookmakers bookmakers={bookmakers} />
+					<BestBookmakers bookmakers={bookmakers} mobileSlider />
 				</div>
 			</DisaperingContainer>
 		</>

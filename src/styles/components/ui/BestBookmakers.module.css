@@ -106,9 +106,24 @@
     }
 }
 
+/* Scroll */
+.bestBookmakersList::-webkit-scrollbar {
+    display: none;
+}
+/* Track */
+.bestBookmakersList::-webkit-scrollbar-track {
+    display: none;
+}
+/* Handle */
+.bestBookmakersList::-webkit-scrollbar-thumb {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
+    .mobileSlider, 
     .bestBookmakersList {
         flex-direction: row;
+        overflow: scroll;
     }
 
     .bestBookmaker {
@@ -118,12 +133,17 @@
 
 @media screen and (max-width: 425px) {
     .bestBookmakersList {
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .mobileSlider {
+        flex-direction: row;
         overflow: scroll;
     }
 
     .bestBookmaker {
         flex: unset;
-        width: max-content;
         gap: 10px;
     }
 
@@ -132,13 +152,4 @@
         min-width: 140px;
     }
 
-    /* Track */
-    .bestBookmakersList::-webkit-scrollbar-track {
-        display: none;
-    }
-
-    /* Handle */
-    .bestBookmakersList::-webkit-scrollbar-thumb {
-        display: none;
-    }
 }

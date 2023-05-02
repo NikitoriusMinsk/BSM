@@ -3,8 +3,7 @@ import styles from "@styles/components/ui/BestBookmakers.module.css";
 import Image from "next/image";
 import { BestBookmakers } from "src/types/queryTypes";
 
-const BestBookmakers: React.FC<{ bookmakers: BestBookmakers }> = (props) => {
-	const { bookmakers } = props;
+const BestBookmakers: React.FC<{ bookmakers: BestBookmakers, mobileSlider?: boolean }> = ({ bookmakers, mobileSlider = false }) => {
 
 	return (
 		<div className={styles.bestBookmakers}>
@@ -15,7 +14,7 @@ const BestBookmakers: React.FC<{ bookmakers: BestBookmakers }> = (props) => {
 				</div>
 				<button>See All</button>
 			</div>
-			<div className={styles.bestBookmakersList}>
+			<div className={`${styles.bestBookmakersList} ${mobileSlider && styles.mobileSlider}`}>
 				{bookmakers.map((bookmaker, index) => (
 					<div
 						className={styles.bestBookmaker}
