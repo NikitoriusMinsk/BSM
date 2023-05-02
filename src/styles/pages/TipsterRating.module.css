@@ -694,6 +694,11 @@
         padding: 0 20px;
     }
 
+    .sideMargin {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
     .verifiedTipsters {
         padding: 16px;
         gap: 20px;
