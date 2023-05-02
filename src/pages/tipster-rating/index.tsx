@@ -420,7 +420,7 @@ const VerifiedTipsters: React.FC<{
 				return 2;
 			case width >= 768:
 				return 2;
-			case width >= 425:
+			case width >= 320:
 				return 1;
 			default:
 				return 3;
