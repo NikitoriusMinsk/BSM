@@ -120,15 +120,25 @@ const PredictionsPage: NextPage = () => {
 									portalNode={portalNode}
 									filters={[
 										{
-											key: "tipsterByMounth",
+											key: "sortBy",
 											type: "buttons",
-											label: "Tipster By Mounth",
+											label: "Sort By",
 											customClass: styles.tipsterFilter,
 											items: [
-												{ id: 0, label: "All" },
-												{ id: 1, label: "1-10 months" },
-												{ id: 2, label: "10-100 months" },
-												{ id: 3, label: "100+ months" },
+												{ id: 1, label: "Upcoming" },
+												{ id: 2, label: "Most" },
+												{ id: 3, label: "Multiple" },
+											],
+										},
+										{
+											key: "type",
+											type: "buttons",
+											label: "Type",
+											customClass: styles.tipsterFilter,
+											items: [
+												{ id: 1, label: "All" },
+												{ id: 2, label: "Free" },
+												{ id: 3, label: "Paid" },
 											],
 										},
 										{
@@ -136,11 +146,25 @@ const PredictionsPage: NextPage = () => {
 											type: "singleChoice",
 											label: "Choose Sport",
 											customClass: styles.sportFilter,
+											collect: true,
 											items: [
 												{ id: 0, label: "All" },
 												{ id: 1, label: "Football" },
 												{ id: 2, label: "Basketball" },
 												{ id: 3, label: "Badminton" },
+											],
+										},
+										{
+											key: "country",
+											type: "multipleChoice",
+											label: "By Country",
+											customClass: styles.sportFilter,
+											collect: true,
+											items: [
+												{ id: 0, label: "All" },
+												{ id: 1, label: "Georgia" },
+												{ id: 2, label: "Armenia" },
+												{ id: 3, label: "Turkey" },
 											],
 										},
 									]}
