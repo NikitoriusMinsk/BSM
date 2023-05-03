@@ -20,4 +20,5 @@ const _withBundleAnalyzer = withBundleAnalyzer({
 export default defineNextConfig({
     reactStrictMode: true,
     swcMinify: true,
+    output: 'standalone'
 });
