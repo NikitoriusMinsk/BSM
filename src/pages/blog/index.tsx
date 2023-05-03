@@ -10,11 +10,13 @@ import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import { appRouter } from "src/server/trpc/router/_app";
 import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
+import DisaperingContainer from "@components/helpers/DisaperingContainer";
+import useWindowSize from "src/utils/useWindowSize";
 
 const BlogPage: NextPage = () => {
 	const { data: news, isLoading: newsLoading } = trpc.news.getAll.useQuery();
-	const { data: matches, isLoading: matchesLoading } =
-		trpc.matches.getAll.useQuery();
+	const { data: matches, isLoading: matchesLoading } = trpc.matches.getAll.useQuery();
+	const { width } = useWindowSize();
 
 	if (newsLoading || matchesLoading) {
 		return <div>Loading...</div>;
@@ -26,30 +28,37 @@ const BlogPage: NextPage = () => {
 
 	return (
 		<>
-			<div className={`${styles.mainColumn} ${styles.top}`}>
+			<div className={`${styles.mainNewsContainer}`}>
 				{news[0] && <MainNews {...news[0]} />}
+			</div>
+			<div className={styles.recentNews}>
 				<NewsBlock
 					news={news.slice(1, 7)}
 					h2="Recently addded"
 					h3="News"
 				/>
 			</div>
-			<div className={`${styles.sideColumn} ${styles.top}`}>
-				<SideNews news={news} />
-				<TopMatches matches={matches} />
+			<div className={styles.wideNews}>
+				<FullWidthNewsBlock
+					news={news.slice(7, 12)}
+					h2="Last week"
+					h3="News"
+				/>
 			</div>
-			<FullWidthNewsBlock
-				news={news.slice(7, 12)}
-				h2="Last week"
-				h3="News"
-			/>
-			<div className={`${styles.mainColumn} ${styles.bottom}`}>
+			<div className={`${styles.newsBlockContainer} `}>
 				<NewsBlock
-					news={news.slice(12)}
+					news={news.slice(12, 16)}
 					h2="Last Month"
 					h3="News"
 				/>
 			</div>
+			<DisaperingContainer
+				condition={width <= 768}
+				className={`${styles.sideColumn}`}
+			>
+				<SideNews news={news} />
+				<TopMatches matches={matches} />
+			</DisaperingContainer>
 		</>
 	);
 };
@@ -172,9 +181,7 @@ const SideNews: React.FC<SideNewsProps> = (props) => {
 						<span className={styles.date}>
 							<Moment format="DD MMM YYYY">{news.date}</Moment>
 						</span>
-						<h2 className={styles.title}>
-							{shortenString(news.title, 45)}
-						</h2>
+						<h2 className={styles.title}>{shortenString(news.title, 45)}</h2>
 						<div className={styles.stats}>
 							<span className={styles.stat}>
 								<Image
@@ -219,7 +226,7 @@ interface TopMatchesProps {
 const TopMatches: React.FC<TopMatchesProps> = (props) => {
 	const { matches } = props;
 
-	function getElementByStatus(match: typeof matches[0]): React.ReactElement {
+	function getElementByStatus(match: (typeof matches)[0]): React.ReactElement {
 		switch (match.status) {
 			case MatchStatus.live:
 				return <div className={styles.live}>Live</div>;
@@ -248,7 +255,7 @@ const TopMatches: React.FC<TopMatchesProps> = (props) => {
 				<button>See All</button>
 			</div>
 			<div className={styles.topMatchesContent}>
-				{matches.slice(0, 5).map((match, index) => (
+				{matches.slice(0, 8).map((match, index) => (
 					<div
 						key={`top_match_${index}`}
 						className={styles.topMatch}
