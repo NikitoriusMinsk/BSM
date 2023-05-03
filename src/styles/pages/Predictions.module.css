@@ -417,9 +417,6 @@
         line-height: 18px;
         color: #FFFFFF;
     }
-    .tipsterFilter > div > button {
-        min-width: calc(50% - 12px);
-    }
     .sportFilter {
         margin-top: 18px;
     }
@@ -466,6 +463,10 @@
         padding-bottom: 5px;
     }
 
+    .tipsterFilter > div > button {
+        min-width: calc(50% - 12px);
+    }
+    
     .mainColumn {
         margin-left: 0;
         margin-right: 0;
