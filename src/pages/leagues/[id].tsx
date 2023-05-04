@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import LeagueSummaryPage from "@components/league-summary/LeagueSummaryPage"
-import LineupsPage from "@components/match-summary/LineupsPage"
+import ResultsPage from "@components/league-summary/ResultsPage"
 import OddsPage from "@components/match-summary/OddsPage"
 import H2HPage from "@components/match-summary/H2HPage"
 import StandingsPage from "@components/match-summary/StandingsPage"
@@ -48,7 +48,7 @@ const LeagueSummary: NextPage = () => {
                 setSelectedPageComponent(<LeagueSummaryPage />)
                 break;
             case 1:
-                setSelectedPageComponent(<LineupsPage />)
+                setSelectedPageComponent(<ResultsPage />)
                 break;
             case 2:
                 setSelectedPageComponent(<OddsPage />)
