@@ -7,9 +7,8 @@ import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import LeagueSummaryPage from "@components/league-summary/LeagueSummaryPage"
 import ResultsPage from "@components/league-summary/ResultsPage"
-import OddsPage from "@components/match-summary/OddsPage"
-import H2HPage from "@components/match-summary/H2HPage"
-import StandingsPage from "@components/match-summary/StandingsPage"
+import FixsturesPage from "@components/league-summary/FixsturesPage"
+import StandingsPage from "@components/league-summary/StandingsPage"
 import PredictionsPage from "@components/match-summary/PredictionsPage"
 import BookmakersPage from "@components/match-summary/BookmakersPage"
 import PagesSlider from "@components/ui/match-summary/PagesSlider";
@@ -51,12 +50,9 @@ const LeagueSummary: NextPage = () => {
                 setSelectedPageComponent(<ResultsPage />)
                 break;
             case 2:
-                setSelectedPageComponent(<OddsPage />)
+                setSelectedPageComponent(<FixsturesPage />)
                 break;
             case 3:
-                setSelectedPageComponent(<H2HPage />)
-                break;
-            case 4:
                 setSelectedPageComponent(<StandingsPage />)
                 break;
             case 5:
