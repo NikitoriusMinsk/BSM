@@ -59,6 +59,7 @@
 #stats .stat {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 20px;
 }
 
@@ -83,7 +84,8 @@
 #coins {
     display: flex;
     flex-direction: row;
-    gap: 80px;
+    align-items: center;
+    gap: 30px;
     background-image: url(/images/dashboard/masks/coins-mask.png);
     background-repeat: no-repeat;
     background-position: center;
@@ -168,12 +170,18 @@
 }
 
 #bookmaker h5 {
+    text-align: center;
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
     color: #1A1C21B2;
+}
+
+#bookmaker img {
+    height: unset;
+    width: unset;
 }
 
 #sport {
@@ -392,16 +400,183 @@
     }
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1280px) {
     .dashboardTab {
         gap: 28px;
+    }
+
+    #odds h5,
+    #unit h5 {
+        font-size: 18px;
+    }
+
+    #sport img {
+        height: 52px;
+        width: 52px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #profit {
+        grid-column-end: 7;
+    }
+
+    #stats {
+        grid-column-start: 7;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    #stats .stat {
+        gap: 6px;
+    }
+
+    #stats span {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    #stats h3 {
+        font-size: 15px;
+        line-height: 18px
+    }
+
+    #coins {
+        grid-column-end: 13;
+    }
+
+    #bookmaker {
+        grid-row-start: 3;
+        grid-column-start: 1;
+        grid-column-end: 9;
+    }
+
+    #bookmaker img {
+        height: 60px;
+        width: 180px;
+    }
+
+    #sport {
+        grid-column-start: 9;
+        grid-column-end: 13;
+    }
+
+    #odds {
+        grid-row-start: 4;
+        grid-column-start: 1;
+        grid-column-end: 7;
+    }
+
+    #unit {
+        grid-row-start: 4;
+        grid-column-start: 7;
+        grid-column-end: 13;
+    }
+
+    #bets {
+        grid-row-start: 5;
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dashboardTab {
+        grid-template-columns: repeat(8, 1fr);
+        gap: 16px;
+    }
+
+    #profit {
+        grid-column-start: 1;
+        grid-column-end: 4;
+    }
+
+    #stats {
+        grid-column-start: 4;
+        grid-column-end: 9;
+        gap: unset;
+    }
+
+    #stats .stat {
+        gap: 6px;
+    }
+
+    #stats span {
+        font-size: 28px;
+        line-height: 33px;
+    }
+
+    #stats h3 {
+        font-size: 15px;
+        line-height: 18px
+    }
+
+    #coins {
+        grid-row-start: 2;
+        grid-column-start: 1;
+        grid-column-end: 6;
+    }
+
+    #coins .description span {
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    #bookmaker {
+        grid-row-start: 2;
+        grid-column-start: 6;
+        grid-column-end: 9;
+    }
+
+    #bookmaker img {
+        height: 60px;
+        width: 180px;
+    }
+
+    #sport {
+        grid-row-start: 3;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    #odds {
+        grid-row-start: 3;
+        grid-column-start: 3;
+        grid-column-end: 6;
+    }
+
+    #unit {
+        grid-row-start: 3;
+        grid-column-start: 6;
+        grid-column-end: 9;
+    }
+
+    #unit h5,
+    #odds h5 {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    #bets {
+        grid-row-start: 4;
+        grid-column-start: 1;
+        grid-column-end: 9;
     }
 }
 
 @media screen and (max-width: 425px) {
+    #profit {
+        grid-row-start: 1;
+        grid-column-start: 1;
+        grid-column-end: 9;
+    }
+
     #stats {
         flex-direction: column;
         gap: 48px;
+        grid-row-start: 2;
+        grid-column-start: 1;
+        grid-column-end: 9;
     }
 
     #stats .stat {
@@ -410,6 +585,9 @@
 
     #coins {
         justify-content: space-between;
+        grid-row-start: 3;
+        grid-column-start: 1;
+        grid-column-end: 9;
     }
 
     #coins .description span {
@@ -418,6 +596,18 @@
 
     #coins .description {
         justify-content: center;
+    }
+
+    #bookmaker {
+        grid-row-start: 4;
+        grid-column-start: 1;
+        grid-column-end: 9;
+    }
+
+    #sport {
+        grid-row-start: 5;
+        grid-column-start: 1;
+        grid-column-end: 9;
     }
 
     #bookmaker,
@@ -429,8 +619,23 @@
         align-items: flex-start;
     }
 
+    #odds {
+        grid-row-start: 6;
+        grid-column-start: 1;
+        grid-column-end: 9;
+    }
+
+    #unit {
+        grid-row-start: 7;
+        grid-column-start: 1;
+        grid-column-end: 9;
+    }
+
     #bets {
         position: relative;
+        grid-row-start: 8;
+        grid-column-start: 1;
+        grid-column-end: 9;
     }
 
     #bets .progressBar {

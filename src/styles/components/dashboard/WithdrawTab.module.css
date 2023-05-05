@@ -16,7 +16,7 @@
 #withdrawBalance {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background-image: url(/images/dashboard/masks/withdraw-mask.png);
     background-repeat: no-repeat;
@@ -25,6 +25,7 @@
     grid-row-start: 1;
     grid-column-start: 1;
     grid-column-end: 9;
+    gap: 120px;
 }
 
 #withdrawBalance div:first-child {
@@ -46,6 +47,7 @@
     font-size: 20px;
     line-height: 24px;
     color: #FFFFFF;
+    width: max-content;
 }
 
 #withdrawBalance div:first-child span {
@@ -439,6 +441,18 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+@media screen and (max-width:1440px) {
+    .withdrawTab {
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    #withdrawBalance {
+        gap: 100px;
+    }
 }
 
 @media screen and (max-width:425px) {

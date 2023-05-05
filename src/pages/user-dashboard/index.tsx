@@ -75,8 +75,7 @@ const NavigationItems = [
 ];
 
 const UserDashboard: NextPage = () => {
-	const { data: userInfo, isLoading: userInfoLoading } =
-		trpc.user.getInfo.useQuery();
+	const { data: userInfo, isLoading: userInfoLoading } = trpc.user.getInfo.useQuery();
 	const [currentPage, setCurrentPage] = useState(Tabs.Dashboard);
 	const memoizedPage = useMemo(() => {
 		switch (currentPage) {
@@ -189,38 +188,23 @@ const Navigation: React.FC<{
 				</div>
 			</div>
 			<nav>
-				<Slider
-					swipable={true}
-					showPagination={false}
-				>
-					{ArrayToChunks(
-						NavigationItems,
-						width <= 425 ? 2 : NavigationItems.length
-					).map((chunk, index) => (
-						<div
-							className={styles.chunk}
-							key={`chunk_${index}`}
-						>
-							{chunk.map(({ icon, activeIcon, page }) => (
-								<MenuItem
-									key={page}
-									page={page}
-									icon={icon}
-									activeIcon={activeIcon}
-									active={currentPage === page}
-									onNavigate={() => onPageChange(page)}
-									counter={
-										page === Tabs.TrackingTips
-											? userInfo.tips.tracking_count
-											: page === Tabs.PendingTips
-											? userInfo.tips.pending_count
-											: undefined
-									}
-								/>
-							))}
-						</div>
-					))}
-				</Slider>
+				{NavigationItems.map(({ activeIcon, icon, page }, index) => (
+					<MenuItem
+						key={page}
+						page={page}
+						icon={icon}
+						activeIcon={activeIcon}
+						active={currentPage === page}
+						onNavigate={() => onPageChange(page)}
+						counter={
+							page === Tabs.TrackingTips
+								? userInfo.tips.tracking_count
+								: page === Tabs.PendingTips
+								? userInfo.tips.pending_count
+								: undefined
+						}
+					/>
+				))}
 			</nav>
 		</div>
 	);
