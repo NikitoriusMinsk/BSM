@@ -9,9 +9,8 @@ import LeagueSummaryPage from "@components/league-summary/LeagueSummaryPage"
 import ResultsPage from "@components/league-summary/ResultsPage"
 import FixsturesPage from "@components/league-summary/FixsturesPage"
 import StandingsPage from "@components/league-summary/StandingsPage"
-import PredictionsPage from "@components/match-summary/PredictionsPage"
-import BookmakersPage from "@components/match-summary/BookmakersPage"
-import PagesSlider from "@components/ui/match-summary/PagesSlider";
+import ArchivePage from "@components/league-summary/ArchivePage"
+import PagesSlider from "@components/ui/match-summary/PagesSlider"
 
 const pages = [
     {
@@ -55,11 +54,8 @@ const LeagueSummary: NextPage = () => {
             case 3:
                 setSelectedPageComponent(<StandingsPage />)
                 break;
-            case 5:
-                setSelectedPageComponent(<PredictionsPage />)
-                break;
-            case 9:
-                setSelectedPageComponent(<BookmakersPage />)
+            case 4:
+                setSelectedPageComponent(<ArchivePage />)
                 break;
         }
     },[selectedPage])
