@@ -1,7 +1,7 @@
 import type { NextPage } from "next"
 import Head from "next/head"
 import styles from "../../styles/pages/MatchSummary.module.css"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -97,8 +97,9 @@ const MatchSummary: NextPage = () => {
                     <Image 
                         //test img link
                         src="/testimg/football.jpg"
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{objectFit:'cover'}}
+                        alt=""
                     />
                     <div className={styles.matchInfo}>
                         <div className={styles.matchHeader}>
@@ -110,6 +111,7 @@ const MatchSummary: NextPage = () => {
                                     src="/icons/arrow-narrow-left.svg"
                                     width={24}
                                     height={24}
+                                    alt=""
                                 />
                             </div>
                             <div className={styles.championship}>
@@ -128,8 +130,8 @@ const MatchSummary: NextPage = () => {
                                         src="/testimg/club1.png"
                                         width={60}
                                         height={60}
-                                        objectFit="contain"
-                                        objectPosition="center center"
+                                        style={{objectFit:'contain',objectPosition:"center center"}}
+                                        alt=""
                                     />
                                 </div>
                                 <span>
@@ -155,8 +157,8 @@ const MatchSummary: NextPage = () => {
                                         src="/testimg/club2.png"
                                         width={60}
                                         height={60}
-                                        objectFit="contain"
-                                        objectPosition="center center"
+                                        style={{objectFit:'contain',objectPosition:"center center"}}
+                                        alt=""
                                     />
                                 </div>
                                 <span>

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import styles from '../../../styles/components/ui/match-summary/OddForm.module.css'
 import { motion, AnimatePresence } from "framer-motion"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Dispatch, SetStateAction } from "react"
 
 interface OddFormProps {
@@ -30,8 +30,8 @@ const OddForm: React.FC<OddFormProps> = (props) => {
                         src="/icons/ticket.svg"
                         width={24}
                         height={24}
-                        objectFit="contain"
-                        objectPosition="center center"
+                        style={{objectFit:'contain',objectPosition:"center center"}}
+                        alt=""
                     />
                     BET SLIP
                 </span>
@@ -40,8 +40,8 @@ const OddForm: React.FC<OddFormProps> = (props) => {
                         src="/icons/chevron-down.svg"
                         width={24}
                         height={24}
-                        objectFit="contain"
-                        objectPosition="center center"
+                        style={{objectFit:'contain',objectPosition:"center center"}}
+                        alt=""
                     />
                 </div>
             </div>
@@ -55,8 +55,8 @@ const OddForm: React.FC<OddFormProps> = (props) => {
                             src="/icons/cancel.svg"
                             width={24}
                             height={24}
-                            objectFit="contain"
-                            objectPosition="center center"
+                            style={{objectFit:'contain',objectPosition:"center center"}}
+                            alt=""
                         />
                     </div>
                 </div>
@@ -74,8 +74,8 @@ const OddForm: React.FC<OddFormProps> = (props) => {
                             src="/images/bookmaker-placeholder-1.png"
                             width={60}
                             height={24}
-                            objectFit="contain"
-                            objectPosition="right center"
+                            style={{objectFit:'contain',objectPosition:"right center"}}
+                            alt=""
                         />
                         <span className={styles.stickerPoints}>
                             23.1
@@ -90,15 +90,15 @@ const OddForm: React.FC<OddFormProps> = (props) => {
                             src="/icons/arrow-narrow-up.svg"
                             width={24}
                             height={24}
-                            objectFit="contain"
-                            objectPosition="center center"
+                            style={{objectFit:'contain',objectPosition:"center center"}}
+                            alt=""
                         />
                         <Image 
                             src="/images/bookmaker-placeholder-3.png"
                             width={60}
                             height={24}
-                            objectFit="contain"
-                            objectPosition="center center"
+                            style={{objectFit:'contain',objectPosition:"center center"}}
+                            alt=""
                         />
                     </div>
                     <div className={styles.switchBtn}>
@@ -106,8 +106,8 @@ const OddForm: React.FC<OddFormProps> = (props) => {
                             src="/icons/Switch.svg"
                             width={16}
                             height={16}
-                            objectFit="contain"
-                            objectPosition="center center"
+                            style={{objectFit:'contain',objectPosition:"center center"}}
+                            alt=""
                         />
                         Switch
                     </div>

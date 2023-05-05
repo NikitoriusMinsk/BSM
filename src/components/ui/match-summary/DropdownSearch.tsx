@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import styles from '../../../styles/components/ui/match-summary/DropdownSearch.module.css'
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 interface DropdownProps {
     items: { name: string, id: string, image: string }[];
@@ -65,8 +65,8 @@ const DropdownSearch: React.FC<DropdownProps> = (props) => {
                     src={selected?.image || ""}
                     width={60}
                     height={24}
-                    objectFit="contain"
-                    objectPosition="left center"
+                    style={{objectFit:'contain',objectPosition:"left center"}}
+                    alt=""
                 />
                 <motion.div
                     className={styles.chevron}
@@ -79,8 +79,8 @@ const DropdownSearch: React.FC<DropdownProps> = (props) => {
                         src="/icons/chevron-down.svg"
                         width={16}
                         height={16}
-                        objectFit="contain"
-                        objectPosition="center center"
+                        style={{objectFit:'contain',objectPosition:"center center"}}
+                        alt=""
                     />
                 </motion.div>
             </div>
@@ -103,8 +103,8 @@ const DropdownSearch: React.FC<DropdownProps> = (props) => {
                                 src={item.image}
                                 width={60}
                                 height={24}
-                                objectFit="contain"
-                                objectPosition="left center"
+                                style={{objectFit:'contain',objectPosition:"left center"}}
+                                alt=""
                             />
                             <span>
                                 {item.name}

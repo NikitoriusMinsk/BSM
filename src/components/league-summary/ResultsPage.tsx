@@ -1,5 +1,5 @@
 import styles from "../../styles/components/league-summary/ResultsPage.module.css"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 
@@ -37,7 +37,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-1-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <div className={styles.logo}>
@@ -45,7 +46,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-2-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                 </div>                                
@@ -94,7 +96,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-1-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <div className={styles.logo}>
@@ -102,7 +105,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-2-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                 </div>                                
@@ -151,7 +155,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-1-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <div className={styles.logo}>
@@ -159,7 +164,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-2-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                 </div>                                
@@ -222,7 +228,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-1-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <div className={styles.logo}>
@@ -230,7 +237,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-2-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                 </div>                                
@@ -279,7 +287,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-1-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <div className={styles.logo}>
@@ -287,7 +296,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-2-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                 </div>                                
@@ -336,7 +346,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-1-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <div className={styles.logo}>
@@ -344,7 +355,8 @@ const LeagueSummaryPage: React.FC = () => {
                                             src="/images/team-2-placeholder.svg"
                                             width={22}
                                             height={22}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                 </div>                                
@@ -386,7 +398,8 @@ const LeagueSummaryPage: React.FC = () => {
                         src="/icons/chevron-down.svg"
                         width={24}
                         height={24}
-                        objectFit="contain"
+                        style={{objectFit:'contain'}}
+                        alt=""
                     />
                 </span>
                 :
@@ -426,7 +439,8 @@ const LeagueSummaryPage: React.FC = () => {
                                                     src="/images/team-1-placeholder.svg"
                                                     width={22}
                                                     height={22}
-                                                    objectFit="contain"
+                                                    style={{objectFit:'contain'}}
+                                                    alt=""
                                                 />
                                             </div>
                                             <div className={styles.logo}>
@@ -434,7 +448,8 @@ const LeagueSummaryPage: React.FC = () => {
                                                     src="/images/team-2-placeholder.svg"
                                                     width={22}
                                                     height={22}
-                                                    objectFit="contain"
+                                                    style={{objectFit:'contain'}}
+                                                    alt=""
                                                 />
                                             </div>
                                         </div>                                
@@ -483,7 +498,8 @@ const LeagueSummaryPage: React.FC = () => {
                                                     src="/images/team-1-placeholder.svg"
                                                     width={22}
                                                     height={22}
-                                                    objectFit="contain"
+                                                    style={{objectFit:'contain'}}
+                                                    alt=""
                                                 />
                                             </div>
                                             <div className={styles.logo}>
@@ -491,7 +507,8 @@ const LeagueSummaryPage: React.FC = () => {
                                                     src="/images/team-2-placeholder.svg"
                                                     width={22}
                                                     height={22}
-                                                    objectFit="contain"
+                                                    style={{objectFit:'contain'}}
+                                                    alt=""
                                                 />
                                             </div>
                                         </div>                                
@@ -540,7 +557,8 @@ const LeagueSummaryPage: React.FC = () => {
                                                     src="/images/team-1-placeholder.svg"
                                                     width={22}
                                                     height={22}
-                                                    objectFit="contain"
+                                                    style={{objectFit:'contain'}}
+                                                    alt=""
                                                 />
                                             </div>
                                             <div className={styles.logo}>
@@ -548,7 +566,8 @@ const LeagueSummaryPage: React.FC = () => {
                                                     src="/images/team-2-placeholder.svg"
                                                     width={22}
                                                     height={22}
-                                                    objectFit="contain"
+                                                    style={{objectFit:'contain'}}
+                                                    alt=""
                                                 />
                                             </div>
                                         </div>                                
