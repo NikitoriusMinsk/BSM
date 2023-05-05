@@ -126,52 +126,52 @@ const FollowingTab: React.FC = () => {
 
 	return (
 		<div className={styles.followersTab}>
-			<div className={sharedStyles.row}>
-				<div
-					id={styles.following}
-					className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
-				>
-					<div className={styles.info}>
-						<div className={sharedStyles.image}>
-							<Image
-								src="/images/dashboard/followers.svg"
-								height={80}
-								width={80}
-								alt=""
-							/>
-						</div>
-						<div className={styles.text}>
-							<h3>Following</h3>
-							<h2>{data.count}</h2>
-						</div>
-					</div>
-					<div className={styles.search}>
-						<input
-							type={"text"}
-							placeholder="Search"
-							onChange={debounce(handleSearch, 1000)}
+			<div
+				id={styles.following}
+				className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
+			>
+				<div className={styles.info}>
+					<div className={sharedStyles.image}>
+						<Image
+							src="/images/dashboard/followers.svg"
+							height={80}
+							width={80}
+							alt=""
 						/>
-						<div className={styles.icon}>
-							<Image
-								src="/icons/search-white.svg"
-								height={24}
-								width={24}
-								alt=""
-							/>
-						</div>
+					</div>
+					<div className={styles.text}>
+						<h3>Following</h3>
+						<h2>{data.count}</h2>
+					</div>
+				</div>
+				<div className={styles.search}>
+					<input
+						type={"text"}
+						placeholder="Search"
+						onChange={debounce(handleSearch, 1000)}
+					/>
+					<div className={styles.icon}>
+						<Image
+							src="/icons/search-white.svg"
+							height={24}
+							width={24}
+							alt=""
+						/>
 					</div>
 				</div>
 			</div>
-			<Table
-				data={
-					shouldShowSearchResuts && searchResults && !searchResultsLoading
-						? searchResults
-						: data.followers
-				}
-				columns={width <= 425 ? mobileColumns : columns}
-				header={false}
-				pageSize={10}
-			/>
+			<div id={styles.table}>
+				<Table
+					data={
+						shouldShowSearchResuts && searchResults && !searchResultsLoading
+							? searchResults
+							: data.followers
+					}
+					columns={width <= 425 ? mobileColumns : columns}
+					header={false}
+					pageSize={10}
+				/>
+			</div>
 		</div>
 	);
 };

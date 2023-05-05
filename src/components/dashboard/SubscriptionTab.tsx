@@ -137,10 +137,8 @@ const mobileColumns = [
 								style={{
 									width: `${
 										100 -
-										((new Date().getTime() -
-											startedOn.getTime()) /
-											(endsOn.getTime() -
-												startedOn.getTime())) *
+										((new Date().getTime() - startedOn.getTime()) /
+											(endsOn.getTime() - startedOn.getTime())) *
 											100
 									}%`,
 								}}
@@ -192,66 +190,66 @@ const SubscriptionTab: React.FC = () => {
 
 	return (
 		<div className={styles.subscriptionTab}>
-			<div className={sharedStyles.row}>
-				<div
-					id={styles.subscribers}
-					className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
-				>
-					<div className={styles.info}>
-						<div className={sharedStyles.image}>
-							<Image
-								src="/images/dashboard/subscribers.svg"
-								height={80}
-								width={80}
-								alt=""
-							/>
-						</div>
-						<div className={styles.text}>
-							<div>
-								<h3>Subscribers</h3>
-								<h2>{data.subscribers_count}</h2>
-							</div>
-							<div>
-								<h4>From last month</h4>
-								<span
-									className={
-										data.subscribers_difference > 0
-											? styles.positive
-											: styles.negative
-									}
-								>
-									{(data.subscribers_difference * 100).toFixed(2)}%
-								</span>
-							</div>
-						</div>
-					</div>
-					<div className={styles.search}>
-						<input
-							type={"text"}
-							placeholder="Search"
-							onChange={debounce(handleSearch, 1000)}
+			<div
+				id={styles.subscribers}
+				className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
+			>
+				<div className={styles.info}>
+					<div className={sharedStyles.image}>
+						<Image
+							src="/images/dashboard/subscribers.svg"
+							height={80}
+							width={80}
+							alt=""
 						/>
-						<div className={styles.icon}>
-							<Image
-								src="/icons/search-white.svg"
-								height={24}
-								width={24}
-								alt=""
-							/>
+					</div>
+					<div className={styles.text}>
+						<div>
+							<h3>Subscribers</h3>
+							<h2>{data.subscribers_count}</h2>
+						</div>
+						<div>
+							<h4>From last month</h4>
+							<span
+								className={
+									data.subscribers_difference > 0
+										? styles.positive
+										: styles.negative
+								}
+							>
+								{(data.subscribers_difference * 100).toFixed(2)}%
+							</span>
 						</div>
 					</div>
 				</div>
+				<div className={styles.search}>
+					<input
+						type={"text"}
+						placeholder="Search"
+						onChange={debounce(handleSearch, 1000)}
+					/>
+					<div className={styles.icon}>
+						<Image
+							src="/icons/search-white.svg"
+							height={24}
+							width={24}
+							alt=""
+						/>
+					</div>
+				</div>
 			</div>
-			<Table
-				data={
-					shouldShowSearchResuts && searchResults && !searchResultsLoading
-						? searchResults
-						: data.subscribers
-				}
-				columns={width <= 425 ? mobileColumns : columns}
-				pageSize={10}
-				header={false}
-			/>
+			<div id={styles.table}>
+				<Table
+					data={
+						shouldShowSearchResuts && searchResults && !searchResultsLoading
+							? searchResults
+							: data.subscribers
+					}
+					columns={width <= 425 ? mobileColumns : columns}
+					pageSize={10}
+					header={false}
+				/>
+			</div>
 		</div>
 	);
 };

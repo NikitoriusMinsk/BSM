@@ -34,9 +34,7 @@ const columns = [
 		},
 	}),
 	columnHelper.accessor("date", {
-		cell: (info) => (
-			<Moment format="DD MMM YYYY HH:mm">{info.getValue()}</Moment>
-		),
+		cell: (info) => <Moment format="DD MMM YYYY HH:mm">{info.getValue()}</Moment>,
 	}),
 	columnHelper.accessor("following", {
 		cell: (info) => {
@@ -111,45 +109,43 @@ export default function ProfileVisitsTab() {
 
 	return (
 		<div className={styles.profileVisitsTab}>
-			<div className={sharedStyles.row}>
-				<div
-					id={styles.profileVisits}
-					className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
-				>
-					<div className={sharedStyles.image}>
-						<Image
-							src="/images/dashboard/profile-visits.svg"
-							height={80}
-							width={80}
-							alt=""
-						/>
+			<div
+				id={styles.profileVisits}
+				className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
+			>
+				<div className={sharedStyles.image}>
+					<Image
+						src="/images/dashboard/profile-visits.svg"
+						height={80}
+						width={80}
+						alt=""
+					/>
+				</div>
+				<div className={styles.text}>
+					<div>
+						<h3>Profile Visits</h3>
+						<h2>{data.count}</h2>
 					</div>
-					<div className={styles.text}>
-						<div>
-							<h3>Profile Visits</h3>
-							<h2>{data.count}</h2>
-						</div>
-						<div>
-							<h4>From last month</h4>
-							<span
-								className={
-									data.difference > 0
-										? styles.positive
-										: styles.negative
-								}
-							>
-								{(data.difference * 100).toFixed(2)}%
-							</span>
-						</div>
+					<div>
+						<h4>From last month</h4>
+						<span
+							className={
+								data.difference > 0 ? styles.positive : styles.negative
+							}
+						>
+							{(data.difference * 100).toFixed(2)}%
+						</span>
 					</div>
 				</div>
 			</div>
-			<Table
-				data={data.visitors}
-				pageSize={10}
-				columns={width <= 425 ? mobileColumns : columns}
-				header={false}
-			/>
+			<div id={styles.table}>
+				<Table
+					data={data.visitors}
+					pageSize={10}
+					columns={width <= 425 ? mobileColumns : columns}
+					header={false}
+				/>
+			</div>
 		</div>
 	);
 }

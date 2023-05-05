@@ -1,6 +1,6 @@
 .subscriptionTab {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
     gap: 40px;
 }
 
@@ -14,6 +14,9 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-column-end: 13;
 }
 
 #subscribers .info {
@@ -131,6 +134,12 @@
     right: 16px;
     width: 24px;
     height: 24px;
+}
+
+#table {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 13;
 }
 
 .user {

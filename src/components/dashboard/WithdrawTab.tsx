@@ -15,17 +15,14 @@ import Table from "@components/ui/Table";
 import dynamic from "next/dynamic";
 import useWindowSize from "src/utils/useWindowSize";
 
-const InPortal = dynamic(
-	async () => (await import("react-reverse-portal")).InPortal,
-	{ ssr: false }
-);
-const OutPortal = dynamic(
-	async () => (await import("react-reverse-portal")).OutPortal,
-	{ ssr: false }
-);
+const InPortal = dynamic(async () => (await import("react-reverse-portal")).InPortal, {
+	ssr: false,
+});
+const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
+	ssr: false,
+});
 
-const columnHelper =
-	createColumnHelper<inferArrayElementType<WithdrawInfo["history"]>>();
+const columnHelper = createColumnHelper<inferArrayElementType<WithdrawInfo["history"]>>();
 
 function getStyleByStatus(status: TransactionStatus) {
 	switch (status) {
@@ -129,37 +126,14 @@ const WithdrawTab: React.FC = () => {
 			<PortalContext.Provider value={{ portalNode: portalNode }}>
 				{portalNode && <OutPortal node={portalNode} />}
 				<div className={styles.withdrawTab}>
-					<div className={sharedStyles.row}>
-						<div
-							id={styles.withdrawBalance}
-							className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
-						>
-							<div>
-								<div className={sharedStyles.image}>
-									<Image
-										src="/images/dashboard/wallet.svg"
-										height={60}
-										width={60}
-										alt=""
-									/>
-								</div>
-								<div className={styles.text}>
-									<h4>Pending Balance</h4>
-									<span>$ {data.pendingBalance}</span>
-								</div>
-							</div>
-							<div>
-								<h5>Cash that can be withdrawn right now</h5>
-								<WithdrawButton balance={data.availableBalance} />
-							</div>
-						</div>
-						<div
-							id={styles.withdrawTotal}
-							className={`${sharedStyles.block} ${sharedStyles.narrow}`}
-						>
+					<div
+						id={styles.withdrawBalance}
+						className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
+					>
+						<div>
 							<div className={sharedStyles.image}>
 								<Image
-									src="/images/dashboard/total.svg"
+									src="/images/dashboard/wallet.svg"
 									height={60}
 									width={60}
 									alt=""
@@ -167,16 +141,39 @@ const WithdrawTab: React.FC = () => {
 							</div>
 							<div className={styles.text}>
 								<h4>Pending Balance</h4>
-								<span>$ {data.totalEarned}</span>
+								<span>$ {data.pendingBalance}</span>
 							</div>
 						</div>
+						<div>
+							<h5>Cash that can be withdrawn right now</h5>
+							<WithdrawButton balance={data.availableBalance} />
+						</div>
 					</div>
-					<h2>Historical Withdraws</h2>
-					<Table
-						data={data.history}
-						columns={width <= 425 ? mobileColumns : columns}
-						pageSize={10}
-					/>
+					<div
+						id={styles.withdrawTotal}
+						className={`${sharedStyles.block} ${sharedStyles.narrow}`}
+					>
+						<div className={sharedStyles.image}>
+							<Image
+								src="/images/dashboard/total.svg"
+								height={60}
+								width={60}
+								alt=""
+							/>
+						</div>
+						<div className={styles.text}>
+							<h4>Pending Balance</h4>
+							<span>$ {data.totalEarned}</span>
+						</div>
+					</div>
+					<div id={styles.table}>
+						<h2>Historical Withdraws</h2>
+						<Table
+							data={data.history}
+							columns={width <= 425 ? mobileColumns : columns}
+							pageSize={10}
+						/>
+					</div>
 				</div>
 			</PortalContext.Provider>
 		</>
@@ -238,9 +235,7 @@ enum PaymentMethods {
 	MastercardVisa = "mastercard/visa",
 }
 
-const WithdrawModal: React.FC<{ maxValue: number; onClose: () => void }> = (
-	props
-) => {
+const WithdrawModal: React.FC<{ maxValue: number; onClose: () => void }> = (props) => {
 	const { maxValue, onClose } = props;
 	const [isMax, setIsMax] = useState<boolean>(false);
 	const [selectedMethod, setSelectedMethod] = useState<PaymentMethods>(
@@ -371,9 +366,7 @@ const WithdrawModal: React.FC<{ maxValue: number; onClose: () => void }> = (
 					</div>
 					<div
 						className={styles.method}
-						onClick={() =>
-							setSelectedMethod(PaymentMethods.MastercardVisa)
-						}
+						onClick={() => setSelectedMethod(PaymentMethods.MastercardVisa)}
 					>
 						<div>
 							<Image
@@ -392,9 +385,7 @@ const WithdrawModal: React.FC<{ maxValue: number; onClose: () => void }> = (
 						<input
 							type={"checkbox"}
 							readOnly
-							checked={
-								selectedMethod === PaymentMethods.MastercardVisa
-							}
+							checked={selectedMethod === PaymentMethods.MastercardVisa}
 						/>
 					</div>
 				</div>
