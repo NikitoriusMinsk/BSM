@@ -1,6 +1,6 @@
 .withdrawTab {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
     gap: 40px;
 }
 
@@ -22,6 +22,9 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-column-end: 9;
 }
 
 #withdrawBalance div:first-child {
@@ -78,6 +81,9 @@
     background-repeat: no-repeat;
     background-position: bottom right;
     background-size: auto;
+    grid-row-start: 1;
+    grid-column-start: 9;
+    grid-column-end: 13;
 }
 
 #withdrawTotal .text {
@@ -102,6 +108,12 @@
     font-size: 24px;
     line-height: 29px;
     color: #1A1C21;
+}
+
+#table {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 13;
 }
 
 /* Withdraw Button */

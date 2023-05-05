@@ -12,17 +12,23 @@
     grid-gap: 40px;
     /* margin is 5px less than design to adjust to scrollbar width */
     margin-right: 135px;
+    margin-left: 60px;
 }
 
 
 @media screen and (max-width:1440px) {
     .content {
         margin-right: 30px;
+        margin-left: 40px;
         gap: 30px;
     }
 }
 
 @media screen and (max-width:1366px) {
+    .content {
+        margin-left: 30px;
+    }
+
     .pageWrap {
         margin-left: 70px;
     }
@@ -36,6 +42,13 @@
 
 @media screen and (max-width:1024px) {
     .content {
-        margin-right: 0px;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content {
+        margin-left: 0;
     }
 }

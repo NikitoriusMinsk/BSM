@@ -1,6 +1,6 @@
 .profileVisitsTab {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
     gap: 40px;
 }
 
@@ -14,6 +14,9 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    grid-column-end: 13;
 }
 
 #profileVisits .text {
@@ -86,6 +89,12 @@
     border-right: 5px solid transparent;
 
     border-top: 7px solid #CF1F1F;
+}
+
+#table {
+    grid-row-start: 2;
+    grid-column-start: 1;
+    grid-column-end: 13;
 }
 
 .user {

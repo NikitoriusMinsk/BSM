@@ -4,6 +4,7 @@
     grid-row-start: 1;
     grid-row-end: 2;
     margin-right: -135px;
+    margin-left: -60px;
 }
 
 .mainColumn {
@@ -14,8 +15,6 @@
     grid-column-end: 10;
     grid-row-start: 2;
     grid-row-end: 3;
-    margin-left: 60px;
-    margin-bottom: 100px;
 }
 
 .mainColumn .filters {
@@ -257,60 +256,67 @@
     justify-content: space-between;
 }
 
-.bottom1024, .filtersMobile {
+.bottom1024,
+.filtersMobile {
     display: none;
 }
 
 @media screen and (max-width: 1440px) {
     .mainColumn {
-        margin-left: 40px;
         gap: 30px;
     }
+
     .mainBlock {
         margin-right: -30px;
+        margin-left: -40px;
     }
+
     .tipsSlider .slide {
         padding: 0 30px 50px 40px;
         gap: 30px;
     }
+
     .tipsSlider h2 {
         padding-left: 40px;
         padding-right: 30px;
     }
-} 
+}
 
 @media screen and (max-width: 1366px) {
-    .mainColumn {
-        margin-left: 30px;
-    }
+
     .mainBlock {
         margin-right: -30px;
+        margin-left: -30px;
     }
+
     .tipsSlider .slide {
         padding: 0 30px 50px;
     }
+
     .tipsSlider h2 {
         padding-left: 30px;
         padding-right: 30px;
     }
-} 
+}
 
 @media screen and (max-width: 1024px) {
     .mainColumn {
         grid-column-end: 13;
-        margin-left: 20px;
         margin-right: 20px;
         gap: 20px;
         margin-bottom: 40px;
     }
-    .mainColumn .filters {        
+
+    .mainColumn .filters {
         grid-row-start: 1;
         grid-row-end: 3;
     }
+
     .sideColumn {
         display: none;
     }
-    .bottom1024{
+
+    .bottom1024 {
         grid-column-start: 5;
         grid-column-end: 13;
         grid-row-start: 2;
@@ -321,85 +327,113 @@
         gap: 20px;
         padding-top: 40px;
     }
-    .bottom1024 > *:last-child > div:last-child {
+
+    .bottom1024>*:last-child>div:last-child {
         flex-direction: row;
     }
+
     .mainBlock {
         margin-right: 0px;
+        margin-left: -20px;
     }
-    .tipsSlider {        
+
+    .tipsSlider {
         padding-bottom: 15px;
     }
+
     .tipsSlider .slide {
         padding: 0 20px 50px;
         gap: 20px;
     }
+
     .tipsSlider h2 {
         padding-left: 20px;
         padding-right: 20px;
     }
-} 
+}
 
 @media screen and (max-width: 768px) {
+    .mainBlock {
+        margin-left: 0;
+    }
+
+    .mainColumn {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
     .tipsSlider {
         padding-top: 30px;
     }
+
     .tipsSlider h2 {
         text-align: center;
         font-weight: 600;
         font-size: 18px;
         line-height: 22px;
     }
+
     .mainColumn .filters {
         display: none;
     }
+
     .mainColumn .predictions {
         grid-column-start: 1;
     }
+
     .bottom1024 {
         display: none;
     }
+
     .filtersMobile {
         display: flex;
         flex-direction: column;
         gap: 32px;
-        grid-column-start: 1;        
+        grid-column-start: 1;
         grid-column-end: 13;
     }
-    .filtersMobile > div{
+
+    .filtersMobile>div {
         width: calc(100% + 40px);
         margin-left: -20px;
         margin-right: -20px;
         padding-left: 20px;
         padding-right: 20px;
     }
+
     .filtersBlockMobile {
         display: flex;
         gap: 12px;
         justify-content: space-between;
         align-items: stretch;
     }
-    .filtersBlockMobile > .dateMobile > div > div > input, 
-    .filtersBlockMobile > .dateMobile > div > div, 
-    .filtersBlockMobile > .dateMobile > div,
-    .filtersBlockMobile > .filterBtnMobile * {
+
+    .filtersBlockMobile>.dateMobile>div>div>input,
+    .filtersBlockMobile>.dateMobile>div>div,
+    .filtersBlockMobile>.dateMobile>div,
+    .filtersBlockMobile>.filterBtnMobile * {
         height: 100%;
     }
-    .filtersBlockMobile > .filterBtnMobile span {
+
+    .filtersBlockMobile>.filterBtnMobile span {
         display: flex;
         align-items: center;
     }
+
     .dateMobile {
         width: 100%;
     }
+
     .filterBtnMobile {
         width: 100%;
     }
-    .filterBtnMobile > button {
+
+    .filterBtnMobile>button {
         cursor: pointer;
         width: 100%;
         justify-content: center;
     }
+
     .resetBtnM {
         background: rgba(26, 28, 33, 0.3);
         border-radius: 8px;
@@ -417,14 +451,17 @@
         line-height: 18px;
         color: #FFFFFF;
     }
+
     .sportFilter {
         margin-top: 18px;
     }
-    .sportFilter > div:last-child {
+
+    .sportFilter>div:last-child {
         max-height: max-content;
         overflow-y: visible;
     }
-    .sportFilter > div:last-child > div {
+
+    .sportFilter>div:last-child>div {
         background: rgba(242, 242, 242, 0.3);
         border-radius: 8px;
         padding: 8px 16px;
@@ -432,13 +469,14 @@
 }
 
 @media screen and (max-width: 425px) {
-    .filtersMobile > div{
+    .filtersMobile>div {
         width: calc(100% + 32px);
         margin-left: -16px;
         margin-right: -16px;
         padding-left: 16px;
         padding-right: 16px;
     }
+
     .bottom1024 {
         display: flex;
         grid-row-start: 3;
@@ -446,9 +484,11 @@
         grid-column-start: 1;
         flex-direction: column;
     }
-    .bottom1024 > *:last-child > div:last-child {
+
+    .bottom1024>*:last-child>div:last-child {
         flex-direction: column;
     }
+
     .tipsSlider h2 {
         padding-left: 16px;
         padding-right: 16px;
@@ -463,10 +503,10 @@
         padding-bottom: 5px;
     }
 
-    .tipsterFilter > div > button {
+    .tipsterFilter>div>button {
         min-width: calc(50% - 12px);
     }
-    
+
     .mainColumn {
         margin-left: 0;
         margin-right: 0;

@@ -11,10 +11,9 @@ import usePortal from "src/utils/usePortal";
 import { PortalContext } from "src/utils/portalContext";
 import dynamic from "next/dynamic";
 
-const OutPortal = dynamic(
-	async () => (await import("react-reverse-portal")).OutPortal,
-	{ ssr: false }
-);
+const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
+	ssr: false,
+});
 
 const DateFilterItems = [
 	{ name: "Newest to Oldest", id: "1" },
@@ -42,7 +41,7 @@ const TrackingTipsTab: React.FC = () => {
 	return (
 		<PortalContext.Provider value={{ portalNode }}>
 			{portalNode && <OutPortal node={portalNode} />}
-			<div className={styles.trackingTipsTab}>
+			<div className={styles.tipsTab}>
 				<div className={styles.filters}>
 					{width > 425 ? (
 						<>
@@ -103,13 +102,14 @@ const TrackingTipsTab: React.FC = () => {
 						/>
 					</div>
 				</div>
-
-				{data.map((prediction, index) => (
-					<Prediction
-						key={`prediction_${index}`}
-						{...prediction}
-					/>
-				))}
+				<div className={styles.predictions}>
+					{data.map((prediction, index) => (
+						<Prediction
+							key={`prediction_${index}`}
+							{...prediction}
+						/>
+					))}
+				</div>
 			</div>
 		</PortalContext.Provider>
 	);

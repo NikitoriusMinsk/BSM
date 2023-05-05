@@ -6,14 +6,13 @@
     flex-direction: column;
     gap: 40px;
     padding-top: 20px;
-    margin-left: 60px;
+    margin-left: -60px;
 }
 
 .recentNews {
     grid-column-start: 1;
     grid-column-end: 10;
     grid-row-start: 2;
-    margin-left: 60px;
 }
 
 .wideNews {
@@ -26,7 +25,6 @@
     grid-column-start: 1;
     grid-column-end: 13;
     grid-row-start: 4;
-    margin-left: 60px;
 }
 
 .newsBlockContainer .newsBlock .newsBlockContent .news {
@@ -52,7 +50,6 @@
     min-height: 540px;
     border-radius: 16px 0 16px 0;
     overflow: hidden;
-    margin-left: -60px;
     margin-top: -20px;
 }
 
@@ -743,11 +740,8 @@
 }
 
 @media screen and (max-width: 1440px) {
-
-    .mainNewsContainer,
-    .recentNews,
-    .newsBlockContainer {
-        margin-left: 40px;
+    .mainNewsContainer {
+        margin-left: -40px;
     }
 
     .fullWidthNewsBlock {
@@ -764,6 +758,12 @@
     }
 }
 
+@media screen and (max-width: 1366px) {
+    .mainNewsContainer {
+        margin-left: -30px;
+    }
+}
+
 @media screen and (max-width: 1280px) {
     .newsBlockContainer .newsBlock .newsBlockContent .news {
         width: calc(33% - 17px);
@@ -771,6 +771,11 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .mainNewsContainer {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+
     .sideColumn {
         display: none;
     }
@@ -785,12 +790,6 @@
         padding-left: 30px;
     }
 
-    .mainNewsContainer,
-    .recentNews,
-    .newsBlockContainer {
-        margin-left: 30px;
-    }
-
     .recentNews,
     .newsBlockContainer {
         margin-right: 30px;
@@ -803,12 +802,6 @@
 
 @media screen and (max-width: 768px) {
 
-    .mainNewsContainer,
-    .recentNews,
-    .newsBlockContainer {
-        margin-left: 20px;
-    }
-
     .fullWidthNewsBlock {
         margin-right: 0;
         padding-left: 20px;
@@ -817,18 +810,26 @@
     .fullWidthNewsBlockContent {
         flex-direction: column;
     }
+
+    .mainNewsContainer {
+        margin-left: 0;
+        padding-top: 0;
+    }
+
+    .mainNewsLabel {
+        top: 60px;
+        left: 20px;
+    }
+
+    .mainNewsInfo {
+        left: 20px;
+    }
 }
 
 @media screen and (max-width: 425px) {
     .fullWidthNewsBlock {
         margin-right: 0;
         padding-left: 0;
-    }
-
-    .mainNewsContainer,
-    .recentNews,
-    .newsBlockContainer {
-        margin-left: 0;
     }
 
     .recentNews,
@@ -841,9 +842,8 @@
         width: 100%;
     }
 
-    .mainNewsContainer {
-        margin-left: 0;
-        padding-top: 0;
+    .mainNewsLabel {
+        top: 20px;
     }
 
     .sideNewsContainer {
@@ -865,11 +865,6 @@
         grid-column-end: 13;
         grid-row-start: 6;
         padding: 0 16px;
-    }
-
-    .mainNewsLabel {
-        top: 20px;
-        left: 20px;
     }
 
     .mainNews {

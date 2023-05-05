@@ -4,6 +4,7 @@
     padding: 20px 30px 0 60px;
     height: 100%;
     background-color: #FBFBFB;
+    margin-left: -60px;
 }
 
 .mainColumn {
@@ -238,6 +239,31 @@
 .menuItem.active .counter {
     background-color: #FFFFFF;
     color: #1A1C21;
+}
+
+@media screen and (max-width: 1440px) {
+    .sideColumn {
+        padding-left: 40px;
+        margin-left: -40px;
+    }
+
+    .navigation .userInfo {
+        padding: 16px;
+    }
+
+    .navigation .userInfo .stats {
+        flex-wrap: nowrap;
+    }
+
+    .navigation .userInfo .stats .stat {
+        flex: unset;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .sideColumn {
+        margin-left: -30px;
+    }
 }
 
 @media screen and (max-width: 425px) {
