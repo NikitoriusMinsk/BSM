@@ -455,10 +455,55 @@
     }
 }
 
+@media screen and (max-width:1024px) {
+    .withdrawTab {
+        gap: 24px;
+    }
+
+    #withdrawBalance {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #withdrawTotal {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    #withdrawTotal .text {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #withdrawBalance {
+        align-items: flex-start;
+    }
+
+    #withdrawBalance div:last-child {
+        flex-direction: row-reverse;
+    }
+}
+
 @media screen and (max-width:425px) {
     #withdrawBalance {
         flex-direction: column;
         gap: 40px;
+        grid-row-start: 1;
+        grid-column-start: 1;
+        grid-column-end: 13;
+    }
+
+    #withdrawTotal {
+        grid-row-start: 2;
+        grid-column-start: 1;
+        grid-column-end: 13;
+        flex-direction: row;
+    }
+
+    #table {
+        grid-row-start: 3;
     }
 
     .modalContainer {
