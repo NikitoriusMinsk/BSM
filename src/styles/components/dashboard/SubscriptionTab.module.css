@@ -268,7 +268,21 @@
     content: url(/icons/check-gray.svg);
 }
 
+@media screen and (max-width: 1024px) {
+    .duration .progress {
+        min-width: 140px;
+    }
+}
+
 @media screen and (max-width: 425px) {
+    .subscriptionTab {
+        gap: 20px;
+    }
+
+    .duration .progress {
+        min-width: 240px;
+    }
+
     #subscribers {
         flex-direction: column;
     }

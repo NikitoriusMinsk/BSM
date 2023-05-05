@@ -131,14 +131,12 @@ const FollowingTab: React.FC = () => {
 				className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
 			>
 				<div className={styles.info}>
-					<div className={sharedStyles.image}>
-						<Image
-							src="/images/dashboard/followers.svg"
-							height={80}
-							width={80}
-							alt=""
-						/>
-					</div>
+					<Image
+						src="/images/dashboard/followers.svg"
+						height={80}
+						width={80}
+						alt=""
+					/>
 					<div className={styles.text}>
 						<h3>Following</h3>
 						<h2>{data.count}</h2>
