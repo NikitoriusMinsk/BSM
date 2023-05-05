@@ -1,0 +1,347 @@
+.container{
+    padding-left: 40px;
+    padding-right: 115px;
+    display: flex;
+    gap: 40px;
+}
+.main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    grid-column-start: 1;
+    grid-column-end: 10;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin-bottom: 100px;
+}
+.leaguePreview{
+    position: relative;
+    height: 270px;
+    border-top-left-radius: 16px;    
+    border-bottom-right-radius: 16px;
+    overflow: hidden;
+    padding: 40px 20px 20px 60px;
+}
+.leaguePreview::after{
+    background: linear-gradient(90deg, rgba(26, 28, 33, 0.8) 14.3%, rgba(26, 28, 33, 0.1) 100%);
+    content: "";
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.leagueInfo{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+.leagueHeader{
+    display: flex;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.buttonBack{
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.leagueData {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    gap: 16px;
+    margin-left: 96px;
+    margin-top: auto;
+    margin-bottom: auto;
+    z-index: 1;
+}
+.leagueLogo {
+    display: flex;
+    padding: 5px;
+    background: #FFFFFF;
+    border-radius: 8px;
+}
+.leagueFields {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: space-between;
+    height: 100%;
+    padding: 6px 0px;
+}
+.leagueTitle {    
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.leagueTitleName {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+}
+.leagueTitleDate {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(255, 255, 255, 0.8);
+}
+.countryName {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.countryNameField {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+.countryFlag {
+    overflow: hidden;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.matchStatPages{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 60px);
+    margin-left: 60px;
+}
+.pageSelector{
+    overflow-x: auto;
+    width: calc(100% + 60px);
+    margin-left: -60px;
+    padding-left: 60px;
+    padding-top: 9px;
+    margin-bottom: 32px;
+    position: relative;
+}
+.pagesLine {
+    display: flex;
+    gap: 60px;
+    border-bottom: 1px solid rgba(26, 28, 33, 0.1);
+    width: max-content;
+    min-width: 100%;
+}
+.pageSelector::-webkit-scrollbar{
+    display: none;
+}
+.page{
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #1A1C21;
+    text-transform: capitalize;
+    min-width: max-content;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    display:inline-block;
+    text-align:center;
+    cursor: pointer;
+    padding-bottom: 19px;
+    z-index: 2;
+}
+.page::before{
+    display: block;
+    content: attr(aria-label);  
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-size: 18px;
+    line-height: 22px;  
+    font-weight: 700;
+    height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.pageActive{
+    font-weight: 700;
+}
+.pageUnderline{
+    background: #1A1C21;
+    border-radius: 2px;
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    grid-column-start: 10;
+    grid-column-end: 13;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+@media screen and (max-width: 1440px) {
+    .matchStatPages {
+        margin-left: 38px;
+        width: calc(100% - 38px);
+    }
+    .pagesLine {
+        gap: 32px;
+    }
+    .main {        
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .matchStatPages {
+        margin-left: 30px;
+        width: calc(100% - 30px);
+    }
+    .pagesLine {
+        gap: 26px;
+    }
+    .main {        
+        gap: 24px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .matchStatPages {
+        margin-left: 30px;
+        width: calc(100% - 30px);
+    }
+    .pagesLine {
+        gap: 18px;
+    }
+    .main {        
+        gap: 24px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .matchStatPages {
+        margin-left: 20px;
+        width: calc(100% - 40px);
+        margin-right: 20px;
+    }
+    .pagesLine {
+        gap: 26px;
+    }
+    .main {        
+        gap: 24px;
+        grid-column-end: 13;
+    }
+    .sideBar {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .pageSelector {        
+        width: calc(100% + 80px);
+        padding-right: 20px;
+    }
+    .matchPreview {
+        border-radius: 0px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .main {
+        grid-column-end: 13;
+        gap: 20px;
+        margin-bottom: 0px;
+    }
+    .sideBar {
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+    .matchPreview {
+        height: 60vw;
+        padding: 16px;
+        border-radius: 0px;
+    }
+    .buttonBack {
+        width: 36px;
+        height: 36px;
+    }
+    .buttonBack *{
+        width: 20px!important;
+        height: 20px!important;
+    }
+    .matchData {
+        padding: 24px;
+        gap: 10px;
+        width: 100%;
+        margin-top: 20px;
+        justify-content: space-around;
+    }
+    .clubLogo {
+        width: 48px;
+        height: 48px;
+    }
+    .score {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 29px;
+    }
+    .currentTime span {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+    }
+    .club span {
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 18px;
+    }
+    .matchStatPages {
+        margin-left: 0px;
+        width: 100%;
+    }
+    .page {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        padding-bottom: 13px;
+    }
+    .pageActive {
+        font-weight: 600;
+    }
+    .pageSelector {
+        width: 100%;
+        padding: 0px 16px;
+        margin-left: 0px;
+    }
+    .pagesLine {
+        gap: 40px;
+    }
+}

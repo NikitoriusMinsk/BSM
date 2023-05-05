@@ -1,0 +1,152 @@
+.pageContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.teamHead{
+    width: auto;
+}
+.teamCell{
+    font-family: 'Samsung Sans'!important;
+    font-style: normal!important;
+    font-weight: 600!important;
+    font-size: 15px!important;
+    line-height: 18px!important;
+    color: #1A1C21!important;
+}
+.teamCell span{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.teamLogo{
+    overflow: hidden;
+    background: #FFF;
+    border: 3px solid rgba(26, 28, 33, 0.1);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    flex-shrink: 0;
+}
+
+/* top scorers table */
+.archive {
+    width: 100%;
+}
+.archive > table {
+    width: 100%;
+}
+.archiveTable th{
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(26, 28, 33, 0.7);   
+    background: #F2F2F2;
+    text-align: left;
+}
+.archiveTable th:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    color: #1A1C21;
+}
+.archiveTable th:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.archiveTable td{
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+    text-align: left;
+}
+.archiveTable tbody td {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.archiveTable > tbody > tr:nth-child(2n) > td {
+    background: rgba(242, 242, 242, 0.3);;
+}
+.archiveTable > tbody > tr:nth-child(2n) > td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.archiveTable > tbody > tr:nth-child(2n) > td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.archiveTable td:first-child, .archiveTable th:first-child {
+    padding-left: 20px;
+}
+.archiveTable td:last-child, .archiveTable th:last-child {
+    padding-right: 20px;
+}
+.boldCell{
+    font-weight: 700!important;
+}
+.teamHead{
+    width: auto;
+}
+.teamCell{
+    font-family: 'Samsung Sans'!important;
+    font-style: normal!important;
+    font-weight: 600!important;
+    font-size: 15px!important;
+    line-height: 18px!important;
+    color: #1A1C21!important;
+}
+.teamCell span{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.teamLogo{
+    overflow: hidden;
+    background: #FFF;
+    border: 3px solid rgba(26, 28, 33, 0.1);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    flex-shrink: 0;
+}
+/* top scorers table - end */
+
+@media screen and (max-width: 600px) {
+    .pageContainer {
+    }
+    .filter {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .standingsTable tbody tr:nth-child(2n-1) td:first-child, .standingsTable tbody tr:nth-child(2n-1) td:last-child { 
+        border-radius: 0px;
+    }
+    .standingsTable td:first-child, .standingsTable th:first-child {
+        padding-left: 16px;
+    }
+    .standingsTable td:last-child, .standingsTable th:last-child {
+        padding-right: 16px;
+    }
+    .standingsTable td:last-child {
+        border-left: 1px solid rgba(26, 28, 33, 0.1);
+    }
+    .standingsTable tbody td {
+        font-weight: 600;
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .standingsTable tbody td:first-child {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        color: rgba(26, 28, 33, 0.7);
+    }
+}
