@@ -11,7 +11,8 @@
     justify-content: center;
     gap: 30px;
     padding: 0 480px;
-    margin-right: -135px
+    margin-right: -135px;
+    margin-left: -60px;
 }
 
 .header .background {
@@ -58,7 +59,6 @@
     grid-column-end: 13;
     grid-row-start: 2;
     grid-row-end: 3;
-    padding-left: 60px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -212,6 +212,7 @@
 @media screen and (max-width: 1440px) {
     .header {
         margin-right: -30px;
+        margin-left: -40px;
         padding: 0 300px;
         height: 300px;
     }
@@ -220,15 +221,6 @@
         left: -50px;
     }
 
-    .mainColumn {
-        padding-left: 40px;
-    }
-}
-
-@media screen and (max-width: 1366px) {
-    .mainColumn {
-        padding-left: 30px;
-    }
 }
 
 @media screen and (max-width: 1280px) {
@@ -248,8 +240,7 @@
     }
 
     .mainColumn {
-        padding-left: 40px;
-        padding-right: 40px;
+        padding-right: 30px;
     }
 }
 

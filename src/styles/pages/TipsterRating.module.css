@@ -3,6 +3,7 @@
     grid-column-end: 13;
     grid-row-start: 1;
     grid-row-end: 2;
+    margin-left: -60px;
 }
 
 .sideColumn {
@@ -13,14 +14,6 @@
     grid-column-end: 13;
     grid-row-start: 2;
     grid-row-end: 5;
-}
-
-.sideMargin {
-    margin-left: 60px;
-}
-
-.sideColumn .sideMargin {
-    margin-left: 0;
 }
 
 #wideBanner {
@@ -544,19 +537,19 @@
 }
 
 @media screen and (max-width: 1440px) {
+    .mainBlock {
+        margin-left: -40px;
+    }
+
     .verifiedTipsters {
         padding: 24px 100px;
         margin-right: -30px;
     }
-
-    .sideMargin {
-        margin-left: 40px;
-    }
 }
 
 @media screen and (max-width: 1366px) {
-    .sideMargin {
-        margin-left: 30px;
+    .mainBlock {
+        margin-left: -30px;
     }
 }
 
@@ -576,6 +569,10 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .mainBlock {
+        margin-left: -20px;
+    }
+
     .verifiedTipsters {
         padding: 24px 20px;
         margin-right: 0;
@@ -595,33 +592,47 @@
 }
 
 @media screen and (max-width: 768px) {
+    .mainBlock {
+        margin-left: 0;
+    }
+
     #tableContainer {
         grid-column-start: 1;
         grid-column-end: 13;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     #timer {
         grid-row-start: 3;
         grid-column-start: 1;
         grid-column-end: 13;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     #liveMatches {
         grid-row-start: 4;
         grid-column-start: 1;
         grid-column-end: 13;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     #bookmakers {
         grid-row-start: 5;
         grid-column-start: 1;
         grid-column-end: 13;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     #tallBanner {
         grid-row-start: 6;
         grid-column-start: 1;
         grid-column-end: 13;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     #tallBanner>div {
@@ -632,23 +643,24 @@
         grid-row-start: 7;
         grid-column-start: 1;
         grid-column-end: 13;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     #wideBanner {
         grid-row-start: 8;
         grid-column-start: 1;
         grid-column-end: 13;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     #tips {
         grid-row-start: 9;
         grid-column-start: 1;
         grid-column-end: 13;
-    }
-
-    .sideMargin {
-        margin-left: 24px;
-        margin-right: 24px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .timer {
@@ -679,25 +691,7 @@
 }
 
 @media screen and (max-width: 425px) {
-    .mainColumn {
-        grid-column-start: 1;
-        grid-column-end: 13;
-        margin-left: 0;
-        margin-bottom: 0;
-    }
 
-    .sideColumn {
-        grid-row-start: 3;
-        grid-row-end: 4;
-        grid-column-start: 1;
-        grid-column-end: 13;
-        padding: 0 20px;
-    }
-
-    .sideMargin {
-        margin-left: 16px;
-        margin-right: 16px;
-    }
 
     .verifiedTipsters {
         padding: 16px;

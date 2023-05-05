@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    margin-left: -60px;
 }
 
 .bestBookmakers .background {
@@ -68,7 +69,6 @@
     grid-column-end: 13;
     grid-row-start: 2;
     grid-row-end: 3;
-    margin-left: 60px;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -110,7 +110,6 @@
     grid-column-end: 13;
     grid-row-start: 3;
     grid-row-end: 4;
-    margin-left: 60px;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -404,29 +403,26 @@
 @media screen and (max-width: 1440px) {
     .bestBookmakers {
         margin-right: -30px;
+        margin-left: -40px;
     }
 
     .sports .sport {
         width: calc(33% - 23px);
     }
 
-    .allBookmakers,
-    .text {
-        margin-left: 40px;
+}
+
+@media screen and (max-width: 1280px) {
+    .bestBookmakers {
+        margin-left: -30px;
     }
 }
 
 @media screen and (max-width: 1024px) {
     .bestBookmakers {
         margin-right: 0px;
+        margin-left: -20px;
         padding: 42px 21px;
-    }
-
-
-    .allBookmakers,
-    .text {
-        margin-left: 20px;
-        margin-right: 20px;
     }
 
     .bookmaker {
@@ -439,6 +435,15 @@
 }
 
 @media screen and (max-width: 768px) {
+    .bestBookmakers {
+        margin-left: 0;
+    }
+
+    .allBookmakers,
+    .text {
+        padding: 0 24px;
+    }
+
     .bookmaker {
         width: calc(50% - 20px);
     }
@@ -465,8 +470,6 @@
 
     .allBookmakers,
     .text {
-        margin-left: 0;
-        margin-right: 0;
         padding: 0 16px;
     }
 
