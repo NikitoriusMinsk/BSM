@@ -1,5 +1,5 @@
 import styles from "../../styles/components/league-summary/ArchivePage.module.css"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useEffect, useState } from "react"
 
 const ArchivePage: React.FC = () => {
@@ -33,7 +33,8 @@ const ArchivePage: React.FC = () => {
                                                 src="/testimg/club1.png"
                                                 width={20}
                                                 height={20}
-                                                objectFit="contain"
+                                                style={{objectFit:'contain'}}
+                                                alt=""
                                             />
                                         </div>
                                         Team Name

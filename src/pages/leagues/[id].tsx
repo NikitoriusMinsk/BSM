@@ -1,7 +1,7 @@
 import type { NextPage } from "next"
 import Head from "next/head"
 import styles from "../../styles/pages/LeagueSummary.module.css"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -72,8 +72,9 @@ const LeagueSummary: NextPage = () => {
                     <Image 
                         //test img link
                         src="/testimg/football.jpg"
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{objectFit:'cover'}}
+                        alt=""
                     />
                     <div className={styles.leagueInfo}>
                         <div className={styles.leagueHeader}>
@@ -85,6 +86,7 @@ const LeagueSummary: NextPage = () => {
                                     src="/icons/arrow-narrow-left.svg"
                                     width={24}
                                     height={24}
+                                    alt=""
                                 />
                             </div>
                         </div>
@@ -94,6 +96,7 @@ const LeagueSummary: NextPage = () => {
                                     src="/images/league-placeholder.png"
                                     width={100}
                                     height={100}
+                                    alt=""
                                 />
                             </div>
                             <div className={styles.leagueFields}>
@@ -111,6 +114,7 @@ const LeagueSummary: NextPage = () => {
                                             src="/icons/flags/en.svg"
                                             width={24}
                                             height={24}
+                                            alt=""
                                         />
                                     </div>
                                     <span className={styles.countryNameField}>

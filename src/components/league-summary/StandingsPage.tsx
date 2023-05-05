@@ -1,5 +1,5 @@
 import styles from "../../styles/components/league-summary/StandingsPage.module.css"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useEffect, useState } from "react"
 import StandingsFilter from "@components/ui/match-summary/StandingsFilter"
 import { motion, AnimatePresence } from "framer-motion"
@@ -113,7 +113,8 @@ const StandingsTable: React.FC = () => {
                                             src="/testimg/club1.png"
                                             width={20}
                                             height={20}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     Team Name
@@ -165,7 +166,8 @@ const StandingsTable: React.FC = () => {
                                             src="/testimg/club1.png"
                                             width={20}
                                             height={20}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     Team Name
@@ -246,7 +248,8 @@ const TopScorersTable: React.FC = () => {
                                             src="/testimg/club1.png"
                                             width={20}
                                             height={20}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     Team Name

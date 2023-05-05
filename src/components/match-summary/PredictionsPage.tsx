@@ -1,5 +1,5 @@
 import styles from "../../styles/components/match-summary/PredictionsPage.module.css"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useEffect, useState } from "react"
 import PredictionsFilter from "@components/ui/match-summary/PredictionsFilter"
 import { motion } from "framer-motion"

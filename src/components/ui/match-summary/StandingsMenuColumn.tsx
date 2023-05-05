@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import styles from '../../../styles/components/ui/match-summary/StandigsMenuColumn.module.css'
-import Image from "next/legacy/image"
+import Image from "next/image"
 import Draggable from 'react-draggable'
 import WheelPicker from 'react-simple-wheel-picker'
 import SubmitButton from "../SubmitButton"
@@ -50,8 +50,8 @@ const StandigsMenuColumn: React.FC<MenuProps> = (props) => {
                         src="/icons/chevron-down.svg"
                         width={20}
                         height={20}
-                        objectFit="contain"
-                        objectPosition="center center"
+                        style={{objectFit:'contain',objectPosition:"center center"}}
+                        alt=""
                     />
                 </div>
             </div>

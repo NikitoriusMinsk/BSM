@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react";
 import styles from "@styles/pages/UserDashboard.module.css";
 import { trpc } from "src/utils/trpc";
 import { UserInfo } from "src/types/queryTypes";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import DashboardTab from "@components/dashboard/DashboardTab";
 import WithdrawTab from "@components/dashboard/WithdrawTab";
 import FollowersTab from "@components/dashboard/FollowersTab";
@@ -151,6 +151,7 @@ const Navigation: React.FC<{
 							src={userInfo.image}
 							height={80}
 							width={80}
+							alt=""
 						/>
 					</div>
 					<div className={styles.details}>
@@ -160,6 +161,7 @@ const Navigation: React.FC<{
 								src="/icons/star.svg"
 								height={16}
 								width={16}
+								alt=""
 							/>
 							<span>
 								Rank <b>{userInfo.rank}</b>
@@ -246,6 +248,7 @@ const MenuItem: React.FC<{
 					src={active ? activeIcon : icon}
 					height={24}
 					width={24}
+					alt=""
 				/>
 				<span className={styles.name}>{page}</span>
 			</div>

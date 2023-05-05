@@ -1,5 +1,5 @@
 import styles from "../../styles/components/match-summary/OddsPage.module.css"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useRef, useEffect, useState } from "react"
 import DropdownSearch from "@components/ui/match-summary/DropdownSearch"
 import OddsFilter from "@components/ui/match-summary/OddsFilter"

@@ -1,5 +1,5 @@
 import styles from "../../styles/components/match-summary/BookmakersPage.module.css"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useEffect, useState } from "react"
 
 const BookmakersPage: React.FC = () => {
@@ -29,8 +29,7 @@ const BookmakersPage: React.FC = () => {
                             src="/images/bookmaker-placeholder-3.png"
                             width={130}
                             height={40}
-                            objectFit="contain"
-                            objectPosition="center center"
+                            style={{objectFit:'contain',objectPosition:"center center"}}
                             alt=""
                         />
                     </div>
@@ -44,8 +43,7 @@ const BookmakersPage: React.FC = () => {
                                     src="/icons/arrow-narrow-up.svg"
                                     width={24}
                                     height={24}
-                                    objectFit="contain"
-                                    objectPosition="center center"
+                                    style={{objectFit:'contain',objectPosition:"center center"}}
                                     alt=""
                                 />
                             </div>                            
@@ -73,8 +71,7 @@ const BookmakersPage: React.FC = () => {
                                     src="/icons/arrow-narrow-down.svg"
                                     width={24}
                                     height={24}
-                                    objectFit="contain"
-                                    objectPosition="center center"
+                                    style={{objectFit:'contain',objectPosition:"center center"}}
                                     alt=""
                                 />
                             </div>                            
@@ -90,8 +87,7 @@ const BookmakersPage: React.FC = () => {
                             src="/images/bookmaker-placeholder-3.png"
                             width={130}
                             height={40}
-                            objectFit="contain"
-                            objectPosition="center center"
+                            style={{objectFit:'contain',objectPosition:"center center"}}
                             alt=""
                         />
                     </div>
@@ -105,8 +101,7 @@ const BookmakersPage: React.FC = () => {
                                     src="/icons/arrow-narrow-up.svg"
                                     width={24}
                                     height={24}
-                                    objectFit="contain"
-                                    objectPosition="center center"
+                                    style={{objectFit:'contain',objectPosition:"center center"}}
                                     alt=""
                                 />
                             </div>                            
@@ -134,8 +129,7 @@ const BookmakersPage: React.FC = () => {
                                     src="/icons/arrow-narrow-down.svg"
                                     width={24}
                                     height={24}
-                                    objectFit="contain"
-                                    objectPosition="center center"
+                                    style={{objectFit:'contain',objectPosition:"center center"}}
                                     alt=""
                                 />
                             </div>                            
@@ -151,8 +145,7 @@ const BookmakersPage: React.FC = () => {
                             src="/images/bookmaker-placeholder-3.png"
                             width={130}
                             height={40}
-                            objectFit="contain"
-                            objectPosition="center center"
+                            style={{objectFit:'contain',objectPosition:"center center"}}
                             alt=""
                         />
                     </div>
@@ -166,8 +159,7 @@ const BookmakersPage: React.FC = () => {
                                     src="/icons/arrow-narrow-up.svg"
                                     width={24}
                                     height={24}
-                                    objectFit="contain"
-                                    objectPosition="center center"
+                                    style={{objectFit:'contain',objectPosition:"center center"}}
                                     alt=""
                                 />
                             </div>                            
@@ -195,8 +187,7 @@ const BookmakersPage: React.FC = () => {
                                     src="/icons/arrow-narrow-down.svg"
                                     width={24}
                                     height={24}
-                                    objectFit="contain"
-                                    objectPosition="center center"
+                                    style={{objectFit:'contain',objectPosition:"center center"}}
                                     alt=""
                                 />
                             </div>                            

@@ -1,5 +1,5 @@
 import styles from "../../styles/components/match-summary/H2HPage.module.css"
-import Image from "next/legacy/image";
+import Image from "next/image";
 import React, { useRef, useEffect, useState } from "react"
 import H2HFilter from "@components/ui/match-summary/H2HFilter"
 import { motion } from "framer-motion"
@@ -82,7 +82,8 @@ const MatchesBlock: React.FC = () => {
                                             src="/testimg/world.png"
                                             width={24}
                                             height={24}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <span className={styles.champName}>
@@ -96,7 +97,8 @@ const MatchesBlock: React.FC = () => {
                                         src="/testimg/world.png"
                                         width={24}
                                         height={24}
-                                        objectFit="contain"
+                                        style={{objectFit:'contain'}}
+                                        alt=""
                                     />
                                 </div>
                                 <div className={styles.champ}>
@@ -115,7 +117,8 @@ const MatchesBlock: React.FC = () => {
                                             src="/testimg/club1.png"
                                             width={20}
                                             height={20}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <div className={styles.teamLogo}>
@@ -123,7 +126,8 @@ const MatchesBlock: React.FC = () => {
                                             src="/testimg/club2.png"
                                             width={20}
                                             height={20}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                 </div>
@@ -162,7 +166,8 @@ const MatchesBlock: React.FC = () => {
                                             src="/testimg/world.png"
                                             width={24}
                                             height={24}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <span className={styles.champName}>
@@ -176,7 +181,8 @@ const MatchesBlock: React.FC = () => {
                                         src="/testimg/world.png"
                                         width={24}
                                         height={24}
-                                        objectFit="contain"
+                                        style={{objectFit:'contain'}}
+                                        alt=""
                                     />
                                 </div>
                                 <div className={styles.champ}>
@@ -195,7 +201,8 @@ const MatchesBlock: React.FC = () => {
                                             src="/testimg/club1.png"
                                             width={20}
                                             height={20}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <div className={styles.teamLogo}>
@@ -203,7 +210,8 @@ const MatchesBlock: React.FC = () => {
                                             src="/testimg/club2.png"
                                             width={20}
                                             height={20}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                 </div>
@@ -242,7 +250,8 @@ const MatchesBlock: React.FC = () => {
                                             src="/testimg/world.png"
                                             width={24}
                                             height={24}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <span className={styles.champName}>
@@ -256,7 +265,8 @@ const MatchesBlock: React.FC = () => {
                                         src="/testimg/world.png"
                                         width={24}
                                         height={24}
-                                        objectFit="contain"
+                                        style={{objectFit:'contain'}}
+                                        alt=""
                                     />
                                 </div>
                                 <div className={styles.champ}>
@@ -275,7 +285,8 @@ const MatchesBlock: React.FC = () => {
                                             src="/testimg/club1.png"
                                             width={20}
                                             height={20}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                     <div className={styles.teamLogo}>
@@ -283,7 +294,8 @@ const MatchesBlock: React.FC = () => {
                                             src="/testimg/club2.png"
                                             width={20}
                                             height={20}
-                                            objectFit="contain"
+                                            style={{objectFit:'contain'}}
+                                            alt=""
                                         />
                                     </div>
                                 </div>
@@ -320,7 +332,8 @@ const MatchesBlock: React.FC = () => {
                         src="/icons/chevron-down.svg"
                         width={24}
                         height={24}
-                        objectFit="contain"
+                        style={{objectFit:'contain'}}
+                        alt=""
                     />
                 </span>
             }
