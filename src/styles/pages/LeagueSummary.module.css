@@ -192,8 +192,8 @@
     }
     .main {        
         gap: 30px;
-        margin-left: -30px;
-        width: calc(100% - 30px);
+        margin-left: -40px;
+        width: calc(100% + 40px);
     }
     .leaguePreview {
         padding-left: 40px;
@@ -204,6 +204,10 @@
     .matchStatPages {
         margin-left: 30px;
         width: calc(100% - 30px);
+    }
+    .main {
+        margin-left: -30px;
+        width: calc(100% + 30px);
     }
     .leaguePreview {
         padding-left: 30px;
@@ -223,21 +227,37 @@
 @media screen and (max-width: 1024px) {
     .matchStatPages {
         margin-left: 20px;
-        width: calc(100% - 40px);
-        margin-right: 20px;
+        width: calc(100% - 20px);
     }
     .main {        
         gap: 24px;
         grid-column-end: 13;
+        margin-left: -20px;
+        width: calc(100% + 20px);
     }
     .sideBar {
         display: none;
+    }
+    .leaguePreview {
+        padding-left: 20px;
     }
 }
 
 @media screen and (max-width: 768px) {
     .matchPreview {
         border-radius: 0px;
+    }
+    .main {        
+        margin-left: 00px;
+        width: 100%;
+    }
+    .matchStatPages {
+        margin-left: 20px;
+        margin-right: 20px;
+        width: calc(100% - 40px);
+    }
+    .leagueData {
+        margin-left: 60px;
     }
 }
 

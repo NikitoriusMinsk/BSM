@@ -27,9 +27,7 @@
 
 }
 @media screen and (max-width: 1024px) {
-    .pagesLine {
-        gap: 26px;
-    }
+
 }
 @media screen and (max-width: 768px) {
     .pageSelector {        
