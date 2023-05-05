@@ -192,6 +192,8 @@
     }
     .main {        
         gap: 30px;
+        margin-left: -30px;
+        width: calc(100% - 30px);
     }
     .leaguePreview {
         padding-left: 40px;
@@ -203,8 +205,8 @@
         margin-left: 30px;
         width: calc(100% - 30px);
     }
-    .main {        
-        gap: 24px;
+    .leaguePreview {
+        padding-left: 30px;
     }
 }
 
