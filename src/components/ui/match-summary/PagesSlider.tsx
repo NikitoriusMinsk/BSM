@@ -1,5 +1,5 @@
 import React, { useRef, MouseEvent } from "react"
-import styles from "../../../styles/pages/MatchSummary.module.css"
+import styles from "../../../styles/components/ui/match-summary/PagesSlider.module.css"
 import { useDraggable } from "react-use-draggable-scroll";
 
 interface PagesSliderProps {

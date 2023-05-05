@@ -154,25 +154,6 @@
     width: calc(100% - 60px);
     margin-left: 60px;
 }
-.pageSelector{
-    overflow-x: auto;
-    width: calc(100% + 60px);
-    margin-left: -60px;
-    padding-left: 60px;
-    padding-top: 9px;
-    margin-bottom: 32px;
-    position: relative;
-}
-.pagesLine {
-    display: flex;
-    gap: 60px;
-    border-bottom: 1px solid rgba(26, 28, 33, 0.1);
-    width: max-content;
-    min-width: 100%;
-}
-.pageSelector::-webkit-scrollbar{
-    display: none;
-}
 .page{
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -230,9 +211,6 @@
         margin-left: 38px;
         width: calc(100% - 38px);
     }
-    .pagesLine {
-        gap: 32px;
-    }
     .main {        
         gap: 30px;
     }
@@ -243,9 +221,6 @@
         margin-left: 30px;
         width: calc(100% - 30px);
     }
-    .pagesLine {
-        gap: 26px;
-    }
     .main {        
         gap: 24px;
     }
@@ -255,9 +230,6 @@
     .matchStatPages {
         margin-left: 30px;
         width: calc(100% - 30px);
-    }
-    .pagesLine {
-        gap: 18px;
     }
     .main {        
         gap: 24px;
@@ -270,9 +242,6 @@
         width: calc(100% - 40px);
         margin-right: 20px;
     }
-    .pagesLine {
-        gap: 26px;
-    }
     .main {        
         gap: 24px;
         grid-column-end: 13;
@@ -283,10 +252,6 @@
 }
 
 @media screen and (max-width: 768px) {
-    .pageSelector {        
-        width: calc(100% + 80px);
-        padding-right: 20px;
-    }
     .matchPreview {
         border-radius: 0px;
     }
@@ -357,13 +322,5 @@
     }
     .pageActive {
         font-weight: 600;
-    }
-    .pageSelector {
-        width: 100%;
-        padding: 0px 16px;
-        margin-left: 0px;
-    }
-    .pagesLine {
-        gap: 40px;
     }
 }
