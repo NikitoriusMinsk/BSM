@@ -8,8 +8,7 @@ import { trpc } from "src/utils/trpc";
 import { MethodStatus } from "src/types/methodStatus";
 
 const AboutCoins: NextPage = () => {
-	const { data: methods, isLoading: methodsLoading } =
-		trpc.coins.getMethods.useQuery();
+	const { data: methods, isLoading: methodsLoading } = trpc.coins.getMethods.useQuery();
 
 	if (methodsLoading) {
 		return <div>Loading...</div>;
@@ -44,11 +43,11 @@ const AboutCoins: NextPage = () => {
 				</div>
 				<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
 				<span>
-					Sed tempus sem ac libero venenatis, malesuada rhoncus tellus
-					gravida. Etiam vitae leo pretium, fermentum lectus interdum,
-					imperdiet dui. Cras cursus non elit et feugiat. Nunc mi diam,
-					pulvinar vel nunc eget, sodales auctor erat. Etiam fringilla
-					sollicitudin accumsan. Phasellus at urna lectus.
+					Sed tempus sem ac libero venenatis, malesuada rhoncus tellus gravida.
+					Etiam vitae leo pretium, fermentum lectus interdum, imperdiet dui.
+					Cras cursus non elit et feugiat. Nunc mi diam, pulvinar vel nunc eget,
+					sodales auctor erat. Etiam fringilla sollicitudin accumsan. Phasellus
+					at urna lectus.
 				</span>
 			</div>
 			<div className={styles.mainColumn}>
@@ -59,13 +58,12 @@ const AboutCoins: NextPage = () => {
 						gravida. Etiam vitae leo pretium, fermentum lectus interdum,
 						imperdiet dui. Cras cursus non elit et feugiat. Nunc mi diam,
 						pulvinar vel nunc eget, sodales auctor erat. Etiam fringilla
-						sollicitudin accumsan. Phasellus at urna lectus. Phasellus at
-						urna lectus. Cras eleifend purus volutpat dolor volutpat
-						placerat. Morbi ut dolor tempor, euismod eros eget, bibendum
-						enim. Donec mattis dolor est, eu placerat tortor commodo id.
-						Fusce purus quam, eleifend eu lacus ac, tempus molestie arcu.
-						Nunc sagittis condimentum purus, vel iaculis nisi efficitur
-						vitae.
+						sollicitudin accumsan. Phasellus at urna lectus. Phasellus at urna
+						lectus. Cras eleifend purus volutpat dolor volutpat placerat.
+						Morbi ut dolor tempor, euismod eros eget, bibendum enim. Donec
+						mattis dolor est, eu placerat tortor commodo id. Fusce purus quam,
+						eleifend eu lacus ac, tempus molestie arcu. Nunc sagittis
+						condimentum purus, vel iaculis nisi efficitur vitae.
 					</span>
 				</div>
 				<div className={styles.description}>
@@ -152,8 +150,7 @@ const Method: React.FC<inferArrayElementType<Methods>> = (props) => {
 				<div className={styles.text}>
 					<h4>{text}</h4>
 					<span>
-						For completing this task you will recieve{" "}
-						<b>{reward} coins</b>
+						For completing this task you will recieve <b>{reward} coins</b>
 					</span>
 				</div>
 				{getElementByType(status)}

@@ -16,14 +16,19 @@ interface FilterModalProps {
 	filters: {
 		key: string;
 		label: string;
-		type: "buttons" | "singleChoice" | "multipleChoice" | "date";
+		type:
+			| "buttons"
+			| "singleChoice"
+			| "singleChoiceSeparatePage"
+			| "multipleChoice"
+			| "multipleChoiceSeparatePage"
+			| "date";
 		items?: {
 			id: number;
 			label: string;
 			image?: string;
 		}[];
 		customClass?: string;
-		collect?: boolean;
 	}[];
 	onApply: (selectedValues: { [k: string]: number[] }) => void;
 	portalNode: HtmlPortalNode<Component<any>> | null;
@@ -72,7 +77,7 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 	}
 
 	function getFilter(filter: inferArrayElementType<FilterModalProps["filters"]>) {
-		const { items, key, type, label, customClass, collect } = filter;
+		const { items, key, type, label, customClass } = filter;
 		switch (type) {
 			case "buttons":
 				return (
@@ -94,7 +99,17 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 						onChange={(selected) => setSelected({ key, selected })}
 						label={label}
 						customClass={customClass}
-						collect={collect}
+					/>
+				);
+			case "singleChoiceSeparatePage":
+				return (
+					<SingleChoiceSeparatePageFilter
+						key={key}
+						items={items}
+						selected={selected[key] ?? []}
+						onChange={(selected) => setSelected({ key, selected })}
+						label={label}
+						customClass={customClass}
 					/>
 				);
 			case "multipleChoice":
@@ -106,7 +121,17 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 						onChange={(selected) => setSelected({ key, selected })}
 						label={label}
 						customClass={customClass}
-						collect={collect}
+					/>
+				);
+			case "multipleChoiceSeparatePage":
+				return (
+					<MultipleChoiceSeparatePageFilter
+						key={key}
+						items={items}
+						selected={selected[key] ?? []}
+						onChange={(selected) => setSelected({ key, selected })}
+						label={label}
+						customClass={customClass}
 					/>
 				);
 			case "date":
@@ -205,7 +230,6 @@ interface FilterProps {
 	onChange: (selected: number[]) => void;
 	label: string;
 	customClass?: string;
-	collect?: boolean;
 }
 
 const ButtonsFilter: React.FC<FilterProps> = (props) => {
@@ -230,134 +254,143 @@ const ButtonsFilter: React.FC<FilterProps> = (props) => {
 };
 
 const SingleChoiceFilter: React.FC<FilterProps> = (props) => {
-	const { selected, items, onChange, label, customClass, collect } = props;
-	const [open, setOpen] = useState(false)
+	const { selected, items, onChange, label, customClass } = props;
+	const [open, setOpen] = useState(false);
 
-	if (collect)
-		return (
-			<div className={`${styles.filterContainer} ${customClass}`}>
-				<span className={styles.filterLabel}>{label}</span>
-				<div 
-					className={styles.selectedFilter} 
-					onClick={() => setOpen(true)}
-				>
-					<span>
-						{selected && selected.length>0 ? 
-							(items && selected && selected[0]) ? items[selected[0]]!.label : 'Filters'
-							: 
-							'All'
-						}
-					</span>
-					<Image 
-						src={'/icons/chevron.svg'}
-						width={24}
-						height={24}
-						alt=""
-						style={{transform:'rotateZ(-90deg)', marginLeft:'auto'}}
-					/>
-				</div>
-				{open &&
-					<div className={styles.filtersModalPage}>
-						<div className={styles.modalPageClose}>
-							<div 
-								className={styles.close}
-								onClick={() => setOpen(false)}
-							>
-								<Image
-									src={"/icons/arrow-back.svg"}
-									height={24}
-									width={24}
-									alt="Close Filter Page"
-								/>
-							</div>
-							<div
-								className={styles.close}
-								onClick={() => setOpen(false)}
-							>
-								<Image
-									src="/icons/close.svg"
-									height={24}
-									width={24}
-									alt="Close Modal"
-								/>
-							</div>
-						</div>
-						<TextField
-							placeholder="Search"
-							icon="/icons/search.svg"
+	return (
+		<div className={`${styles.filterContainer} ${customClass}`}>
+			<span className={styles.filterLabel}>{label}</span>
+			<TextField
+				placeholder="Search"
+				icon="/icons/search.svg"
+			/>
+			<div className={styles.choiceContainer}>
+				{items?.map((item) => (
+					<div
+						className={`${styles.option} ${
+							selected.includes(item.id) ? styles.active : undefined
+						}`}
+						key={`option_${item.id}`}
+						onClick={() => onChange([item.id])}
+					>
+						<Image
+							src={item.image ?? ""}
+							height={32}
+							width={32}
+							alt=""
 						/>
-						<div className={styles.choiceContainerPage}>
-							{items?.map((item) => (
-								<div
-									className={`${styles.option} ${
-										selected.includes(item.id) ? styles.active : undefined
-									}`}
-									key={`option_${item.id}`}
-									onClick={() => onChange([item.id])}
-								>
-									<Image
-										src={item.image ?? ""}
-										height={32}
-										width={32}
-										alt=""
-									/>
-									<span>{item.label}</span>
-								</div>
-							))}
-						</div>
-						<div className={styles.controls}>
-							<button
-								className={styles.clear}
-								onClick={() => {onChange([]); setOpen(false)}}
-							>
-								Clear
-							</button>
-							<button
-								className={styles.apply}
-								onClick={() => {setOpen(false)}}
-							>
-								Apply
-							</button>
-						</div>
+						<span>{item.label}</span>
 					</div>
-				}				
-				<div></div>
+				))}
 			</div>
-		);
-	else
-		return (
-			<div className={`${styles.filterContainer} ${customClass}`}>
-				<span className={styles.filterLabel}>{label}</span>
-				<TextField
-					placeholder="Search"
-					icon="/icons/search.svg"
+		</div>
+	);
+};
+
+const SingleChoiceSeparatePageFilter: React.FC<FilterProps> = (props) => {
+	const { selected, items, onChange, label, customClass } = props;
+	const [open, setOpen] = useState(false);
+
+	return (
+		<div className={`${styles.filterContainer} ${customClass}`}>
+			<span className={styles.filterLabel}>{label}</span>
+			<div
+				className={styles.selectedFilter}
+				onClick={() => setOpen(true)}
+			>
+				<span>
+					{selected && selected.length > 0
+						? items && selected && selected[0]
+							? items[selected[0]]!.label
+							: "Filters"
+						: "All"}
+				</span>
+				<Image
+					src={"/icons/chevron.svg"}
+					width={24}
+					height={24}
+					alt=""
+					style={{ transform: "rotateZ(-90deg)", marginLeft: "auto" }}
 				/>
-				<div className={styles.choiceContainer}>
-					{items?.map((item) => (
+			</div>
+			{open && (
+				<div className={styles.filtersModalPage}>
+					<div className={styles.modalPageClose}>
 						<div
-							className={`${styles.option} ${
-								selected.includes(item.id) ? styles.active : undefined
-							}`}
-							key={`option_${item.id}`}
-							onClick={() => onChange([item.id])}
+							className={styles.close}
+							onClick={() => setOpen(false)}
 						>
 							<Image
-								src={item.image ?? ""}
-								height={32}
-								width={32}
-								alt=""
+								src={"/icons/arrow-back.svg"}
+								height={24}
+								width={24}
+								alt="Close Filter Page"
 							/>
-							<span>{item.label}</span>
 						</div>
-					))}
+						<div
+							className={styles.close}
+							onClick={() => setOpen(false)}
+						>
+							<Image
+								src="/icons/close.svg"
+								height={24}
+								width={24}
+								alt="Close Modal"
+							/>
+						</div>
+					</div>
+					<TextField
+						placeholder="Search"
+						icon="/icons/search.svg"
+					/>
+					<div className={styles.choiceContainerPage}>
+						{items?.map((item) => (
+							<div
+								className={`${styles.option} ${
+									selected.includes(item.id) ? styles.active : undefined
+								}`}
+								key={`option_${item.id}`}
+								onClick={() => onChange([item.id])}
+							>
+								<Image
+									src={item.image ?? ""}
+									height={32}
+									width={32}
+									alt=""
+								/>
+								<span>{item.label}</span>
+							</div>
+						))}
+					</div>
+					<div className={styles.controls}>
+						<button
+							className={styles.clear}
+							onClick={() => {
+								onChange([]);
+								setOpen(false);
+							}}
+						>
+							Clear
+						</button>
+						<button
+							className={styles.apply}
+							onClick={() => {
+								setOpen(false);
+							}}
+						>
+							Apply
+						</button>
+					</div>
 				</div>
-			</div>
-		)
+			)}
+			<div></div>
+		</div>
+	);
 };
 
 const MultipleChoiceFilter: React.FC<FilterProps> = (props) => {
-	const { selected, items, onChange, label, customClass, collect } = props;
-	const [open, setOpen] = useState(false)
+	const { selected, items, onChange, label, customClass } = props;
+	const [open, setOpen] = useState(false);
 
 	function handleChange(id: number) {
 		if (selected.includes(id)) {
@@ -371,129 +404,150 @@ const MultipleChoiceFilter: React.FC<FilterProps> = (props) => {
 		onChange([]);
 	}
 
-	if (collect)
-		return (
-			<div className={`${styles.filterContainer} ${customClass}`}>
-				<span className={styles.filterLabel}>{label}</span>
-				<div 
-					className={styles.selectedFilter} 
-					onClick={() => setOpen(true)}
-				>
-					<span>
-						{selected && selected.length>0 ? 
-							selected.length>1 ? 
-								selected.length+' selected' 
-								: 
-								(items && selected && selected[0]) && items[selected[0]]!.label
-							: 
-							'All'
-						}
-					</span>
-					<Image 
-						src={'/icons/chevron.svg'}
-						width={24}
-						height={24}
-						alt=""
-						style={{transform:'rotateZ(-90deg)', marginLeft:'auto'}}
-					/>
-				</div>
-				{open &&
-					<div className={styles.filtersModalPage}>
-						<div className={styles.modalPageClose}>
-							<div 
-								className={styles.close}
-								onClick={() => setOpen(false)}
-							>
-								<Image
-									src={"/icons/arrow-back.svg"}
-									height={24}
-									width={24}
-									alt="Close Filter Page"
-								/>
-							</div>
-							<div
-								className={styles.close}
-								onClick={() => setOpen(false)}
-							>
-								<Image
-									src="/icons/close.svg"
-									height={24}
-									width={24}
-									alt="Close Modal"
-								/>
-							</div>
-						</div>
-						<TextField
-							placeholder="Search"
-							icon="/icons/search.svg"
+	return (
+		<div className={`${styles.filterContainer} ${customClass}`}>
+			<span className={styles.filterLabel}>{label}</span>
+			<TextField
+				placeholder="Search"
+				icon="/icons/search.svg"
+			/>
+			<div className={styles.choiceContainer}>
+				{items?.map((item) => (
+					<div
+						className={`${styles.option} ${
+							selected.includes(item.id) ? styles.active : undefined
+						}`}
+						key={`option_${item.id}`}
+						onClick={() => handleChange(item.id)}
+					>
+						<Image
+							src={item.image ?? ""}
+							height={32}
+							width={32}
+							alt=""
 						/>
-						<div className={styles.choiceContainerPage}>
-							{items?.map((item) => (
-								<div
-									className={`${styles.option} ${
-										selected.includes(item.id) ? styles.active : undefined
-									}`}
-									key={`option_${item.id}`}
-									onClick={() => handleChange(item.id)}
-								>
-									<Image
-										src={item.image ?? ""}
-										height={32}
-										width={32}
-										alt=""
-									/>
-									<span>{item.label}</span>
-								</div>
-							))}
-						</div>
-						<div className={styles.controls}>
-							<button
-								className={styles.clear}
-								onClick={() => {clearSelections(); setOpen(false)}}
-							>
-								Clear
-							</button>
-							<button
-								className={styles.apply}
-								onClick={() => {setOpen(false)}}
-							>
-								Apply
-							</button>
-						</div>
+						<span>{item.label}</span>
 					</div>
-				}				
-				<div></div>
+				))}
 			</div>
-		);
-	else
-		return (
-			<div className={`${styles.filterContainer} ${customClass}`}>
-				<span className={styles.filterLabel}>{label}</span>
-				<TextField
-					placeholder="Search"
-					icon="/icons/search.svg"
+		</div>
+	);
+};
+
+const MultipleChoiceSeparatePageFilter: React.FC<FilterProps> = (props) => {
+	const { selected, items, onChange, label, customClass } = props;
+	const [open, setOpen] = useState(false);
+
+	function handleChange(id: number) {
+		if (selected.includes(id)) {
+			onChange(selected.filter((_id) => _id !== id));
+		} else {
+			onChange([...selected, id]);
+		}
+	}
+
+	function clearSelections() {
+		onChange([]);
+	}
+
+	return (
+		<div className={`${styles.filterContainer} ${customClass}`}>
+			<span className={styles.filterLabel}>{label}</span>
+			<div
+				className={styles.selectedFilter}
+				onClick={() => setOpen(true)}
+			>
+				<span>
+					{selected && selected.length > 0
+						? selected.length > 1
+							? selected.length + " selected"
+							: items &&
+							  selected &&
+							  selected[0] &&
+							  items[selected[0]]!.label
+						: "All"}
+				</span>
+				<Image
+					src={"/icons/chevron.svg"}
+					width={24}
+					height={24}
+					alt=""
+					style={{ transform: "rotateZ(-90deg)", marginLeft: "auto" }}
 				/>
-				<div className={styles.choiceContainer}>
-					{items?.map((item) => (
+			</div>
+			{open && (
+				<div className={styles.filtersModalPage}>
+					<div className={styles.modalPageClose}>
 						<div
-							className={`${styles.option} ${
-								selected.includes(item.id) ? styles.active : undefined
-							}`}
-							key={`option_${item.id}`}
-							onClick={() => handleChange(item.id)}
+							className={styles.close}
+							onClick={() => setOpen(false)}
 						>
 							<Image
-								src={item.image ?? ""}
-								height={32}
-								width={32}
-								alt=""
+								src={"/icons/arrow-back.svg"}
+								height={24}
+								width={24}
+								alt="Close Filter Page"
 							/>
-							<span>{item.label}</span>
 						</div>
-					))}
+						<div
+							className={styles.close}
+							onClick={() => setOpen(false)}
+						>
+							<Image
+								src="/icons/close.svg"
+								height={24}
+								width={24}
+								alt="Close Modal"
+							/>
+						</div>
+					</div>
+					<TextField
+						placeholder="Search"
+						icon="/icons/search.svg"
+					/>
+					<div className={styles.choiceContainerPage}>
+						{items?.map((item) => (
+							<div
+								className={`${styles.option} ${
+									selected.includes(item.id) ? styles.active : undefined
+								}`}
+								key={`option_${item.id}`}
+								onClick={() => handleChange(item.id)}
+							>
+								<Image
+									src={item.image ?? ""}
+									height={32}
+									width={32}
+									alt=""
+								/>
+								<span>{item.label}</span>
+							</div>
+						))}
+					</div>
+					<div className={styles.controls}>
+						<button
+							className={styles.clear}
+							onClick={() => {
+								clearSelections();
+								setOpen(false);
+							}}
+						>
+							Clear
+						</button>
+						<button
+							className={styles.apply}
+							onClick={() => {
+								setOpen(false);
+							}}
+						>
+							Apply
+						</button>
+					</div>
 				</div>
-			</div>
-		);
+			)}
+			<div></div>
+		</div>
+	);
 };
 
 const DateFilter: React.FC<FilterProps> = (props) => {

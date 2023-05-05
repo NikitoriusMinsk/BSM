@@ -20,7 +20,6 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    margin-bottom: 100px;
 }
 
 /* PredictionOffers */
@@ -170,6 +169,36 @@
 
 .ourGoals span b {
     color: #7F3FFC;
+}
+
+@media screen and (max-width: 1440px) {
+    .predictionOffers {
+        margin-right: -30px;
+        padding-right: 30px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .predictionOffers {
+        margin-right: 0;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .ourGoals {
+        margin-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .predictionOffers .content {
+        flex-direction: column;
+    }
+
+    .predictionOffers .content .block {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 425px) {

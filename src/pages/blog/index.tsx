@@ -10,11 +10,13 @@ import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import { appRouter } from "src/server/trpc/router/_app";
 import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
+import DisaperingContainer from "@components/helpers/DisaperingContainer";
+import useWindowSize from "src/utils/useWindowSize";
 
 const BlogPage: NextPage = () => {
 	const { data: news, isLoading: newsLoading } = trpc.news.getAll.useQuery();
-	const { data: matches, isLoading: matchesLoading } =
-		trpc.matches.getAll.useQuery();
+	const { data: matches, isLoading: matchesLoading } = trpc.matches.getAll.useQuery();
+	const { width } = useWindowSize();
 
 	if (newsLoading || matchesLoading) {
 		return <div>Loading...</div>;
@@ -26,30 +28,41 @@ const BlogPage: NextPage = () => {
 
 	return (
 		<>
-			<div className={`${styles.mainColumn} ${styles.top}`}>
+			<div className={`${styles.mainNewsContainer}`}>
 				{news[0] && <MainNews {...news[0]} />}
+			</div>
+			<div className={styles.recentNews}>
 				<NewsBlock
 					news={news.slice(1, 7)}
 					h2="Recently addded"
 					h3="News"
 				/>
 			</div>
-			<div className={`${styles.sideColumn} ${styles.top}`}>
-				<SideNews news={news} />
-				<TopMatches matches={matches} />
+			<div className={styles.wideNews}>
+				<FullWidthNewsBlock
+					news={news.slice(7, 12)}
+					h2="Last week"
+					h3="News"
+				/>
 			</div>
-			<FullWidthNewsBlock
-				news={news.slice(7, 12)}
-				h2="Last week"
-				h3="News"
-			/>
-			<div className={`${styles.mainColumn} ${styles.bottom}`}>
+			<div className={`${styles.newsBlockContainer} `}>
 				<NewsBlock
-					news={news.slice(12)}
+					news={news.slice(12, 16)}
 					h2="Last Month"
 					h3="News"
 				/>
 			</div>
+			<DisaperingContainer
+				condition={width <= 425}
+				className={`${styles.sideColumn}`}
+			>
+				<div className={styles.sideNewsContainer}>
+					<SideNews news={news} />
+				</div>
+				<div className={styles.topMatchesContainer}>
+					<TopMatches matches={matches} />
+				</div>
+			</DisaperingContainer>
 		</>
 	);
 };
@@ -172,9 +185,7 @@ const SideNews: React.FC<SideNewsProps> = (props) => {
 						<span className={styles.date}>
 							<Moment format="DD MMM YYYY">{news.date}</Moment>
 						</span>
-						<h2 className={styles.title}>
-							{shortenString(news.title, 45)}
-						</h2>
+						<h2 className={styles.title}>{shortenString(news.title, 45)}</h2>
 						<div className={styles.stats}>
 							<span className={styles.stat}>
 								<Image
@@ -219,7 +230,7 @@ interface TopMatchesProps {
 const TopMatches: React.FC<TopMatchesProps> = (props) => {
 	const { matches } = props;
 
-	function getElementByStatus(match: typeof matches[0]): React.ReactElement {
+	function getElementByStatus(match: (typeof matches)[0]): React.ReactElement {
 		switch (match.status) {
 			case MatchStatus.live:
 				return <div className={styles.live}>Live</div>;
@@ -248,7 +259,7 @@ const TopMatches: React.FC<TopMatchesProps> = (props) => {
 				<button>See All</button>
 			</div>
 			<div className={styles.topMatchesContent}>
-				{matches.slice(0, 5).map((match, index) => (
+				{matches.slice(0, 8).map((match, index) => (
 					<div
 						key={`top_match_${index}`}
 						className={styles.topMatch}
@@ -368,6 +379,17 @@ const NewsBlock: React.FC<NewsBlockProps> = (props) => {
 
 const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 	const { news, h2, h3 } = props;
+	const { width } = useWindowSize();
+
+	function GetNewsCount(width: number) {
+		switch (true) {
+			case width <= 1280:
+				return 1;
+			default:
+				return 2;
+		}
+	}
+
 	return (
 		<div className={styles.fullWidthNewsBlock}>
 			{(h2 || h3) && (
@@ -381,7 +403,7 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 			)}
 			<div className={styles.fullWidthNewsBlockContent}>
 				<div className={styles.main}>
-					{news.slice(0, 2).map((news, index) => (
+					{news.slice(0, GetNewsCount(width)).map((news, index) => (
 						<div
 							key={`news_${index}`}
 							className={styles.news}
@@ -424,52 +446,54 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 					))}
 				</div>
 				<div className={styles.side}>
-					{news.slice(2).map((news, index) => (
-						<div
-							key={`news_${index}`}
-							className={styles.news}
-						>
-							<div className={styles.image}>
-								<Image
-									src={news.image}
-									alt={news.title}
-									height={100}
-									width={100}
-									style={{
-										objectFit: "cover",
-									}}
-								/>
-							</div>
-							<div className={styles.info}>
-								<span className={styles.date}>
-									<Moment format="DD MMM YYYY">{news.date}</Moment>
-								</span>
-								<h2 className={styles.title}>
-									{shortenString(news.title, 45)}
-								</h2>
-								<div className={styles.stats}>
-									<span className={styles.stat}>
-										<Image
-											src="/icons/comment.svg"
-											alt="comment"
-											width={16}
-											height={16}
-										/>
-										{news.comments}
+					{news
+						.slice(GetNewsCount(width), GetNewsCount(width) + 3)
+						.map((news, index) => (
+							<div
+								key={`news_${index}`}
+								className={styles.news}
+							>
+								<div className={styles.image}>
+									<Image
+										src={news.image}
+										alt={news.title}
+										height={100}
+										width={100}
+										style={{
+											objectFit: "cover",
+										}}
+									/>
+								</div>
+								<div className={styles.info}>
+									<span className={styles.date}>
+										<Moment format="DD MMM YYYY">{news.date}</Moment>
 									</span>
-									<span className={styles.stat}>
-										<Image
-											src="/icons/views-gray.svg"
-											alt="views"
-											width={16}
-											height={16}
-										/>
-										{news.views}
-									</span>
+									<h2 className={styles.title}>
+										{shortenString(news.title, 45)}
+									</h2>
+									<div className={styles.stats}>
+										<span className={styles.stat}>
+											<Image
+												src="/icons/comment.svg"
+												alt="comment"
+												width={16}
+												height={16}
+											/>
+											{news.comments}
+										</span>
+										<span className={styles.stat}>
+											<Image
+												src="/icons/views-gray.svg"
+												alt="views"
+												width={16}
+												height={16}
+											/>
+											{news.views}
+										</span>
+									</div>
 								</div>
 							</div>
-						</div>
-					))}
+						))}
 				</div>
 			</div>
 		</div>

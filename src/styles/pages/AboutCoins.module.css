@@ -20,6 +20,7 @@
     left: 0;
     height: 95%;
     width: 100%;
+    overflow: hidden;
 }
 
 .header .coins {
@@ -61,7 +62,6 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-    margin-bottom: 100px;
 }
 
 .description {
@@ -209,15 +209,70 @@
     color: #2CD114;
 }
 
+@media screen and (max-width: 1440px) {
+    .header {
+        margin-right: -30px;
+        padding: 0 300px;
+        height: 300px;
+    }
+
+    .header .coins {
+        left: -50px;
+    }
+
+    .mainColumn {
+        padding-left: 40px;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .mainColumn {
+        padding-left: 30px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .header {
+        padding: 0 100px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .header {
+        margin-right: 0;
+        height: 250px;
+    }
+
+    .header .coins {
+        left: -25px;
+    }
+
+    .mainColumn {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        margin-right: 0;
+        padding: 0 75px;
+        height: 200px;
+    }
+
+    .mainColumn {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .header {
-        padding: 0;
-        margin-right: 0;
         height: 120px;
     }
 
     .header .coins {
-        left: 0;
+        left: -15px;
     }
 
     .header h2 {

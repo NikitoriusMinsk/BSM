@@ -2,11 +2,7 @@ import React, { useState, useRef } from "react";
 import { GetStaticProps, NextPage } from "next";
 import styles from "@styles/pages/Predictions.module.css";
 import { trpc } from "src/utils/trpc";
-import {
-	MostTips,
-	Predictions as PredictionsType,
-	Sports,
-} from "src/types/queryTypes";
+import { MostTips, Predictions as PredictionsType, Sports } from "src/types/queryTypes";
 import Slider from "@components/ui/Slider";
 import MatchTipsCard from "@components/ui/MatchTipsCard";
 import Image from "next/image";
@@ -28,10 +24,9 @@ import usePortal from "src/utils/usePortal";
 import { PortalContext } from "src/utils/portalContext";
 import LeaguesMobileBlocks from "@components/ui/LeaguesMobileBlocks";
 
-const OutPortal = dynamic(
-	async () => (await import("react-reverse-portal")).OutPortal,
-	{ ssr: false }
-);
+const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
+	ssr: false,
+});
 
 const SortItems = [
 	{
@@ -72,8 +67,7 @@ const PredictionsPage: NextPage = () => {
 		trpc.bookmakers.getTop.useQuery();
 	const { data: leagues, isLoading: leaguesLoading } =
 		trpc.filters.getLeagues.useQuery();
-	const { data: sports, isLoading: sportsLoading } =
-		trpc.filters.getSports.useQuery();
+	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
 	const { data: predictions, isLoading: predictionsLoading } =
 		trpc.predictions.getAll.useQuery(
 			{ limit: limit },
@@ -143,10 +137,9 @@ const PredictionsPage: NextPage = () => {
 										},
 										{
 											key: "sport",
-											type: "singleChoice",
+											type: "singleChoiceSeparatePage",
 											label: "Choose Sport",
 											customClass: styles.sportFilter,
-											collect: true,
 											items: [
 												{ id: 0, label: "All" },
 												{ id: 1, label: "Football" },
@@ -156,10 +149,9 @@ const PredictionsPage: NextPage = () => {
 										},
 										{
 											key: "country",
-											type: "multipleChoice",
+											type: "multipleChoiceSeparatePage",
 											label: "By Country",
 											customClass: styles.sportFilter,
-											collect: true,
 											items: [
 												{ id: 0, label: "All" },
 												{ id: 1, label: "Georgia" },
@@ -170,9 +162,7 @@ const PredictionsPage: NextPage = () => {
 									]}
 								/>
 							</div>
-							<button className={styles.resetBtnM}>
-								Reset
-							</button>
+							<button className={styles.resetBtnM}>Reset</button>
 						</div>
 					</div>
 					<div className={styles.filters}>
@@ -203,7 +193,7 @@ const PredictionsPage: NextPage = () => {
 								items={TypeItems}
 								onChange={() => {}}
 							/>
-						</div>						
+						</div>
 						<Filter
 							items={leagues}
 							h3="CHOOSE LEAGUE"
@@ -316,7 +306,7 @@ const PredictionsPage: NextPage = () => {
 							height={463}
 							image="/images/banner-placeholder-2.png"
 						/>
-						<BestBookmakers bookmakers={bookmakers} />					
+						<BestBookmakers bookmakers={bookmakers} />
 					</div>
 				</div>
 				<div className={styles.sideColumn}>
@@ -324,7 +314,7 @@ const PredictionsPage: NextPage = () => {
 						height={463}
 						image="/images/banner-placeholder-2.png"
 					/>
-					<BestBookmakers bookmakers={bookmakers} />					
+					<BestBookmakers bookmakers={bookmakers} />
 				</div>
 			</PortalContext.Provider>
 		</>
@@ -358,11 +348,16 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 						offset: {
 							next: {
 								top: -54,
-								side: width>1440 ? 135 : width>1024 ? 30 : 20,
+								side: width > 1440 ? 135 : width > 1024 ? 30 : 20,
 							},
 							prev: {
 								top: -54,
-								side: width>1440 ? "calc(100% - 210px)" : width>1024 ? "calc(100% - 100px)" : "calc(100% - 90px)",
+								side:
+									width > 1440
+										? "calc(100% - 210px)"
+										: width > 1024
+										? "calc(100% - 100px)"
+										: "calc(100% - 90px)",
 							},
 						},
 						size: {
@@ -371,21 +366,22 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 						},
 					}}
 				>
-					{ArrayToChunks(tips, width <= 425 ? 1 : width <= 768 ? 2 : width <= 1366 ? 3 : 4).map(
-						(tipsChunk, index) => (
-							<div
-								className={styles.slide}
-								key={`slide_${index}`}
-							>
-								{tipsChunk.map((tip, index) => (
-									<MatchTipsCard
-										{...tip}
-										key={`tip_${index}`}
-									/>
-								))}
-							</div>
-						)
-					)}
+					{ArrayToChunks(
+						tips,
+						width <= 425 ? 1 : width <= 768 ? 2 : width <= 1366 ? 3 : 4
+					).map((tipsChunk, index) => (
+						<div
+							className={styles.slide}
+							key={`slide_${index}`}
+						>
+							{tipsChunk.map((tip, index) => (
+								<MatchTipsCard
+									{...tip}
+									key={`tip_${index}`}
+								/>
+							))}
+						</div>
+					))}
 				</Slider>
 			</div>
 		</div>
@@ -415,9 +411,7 @@ const SportsSider: React.FC<{
 			return;
 		}
 		if (selectedItems.includes(id)) {
-			setSelectedItems(
-				selectedItems.filter((item) => item !== id && item !== "0")
-			);
+			setSelectedItems(selectedItems.filter((item) => item !== id && item !== "0"));
 			onChange(selectedItems.filter((item) => item !== id));
 		} else {
 			setSelectedItems([...selectedItems.filter((item) => item !== "0"), id]);
@@ -501,9 +495,7 @@ const SortButtons: React.FC<SortButtonsProps> = (props) => {
 			return;
 		}
 		if (selectedItems.includes(id)) {
-			setSelectedItems(
-				selectedItems.filter((item) => item !== id && item !== "0")
-			);
+			setSelectedItems(selectedItems.filter((item) => item !== id && item !== "0"));
 			onChange(selectedItems.filter((item) => item !== id));
 		} else {
 			setSelectedItems([...selectedItems.filter((item) => item !== "0"), id]);
@@ -517,9 +509,7 @@ const SortButtons: React.FC<SortButtonsProps> = (props) => {
 				<button
 					key={`sort_button_${id}_${name}`}
 					onClick={() => handleSelect(id)}
-					className={
-						selectedItems.includes(id) ? styles.active : undefined
-					}
+					className={selectedItems.includes(id) ? styles.active : undefined}
 				>
 					{name}
 				</button>
