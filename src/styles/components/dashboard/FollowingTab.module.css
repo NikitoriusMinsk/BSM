@@ -1,4 +1,4 @@
-.followersTab {
+.followingTab {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 40px;
@@ -129,7 +129,7 @@
     color: #FFFFFF;
 }
 
-#following .search .icon {
+#following .search .icon img {
     position: absolute;
     top: 14px;
     right: 16px;
@@ -214,6 +214,10 @@
 }
 
 @media screen and (max-width: 425px) {
+    .followingTab {
+        gap: 20px;
+    }
+
     #following {
         flex-direction: column;
     }

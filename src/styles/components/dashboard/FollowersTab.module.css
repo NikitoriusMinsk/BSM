@@ -127,7 +127,7 @@
     color: #FFFFFF;
 }
 
-#followers .search .icon {
+#followers .search .icon img {
     position: absolute;
     top: 14px;
     right: 16px;
@@ -212,6 +212,10 @@
 }
 
 @media screen and (max-width: 425px) {
+    .followersTab {
+        gap: 20px;
+    }
+
     #followers {
         flex-direction: column;
     }
