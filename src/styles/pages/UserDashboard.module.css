@@ -244,6 +244,7 @@
 @media screen and (max-width: 1440px) {
     .sideColumn {
         padding-left: 40px;
+        margin-left: -40px;
     }
 
     .navigation .userInfo {
@@ -256,6 +257,12 @@
 
     .navigation .userInfo .stats .stat {
         flex: unset;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .sideColumn {
+        margin-left: -30px;
     }
 }
 

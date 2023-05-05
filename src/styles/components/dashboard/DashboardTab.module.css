@@ -386,6 +386,18 @@
     color: #FF5018;
 }
 
+@media screen and (max-width: 1440px) {
+    .dashboardTab {
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .dashboardTab {
+        gap: 28px;
+    }
+}
+
 @media screen and (max-width: 425px) {
     #stats {
         flex-direction: column;

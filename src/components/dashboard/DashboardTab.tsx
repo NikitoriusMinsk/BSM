@@ -225,9 +225,6 @@ const DashboardTab: React.FC = () => {
 					</div>
 				</div>
 			</div>
-			<div
-				className={`${sharedStyles.block} ${sharedStyles.narrow} ${sharedStyles.hidden}`}
-			/>
 		</div>
 	);
 };
