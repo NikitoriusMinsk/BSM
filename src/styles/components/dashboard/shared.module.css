@@ -36,9 +36,15 @@
     background: none;
 }
 
-.block .image {
-    height: 60px;
-    width: 60px;
+@media screen and (max-width: 1440px) {
+    .block {
+        padding: 30px;
+    }
+
+    .block img {
+        height: 48px;
+        width: 48px;
+    }
 }
 
 @media screen and (max-width:425px) {

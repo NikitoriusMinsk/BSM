@@ -195,14 +195,12 @@ const SubscriptionTab: React.FC = () => {
 				className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
 			>
 				<div className={styles.info}>
-					<div className={sharedStyles.image}>
-						<Image
-							src="/images/dashboard/subscribers.svg"
-							height={80}
-							width={80}
-							alt=""
-						/>
-					</div>
+					<Image
+						src="/images/dashboard/subscribers.svg"
+						height={80}
+						width={80}
+						alt=""
+					/>
 					<div className={styles.text}>
 						<div>
 							<h3>Subscribers</h3>
@@ -245,7 +243,7 @@ const SubscriptionTab: React.FC = () => {
 							? searchResults
 							: data.subscribers
 					}
-					columns={width <= 425 ? mobileColumns : columns}
+					columns={width <= 1024 ? mobileColumns : columns}
 					pageSize={10}
 					header={false}
 				/>

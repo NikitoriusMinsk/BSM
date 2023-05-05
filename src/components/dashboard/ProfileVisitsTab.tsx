@@ -113,14 +113,12 @@ export default function ProfileVisitsTab() {
 				id={styles.profileVisits}
 				className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
 			>
-				<div className={sharedStyles.image}>
-					<Image
-						src="/images/dashboard/profile-visits.svg"
-						height={80}
-						width={80}
-						alt=""
-					/>
-				</div>
+				<Image
+					src="/images/dashboard/profile-visits.svg"
+					height={80}
+					width={80}
+					alt=""
+				/>
 				<div className={styles.text}>
 					<div>
 						<h3>Profile Visits</h3>

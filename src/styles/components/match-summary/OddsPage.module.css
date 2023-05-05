@@ -1,43 +1,50 @@
 /* inner pages styles */
-.pageContainer{
+.pageContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
 /* odds */
-.oddsFilter{
+.oddsFilter {
     display: flex;
     align-items: stretch;
     gap: 10px;
     overflow-x: auto;
     width: 100%;
 }
-.oddsFilter::-webkit-scrollbar{
+
+.oddsFilter::-webkit-scrollbar {
     display: none;
 }
-.oddsContent{
+
+.oddsContent {
     margin-top: 28px;
     display: flex;
     flex-direction: column;
     gap: 40px;
 }
-.oddsBlock{
+
+.oddsBlock {
     display: grid;
     grid-auto-flow: row;
     grid-template-columns: auto;
     gap: 14px;
 }
-.oddsBlock[aria-colcount="2"]{    
+
+.oddsBlock[aria-colcount="2"] {
     grid-template-columns: repeat(2, 1fr);
 }
-.oddsBlock[aria-colcount="3"]{
+
+.oddsBlock[aria-colcount="3"] {
     grid-template-columns: repeat(3, 1fr);
 }
-.oddsBlock[aria-colcount="4"]{
+
+.oddsBlock[aria-colcount="4"] {
     grid-template-columns: repeat(4, 1fr);
 }
-.oddsBlockTitle{
+
+.oddsBlockTitle {
     width: 100%;
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -47,7 +54,8 @@
     color: #1A1C21;
     grid-column: 1 / -1;
 }
-.odd{
+
+.odd {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -66,11 +74,13 @@
     line-height: 18px;
     color: #1A1C21;
 }
-.odd > *:last-child {
+
+.odd>*:last-child {
     font-size: 16px;
     line-height: 22px;
 }
-.oddsColTitle{
+
+.oddsColTitle {
     text-align: center;
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -79,7 +89,8 @@
     line-height: 17px;
     color: rgba(26, 28, 33, 0.7);
 }
-.oddCondition{
+
+.oddCondition {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,7 +98,8 @@
     border: 1px solid rgba(26, 28, 33, 0.1);
     border-radius: 4px;
 }
-.oddValue{
+
+.oddValue {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,7 +115,9 @@
     line-height: 22px;
     color: #1A1C21;
 }
-.odd.oddActive, .oddValue.oddActive {
+
+.odd.oddActive,
+.oddValue.oddActive {
     background: #7F3FFC;
     color: #FFFFFF;
 }
@@ -114,18 +128,22 @@
         margin-right: 16px;
         width: calc(100% - 32px);
     }
+
     .oddsFilter {
         margin: 0px -16px;
         width: calc(100% + 32px);
         padding: 0px 16px;
     }
+
     .oddsBlock[aria-colcount="2"] {
         grid-template-columns: repeat(1, 1fr);
     }
+
     .oddsContent {
         gap: 32px;
     }
-    .oddsBlock[aria-colcount="3"]:not([aria-mobile="true"]) {
+
+    .oddsBlock[aria-colcount="3"]:not([data-mobile="true"]) {
         grid-template-columns: repeat(1, 1fr);
     }
 }

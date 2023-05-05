@@ -43,7 +43,7 @@ const PendingTipsTab: React.FC = () => {
 			{portalNode && <OutPortal node={portalNode} />}
 			<div className={styles.tipsTab}>
 				<div className={styles.filters}>
-					{width > 425 ? (
+					{width > 1024 ? (
 						<>
 							<div className={styles.filter}>
 								<span>CREATE DATE</span>

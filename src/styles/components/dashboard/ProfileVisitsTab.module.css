@@ -166,3 +166,9 @@
 .followButton.following::before {
     content: url(/icons/following-gray.svg);
 }
+
+@media screen and (max-width: 425px) {
+    .profileVisitsTab {
+        gap: 20px;
+    }
+}

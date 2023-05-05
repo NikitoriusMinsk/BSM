@@ -26,14 +26,12 @@ const DashboardTab: React.FC = () => {
 					data.avgProfit > 0 ? sharedStyles.positive : sharedStyles.negative
 				}`}
 			>
-				<div className={sharedStyles.image}>
-					<Image
-						src="/images/dashboard/wallet.svg"
-						height={60}
-						width={60}
-						alt=""
-					/>
-				</div>
+				<Image
+					src="/images/dashboard/wallet.svg"
+					height={60}
+					width={60}
+					alt=""
+				/>
 				<div className={styles.text}>
 					<h5>Avg. Monthly Profit</h5>
 					<span>$ {data.avgProfit}</span>
@@ -62,14 +60,12 @@ const DashboardTab: React.FC = () => {
 				className={`${sharedStyles.block} ${sharedStyles.wide}`}
 			>
 				<div className={styles.info}>
-					<div className={sharedStyles.image}>
-						<Image
-							src="/images/dashboard/piggy-bank.svg"
-							height={60}
-							width={60}
-							alt=""
-						/>
-					</div>
+					<Image
+						src="/images/dashboard/piggy-bank.svg"
+						height={60}
+						width={60}
+						alt=""
+					/>
 					<div className={styles.count}>
 						<h4>Coins</h4>
 						<span>{data.coins.count}</span>
@@ -118,14 +114,12 @@ const DashboardTab: React.FC = () => {
 				className={`${sharedStyles.block} ${sharedStyles.narrow}`}
 			>
 				<div className={styles.info}>
-					<div className={sharedStyles.image}>
-						<Image
-							src="/images/dashboard/chart-bubble.svg"
-							height={60}
-							width={60}
-							alt=""
-						/>
-					</div>
+					<Image
+						src="/images/dashboard/chart-bubble.svg"
+						height={60}
+						width={60}
+						alt=""
+					/>
 					<div className={styles.text}>
 						<h5>Average Odds</h5>
 						<span>{data.odds.avg}</span>
@@ -140,14 +134,12 @@ const DashboardTab: React.FC = () => {
 				<div className={styles.info}>
 					<h5>All Time Average Unit Rate</h5>
 					<div className={styles.detailed}>
-						<div className={sharedStyles.image}>
-							<Image
-								src="/images/dashboard/coin.svg"
-								height={60}
-								width={60}
-								alt=""
-							/>
-						</div>
+						<Image
+							src="/images/dashboard/coin.svg"
+							height={60}
+							width={60}
+							alt=""
+						/>
 						<div className={styles.text}>
 							<h4>Coins</h4>
 							<span>{data.coins.count}</span>
@@ -236,7 +228,7 @@ const StatisticsChart: React.FC<{ data: { time: number; value: number }[] }> = (
 
 	return (
 		<ResponsiveContainer
-			height={100}
+			height={50}
 			width="100%"
 		>
 			<LineChart data={data}>

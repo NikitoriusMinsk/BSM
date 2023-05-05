@@ -131,14 +131,12 @@ const WithdrawTab: React.FC = () => {
 						className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
 					>
 						<div>
-							<div className={sharedStyles.image}>
-								<Image
-									src="/images/dashboard/wallet.svg"
-									height={60}
-									width={60}
-									alt=""
-								/>
-							</div>
+							<Image
+								src="/images/dashboard/wallet.svg"
+								height={60}
+								width={60}
+								alt=""
+							/>
 							<div className={styles.text}>
 								<h4>Pending Balance</h4>
 								<span>$ {data.pendingBalance}</span>
@@ -153,14 +151,12 @@ const WithdrawTab: React.FC = () => {
 						id={styles.withdrawTotal}
 						className={`${sharedStyles.block} ${sharedStyles.narrow}`}
 					>
-						<div className={sharedStyles.image}>
-							<Image
-								src="/images/dashboard/total.svg"
-								height={60}
-								width={60}
-								alt=""
-							/>
-						</div>
+						<Image
+							src="/images/dashboard/total.svg"
+							height={60}
+							width={60}
+							alt=""
+						/>
 						<div className={styles.text}>
 							<h4>Pending Balance</h4>
 							<span>$ {data.totalEarned}</span>
