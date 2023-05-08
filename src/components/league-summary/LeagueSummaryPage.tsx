@@ -2,9 +2,11 @@ import styles from "../../styles/components/league-summary/LeagueSummaryPage.mod
 import Image from "next/image";
 import React, { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import useWindowSize from "src/utils/useWindowSize";
 
 const LeagueSummaryPage: React.FC = () => {    
     const [seeMore, setSeeMore] = useState(false)
+    const { width } = useWindowSize()
 	
     return (
         <div className={styles.pageContainer}>
@@ -21,7 +23,7 @@ const LeagueSummaryPage: React.FC = () => {
                     <tbody>
                         <tr className={styles.statLine}>
                             <td style={{width:'1%', minWidth:'86px', textAlign:'center'}}>
-                                Finished
+                                {width>600 ? 'Finished' : 'Fin'}
                             </td>
                             <td style={{width:'85px'}}>
                                 <div className={styles.teamsLogos}>
