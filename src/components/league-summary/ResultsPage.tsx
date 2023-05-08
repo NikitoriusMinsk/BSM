@@ -17,7 +17,7 @@ const LeagueSummaryPage: React.FC = () => {
                         Standings
                     </span>
                 </div>
-                <table className={styles.stageStat}>
+                <table className={styles.stageStat} cellSpacing={0}>
                     <tbody>
                         <tr className={styles.statLine}>
                             <td style={{width:'1%', minWidth:'86px', textAlign:'center'}}>
@@ -208,7 +208,7 @@ const LeagueSummaryPage: React.FC = () => {
                         Standings
                     </span>
                 </div>
-                <table className={styles.stageStat}>
+                <table className={styles.stageStat} cellSpacing={0}>
                     <tbody>
                         <tr className={styles.statLine}>
                             <td style={{width:'1%', minWidth:'86px', textAlign:'center'}}>
@@ -419,7 +419,7 @@ const LeagueSummaryPage: React.FC = () => {
                                 Standings
                             </span>
                         </div>
-                        <table className={styles.stageStat}>
+                        <table className={styles.stageStat} cellSpacing={0}>
                             <tbody>
                                 <tr className={styles.statLine}>
                                     <td style={{width:'1%', minWidth:'86px', textAlign:'center'}}>
