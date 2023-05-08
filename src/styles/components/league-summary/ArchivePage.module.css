@@ -126,27 +126,35 @@
         padding-left: 16px;
         padding-right: 16px;
     }
-    .standingsTable tbody tr:nth-child(2n-1) td:first-child, .standingsTable tbody tr:nth-child(2n-1) td:last-child { 
-        border-radius: 0px;
+    .archiveTable th, .archiveTable td { 
+        border-radius: 0px!important;
     }
-    .standingsTable td:first-child, .standingsTable th:first-child {
+    .archiveTable th {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 18px;
+        color: #1A1C21;
+    }
+    .archiveTable td:first-child, .archiveTable th:first-child {
         padding-left: 16px;
     }
-    .standingsTable td:last-child, .standingsTable th:last-child {
+    .archiveTable td:last-child, .archiveTable th:last-child {
         padding-right: 16px;
     }
-    .standingsTable td:last-child {
-        border-left: 1px solid rgba(26, 28, 33, 0.1);
-    }
-    .standingsTable tbody td {
+    .archiveTable tbody td {
         font-weight: 600;
         padding-top: 16px;
         padding-bottom: 16px;
     }
-    .standingsTable tbody td:first-child {
+    .archiveTable tbody td:first-child {
         font-weight: 400;
-        font-size: 12px;
-        line-height: 14px;
+        font-size: 15px;
+        line-height: 18px;
         color: rgba(26, 28, 33, 0.7);
+    }
+    .teamCell span {
+        gap: 8px;
     }
 }
