@@ -3,6 +3,17 @@
     flex-direction: column;
     width: 100%;
 }
+.filter{
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 28px;
+    overflow-x: auto;
+    width: 100%;
+}
+.filter::-webkit-scrollbar{
+    display: none;
+}
 /* match summary */
 .stageStat{
     width: 100%;
@@ -80,6 +91,57 @@
     align-items: center;
     gap: 10px;
 }
+/* match summary - end */
+
+/* match stat bars */
+.statBarsBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+.barBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+.barInfo {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #1A1C21;
+}
+.barBlock span:first-child {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.barBlock span:last-child {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.bar {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+.barStripe {
+    height: 16px;
+    background: rgba(26, 28, 33, 0.1);
+    border-radius: 4px;
+    transition: .3s all ease-in-out;
+}
+.win {
+    background: #7F3FFC;
+}
+/* match stat bars - end */
 
 @media screen and (max-width: 600px) {
     .stageStat {
