@@ -44,11 +44,9 @@ const LiveMatch: React.FC<LiveMatchProps> = (props) => {
 		<div className={styles.liveMatchesItem}>
 			<div className={styles.matchInfo}>
 				<div className={styles.matchInfoHeader}>
-					<div className={styles.matchDuration}>
-						Live: {match.duration}
-					</div>
+					<div className={styles.matchDuration}>Live: {match.duration}</div>
 					<div className={styles.buttonContainer}>
-						<button>
+						{/* <button>
 							<Image
 								src="/icons/viewers.svg"
 								width={20}
@@ -56,7 +54,7 @@ const LiveMatch: React.FC<LiveMatchProps> = (props) => {
 								alt="expand"
 							/>
 							{match.viewer_count}
-						</button>
+						</button> */}
 						<button>
 							<Image
 								src="/icons/expand.svg"
