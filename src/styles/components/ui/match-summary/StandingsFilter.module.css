@@ -8,6 +8,7 @@
     border-radius: 8px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+    min-width: fit-content;
 
     font-family: 'Samsung Sans';
     font-style: normal;

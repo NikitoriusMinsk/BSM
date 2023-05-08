@@ -235,8 +235,6 @@
 /* top scorers table - end */
 
 @media screen and (max-width: 600px) {
-    .pageContainer {
-    }
     .filter {
         padding-left: 16px;
         padding-right: 16px;
@@ -263,5 +261,83 @@
         font-size: 12px;
         line-height: 14px;
         color: rgba(26, 28, 33, 0.7);
+    }
+    .standingsTable th {        
+        font-size: 15px;
+        line-height: 18px;
+    }
+    .teamCell span {
+        gap: 8px;
+    }
+    .scorersFilter {
+        margin-left: 16px;
+        margin-right: 16px;
+        gap: 12px;
+    }
+    .filtersMobile {
+        display: flex;
+        gap: 10px;
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-bottom: 16px;
+    }
+    .filterBtnMobile {
+        width: 100%;
+    }
+    .filterBtnMobile > button {
+        width: 100%;
+        justify-content: center;
+    }
+    .resetBtnM {
+        background: rgba(26, 28, 33, 0.3);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        border: none;
+        outline: none;
+
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #FFFFFF;
+    }
+    .topScorersTable td:first-child, .topScorersTable th:first-child {
+        padding-left: 16px;
+    }
+    .topScorersTable td:last-child, .topScorersTable th:last-child {        
+        padding-right: 16px;
+    }
+    .topScorers th {
+        background: none;
+    }
+    .topScorersTable > tbody > tr:nth-child(2n) > td {
+        background: none;
+    }
+    .topScorersTable > tbody > tr:nth-child(2n+1) > td {
+        background: rgba(242, 242, 242, 0.3);
+    }
+    .teamHead {
+        text-align: center!important;
+        color: #1A1C21!important;
+        font-size: 15px!important;
+        line-height: 18px!important;
+    }
+    .topScorersTable td:last-child {
+        border-left: 1px solid rgba(26, 28, 33, 0.1);
+    }
+    .topScorersTable .teamCell {
+        font-weight: 600;
+    }
+    .topScorers tbody td {        
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+    .topScorersTable tbody td:first-child {
+        font-size: 12px;
+        line-height: 14px;
     }
 }

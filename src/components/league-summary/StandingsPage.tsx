@@ -6,6 +6,14 @@ import { motion, AnimatePresence } from "framer-motion"
 import useWindowSize from "src/utils/useWindowSize";
 import StandigsMenuColumn from "@components/ui/match-summary/StandingsMenuColumn";
 import Dropdown from "@components/ui/Dropdown";
+import FilterModal from "@components/ui/FilterModal";
+import dynamic from "next/dynamic";
+import usePortal from "src/utils/usePortal";
+import { PortalContext } from "src/utils/portalContext";
+
+const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
+	ssr: false,
+});
 
 const StandingsPage: React.FC = () => {
     const [selectedTable, setSelectedTable] = useState('1')
@@ -194,75 +202,182 @@ const StandingsTable: React.FC = () => {
 }
 
 const TopScorersTable: React.FC = () => {
+    const { width } = useWindowSize()
+    const portalNode = usePortal();
+    const [selectedCol, setSelectedCol] = useState<{ value: string, id: string }>()
+
     return (
-        <div className={styles.topScorers}>
-            <div className={styles.scorersFilter}>
-                <Dropdown
-			    	items={[]}
-			    	onSelect={() => {}}
-			    	label="Team"
-			    	searchable={true}
-			    />
-                <Dropdown
-			    	items={[]}
-			    	onSelect={() => {}}
-			    	label="Position"
-			    	searchable={true}
-			    />
-                <Dropdown
-			    	items={[]}
-			    	onSelect={() => {}}
-			    	label="Nationality"
-			    	searchable={true}
-			    />
-            </div>
-            <table 
-                className={styles.topScorersTable} 
-                cellPadding={10} 
-                cellSpacing={0}
-            >
-                <colgroup>
-                    <col width="50" />
-                    <col width="" />
-                    <col width="" />
-                    <col width="50" />
-                    <col width="50" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th className={styles.teamHead}>Player</th>
-                        <th>Team</th>
-                        <th>G</th>
-                        <th>A</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {[1,1,1,1,1,1,1,1,1].map((item,index) => (
-                        <tr key={index}>
-                            <td>1</td>
-                            <td className={styles.teamCell}>
-                                <span>
-                                    <div className={styles.teamLogo}>
-                                        <Image 
-                                            src="/testimg/club1.png"
-                                            width={20}
-                                            height={20}
-                                            style={{objectFit:'contain'}}
-                                            alt=""
+        <PortalContext.Provider value={{ portalNode }}>
+            {portalNode && <OutPortal node={portalNode} />}
+            <div className={styles.topScorers}>
+                {width>600 ? 
+                    <>
+                        <div className={styles.scorersFilter}>
+                            <Dropdown
+		    	            	items={[]}
+		    	            	onSelect={() => {}}
+		    	            	label="Team"
+		    	            	searchable={true}
+		    	            />
+                            <Dropdown
+		    	            	items={[]}
+		    	            	onSelect={() => {}}
+		    	            	label="Position"
+		    	            	searchable={true}
+		    	            />
+                            <Dropdown
+		    	            	items={[]}
+		    	            	onSelect={() => {}}
+		    	            	label="Nationality"
+		    	            	searchable={true}
+		    	            />
+                        </div>
+                        <table 
+                            className={styles.topScorersTable} 
+                            cellPadding={10} 
+                            cellSpacing={0}
+                        >
+                            <colgroup>
+                                <col width="50" />
+                                <col width="" />
+                                <col width="" />
+                                <col width="50" />
+                                <col width="50" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th className={styles.teamHead}>Player</th>
+                                    <th>Team</th>
+                                    <th>G</th>
+                                    <th>A</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[1,1,1,1,1,1,1,1,1].map((item,index) => (
+                                    <tr key={index}>
+                                        <td>1</td>
+                                        <td className={styles.teamCell}>
+                                            <span>
+                                                <div className={styles.teamLogo}>
+                                                    <Image 
+                                                        src="/testimg/club1.png"
+                                                        width={20}
+                                                        height={20}
+                                                        style={{objectFit:'contain'}}
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                Team Name
+                                            </span>
+                                        </td>
+                                        <td>Club name</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                    </tr>
+                                ))}                    
+                            </tbody>               
+                        </table>
+                    </>
+                    :
+                    <>
+                        <div className={styles.filtersMobile}>
+                            <div className={styles.filterBtnMobile}>
+                                <FilterModal
+                                    onApply={() => {}}
+                                    portalNode={portalNode}
+                                    filters={[
+                                        {
+                                            key: "team",
+                                            type: "singleChoiceSeparatePage",
+                                            label: "Team",
+                                            customClass: styles.sportFilter,
+                                            items: [
+                                                { id: 0, label: "All" },
+                                                { id: 1, label: "Man City" },
+                                                { id: 2, label: "Real" },
+                                                { id: 3, label: "PSG" },
+                                            ],
+                                        },
+                                        {
+                                            key: "nationality",
+                                            type: "multipleChoiceSeparatePage",
+                                            label: "Nationality",
+                                            customClass: styles.sportFilter,
+                                            items: [
+                                                { id: 0, label: "All" },
+                                                { id: 1, label: "Georgia" },
+                                                { id: 2, label: "Armenia" },
+                                                { id: 3, label: "Turkey" },
+                                            ],
+                                        },
+                                        {
+                                            key: "position",
+                                            type: "multipleChoiceSeparatePage",
+                                            label: "Position",
+                                            customClass: styles.sportFilter,
+                                            items: [
+                                                { id: 0, label: "All" },
+                                                { id: 1, label: "Forward" },
+                                                { id: 2, label: "Midfielder" },
+                                                { id: 3, label: "Defender" },
+                                            ],
+                                        },
+                                    ]}
+                                />
+                            </div>
+                            <button className={styles.resetBtnM}>Reset</button>
+                        </div>
+                        <table 
+                            className={styles.topScorersTable} 
+                            cellPadding={10} 
+                            cellSpacing={0}
+                        >
+                            <colgroup>
+                                <col width="25" />
+                                <col width="50%" />
+                                <col width="50%" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th className={styles.teamHead}>Player</th>
+                                    <th>
+                                        <StandigsMenuColumn
+                                            items={[{id:'1', value:'Team'}, {id:'2', value:'Goals'}, {id:'3', value:'Assists'}]}
+                                            onSelect={setSelectedCol}
                                         />
-                                    </div>
-                                    Team Name
-                                </span>
-                            </td>
-                            <td>Club name</td>
-                            <td>1</td>
-                            <td>1</td>
-                        </tr>
-                    ))}                    
-                </tbody>               
-            </table>
-        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {[1,1,1,1,1,1,1,1,1].map((item,index) => (
+                                    <tr key={index}>
+                                        <td>1</td>
+                                        <td className={styles.teamCell}>
+                                            <span>
+                                                <div className={styles.teamLogo}>
+                                                    <Image 
+                                                        src="/testimg/club1.png"
+                                                        width={20}
+                                                        height={20}
+                                                        style={{objectFit:'contain'}}
+                                                        alt=""
+                                                    />
+                                                </div>
+                                                Player name
+                                            </span>
+                                        </td>
+                                        <td>Club name</td>
+                                    </tr>
+                                ))}                    
+                            </tbody>               
+                        </table>
+                    </>
+                }
+                
+            </div>
+        </PortalContext.Provider>        
     )
 }
 
