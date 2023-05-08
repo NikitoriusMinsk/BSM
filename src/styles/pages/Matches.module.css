@@ -266,15 +266,15 @@
 @media screen and (max-width: 425px) {
     .predictions {
         grid-column-end: 13;
-        grid-row-start: 2;
-        grid-row-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
         padding: 16px;
     }
 
     .sideColumn {
         grid-column-start: 1;
-        grid-row-start: 3;
-        grid-row-end: 4;
+        grid-row-start: 4;
+        grid-row-end: 5;
         padding: 16px;
         display: flex;
     }
