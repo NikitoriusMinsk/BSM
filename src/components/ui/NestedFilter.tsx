@@ -49,14 +49,7 @@ const ChevronVariants = {
 };
 
 const NestedFilter: React.FC<NestedFilterProps> = (props) => {
-	const {
-		items,
-		onChange,
-		h2,
-		h3,
-		withClearButton = true,
-		colapsible = false,
-	} = props;
+	const { items, onChange, h2, h3, withClearButton = true, colapsible = false } = props;
 	const [selectedItems, setSelectedItems] = useState<string[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -101,7 +94,7 @@ const NestedFilter: React.FC<NestedFilterProps> = (props) => {
 			>
 				{items.map((item) => (
 					<Item
-						key={`nested_filter_item_${item.id}`}
+						key={`nested_filter_${item.name}_item_${item.id}`}
 						{...item}
 						selectedItems={selectedItems}
 						onSelect={(id) => handleSelect(id)}
@@ -200,7 +193,7 @@ const Item: React.FC<ItemType> = (props) => {
 						className={`${styles.subItem} ${
 							selectedItems.includes(id) && styles.active
 						}`}
-						key={`nested_filter_item_${id} `}
+						key={`nested_filter_${name}_item_${id} `}
 					>
 						<div className={styles.info}>
 							<div className={styles.image}>
