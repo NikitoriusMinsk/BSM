@@ -27,6 +27,10 @@ const MatchSummaryPage: React.FC = () => {
                 setSelectedTable('2')
                 setSelectedTableComponent(<StatisticsTable />)
                 break;
+            case '3':
+                setSelectedTable('2')
+                setSelectedTableComponent(<LineupTable />)
+                break;
         }
     }
 
@@ -294,6 +298,675 @@ const Bar: React.FC<{leftPercent: number, rightPercent: number}> = ({leftPercent
                 className={`${styles.barStripe} ${(rightPercent-leftPercent) > 0 ? styles.win : ''}`} 
                 style={{width:rightPercent+"%"}} 
             />
+        </div>
+    )
+}
+
+const LineupTable: React.FC = () => {
+    return (
+        <div className={styles.lineupBlock}>
+            <div className={styles.squadBlock}>
+                <div className={styles.squadHeader}>
+                    <div className={styles.squadTeam}>
+                        <Image 
+                            src={'/images/team-1-placeholder.svg'}
+                            width={32}
+                            height={32}
+                            alt=""
+                            style={{objectFit:'contain'}}
+                        />
+                        <span>
+                            Team 1
+                        </span>
+                    </div>
+                    <span className={styles.lineupStyle}>
+                        4 - 3 - 3
+                    </span>
+                </div>
+                <div className={styles.squad}>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/yellow-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                1
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Keeper
+                            </span>
+                            <span className={styles.playerName}>
+                                Ederson
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/es.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                2
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                John Stones
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/ar.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                3
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Ruben Dias
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/al.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                4
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Kyle Walker
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/af.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                2
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                John Stones
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/ar.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                3
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Ruben Dias
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/al.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                4
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Kyle Walker
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/af.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                2
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                John Stones
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/ar.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                3
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Ruben Dias
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/al.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                4
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Kyle Walker
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/af.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className={styles.squadBlock}>
+                <div className={styles.squadHeader}>
+                    <div className={styles.squadTeam}>
+                        <Image 
+                            src={'/images/team-1-placeholder.svg'}
+                            width={32}
+                            height={32}
+                            alt=""
+                            style={{objectFit:'contain'}}
+                        />
+                        <span>
+                            Team 1
+                        </span>
+                    </div>
+                    <span className={styles.lineupStyle}>
+                        4 - 3 - 3
+                    </span>
+                </div>
+                <div className={styles.squad}>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/yellow-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                1
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Keeper
+                            </span>
+                            <span className={styles.playerName}>
+                                Ederson
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/es.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                2
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                John Stones
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/ar.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                3
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Ruben Dias
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/al.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                4
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Kyle Walker
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/af.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                2
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                John Stones
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/ar.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                3
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Ruben Dias
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/al.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                4
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Kyle Walker
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/af.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                2
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                John Stones
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/ar.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                3
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Ruben Dias
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/al.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.player}>
+                        <div className={styles.shirt}>
+                            <Image 
+                                src={'/icons/gray-shirt.png'}
+                                width={32}
+                                height={32}
+                                alt=""
+                                style={{objectFit:'contain', position:'absolute', left:0, top:0}}
+                            />
+                            <span>
+                                4
+                            </span>                            
+                        </div>
+                        <div className={styles.playerInfo}>
+                            <span className={styles.playerPos}>
+                                Defender
+                            </span>
+                            <span className={styles.playerName}>
+                                Kyle Walker
+                            </span>
+                        </div>
+                        <div className={styles.flag}>
+                            <Image 
+                                src={'/icons/wide-flags/af.png'}
+                                width={30}
+                                height={22}
+                                alt=""
+                                style={{objectFit:'contain'}}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
