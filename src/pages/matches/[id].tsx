@@ -11,7 +11,8 @@ import H2HPage from "@components/match-summary/H2HPage"
 import StandingsPage from "@components/match-summary/StandingsPage"
 import PredictionsPage from "@components/match-summary/PredictionsPage"
 import BookmakersPage from "@components/match-summary/BookmakersPage"
-import PagesSlider from "@components/ui/match-summary/PagesSlider";
+import NewsPage from "@components/match-summary/NewsPage"
+import PagesSlider from "@components/ui/match-summary/PagesSlider"
 
 const pages = [
     {
@@ -65,6 +66,9 @@ const MatchSummary: NextPage = () => {
                 break;
             case 4:
                 setSelectedPageComponent(<PredictionsPage />)
+                break;
+            case 5:
+                setSelectedPageComponent(<NewsPage />)
                 break;
             case 6:
                 setSelectedPageComponent(<BookmakersPage />)
