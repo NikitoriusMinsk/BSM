@@ -22,7 +22,7 @@
     border-top-left-radius: 16px;    
     border-bottom-right-radius: 16px;
     overflow: hidden;
-    padding: 20px;
+    padding: 40px 60px;
 }
 .matchPreview::after{
     background: linear-gradient(180deg, rgba(26, 28, 33, 0.6) 0%, rgba(26, 28, 33, 0.2) 100%);
@@ -76,7 +76,7 @@
 .tournament{
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
@@ -129,7 +129,7 @@
 .score{
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 28px;
     line-height: 34px;
     color: #FFFFFF;

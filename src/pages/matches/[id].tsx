@@ -6,7 +6,6 @@ import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import MatchSummaryPage from "@components/match-summary/MatchSummaryPage"
-import LineupsPage from "@components/match-summary/LineupsPage"
 import OddsPage from "@components/match-summary/OddsPage"
 import H2HPage from "@components/match-summary/H2HPage"
 import StandingsPage from "@components/match-summary/StandingsPage"
@@ -17,39 +16,30 @@ import PagesSlider from "@components/ui/match-summary/PagesSlider";
 const pages = [
     {
         id:1,
-        name:"Match Summary"
+        name:"Match"
     },
     {
         id:2,
-        name:"Lineups"
-    },
-    {
-        id:3,
         name:"Odds"
     },
     {
-        id:4,
+        id:3,
         name:"H2H"
     },
     {
-        id:5,
+        id:4,
         name:"Standings"
     },
     {
-        id:6,
+        id:5,
         name:"Predictions"
     },
     {
-        id:7,
-        name:"Statistics"
-    },
-    {
-        id:8,
+        id:6,
         name:"News"
     },
-    ,
     {
-        id:9,
+        id:7,
         name:"Bookmakers"
     }    
 ]
@@ -65,21 +55,18 @@ const MatchSummary: NextPage = () => {
                 setSelectedPageComponent(<MatchSummaryPage />)
                 break;
             case 1:
-                setSelectedPageComponent(<LineupsPage />)
-                break;
-            case 2:
                 setSelectedPageComponent(<OddsPage />)
                 break;
-            case 3:
+            case 2:
                 setSelectedPageComponent(<H2HPage />)
                 break;
-            case 4:
+            case 3:
                 setSelectedPageComponent(<StandingsPage />)
                 break;
-            case 5:
+            case 4:
                 setSelectedPageComponent(<PredictionsPage />)
                 break;
-            case 9:
+            case 6:
                 setSelectedPageComponent(<BookmakersPage />)
                 break;
         }
