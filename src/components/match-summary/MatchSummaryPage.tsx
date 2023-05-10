@@ -28,7 +28,7 @@ const MatchSummaryPage: React.FC = () => {
                 setSelectedTableComponent(<StatisticsTable />)
                 break;
             case '3':
-                setSelectedTable('2')
+                setSelectedTable('3')
                 setSelectedTableComponent(<LineupTable />)
                 break;
         }
