@@ -5,7 +5,9 @@ import Image from "next/image";
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { GetServerSideProps } from 'next'
 import MatchSummaryPage from "@components/match-summary/MatchSummaryPage"
+import MatchTennisBasketPage from "@components/match-summary/MatchTennisBasketPage";
 import OddsPage from "@components/match-summary/OddsPage"
 import H2HPage from "@components/match-summary/H2HPage"
 import StandingsPage from "@components/match-summary/StandingsPage"
@@ -45,7 +47,7 @@ const pages = [
     }    
 ]
 
-const MatchSummary: NextPage = () => {
+const MatchSummary: NextPage<{type:string}> = ({type}) => {
     const router = useRouter()
     const [selectedPage, setSelectedPage] = useState(0)
     const [selectedPageComponent, setSelectedPageComponent] = useState(<MatchSummaryPage />)
@@ -53,6 +55,9 @@ const MatchSummary: NextPage = () => {
     useEffect(()=>{
         switch (selectedPage) {
             case 0:
+                if (type == 'tennis' || type == 'basketball')
+                setSelectedPageComponent(<MatchTennisBasketPage type={type} />)
+                else
                 setSelectedPageComponent(<MatchSummaryPage />)
                 break;
             case 1:
@@ -87,7 +92,11 @@ const MatchSummary: NextPage = () => {
                 <div className={styles.matchPreview}>
                     <Image 
                         //test img link
-                        src="/testimg/football.jpg"
+                        src={
+                            type=="tennis" ? "/testimg/tennis.jpg" : 
+                            type=="basketball" ? "/testimg/basketball.jpg" 
+                            : "/testimg/football.jpg"
+                        }
                         fill
                         style={{objectFit:'cover'}}
                         alt=""
@@ -162,7 +171,7 @@ const MatchSummary: NextPage = () => {
 
                 <div className={styles.matchStatPages}>
                     <PagesSlider>
-                        {pages.map((page, index) => (
+                        {(type=="tennis" || type=="basketball") ? pages.slice(0,3).map((page, index) => (
                             <span 
                                 className={`${styles.page} ${index == selectedPage && styles.pageActive}`}
                                 onClick={()=>setSelectedPage(index)}
@@ -174,7 +183,22 @@ const MatchSummary: NextPage = () => {
                                     <motion.div className={styles.pageUnderline} layoutId="pageUnderline" />
                                 }
                             </span>
-                        ))}
+                        ))
+                        :
+                        pages.map((page, index) => (
+                            <span 
+                                className={`${styles.page} ${index == selectedPage && styles.pageActive}`}
+                                onClick={()=>setSelectedPage(index)}
+                                key={page?.id}
+                                aria-label={page?.name}
+                            >
+                                {page?.name}
+                                {index == selectedPage && 
+                                    <motion.div className={styles.pageUnderline} layoutId="pageUnderline" />
+                                }
+                            </span>
+                        ))
+                        }
                     </PagesSlider>
                     <AnimatePresence exitBeforeEnter>
                         <motion.div
@@ -195,5 +219,13 @@ const MatchSummary: NextPage = () => {
         </>
     );
 };
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    return {
+        props: {
+            type: context.params?.id || 'default'
+        }
+    }
+}
 
 export default MatchSummary;
