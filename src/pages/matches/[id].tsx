@@ -171,33 +171,46 @@ const MatchSummary: NextPage<{type:string}> = ({type}) => {
 
                 <div className={styles.matchStatPages}>
                     <PagesSlider>
-                        {(type=="tennis" || type=="basketball") ? pages.slice(0,3).map((page, index) => (
-                            <span 
-                                className={`${styles.page} ${index == selectedPage && styles.pageActive}`}
-                                onClick={()=>setSelectedPage(index)}
-                                key={page?.id}
-                                aria-label={page?.name}
-                            >
-                                {page?.name}
-                                {index == selectedPage && 
-                                    <motion.div className={styles.pageUnderline} layoutId="pageUnderline" />
-                                }
-                            </span>
-                        ))
-                        :
-                        pages.map((page, index) => (
-                            <span 
-                                className={`${styles.page} ${index == selectedPage && styles.pageActive}`}
-                                onClick={()=>setSelectedPage(index)}
-                                key={page?.id}
-                                aria-label={page?.name}
-                            >
-                                {page?.name}
-                                {index == selectedPage && 
-                                    <motion.div className={styles.pageUnderline} layoutId="pageUnderline" />
-                                }
-                            </span>
-                        ))
+                        {(type=="tennis" || type=="basketball") ? 
+                            <>
+                                {pages.slice(0,3).map((page, index) => (
+                                    <span 
+                                        className={`${styles.page} ${index == selectedPage && styles.pageActive}`}
+                                        onClick={()=>setSelectedPage(index)}
+                                        key={page?.id}
+                                        aria-label={page?.name}
+                                    >
+                                        {page?.name}
+                                        {index == selectedPage && 
+                                            <motion.div className={styles.pageUnderline} layoutId="pageUnderline" />
+                                        }
+                                    </span>
+                                ))}
+                                <span 
+                                    className={`${styles.page} ${4 == selectedPage && styles.pageActive}`}
+                                    onClick={()=>setSelectedPage(4)}
+                                    aria-label={"Predictions"}
+                                >
+                                    Predictions
+                                    {4 == selectedPage && 
+                                        <motion.div className={styles.pageUnderline} layoutId="pageUnderline" />
+                                    }
+                                </span>
+                            </>                            
+                            :
+                            pages.map((page, index) => (
+                                <span 
+                                    className={`${styles.page} ${index == selectedPage && styles.pageActive}`}
+                                    onClick={()=>setSelectedPage(index)}
+                                    key={page?.id}
+                                    aria-label={page?.name}
+                                >
+                                    {page?.name}
+                                    {index == selectedPage && 
+                                        <motion.div className={styles.pageUnderline} layoutId="pageUnderline" />
+                                    }
+                                </span>
+                            ))
                         }
                     </PagesSlider>
                     <AnimatePresence exitBeforeEnter>
