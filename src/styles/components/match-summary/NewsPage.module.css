@@ -130,6 +130,12 @@
     .wideBlock {
         height: 30vw;
     }
+    .wideInfo {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 30px;
+    }
     .newsPhoto { 
         height: 11vw;
     }

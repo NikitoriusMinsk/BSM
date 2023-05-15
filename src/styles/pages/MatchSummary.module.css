@@ -234,6 +234,12 @@
     }
     .main {        
         gap: 24px;
+        margin-left: -30px;
+        width: calc(100% + 30px);
+    }
+    .matchPreview {
+        height: 350px;
+        padding: 30px;
     }
 }
 
