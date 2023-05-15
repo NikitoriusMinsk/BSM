@@ -210,11 +210,20 @@
 
 @media screen and (max-width: 1440px) {
     .matchStatPages {
-        margin-left: 38px;
-        width: calc(100% - 38px);
+        margin-left: 40px;
+        width: calc(100% - 40px);
     }
     .main {        
         gap: 30px;
+        margin-left: -40px;
+        width: calc(100% + 40px);
+    }
+    .sideBar {
+        padding-top: 30px;
+    }
+    .matchPreview {
+        height: 370px;
+        padding: 40px;
     }
 }
 

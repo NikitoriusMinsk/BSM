@@ -18,7 +18,9 @@
 }
 
 @media screen and (max-width: 1440px) {
-
+    .pagesLine {
+        gap: 48px;
+    }
 }
 @media screen and (max-width: 1366px) {
 

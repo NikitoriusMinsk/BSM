@@ -80,7 +80,7 @@
 }
 .newsPhoto {  
     position: relative;  
-    height: 10vw!important;
+    height: 10vw;
 }
 .newsInfo {
     display: flex;
@@ -124,4 +124,16 @@
     display: flex;
     align-items: center;
     gap: 4px;
+}
+
+@media screen and (max-width: 1440px) {
+    .wideBlock {
+        height: 30vw;
+    }
+    .newsPhoto { 
+        height: 11vw;
+    }
+    .pageContainer {
+        gap: 30px;
+    }
 }
