@@ -15,6 +15,8 @@ import PredictionsPage from "@components/match-summary/PredictionsPage"
 import BookmakersPage from "@components/match-summary/BookmakersPage"
 import NewsPage from "@components/match-summary/NewsPage"
 import PagesSlider from "@components/ui/match-summary/PagesSlider"
+import LiveMatchesExpanded from "@components/ui/LiveMatchesExpanded"
+import { trpc } from "src/utils/trpc"
 
 const pages = [
     {
@@ -52,6 +54,9 @@ const MatchSummary: NextPage<{type:string}> = ({type}) => {
     const [selectedPage, setSelectedPage] = useState(0)
     const [selectedPageComponent, setSelectedPageComponent] = useState(<MatchSummaryPage />)
 
+    const { data: liveMatches, isLoading: liveMatchesLoading } =
+		trpc.matches.getAllLive.useQuery();
+
     useEffect(()=>{
         switch (selectedPage) {
             case 0:
@@ -80,6 +85,18 @@ const MatchSummary: NextPage<{type:string}> = ({type}) => {
                 break;
         }
     },[selectedPage])
+
+    if (
+        liveMatchesLoading
+    ) {
+        return <div>Loading...</div>;
+    }
+
+    if (
+        !liveMatches
+    ) {
+        return <div>Error</div>;
+    }
 
     return (
         <>
@@ -227,7 +244,9 @@ const MatchSummary: NextPage<{type:string}> = ({type}) => {
                 </div>
             </main>
             <div className={styles.sideBar}>
-
+                <LiveMatchesExpanded 
+                    matches={liveMatches}
+                />
             </div>
         </>
     );
