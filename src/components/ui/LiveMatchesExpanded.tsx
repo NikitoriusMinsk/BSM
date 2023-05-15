@@ -111,12 +111,13 @@ const LiveMatchCard: React.FC<LiveMatchProps> = (props) => {
 					<span className={styles.date}>
 						16/02/2023
 					</span>
-					<div className={styles.liveTime}>
+					{/* other types */}
+					{/* <div className={styles.liveTime}>
 						LIVE: 25:33
 					</div>
 					<div className={styles.beforeTime}>
 						25:33
-					</div>
+					</div> */}
 				</div>
 			</div>
 			<div className={styles.resultBlock}>
