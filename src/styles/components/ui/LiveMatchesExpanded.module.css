@@ -289,13 +289,13 @@
 }
 
 @media screen and (max-width:1280px) {
-    .buttonContainer button:first-child {
+    /* .buttonContainer button:first-child {
         display: none;
     }
 
     .matchDuration {
         display: none;
-    }
+    } */
 
     .matchInfo .matchDuration {
         display: flex;

@@ -143,3 +143,12 @@
         gap: 30px;
     }
 }
+
+@media screen and (max-width: 1280px) {
+    .wideInfo {
+        padding: 24px;
+    }
+    .pageContainer {
+        gap: 28px;
+    }
+}
