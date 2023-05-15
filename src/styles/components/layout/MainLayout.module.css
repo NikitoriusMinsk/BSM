@@ -2,8 +2,8 @@
     margin-top: 85px;
     margin-left: 80px;
     max-height: calc(100vh - 85px);
-    overflow-y: scroll;
-    border: 1px solid #D9D9D9;
+    /* overflow-y: scroll; */
+    /* border: 1px solid #D9D9D9; */
 }
 
 .content {
