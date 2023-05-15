@@ -457,6 +457,13 @@
     }
 }
 
+@media screen and (max-width: 1366px) {
+    .playerStats > table > tbody > tr > td, .playerStats > table > thead > tr > th  {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
 @media screen and (max-width: 600px) {
     /* book mob */
     .header {
