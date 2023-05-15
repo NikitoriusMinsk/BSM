@@ -498,6 +498,7 @@ const SummaryTable: React.FC<{type: string}> = ({type}) => {
                 <table className={styles.tableSummary} cellSpacing={0}>
                     <colgroup>
                         <col width="" />
+                        {/* <col width="50" />
                         <col width="50" />
                         <col width="50" />
                         <col width="50" />
@@ -510,8 +511,7 @@ const SummaryTable: React.FC<{type: string}> = ({type}) => {
                         <col width="50" />
                         <col width="50" />
                         <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
+                        <col width="50" /> */}
                     </colgroup>
                     <thead>
                         <tr className={styles.header}>
