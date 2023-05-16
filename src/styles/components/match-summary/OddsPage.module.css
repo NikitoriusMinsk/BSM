@@ -3,13 +3,14 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    position: relative;
 }
 
 /* odds */
 .oddsFilter {
     display: flex;
     align-items: stretch;
-    gap: 10px;
+    gap: 16px;
     overflow-x: auto;
     width: 100%;
 }
@@ -120,6 +121,32 @@
 .oddValue.oddActive {
     background: #7F3FFC;
     color: #FFFFFF;
+}
+
+.chevronMobile {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .oddsFilter {
+        margin: 0px -20px;
+        width: calc(100% + 40px);
+        padding: 0px 20px;
+    }
+    .chevronMobile {
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: -20px;
+        top: 0px;
+        height: 44px;
+        padding-left: 10px;
+        padding-right: 20px;
+        text-align: left;
+        background: #fff;
+        cursor: pointer!important;
+    }
 }
 
 @media screen and (max-width: 600px) {

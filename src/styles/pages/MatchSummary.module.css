@@ -283,6 +283,9 @@
     .matchPreview {
         border-radius: 0px;
     }
+    .matchData {
+        padding: 20px 10px;
+    }
 }
 
 @media screen and (max-width: 600px) {

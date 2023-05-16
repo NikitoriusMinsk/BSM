@@ -1,6 +1,6 @@
 import styles from "../../styles/components/match-summary/OddsPage.module.css";
 import Image from "next/image";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, UIEvent } from "react";
 import DropdownSearch from "@components/ui/match-summary/DropdownSearch";
 import OddsFilter from "@components/ui/match-summary/OddsFilter";
 import OddForm from "@components/ui/match-summary/OddForm";
@@ -18,12 +18,28 @@ const OddsPage: React.FC = () => {
 		else setOddInProcess(key);
 	};
 
+    // const handleScroll = (event:UIEvent<HTMLDivElement>) => {
+    //     if (event.currentTarget.scrollLeft>3) {
+	// 		// 'as' for typescript
+	// 		try {
+	// 			(document.querySelector(`.${styles.chevronMobile}`) as HTMLInputElement).style.display = 'none'
+	// 		}
+	// 		catch {}
+	// 	}
+    // }
+
+	// const scrollFilter = (event:UIEvent<HTMLDivElement>) => {
+	// 	sliderRef.current.scroll({left: 250, behavior:'smooth'})
+	// 	event.currentTarget.style.display = "none"
+    // }
+
 	return (
 		<div className={styles.pageContainer}>
 			<div
 				className={styles.oddsFilter}
 				{...events}
 				ref={sliderRef}
+				// onScroll={handleScroll}
 			>
 				<DropdownSearch
 					items={[
@@ -78,6 +94,18 @@ const OddsPage: React.FC = () => {
 					onSelect={(id) => {}}
 				/>
 			</div>
+			{/* <div 
+				className={styles.chevronMobile}
+				onClick={scrollFilter}
+			>
+				<Image 
+					src={"/icons/chevron-filter.svg"}
+					width={16}
+					height={16}
+					style={{objectFit:"contain"}}
+					alt=""
+				/>
+			</div> */}
 			<div className={styles.oddsContent}>
 				<AnimatePresence>
 					{oddInProcess && <OddForm setOpen={setOddInProcess} />}

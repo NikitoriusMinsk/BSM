@@ -71,6 +71,7 @@
 .stat {
     display: flex;
     gap: 8px;
+    align-items: center;
 }
 .newsBlock {
     display: flex;
@@ -162,5 +163,19 @@
     }
     .pageContainer {
         gap: 22px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .pageContainer {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    .wideBlock {
+        height: 43vw;
+        grid-column-end: 3;
+    }
+    .newsPhoto { 
+        height: 25vw;
     }
 }

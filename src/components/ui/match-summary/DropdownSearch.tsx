@@ -64,7 +64,7 @@ const DropdownSearch: React.FC<DropdownProps> = (props) => {
                 <Image
                     src={selected?.image || ""}
                     width={60}
-                    height={24}
+                    height={20}
                     style={{objectFit:'contain',objectPosition:"left center"}}
                     alt=""
                 />
