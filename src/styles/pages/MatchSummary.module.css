@@ -262,6 +262,11 @@
     .matchPreview {
         height: 490px;
         padding: 20px;
+        padding-top: 64px;
+        padding-bottom: 64px;
+    }
+    .buttonBack {
+        display: none;
     }
     .sideBar {
         display: none;
@@ -269,6 +274,12 @@
 }
 
 @media screen and (max-width: 768px) {
+    .main {
+        grid-column-end: 13;
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 100%;
+    } 
     .matchPreview {
         border-radius: 0px;
     }
