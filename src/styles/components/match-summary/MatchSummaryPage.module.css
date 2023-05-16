@@ -249,6 +249,11 @@
 /* lineup - end */
 
 @media screen and (max-width: 600px) {
+    .filter {
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 12px;
+    }
     .stageStat {
         gap: 0px;
     }
@@ -272,5 +277,24 @@
     .infoLink {
         gap: 8px;
         margin-top: 40px;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+    .statBarsBlock {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .barInfo {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+    }
+    .barInfo span:first-child, .barInfo span:last-child {
+        font-weight: 400;
+    }
+    .lineupBlock {
+        padding-left: 16px;
+        padding-right: 16px;
+        flex-direction: column;
     }
 }

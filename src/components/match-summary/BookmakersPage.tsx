@@ -9,9 +9,9 @@ const BookmakersPage: React.FC = () => {
             <table className={styles.bookmakersTable} cellSpacing={0}>
                 <colgroup>
                     <col width="" />
-                    <col width="125" />
-                    <col width="125" />
-                    <col width="125" />
+                    <col width="50" />
+                    <col width="50" />
+                    <col width="50" />
                 </colgroup>
                 <thead>
                     <tr className={styles.header}>

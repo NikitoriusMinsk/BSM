@@ -265,9 +265,9 @@
         padding-top: 64px;
         padding-bottom: 64px;
     }
-    .buttonBack {
+    /* .buttonBack {
         display: none;
-    }
+    } */
     .sideBar {
         display: none;
     }
@@ -316,7 +316,7 @@
         height: 20px!important;
     }
     .matchData {
-        padding: 24px;
+        padding: 24px 10px;
         gap: 10px;
         width: 100%;
         margin-top: 20px;
@@ -325,6 +325,10 @@
     .clubLogo {
         width: 48px;
         height: 48px;
+    }
+    .clubLogo img {
+        width: 28px;
+        height: 28px;
     }
     .score {
         font-weight: 600;
@@ -343,6 +347,7 @@
     }
     .matchStatPages {
         margin-left: 0px;
+        margin-right: 0px;
         width: 100%;
     }
     .page {

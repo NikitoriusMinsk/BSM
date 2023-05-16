@@ -117,6 +117,7 @@
     .filter {
         padding-left: 16px;
         padding-right: 16px;
+        gap: 12px;
     }
     .standingsTable tbody tr:nth-child(2n-1) td:first-child, .standingsTable tbody tr:nth-child(2n-1) td:last-child { 
         border-radius: 0px;

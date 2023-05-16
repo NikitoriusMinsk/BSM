@@ -25,3 +25,9 @@
     border-color: #7F3FFC;
     color: #FFFFFF;
 }
+
+@media screen and (max-width: 600px) {
+    .container {
+        gap: 12px;
+    }
+}
