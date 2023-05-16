@@ -152,3 +152,15 @@
         gap: 28px;
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .wideBlock {
+        height: 40vw;
+    }
+    .newsPhoto { 
+        height: 15vw;
+    }
+    .pageContainer {
+        gap: 22px;
+    }
+}

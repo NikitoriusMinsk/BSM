@@ -253,9 +253,15 @@
         width: calc(100% - 40px);
         margin-right: 20px;
     }
-    .main {        
-        gap: 24px;
+    .main {
         grid-column-end: 13;
+        margin-left: -20px;
+        margin-right: -20px;
+        width: calc(100% + 40px);
+    }    
+    .matchPreview {
+        height: 490px;
+        padding: 20px;
     }
     .sideBar {
         display: none;
