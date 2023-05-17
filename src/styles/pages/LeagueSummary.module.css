@@ -5,7 +5,7 @@
     gap: 40px;
 }
 .main{
-    width: calc(100% + 40px);
+    width: calc(100% + 60px);
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -14,7 +14,7 @@
     grid-row-start: 1;
     grid-row-end: 2;
     margin-bottom: 100px;
-    margin-left: -40px;
+    margin-left: -60px;
 }
 .leaguePreview{
     position: relative;
@@ -183,6 +183,7 @@
     grid-column-end: 13;
     grid-row-start: 1;
     grid-row-end: 2;
+    padding-top: 40px;
 }
 
 @media screen and (max-width: 1440px) {
@@ -194,6 +195,9 @@
         gap: 30px;
         margin-left: -40px;
         width: calc(100% + 40px);
+    }
+    .sideBar {
+        padding-top: 30px;
     }
     .leaguePreview {
         padding-left: 40px;

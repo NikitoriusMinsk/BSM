@@ -11,6 +11,8 @@ import FixsturesPage from "@components/league-summary/FixsturesPage"
 import StandingsPage from "@components/league-summary/StandingsPage"
 import ArchivePage from "@components/league-summary/ArchivePage"
 import PagesSlider from "@components/ui/match-summary/PagesSlider"
+import { trpc } from "src/utils/trpc"
+import Leagues from "@components/ui/league-summary/Leagues"
 
 const pages = [
     {
@@ -39,6 +41,8 @@ const LeagueSummary: NextPage = () => {
     const router = useRouter()
     const [selectedPage, setSelectedPage] = useState(0)
     const [selectedPageComponent, setSelectedPageComponent] = useState(<LeagueSummaryPage />)
+    const { data: leagues, isLoading: leaguesLoading } =
+		trpc.filters.getLeagues.useQuery();
 
     useEffect(()=>{
         switch (selectedPage) {
@@ -59,6 +63,9 @@ const LeagueSummary: NextPage = () => {
                 break;
         }
     },[selectedPage])
+
+    if (!leagues) 
+    return (<></>)
 
     return (
         <>
@@ -156,7 +163,11 @@ const LeagueSummary: NextPage = () => {
                 </div>
             </main>
             <div className={styles.sideBar}>
-
+                <Leagues
+					h3="Top Leagues"
+					items={leagues}
+                    showCount={false}
+				/>
             </div>
         </>
     );

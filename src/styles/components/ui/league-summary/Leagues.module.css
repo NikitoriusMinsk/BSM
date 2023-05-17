@@ -1,0 +1,130 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 7px;
+    gap: 8px;
+}
+
+.container h3 {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1A1C2180;
+    text-transform: uppercase;
+}
+
+.container h2 {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    color: #1A1C21;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+    height: 390px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.titles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+}
+
+.itemName {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+}
+
+.itemSubname {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C2199;
+}
+
+.image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 100%;
+    border: 3px solid #1A1C211A;
+}
+
+.count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+    min-width: 28px;
+    background-color: #1A1C211A;
+    border-radius: 8px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #1A1C21;
+    transition: all 0.3s ease;
+}
+
+.item.selected .count {
+    background-color: #7F3FFC;
+    color: white;
+}
+
+.showMore {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21B2;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.chevron {
+    height: 24px;
+    width: 24px;
+}
