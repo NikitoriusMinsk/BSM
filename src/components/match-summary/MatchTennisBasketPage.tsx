@@ -4,6 +4,8 @@ import React, { useRef, useEffect, useState } from "react"
 import MatchFilter from "@components/ui/match-summary/MatchFilter";
 import { useDraggable } from "react-use-draggable-scroll";
 import { motion, AnimatePresence } from "framer-motion";
+import useWindowSize from "src/utils/useWindowSize";
+import StandigsMenuColumn from "@components/ui/match-summary/StandingsMenuColumn";
 
 const MatchTennisBasketPage: React.FC<{type: string}> = ({type}) => {
     const sliderRef = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
@@ -83,6 +85,9 @@ const MatchTennisBasketPage: React.FC<{type: string}> = ({type}) => {
 }
 
 const SummaryTable: React.FC<{type: string}> = ({type}) => {
+    const {width} = useWindowSize()
+    const [selectedCol, setSelectedCol] = useState<{ value: string, id: string }>()
+
     if (type=='tennis')
     return (
         <div className={styles.summaryContainer}>
@@ -495,308 +500,436 @@ const SummaryTable: React.FC<{type: string}> = ({type}) => {
             </table>
             <div className={styles.playerStats}>
                 <span className={styles.playerStatTitle}>Player statistics</span>
-                <table className={styles.tableSummary} cellSpacing={0}>
-                    <colgroup>
-                        <col width="" />
-                        {/* <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" /> */}
-                    </colgroup>
-                    <thead>
-                        <tr className={styles.header}>
-                            <th>
-                                Player
-                            </th>
-                            <th>
-                                Team
-                            </th>
-                            <th>
-                                PTS
-                            </th>
-                            <th>
-                                REB
-                            </th>
-                            <th>
-                                AST
-                            </th>
-                            <th>
-                                MIN
-                            </th>
-                            <th>
-                                FGM
-                            </th>
-                            <th>
-                                FGA
-                            </th>
-                            <th>
-                                2PM
-                            </th>
-                            <th>
-                                2PA
-                            </th>
-                            <th>
-                                3PM
-                            </th>
-                            <th>
-                                3PA
-                            </th>
-                            <th>
-                                FTM
-                            </th>
-                            <th>
-                                FTA
-                            </th>
-                            <th>
-                                +/-
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div className={styles.player}>
-                                    <Image 
-                                        src={'/icons/wide-flags/es.png'}
-                                        width={30}
-                                        height={22}
-                                        alt=""
-                                        style={{objectFit:'contain'}}
+                {width <= 600 ? 
+                    <table className={styles.tableSummary} cellSpacing={0}>
+                        <colgroup>
+                            <col width="" />
+                        </colgroup>
+                        <thead>
+                            <tr className={styles.header}>
+                                <th>
+                                    Player
+                                </th>
+                                <th>
+                                    Team
+                                </th>
+                                <th>
+                                    <StandigsMenuColumn 
+                                        items={[
+                                            {id:'1', value:'PTS'}, 
+                                            {id:'2', value:'REB'}, 
+                                            {id:'3', value:'AST'}, 
+                                            {id:'4', value:'MIN'}, 
+                                            {id:'5', value:'FGM'}, 
+                                            {id:'6', value:'FGA'}, 
+                                            {id:'7', value:'2PM'}, 
+                                            {id:'8', value:'2PA'}, 
+                                            {id:'9', value:'3PM'}, 
+                                            {id:'10', value:'3PA'}, 
+                                            {id:'11', value:'FTM'}, 
+                                            {id:'12', value:'FTA'}, 
+                                            {id:'13', value:'+/-'}
+                                        ]}
+                                        onSelect={setSelectedCol}
                                     />
-                                    <span>
-                                        Player name
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                Team
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div className={styles.player}>
-                                    <Image 
-                                        src={'/icons/wide-flags/es.png'}
-                                        width={30}
-                                        height={22}
-                                        alt=""
-                                        style={{objectFit:'contain'}}
-                                    />
-                                    <span>
-                                        Player name
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                Team
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div className={styles.player}>
-                                    <Image 
-                                        src={'/icons/wide-flags/es.png'}
-                                        width={30}
-                                        height={22}
-                                        alt=""
-                                        style={{objectFit:'contain'}}
-                                    />
-                                    <span>
-                                        Player name
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                Team
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div className={styles.player}>
-                                    <Image 
-                                        src={'/icons/wide-flags/es.png'}
-                                        width={30}
-                                        height={22}
-                                        alt=""
-                                        style={{objectFit:'contain'}}
-                                    />
-                                    <span>
-                                        Player name
-                                    </span>
-                                </div>
-                            </td>
-                            <td>
-                                Team
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                1
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div className={styles.player}>
+                                        <Image 
+                                            src={'/icons/wide-flags/es.png'}
+                                            width={30}
+                                            height={22}
+                                            alt=""
+                                            style={{objectFit:'contain'}}
+                                        />
+                                        <span>
+                                            Player name
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    Team
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div className={styles.player}>
+                                        <Image 
+                                            src={'/icons/wide-flags/es.png'}
+                                            width={30}
+                                            height={22}
+                                            alt=""
+                                            style={{objectFit:'contain'}}
+                                        />
+                                        <span>
+                                            Player name
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    Team
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div className={styles.player}>
+                                        <Image 
+                                            src={'/icons/wide-flags/es.png'}
+                                            width={30}
+                                            height={22}
+                                            alt=""
+                                            style={{objectFit:'contain'}}
+                                        />
+                                        <span>
+                                            Player name
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    Team
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div className={styles.player}>
+                                        <Image 
+                                            src={'/icons/wide-flags/es.png'}
+                                            width={30}
+                                            height={22}
+                                            alt=""
+                                            style={{objectFit:'contain'}}
+                                        />
+                                        <span>
+                                            Player name
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    Team
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    :
+                    <table className={styles.tableSummary} cellSpacing={0}>
+                        <colgroup>
+                            <col width="" />
+                            {/* <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" /> */}
+                        </colgroup>
+                        <thead>
+                            <tr className={styles.header}>
+                                <th>
+                                    Player
+                                </th>
+                                <th>
+                                    Team
+                                </th>
+                                <th>
+                                    PTS
+                                </th>
+                                <th>
+                                    REB
+                                </th>
+                                <th>
+                                    AST
+                                </th>
+                                <th>
+                                    MIN
+                                </th>
+                                <th>
+                                    FGM
+                                </th>
+                                <th>
+                                    FGA
+                                </th>
+                                <th>
+                                    2PM
+                                </th>
+                                <th>
+                                    2PA
+                                </th>
+                                <th>
+                                    3PM
+                                </th>
+                                <th>
+                                    3PA
+                                </th>
+                                <th>
+                                    FTM
+                                </th>
+                                <th>
+                                    FTA
+                                </th>
+                                <th>
+                                    +/-
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div className={styles.player}>
+                                        <Image 
+                                            src={'/icons/wide-flags/es.png'}
+                                            width={30}
+                                            height={22}
+                                            alt=""
+                                            style={{objectFit:'contain'}}
+                                        />
+                                        <span>
+                                            Player name
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    Team
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div className={styles.player}>
+                                        <Image 
+                                            src={'/icons/wide-flags/es.png'}
+                                            width={30}
+                                            height={22}
+                                            alt=""
+                                            style={{objectFit:'contain'}}
+                                        />
+                                        <span>
+                                            Player name
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    Team
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div className={styles.player}>
+                                        <Image 
+                                            src={'/icons/wide-flags/es.png'}
+                                            width={30}
+                                            height={22}
+                                            alt=""
+                                            style={{objectFit:'contain'}}
+                                        />
+                                        <span>
+                                            Player name
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    Team
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div className={styles.player}>
+                                        <Image 
+                                            src={'/icons/wide-flags/es.png'}
+                                            width={30}
+                                            height={22}
+                                            alt=""
+                                            style={{objectFit:'contain'}}
+                                        />
+                                        <span>
+                                            Player name
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    Team
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }                
             </div>
             <table className={styles.bookmakersTable} cellSpacing={0}>
                 <colgroup>

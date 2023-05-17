@@ -169,6 +169,7 @@
 
     .oddsContent {
         gap: 32px;
+        margin-top: 24px;
     }
 
     .oddsBlock[aria-colcount="3"]:not([data-mobile="true"]) {

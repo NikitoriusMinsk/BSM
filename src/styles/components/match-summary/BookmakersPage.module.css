@@ -121,6 +121,7 @@
         line-height: 17px;
         min-width: 70px;
         padding: 6px;
+        height: 34px;
     }
     .colsHeader > * {        
         min-width: 70px;

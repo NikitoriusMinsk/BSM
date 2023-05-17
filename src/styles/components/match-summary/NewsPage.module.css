@@ -212,6 +212,9 @@
         height: 53vw;
         position: relative;
     }
+    .wideBlImg::after{
+        display: none;
+    }
     .wideInfo {
         padding: 10px 16px;
     }
