@@ -18,7 +18,7 @@
     color: #1A1C21;
 }
 .filterActive{
-    background: #7F3FFC;
-    border-color: #7F3FFC;
-    color: #FFFFFF;
+    background: #7F3FFC!important;
+    border-color: #7F3FFC!important;
+    color: #FFFFFF!important;
 }

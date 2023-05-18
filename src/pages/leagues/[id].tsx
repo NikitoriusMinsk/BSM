@@ -5,10 +5,12 @@ import Image from "next/image";
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { GetServerSideProps } from 'next'
 import LeagueSummaryPage from "@components/league-summary/LeagueSummaryPage"
 import ResultsPage from "@components/league-summary/ResultsPage"
 import FixsturesPage from "@components/league-summary/FixsturesPage"
 import StandingsPage from "@components/league-summary/StandingsPage"
+import StandingsTennisBasketPage from "@components/league-summary/StandingsTennisBasketPage"
 import ArchivePage from "@components/league-summary/ArchivePage"
 import PagesSlider from "@components/ui/match-summary/PagesSlider"
 import { trpc } from "src/utils/trpc"
@@ -37,7 +39,7 @@ const pages = [
     }
 ]
 
-const LeagueSummary: NextPage = () => {
+const LeagueSummary: NextPage<{type:string}> = ({type}) => {
     const router = useRouter()
     const [selectedPage, setSelectedPage] = useState(0)
     const [selectedPageComponent, setSelectedPageComponent] = useState(<LeagueSummaryPage />)
@@ -56,6 +58,9 @@ const LeagueSummary: NextPage = () => {
                 setSelectedPageComponent(<FixsturesPage />)
                 break;
             case 3:
+                if (type == 'tennis' || type == 'basketball')
+                setSelectedPageComponent(<StandingsTennisBasketPage />)
+                else
                 setSelectedPageComponent(<StandingsPage />)
                 break;
             case 4:
@@ -78,7 +83,11 @@ const LeagueSummary: NextPage = () => {
                 <div className={styles.leaguePreview}>
                     <Image 
                         //test img link
-                        src="/testimg/football.jpg"
+                        src={
+                            type=="tennis" ? "/testimg/tennis.jpg" : 
+                            type=="basketball" ? "/testimg/basketball.jpg" 
+                            : "/testimg/football.jpg"
+                        }
                         fill
                         style={{objectFit:'cover'}}
                         alt=""
@@ -172,5 +181,13 @@ const LeagueSummary: NextPage = () => {
         </>
     );
 };
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    return {
+        props: {
+            type: context.params?.id || 'default'
+        }
+    }
+}
 
 export default LeagueSummary;
