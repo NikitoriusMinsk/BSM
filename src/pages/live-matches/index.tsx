@@ -13,7 +13,7 @@ import FilterModal from "@components/ui/FilterModal";
 import { PortalContext } from "src/utils/portalContext";
 import dynamic from "next/dynamic";
 import usePortal from "src/utils/usePortal";
-import LeaguesMobileBlocks from "@components/ui/LeaguesMobileBlocks";
+import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
@@ -123,7 +123,7 @@ const LiveMatches: NextPage = () => {
 						/>
 					</div>
 					<div className={styles.leaguesMobile}>
-						<LeaguesMobileBlocks
+						<LeaguesMobileBlocksFilter
 							items={filters}
 							onChange={() => {}}
 						/>

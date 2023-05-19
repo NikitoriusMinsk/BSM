@@ -14,7 +14,7 @@ interface FilterProps {
 	onChange: (ids: string[]) => void;
 }
 
-const LeaguesMobileBlocks: React.FC<FilterProps> = (props) => {
+const LeaguesMobileBlocksFilter: React.FC<FilterProps> = (props) => {
 	const { items, onChange } = props;
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedItems, setSelectedItems] = useState<string[]>([]);
@@ -67,4 +67,4 @@ const LeaguesMobileBlocks: React.FC<FilterProps> = (props) => {
 	);
 };
 
-export default LeaguesMobileBlocks;
+export default LeaguesMobileBlocksFilter;
