@@ -5,6 +5,7 @@ import StandingsFilter from "@components/ui/match-summary/StandingsFilter"
 import { motion, AnimatePresence } from "framer-motion"
 import useWindowSize from "src/utils/useWindowSize";
 import StandigsMenuColumn from "@components/ui/match-summary/StandingsMenuColumn";
+import PlayoffBracket from "@components/ui/league-summary/PlayoffBracket";
 
 const StandingsTennisBasketPage: React.FC = () => {
     const [selectedTable, setSelectedTable] = useState('1')
@@ -117,9 +118,7 @@ const MainTable: React.FC = () => {
 const PlayoffsTable: React.FC = () => {
 
     return (
-        <>
-        
-        </>
+        <PlayoffBracket />
     )    
 }
 

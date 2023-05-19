@@ -15,6 +15,7 @@ import ArchivePage from "@components/league-summary/ArchivePage"
 import PagesSlider from "@components/ui/match-summary/PagesSlider"
 import { trpc } from "src/utils/trpc"
 import Leagues from "@components/ui/league-summary/Leagues"
+import LeaguesMobileBlocksLinks from "@components/ui/LeaguesMobileBlocksLinks"
 
 const pages = [
     {
@@ -178,6 +179,14 @@ const LeagueSummary: NextPage<{type:string}> = ({type}) => {
                     showCount={false}
 				/>
             </div>
+            <div className={styles.leaguesMobile}>
+                <span className={styles.leaguesMobileTitle}>
+                    Top Leagues
+                </span>
+				<LeaguesMobileBlocksLinks
+					items={leagues}
+				/>
+			</div>
         </>
     );
 };

@@ -186,6 +186,10 @@
     padding-top: 40px;
 }
 
+.leaguesMobile {
+    display: none;
+}
+
 @media screen and (max-width: 1440px) {
     .matchStatPages {
         margin-left: 40px;
@@ -244,10 +248,17 @@
     }
     .leaguePreview {
         padding-left: 20px;
+        padding-top: 24px;
+        margin-right: -20px;
+        border-bottom-right-radius: 0px;
     }
 }
 
 @media screen and (max-width: 768px) {
+    .leaguePreview {
+        margin-right: 0px;
+        border-top-left-radius: 0px;
+    }
     .main {        
         margin-left: 00px;
         width: 100%;
@@ -258,7 +269,7 @@
         width: calc(100% - 40px);
     }
     .leagueData {
-        margin-left: 60px;
+        margin-left: 80px;
     }
 }
 
@@ -335,5 +346,31 @@
     }
     .pageActive {
         font-weight: 600;
+    }
+    .leaguesMobile {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 2;
+        grid-row-end: 3;
+        margin-top: 30px;
+    }
+    .leaguesMobile > div {        
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .leaguesMobileTitle {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: #1A1C21;
+        width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-bottom: 12px;
     }
 }

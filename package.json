@@ -22,6 +22,7 @@
 		"next": "^13.1.6",
 		"next-auth": "^4.19.2",
 		"react": "^18.2.0",
+		"react-brackets": "^0.4.7",
 		"react-circular-progressbar": "^2.1.0",
 		"react-datepicker": "^4.8.0",
 		"react-dom": "^18.2.0",

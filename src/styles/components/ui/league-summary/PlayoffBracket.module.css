@@ -1,0 +1,188 @@
+.bracketContainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.bracketWrap {
+    display: flex;
+    overflow: auto;
+    margin-left: -60px;
+    width: calc(100% + 60px);
+    padding-left: 60px;
+}
+.bracketWrap::-webkit-scrollbar{
+    display: none;
+}
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 8px;
+}
+.leftControl, .rightControl {
+    background: rgba(242, 242, 242, 0.5);
+    border-radius: 8px;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+}
+.rightControl img {
+    transform: rotateZ(180deg);
+}
+.playoff {
+
+}
+.stage {
+    flex-grow: 1!important;
+}
+.stage:first-child > div:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.stage:last-child > div:first-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.stage:first-child .matchWrap {
+    padding-left: 0px!important;
+}
+.stage > div:first-child {
+    background: rgba(242, 242, 242, 0.5);
+    padding: 12px;
+    margin-bottom: 11px;
+
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: #1A1C21;
+}
+.matchWrap {
+    padding: 5px 16px!important;
+}
+.matchWrap:after, .matchWrap::before {
+    width: 16px!important;
+}
+.matchWrap:nth-child(odd):not(:last-child)::after {
+    border-color: rgba(26, 28, 33, 0.1)!important;
+    border-top-right-radius: 16px;
+}
+.matchWrap:nth-child(even)::after {
+    border-color: rgba(26, 28, 33, 0.1)!important;
+    border-bottom-right-radius: 16px;
+}
+.matchWrap:nth-child(even)::before{
+    border-color: rgba(26, 28, 33, 0.1)!important;
+    right: -16px!important;
+}
+.match {
+    background-color: rgba(242, 242, 242, 0.5)!important;
+    border-radius: 16px!important;
+    box-shadow: none!important;
+    display: flex;
+    min-width: max-content!important;
+}
+.match span {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(26, 28, 33, 0.7);
+}
+.teamImgs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+.teamImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FBFBFB;
+    border-radius: 20px;
+    border: 3px solid #E8E8E9;
+    padding: 5px;
+}
+.teamImg:last-child {
+    margin-left: -10px;
+}
+.teamImg img {
+    object-fit: contain;
+}
+.teams {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    justify-content: center;
+}
+.teams span {
+    flex-shrink: 0;
+}
+.teams > div {
+    gap: 32px;
+}
+.teams > div:first-child {
+    padding-top: 16px;
+    padding-bottom: 1px;
+    padding-right: 16px;
+    padding-left: 4px;
+}
+.teams > div:last-child {
+    padding-top: 1px;
+    padding-bottom: 16px;
+    padding-right: 16px;
+    padding-left: 4px;
+}
+.home span{
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+}
+
+@media screen and (max-width: 1280px) {
+    .teamImgs {
+        flex-direction: column;
+        padding: 6px 12px;
+    }
+    .teamImg:last-child {
+        margin-left: 0px;
+        margin-top: -12px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .bracketWrap {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: calc(100% + 40px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .controls {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .bracketWrap {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+        width: 100%;
+    }
+    .stage:first-child .matchWrap {
+        padding-left: 16px!important;
+    }
+}

@@ -253,6 +253,12 @@
     .filter {
         padding-left: 16px;
         padding-right: 16px;
+        margin-bottom: 24px;
+    }
+    .filtersInside {
+        margin-left: 16px;
+        margin-right: 16px;
+        margin-bottom: 16px;
     }
     .standingsTable tbody tr:nth-child(2n-1) td:first-child, .standingsTable tbody tr:nth-child(2n-1) td:last-child { 
         border-radius: 0px;
