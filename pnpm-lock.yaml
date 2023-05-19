@@ -40,6 +40,9 @@ dependencies:
   react:
     specifier: ^18.2.0
     version: 18.2.0
+  react-brackets:
+    specifier: ^0.4.7
+    version: 0.4.7(react-swipeable-views@0.13.9)(react@18.2.0)(styled-components@5.3.10)
   react-circular-progressbar:
     specifier: ^2.1.0
     version: 2.1.0(react@18.2.0)
@@ -194,6 +197,12 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.21.5
+    dev: false
+
+  /@babel/runtime@7.0.0:
+    resolution: {integrity: sha512-7hGhzlcmg01CvH1EHdSPVXYX1aJ8KCEyz6I9xYIi/asDtzBPMyMhVibhM/K6g/5qnKBwjZtp10bNZIEFTRW1MA==}
+    dependencies:
+      regenerator-runtime: 0.12.1
     dev: false
 
   /@babel/runtime@7.21.5:
@@ -2188,6 +2197,10 @@ packages:
       object.assign: 4.1.4
     dev: true
 
+  /keycode@2.2.1:
+    resolution: {integrity: sha512-Rdgz9Hl9Iv4QKi8b0OlCRQEzp4AgVxyCtz5S/+VIHezDmrDhkp2N2TqBWOLz0/gbeREXOOiI9/4b8BY9uw2vFg==}
+    dev: false
+
   /language-subtag-registry@0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
     dev: true
@@ -2636,6 +2649,19 @@ packages:
       strip-json-comments: 2.0.1
     dev: false
 
+  /react-brackets@0.4.7(react-swipeable-views@0.13.9)(react@18.2.0)(styled-components@5.3.10):
+    resolution: {integrity: sha512-5NynHxC32gEe9vuLQJvD2JEtHXg2gI0R6MWVD+uSYhQCAlEdwlKbFWNdrP5MIt1buyxrs2F/tr1EIW6+eBCocw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^17.0.0
+      react-swipeable-views: ^0.13.9
+      styled-components: ^5.1.1
+    dependencies:
+      react: 18.2.0
+      react-swipeable-views: 0.13.9(react@18.2.0)
+      styled-components: 5.3.10(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    dev: false
+
   /react-circular-progressbar@2.1.0(react@18.2.0):
     resolution: {integrity: sha512-xp4THTrod4aLpGy68FX/k1Q3nzrfHUjUe5v6FsdwXBl3YVMwgeXYQKDrku7n/D6qsJA9CuunarAboC2xCiKs1g==}
     peerDependencies:
@@ -2686,6 +2712,17 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       prop-types: 15.8.1
+    dev: false
+
+  /react-event-listener@0.6.6(react@18.2.0):
+    resolution: {integrity: sha512-+hCNqfy7o9wvO6UgjqFmBzARJS7qrNoda0VqzvOuioEpoEXKutiKuv92dSz6kP7rYLmyHPyYNLesi5t/aH1gfw==}
+    peerDependencies:
+      react: ^16.3.0
+    dependencies:
+      '@babel/runtime': 7.21.5
+      prop-types: 15.8.1
+      react: 18.2.0
+      warning: 4.0.3
     dev: false
 
   /react-fast-compare@3.2.1:
@@ -2833,6 +2870,42 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
+  /react-swipeable-views-core@0.13.7:
+    resolution: {integrity: sha512-ekn9oDYfBt0oqJSGGwLEhKvn+QaqMGTy//9dURTLf+vp7W5j6GvmKryYdnwJCDITaPFI2hujXV4CH9krhvaE5w==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      '@babel/runtime': 7.0.0
+      warning: 4.0.3
+    dev: false
+
+  /react-swipeable-views-utils@0.13.9(react@18.2.0):
+    resolution: {integrity: sha512-QLGxRKrbJCbWz94vkWLzb1Daaa2Y/TZKmsNKQ6WSNrS+chrlfZ3z9tqZ7YUJlW6pRWp3QZdLSY3UE3cN0TXXmw==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      '@babel/runtime': 7.0.0
+      keycode: 2.2.1
+      prop-types: 15.8.1
+      react-event-listener: 0.6.6(react@18.2.0)
+      react-swipeable-views-core: 0.13.7
+      shallow-equal: 1.2.1
+    transitivePeerDependencies:
+      - react
+    dev: false
+
+  /react-swipeable-views@0.13.9(react@18.2.0):
+    resolution: {integrity: sha512-WXC2FKYvZ9QdJ31v9LjEJEl1bA7E4AcaloTkbW0uU0dYf5uvv4aOpiyxubvOkVl1a5L2UAHmKSif4TmJ9usrSg==}
+    engines: {node: '>=6.0.0'}
+    peerDependencies:
+      react: ^15.3.0 || ^16.0.0
+    dependencies:
+      '@babel/runtime': 7.0.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-swipeable-views-core: 0.13.7
+      react-swipeable-views-utils: 0.13.9(react@18.2.0)
+      warning: 4.0.3
+    dev: false
+
   /react-transition-group@2.9.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-+HzNTCHpeQyl4MJ/bdE0u6XRMe9+XG/+aL4mCxVN4DnPBQ0/5bfHWPDuOZUzYdMj94daZaZdCCc1Dzt9R/xSSg==}
     peerDependencies:
@@ -2906,6 +2979,10 @@ packages:
     dependencies:
       css-unit-converter: 1.1.2
       postcss-value-parser: 3.3.1
+    dev: false
+
+  /regenerator-runtime@0.12.1:
+    resolution: {integrity: sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==}
     dev: false
 
   /regenerator-runtime@0.13.11:
@@ -2997,6 +3074,10 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
+
+  /shallow-equal@1.2.1:
+    resolution: {integrity: sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA==}
+    dev: false
 
   /shallowequal@1.1.0:
     resolution: {integrity: sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==}
