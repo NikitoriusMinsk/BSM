@@ -274,69 +274,56 @@ const Profile: React.FC<ProfileProps> = (props) => {
 							</div>
 						</div>
 						<div className={styles.menuSection}>
-							<div className={styles.column}>
-								<div className={styles.menuItem}>
-									<Image
-										src="/icons/profile/profile.svg"
-										alt="profile"
-										width={24}
-										height={24}
-									/>
-									<span>Profile</span>
-								</div>
-								<div className={styles.menuItem}>
-									<Image
-										src="/icons/profile/edit-profile.svg"
-										alt="profile"
-										width={24}
-										height={24}
-									/>
-									<span>Edit Profile</span>
-								</div>
-								<div className={styles.menuItem}>
-									<Image
-										src="/icons/profile/followers.svg"
-										alt="profile"
-										width={24}
-										height={24}
-									/>
-									<span>Followers</span>
-								</div>
+							<div className={styles.menuItem}>
+								<Image
+									src="/icons/profile/edit-profile.svg"
+									alt="profile"
+									width={24}
+									height={24}
+								/>
+								<span>Edit Profile</span>
 							</div>
-							<div className={styles.column}>
-								<Link
-									href="/user-dashboard"
-									className={styles.menuItem}
-								>
-									<Image
-										src="/icons/profile/dashboard.svg"
-										alt="profile"
-										width={24}
-										height={24}
-									/>
-									<span>My Dashboard</span>
-								</Link>
-								<div className={styles.menuItem}>
-									<Image
-										src="/icons/profile/tips.svg"
-										alt="profile"
-										width={24}
-										height={24}
-									/>
-									<span>Tracking Tips</span>
-								</div>
-								<div
-									className={styles.menuItem}
-									onClick={() => signOut()}
-								>
-									<Image
-										src="/icons/profile/logout.svg"
-										alt="logout"
-										width={24}
-										height={24}
-									/>
-									<span>Logout</span>
-								</div>
+							<div className={styles.menuItem}>
+								<Image
+									src="/icons/profile/followers.svg"
+									alt="profile"
+									width={24}
+									height={24}
+								/>
+								<span>Followers</span>
+							</div>
+							<Link
+								href="/user-dashboard"
+								className={styles.menuItem}
+							>
+								<Image
+									src="/icons/profile/dashboard.svg"
+									alt="profile"
+									width={24}
+									height={24}
+								/>
+								<span>My Dashboard</span>
+							</Link>
+							<div className={styles.menuItem}>
+								<Image
+									src="/icons/profile/tips.svg"
+									alt="profile"
+									width={24}
+									height={24}
+								/>
+								<span>Tracking Tips</span>
+							</div>
+							<div
+								className={styles.menuItem}
+								onClick={() => signOut()}
+							>
+								<Image
+									src="/icons/profile/logout.svg"
+									alt="logout"
+									width={24}
+									height={24}
+								/>
+								<span>Logout</span>
 							</div>
 						</div>
 					</motion.div>
