@@ -828,4 +828,17 @@
     #wideBanner>div {
         height: 418px !important;
     }
+
+    .slideSummaryTeam {
+        gap: 8px;
+    }
+
+    .slideSummaryTeamName {
+        font-size: 14px;
+    }
+
+    .slideSummaryTeams {
+        font-size: 16px;
+        gap: 8px;
+    }
 }
