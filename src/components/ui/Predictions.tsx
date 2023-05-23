@@ -11,9 +11,7 @@ interface PredictionsProps {
 	h2?: string;
 }
 
-type MatchType = inferArrayElementType<
-	inferArrayElementType<Predictions>["matches"]
->;
+type MatchType = inferArrayElementType<inferArrayElementType<Predictions>["matches"]>;
 
 const Predictions: React.FC<PredictionsProps> = (props) => {
 	const { leagues, h2, h3 } = props;
@@ -22,8 +20,11 @@ const Predictions: React.FC<PredictionsProps> = (props) => {
 		<div className={styles.container}>
 			{(h2 || h3) && (
 				<div className={styles.titles}>
-					{h3 && <h3>{h3}</h3>}
-					{h2 && <h2>{h2}</h2>}
+					<div>
+						{h3 && <h3>{h3}</h3>}
+						{h2 && <h2>{h2}</h2>}
+					</div>
+					<button>See all</button>
 				</div>
 			)}
 			{leagues.map((league, leagueIndex) => (
@@ -164,26 +165,26 @@ const Match: React.FC<MatchType> = (props) => {
 								</div>
 							</div>
 						</div>
-						{prediction.comment && <div className={styles.comment}>
-							<Image
-								src="/icons/comment.svg"
-								alt="Comment"
-								width={20}
-								height={20}
-							/>
-							<span>
-								With Comment
-							</span>
-						</div>}
+						{prediction.comment && (
+							<div className={styles.comment}>
+								<Image
+									src="/icons/comment.svg"
+									alt="Comment"
+									width={20}
+									height={20}
+								/>
+								<span>With Comment</span>
+							</div>
+						)}
 						<div className={styles.outcome}>
-							<span 
-								style={prediction.type == 'Paid' ? 
-									{
-										color: '#7F3FFC',
-										fontWeight: 500
-									} 
-									: 
-									{}
+							<span
+								style={
+									prediction.type == "Paid"
+										? {
+												color: "#7F3FFC",
+												fontWeight: 500,
+										  }
+										: {}
 								}
 							>
 								{prediction.type} Prediction

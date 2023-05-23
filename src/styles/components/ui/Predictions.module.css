@@ -6,8 +6,24 @@
 
 .titles {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titles>div {
+    display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
+}
+
+.titles button {
+    padding: 13px 24px 13px 24px;
+    border-radius: 8px;
+    border: 1px solid #1a1c2133;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    height: min-content;
 }
 
 .titles h3 {
@@ -44,7 +60,7 @@
     border: 3px solid rgba(26, 28, 33, 0.1);
 }
 
-.league .image > img {
+.league .image>img {
     width: 30px;
     height: 30px;
 }
@@ -346,20 +362,24 @@
     .teamImages {
         flex-direction: column;
     }
+
     .teamImages .teamImage:not(:first-child) {
         margin-left: 0px;
         margin-top: -10px;
     }
+
     .more {
         display: none;
     }
+
     .header {
         padding: 15px;
     }
-    .prediction {        
+
+    .prediction {
         padding: 15px;
     }
-} 
+}
 
 @media screen and (max-width:425px) {
 
@@ -372,7 +392,8 @@
         display: none;
     }
 
-    .info, .user {
+    .info,
+    .user {
         gap: 12px;
     }
 
@@ -385,9 +406,11 @@
         margin-top: -10px;
     }
 
-    .teamNames .teamName, .userInfo .userName, .leagueDescription .titles span  {
-        font-size: 13px!important;
-        line-height: 16px!important;
+    .teamNames .teamName,
+    .userInfo .userName,
+    .leagueDescription .titles span {
+        font-size: 13px !important;
+        line-height: 16px !important;
     }
 
     .time span:first-child {

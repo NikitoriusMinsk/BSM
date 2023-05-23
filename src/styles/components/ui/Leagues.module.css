@@ -509,13 +509,20 @@
     }
 
     .controls .matchesOptions {
-        width: unset;
+        width: 100%;
         gap: 30px;
+        justify-content: space-between;
     }
 
     .controls .matchesOptions button {
-        flex: unset;
+        flex: 1;
     }
+
+    .controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
 }
 
 @media screen and (max-width: 1024px) {
@@ -587,12 +594,15 @@
         margin-left: -16px;
         margin-right: -16px;
     }
+
     .matches .time {
         display: none;
     }
+
     .info {
         gap: 16px;
     }
+
     .teamNames {
         gap: 4px;
     }
@@ -607,10 +617,12 @@
         text-align: center;
         color: #CF1F1F;
     }
+
     .outcome {
         min-width: auto;
     }
-    .details {        
+
+    .details {
         margin-left: auto;
     }
 }
