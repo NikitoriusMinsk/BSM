@@ -191,8 +191,8 @@ const SideNews: React.FC<SideNewsProps> = (props) => {
 								<Image
 									src="/icons/comment.svg"
 									alt="comments"
-									width={16}
-									height={16}
+									width={24}
+									height={24}
 								/>
 								{news.likes}
 							</span>
@@ -200,8 +200,8 @@ const SideNews: React.FC<SideNewsProps> = (props) => {
 								<Image
 									src="/icons/views-gray.svg"
 									alt="views"
-									width={16}
-									height={16}
+									width={24}
+									height={24}
 								/>
 								{news.views}
 							</span>
@@ -233,7 +233,29 @@ const TopMatches: React.FC<TopMatchesProps> = (props) => {
 	function getElementByStatus(match: (typeof matches)[0]): React.ReactElement {
 		switch (match.status) {
 			case MatchStatus.live:
-				return <div className={styles.live}>Live</div>;
+				return (
+					<div className={styles.live}>
+						<Moment
+							format="HH:mm"
+							className={styles.date}
+							fromNow
+						>
+							{match.date}
+						</Moment>
+					</div>
+				);
+			case MatchStatus.upcoming:
+				return (
+					<div className={styles.upcoming}>
+						<Moment
+							format="HH:mm"
+							className={styles.date}
+							toNow
+						>
+							{match.date}
+						</Moment>
+					</div>
+				);
 			default:
 				return (
 					<div className={styles.matchDate}>
@@ -354,8 +376,8 @@ const NewsBlock: React.FC<NewsBlockProps> = (props) => {
 									<Image
 										src="/icons/comment.svg"
 										alt="comments"
-										width={16}
-										height={16}
+										width={24}
+										height={24}
 									/>
 									{news.comments}
 								</span>
@@ -363,8 +385,8 @@ const NewsBlock: React.FC<NewsBlockProps> = (props) => {
 									<Image
 										src="/icons/views-gray.svg"
 										alt="views"
-										width={16}
-										height={16}
+										width={24}
+										height={24}
 									/>
 									{news.views}
 								</span>

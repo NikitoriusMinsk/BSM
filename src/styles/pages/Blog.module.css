@@ -19,6 +19,7 @@
     grid-column-start: 1;
     grid-column-end: 13;
     grid-row-start: 3;
+    margin-left: -60px;
 }
 
 .newsBlockContainer {
@@ -40,14 +41,14 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    padding-top: 20px;
+    padding-top: 40px;
 }
 
 /* Main News */
 
 .mainNews {
     position: relative;
-    min-height: 540px;
+    min-height: 560px;
     border-radius: 16px 0 16px 0;
     overflow: hidden;
     margin-top: -20px;
@@ -65,7 +66,8 @@
     line-height: 18px;
     color: #FFFFFF;
     z-index: 2;
-    background-color: #7F3FFC;
+    background-color: transparent;
+    border: 1px solid #FFFFFF66;
     border-radius: 8px;
     width: fit-content;
     position: absolute;
@@ -95,9 +97,10 @@
 .mainNewsTitle {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    text-transform: capitalize;
     color: #FFFFFF;
     z-index: 1;
     max-width: 80%;
@@ -106,15 +109,10 @@
 .mainNewsStats {
     display: flex;
     flex-direction: row;
-    gap: 14px;
+    gap: 27px;
     position: absolute;
     right: 30px;
     bottom: 30px;
-}
-
-.mainNewsStats .mainNewsStat:not(:last-child) {
-    border-right: 1px solid #FFFFFF4D;
-    padding-right: 25px;
 }
 
 .mainNewsStat {
@@ -168,7 +166,7 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 19px;
     color: #FFFFFF;
 }
@@ -318,6 +316,23 @@
     justify-content: center;
     padding: 8px 14px 8px 13px;
     background-color: #CF1F1F;
+    border-radius: 4px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+}
+
+.upcoming {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px 8px 13px;
+    background-color: #7F3FFC;
     border-radius: 4px;
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -513,7 +528,7 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 19px;
     color: #1A1C21;
 }
@@ -527,7 +542,7 @@
 .newsBlockContent .news .info .stats .stat {
     display: flex;
     flex-direction: row;
-    gap: 9px;
+    gap: 7px;
     align-items: center;
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -756,10 +771,18 @@
         margin-right: -30px;
         padding-right: 30px;
     }
+
+    .wideNews {
+        margin-left: -40px;
+    }
 }
 
 @media screen and (max-width: 1366px) {
     .mainNewsContainer {
+        margin-left: -30px;
+    }
+
+    .wideNews {
         margin-left: -30px;
     }
 }
@@ -798,12 +821,20 @@
     .newsBlockContainer .newsBlock .newsBlockContent .news {
         width: calc(50% - 15px);
     }
+
+    .wideNews {
+        margin-left: -20px;
+    }
 }
 
 @media screen and (max-width: 768px) {
 
     .fullWidthNewsBlock {
         margin-right: 0;
+        padding-left: 20px;
+    }
+
+    .recentNews {
         padding-left: 20px;
     }
 
@@ -823,6 +854,20 @@
 
     .mainNewsInfo {
         left: 20px;
+        bottom: 64px;
+    }
+
+    .mainNewsStats {
+        bottom: 28px;
+        left: 20px;
+    }
+
+    .wideNews {
+        margin-left: 0;
+    }
+
+    .newsBlockContainer {
+        padding-left: 20px;
     }
 }
 
