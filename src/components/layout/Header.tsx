@@ -34,9 +34,9 @@ const Header: React.FC = () => {
 				return 5;
 			case width >= 1280:
 				return 4;
-			case width >= 1024 && session != null:
+			case width <= 1024 && session != null:
 				return 2;
-			case width >= 1024:
+			case width <= 1024:
 				return 3;
 			default:
 				return 6;
