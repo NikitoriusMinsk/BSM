@@ -74,11 +74,11 @@
 .leagueDescription .titles {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: flex-start;
     gap: 1px;
 }
 
-.leagueDescription .titles span:first-child {
+.leagueDescription .titles span:last-child {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
@@ -87,7 +87,7 @@
     color: #1A1C2199;
 }
 
-.leagueDescription .titles span:last-child {
+.leagueDescription .titles span:first-child {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;

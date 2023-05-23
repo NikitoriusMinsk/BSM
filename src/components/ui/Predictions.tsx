@@ -42,10 +42,10 @@ const Predictions: React.FC<PredictionsProps> = (props) => {
 							/>
 						</div>
 						<div className={styles.titles}>
+							<span>{league.name}</span>
 							<span>
 								{league.country} • {league.sport.name}
 							</span>
-							<span>{league.name}</span>
 						</div>
 					</div>
 					<div className={styles.matches}>
