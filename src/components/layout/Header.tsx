@@ -15,12 +15,14 @@ import Moment from "react-moment";
 import debounce from "src/utils/debounce";
 import UserProfile from "./shared/UserProfile";
 import useWindowSize from "src/utils/useWindowSize";
+import { useSession } from "next-auth/react";
 
 const Header: React.FC = () => {
 	const router = useRouter();
 	const { data: links } = trpc.navigation.getSports.useQuery();
 	const { data: Timezones } = trpc.navigation.getTimezones.useQuery();
 	const { width } = useWindowSize();
+	const { data: session } = useSession();
 
 	function GetSportCount(width: number) {
 		switch (true) {
@@ -32,6 +34,8 @@ const Header: React.FC = () => {
 				return 5;
 			case width >= 1280:
 				return 4;
+			case width >= 1024 && session != null:
+				return 2;
 			case width >= 1024:
 				return 3;
 			default:
@@ -70,7 +74,7 @@ const Header: React.FC = () => {
 				{Timezones && (
 					<Dropdown
 						items={Timezones.map((tz) => ({
-							name: (
+							name: width > 1440 && (
 								<Moment
 									date={tz.date}
 									tz={tz.name}
@@ -87,7 +91,6 @@ const Header: React.FC = () => {
 							id: tz.id,
 						}))}
 						onSelect={(id) => {}}
-						minWidth={200}
 					/>
 				)}
 				<Settings />
