@@ -99,7 +99,7 @@
 
 @media screen and (max-width:1280px) {
     .container {
-        margin-bottom: 98px;
+        margin-bottom: 73px;
         padding: 40px 16px 30px;
     }
 
@@ -116,6 +116,12 @@
     .container .column:last-child {
         width: 100%;
         flex: unset;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        border-radius: 0;
     }
 }
 
