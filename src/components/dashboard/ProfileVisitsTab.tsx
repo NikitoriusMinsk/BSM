@@ -108,7 +108,7 @@ export default function ProfileVisitsTab() {
 	}
 
 	return (
-		<div className={styles.profileVisitsTab}>
+		<>
 			<div
 				id={styles.profileVisits}
 				className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
@@ -144,6 +144,6 @@ export default function ProfileVisitsTab() {
 					header={false}
 				/>
 			</div>
-		</div>
+		</>
 	);
 }
