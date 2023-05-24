@@ -24,13 +24,17 @@
 }
 .barBlock span:first-child {
     position: absolute;
-    left: 0px;
+    left: 16px;
     top: 0px;
+    font-size: 16px;
+    line-height: 19px;
 }
 .barBlock span:last-child {
     position: absolute;
-    right: 0px;
+    right: 16px;
     top: 0px;
+    font-size: 16px;
+    line-height: 19px;
 }
 .bar {
     display: flex;
@@ -83,8 +87,12 @@
     }
     .barBlock span:first-child {
         font-weight: 400;
+        left: 0px;
+        top: 0px;
     }
     .barBlock span:last-child {
         font-weight: 400;
+        right: 0px;
+        top: 0px;
     }
 }
