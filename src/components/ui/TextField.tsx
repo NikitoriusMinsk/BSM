@@ -9,18 +9,27 @@ interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	minWidth?: number | string;
 	searchShrink768?: true | false;
 	searchShrinkMobile?: true | false;
+	shouldShrink?: boolean;
 }
 
 const TextField: React.FC<TextFieldProps> = (props) => {
-	const { iconClick, minWidth, searchShrink768, searchShrinkMobile, ...inputProps } = props;
-	const { width } = useWindowSize()
+	const {
+		iconClick,
+		minWidth,
+		searchShrink768,
+		searchShrinkMobile,
+		shouldShrink,
+		...inputProps
+	} = props;
+	const { width } = useWindowSize();
 
 	return (
 		<div
 			className={
-				`${styles.textFieldContainer}`+
-				` ${searchShrink768 && width<=768 && styles.shrinkSearch }`+
-				` ${searchShrinkMobile && width<=425 && styles.shrinkSearch }`
+				`${styles.textFieldContainer}` +
+				` ${shouldShrink && styles.shrinkSearch}` +
+				` ${searchShrink768 && width <= 768 && styles.shrinkSearch}` +
+				` ${searchShrinkMobile && width <= 425 && styles.shrinkSearch}`
 			}
 			style={{
 				minWidth: minWidth,

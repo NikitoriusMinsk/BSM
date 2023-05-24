@@ -20,6 +20,7 @@ import { PortalContext } from "src/utils/portalContext";
 import TextField from "@components/ui/TextField";
 import FilterModal from "@components/ui/FilterModal";
 import DisaperingContainer from "@components/helpers/DisaperingContainer";
+import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
@@ -33,6 +34,8 @@ const MatchesPage: NextPage = () => {
 		trpc.bookmakers.getTop.useQuery();
 	const { data: leagues, isLoading: leaguesLoading } =
 		trpc.filters.getLeaguesByCountry.useQuery();
+	const { data: filters, isLoading: filtersLoading } =
+		trpc.filters.getLeagues.useQuery();
 	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
 	const { data: liveMatches, isLoading: liveMatchesLoading } =
 		trpc.matches.getAllLive.useQuery();
@@ -45,12 +48,21 @@ const MatchesPage: NextPage = () => {
 		leaguesLoading ||
 		sportsLoading ||
 		liveMatchesLoading ||
-		matchesLoading
+		matchesLoading ||
+		filtersLoading
 	) {
 		return <div>Loading...</div>;
 	}
 
-	if (!tips || !liveMatches || !bookmakers || !leagues || !sports || !matches) {
+	if (
+		!tips ||
+		!liveMatches ||
+		!bookmakers ||
+		!leagues ||
+		!sports ||
+		!matches ||
+		!filters
+	) {
 		return <div>Error...</div>;
 	}
 
@@ -59,7 +71,14 @@ const MatchesPage: NextPage = () => {
 			<PortalContext.Provider value={{ portalNode }}>
 				{portalNode && <OutPortal node={portalNode} />}
 				<div className={styles.filters}>
-					<DatePicker onChange={() => {}} />
+					<div>
+						<DatePicker onChange={() => {}} />
+						<TextField
+							icon="/icons/search.svg"
+							placeholder="Search"
+							shouldShrink={true}
+						/>
+					</div>
 					<NestedFilter
 						items={leagues}
 						h3="BY COUNTRY"
@@ -81,79 +100,62 @@ const MatchesPage: NextPage = () => {
 					/>
 				</div>
 				<div className={styles.mobileFilters}>
-					<TextField
-						icon="/icons/search.svg"
-						placeholder="Search"
-					/>
-					<FilterModal
-						onApply={() => {}}
-						portalNode={portalNode}
-						filters={[
-							{
-								key: "sortBy",
-								type: "buttons",
-								label: "Sort By",
-								items: [
-									{ id: 1, label: "Upcoming" },
-									{ id: 2, label: "Most" },
-									{ id: 3, label: "Multiple" },
-								],
-							},
-							{
-								key: "type",
-								type: "buttons",
-								label: "Type",
-								items: [
-									{
-										id: 1,
-										label: "All",
-									},
-									{
-										id: 2,
-										label: "Free",
-									},
-									{
-										id: 3,
-										label: "Paid",
-									},
-								],
-							},
-							{
-								key: "sport",
-								type: "singleChoice",
-								label: "Status",
-								items: [
-									{ id: 1, label: "Football" },
-									{ id: 2, label: "Basketball" },
-									{ id: 3, label: "Badminton" },
-								],
-							},
-							{
-								key: "country",
-								type: "singleChoice",
-								label: "Country",
-								items: [
-									{ id: 1, label: "Georgia" },
-									{ id: 2, label: "Spain" },
-									{ id: 3, label: "England" },
-								],
-							},
-							{
-								key: "league",
-								type: "singleChoice",
-								label: "League",
-								items: [
-									{ id: 1, label: "Premier League" },
-									{ id: 2, label: "Ligue 1" },
-									{ id: 3, label: "Bundesliga" },
-								],
-							},
-							{
-								key: "date",
-								type: "date",
-								label: "Date",
-							},
-						]}
+					<div>
+						<TextField
+							icon="/icons/search.svg"
+							placeholder="Search"
+						/>
+						<DatePicker onChange={() => {}} />
+						<FilterModal
+							onApply={() => {}}
+							portalNode={portalNode}
+							filters={[
+								{
+									key: "sortBy",
+									type: "buttons",
+									label: "Sort By",
+									items: [
+										{ id: 1, label: "Upcoming" },
+										{ id: 2, label: "Most" },
+										{ id: 3, label: "Multiple" },
+									],
+								},
+								{
+									key: "type",
+									type: "buttons",
+									label: "Type",
+									items: [
+										{
+											id: 1,
+											label: "All",
+										},
+										{
+											id: 2,
+											label: "Free",
+										},
+										{
+											id: 3,
+											label: "Paid",
+										},
+									],
+								},
+								{
+									key: "sport",
+									type: "singleChoice",
+									label: "Status",
+									items: [
+										{ id: 1, label: "Football" },
+										{ id: 2, label: "Basketball" },
+										{ id: 3, label: "Badminton" },
+									],
+								},
+							]}
+						/>
+						<button className={styles.clear}>Clear</button>
+					</div>
+					<LeaguesMobileBlocksFilter
+						items={filters}
+						onChange={() => {}}
 					/>
 				</div>
 				<div className={styles.predictions}>
