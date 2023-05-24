@@ -1,9 +1,3 @@
-.subscriptionTab {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 40px;
-}
-
 #subscribers {
     display: flex;
     flex-direction: row;
@@ -15,8 +9,9 @@
     background-position: center;
     background-size: cover;
     grid-row-start: 1;
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 13;
+    margin-top: 20px;
 }
 
 #subscribers .info {
@@ -138,7 +133,7 @@
 
 #table {
     grid-row-start: 2;
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 13;
 }
 
@@ -271,6 +266,24 @@
 @media screen and (max-width: 1024px) {
     .duration .progress {
         min-width: 140px;
+    }
+
+    #subscribers {
+        grid-column-start: 5;
+    }
+
+    #table {
+        grid-column-start: 5;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #subscribers {
+        grid-column-start: 1;
+    }
+
+    #table {
+        grid-column-start: 1;
     }
 }
 
