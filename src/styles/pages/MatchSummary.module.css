@@ -143,9 +143,17 @@
 .currentTime span{
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 16px;
     line-height: 19px;
+    color: #FFFFFF;
+}
+.currentTime span:last-child{
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
     color: #FFFFFF;
 }
 
