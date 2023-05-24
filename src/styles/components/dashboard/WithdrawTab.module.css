@@ -23,9 +23,10 @@
     background-position: center;
     background-size: cover;
     grid-row-start: 1;
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 9;
     gap: 120px;
+    margin-top: 20px;
 }
 
 #withdrawBalance div:first-child {
@@ -86,6 +87,7 @@
     grid-row-start: 1;
     grid-column-start: 9;
     grid-column-end: 13;
+    margin-top: 20px;
 }
 
 #withdrawTotal .text {
@@ -114,7 +116,7 @@
 
 #table {
     grid-row-start: 2;
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 13;
 }
 
@@ -463,12 +465,17 @@
     #withdrawBalance {
         flex-direction: column;
         gap: 20px;
+        grid-column-start: 5;
     }
 
     #withdrawTotal {
         flex-direction: column;
         gap: 20px;
         align-items: center;
+    }
+
+    #table {
+        grid-column-start: 5;
     }
 
     #withdrawTotal .text {
@@ -479,10 +486,16 @@
 @media screen and (max-width: 768px) {
     #withdrawBalance {
         align-items: flex-start;
+        grid-column-start: 1;
     }
 
     #withdrawBalance div:last-child {
         flex-direction: row-reverse;
+        grid-column-start: 1;
+    }
+
+    #table {
+        grid-column-start: 1;
     }
 }
 

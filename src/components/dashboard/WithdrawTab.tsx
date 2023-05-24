@@ -125,51 +125,49 @@ const WithdrawTab: React.FC = () => {
 		<>
 			<PortalContext.Provider value={{ portalNode: portalNode }}>
 				{portalNode && <OutPortal node={portalNode} />}
-				<div className={styles.withdrawTab}>
-					<div
-						id={styles.withdrawBalance}
-						className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
-					>
-						<div>
-							<Image
-								src="/images/dashboard/wallet.svg"
-								height={60}
-								width={60}
-								alt=""
-							/>
-							<div className={styles.text}>
-								<h4>Pending Balance</h4>
-								<span>$ {data.pendingBalance}</span>
-							</div>
-						</div>
-						<div>
-							<h5>Cash that can be withdrawn right now</h5>
-							<WithdrawButton balance={data.availableBalance} />
-						</div>
-					</div>
-					<div
-						id={styles.withdrawTotal}
-						className={`${sharedStyles.block} ${sharedStyles.narrow}`}
-					>
+				<div
+					id={styles.withdrawBalance}
+					className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
+				>
+					<div>
 						<Image
-							src="/images/dashboard/total.svg"
+							src="/images/dashboard/wallet.svg"
 							height={60}
 							width={60}
 							alt=""
 						/>
 						<div className={styles.text}>
 							<h4>Pending Balance</h4>
-							<span>$ {data.totalEarned}</span>
+							<span>$ {data.pendingBalance}</span>
 						</div>
 					</div>
-					<div id={styles.table}>
-						<h2>Historical Withdraws</h2>
-						<Table
-							data={data.history}
-							columns={width <= 425 ? mobileColumns : columns}
-							pageSize={10}
-						/>
+					<div>
+						<h5>Cash that can be withdrawn right now</h5>
+						<WithdrawButton balance={data.availableBalance} />
 					</div>
+				</div>
+				<div
+					id={styles.withdrawTotal}
+					className={`${sharedStyles.block} ${sharedStyles.narrow}`}
+				>
+					<Image
+						src="/images/dashboard/total.svg"
+						height={60}
+						width={60}
+						alt=""
+					/>
+					<div className={styles.text}>
+						<h4>Pending Balance</h4>
+						<span>$ {data.totalEarned}</span>
+					</div>
+				</div>
+				<div id={styles.table}>
+					<h2>Historical Withdraws</h2>
+					<Table
+						data={data.history}
+						columns={width <= 425 ? mobileColumns : columns}
+						pageSize={10}
+					/>
 				</div>
 			</PortalContext.Provider>
 		</>

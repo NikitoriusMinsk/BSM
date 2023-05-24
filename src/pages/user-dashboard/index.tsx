@@ -15,6 +15,7 @@ import PendingTipsTab from "@components/dashboard/PendingTipsTab";
 import HistoricalTipsTab from "@components/dashboard/HistoricalTipsTab";
 import ProfileSettings from "@components/dashboard/ProfileSettings";
 import useWindowSize from "src/utils/useWindowSize";
+import DisaperingContainer from "@components/helpers/DisaperingContainer";
 
 enum Tabs {
 	Dashboard = "Dashboard",
@@ -101,6 +102,7 @@ const UserDashboard: NextPage = () => {
 				return <></>;
 		}
 	}, [currentPage]);
+	const { width } = useWindowSize();
 
 	if (userInfoLoading) {
 		return <div>Loading...</div>;
@@ -121,9 +123,12 @@ const UserDashboard: NextPage = () => {
 					/>
 				</div>
 			</div>
-			{/* <div className={styles.mainColumn}> */}
-			{memoizedPage}
-			{/* </div> */}
+			<DisaperingContainer
+				condition={width > 768}
+				className={styles.mobileGrid}
+			>
+				{memoizedPage}
+			</DisaperingContainer>
 		</>
 	);
 };
