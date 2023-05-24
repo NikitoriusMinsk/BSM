@@ -333,7 +333,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 8px 14px 8px 13px;
+    padding: 11px 12px;
     background-color: #7F3FFC;
     border-radius: 4px;
     font-family: 'Samsung Sans';
@@ -1029,7 +1029,7 @@
     .mainNewsStat:not(:last-child)::after {
         content: "";
         position: absolute;
-        left: 250%;
+        left: 25vw;
         height: 100%;
         width: 1px;
         background-color: #1A1C211A;
