@@ -1,0 +1,90 @@
+/* match stat bars */
+.statBarsBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+.barBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+.barInfo {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #1A1C21;
+}
+.barBlock span:first-child {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.barBlock span:last-child {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.bar {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+.barStripe {
+    height: 16px;
+    background: rgba(26, 28, 33, 0.1);
+    border-radius: 4px;
+    transition: .3s all ease-in-out;
+}
+.win {
+    background: #7F3FFC;
+}
+.statBarBlockTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 11px 16px;
+    background: rgba(242, 242, 242, 0.5);
+    border-radius: 8px;
+
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+}
+.statBarBlockTitle:not(:first-child) {
+    margin-top: 16px;
+}
+/* match stat bars - end */
+
+@media screen and (max-width: 600px) {
+    .statBarBlockTitle {
+        border-radius: 0px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .barBlock {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .barInfo {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+    }
+    .barBlock span:first-child {
+        font-weight: 400;
+    }
+    .barBlock span:last-child {
+        font-weight: 400;
+    }
+}

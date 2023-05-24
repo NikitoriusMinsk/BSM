@@ -1,0 +1,120 @@
+/* lineup */
+.lineupBlock {
+    display: flex;
+    gap: 24px;
+}
+.squadBlock {
+    border-radius: 16px;
+    overflow: hidden;
+    flex: 1 1;
+}
+.squadHeader {
+    background: rgba(242, 242, 242, 0.5);
+    border-bottom: 1px solid #F2F2F2;
+    padding: 16px 28px;
+    display: flex;
+    gap: 16px;    
+    justify-content: space-between;
+    align-items: center;
+}
+.squadTeam {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.squadTeam span {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1A1C21;
+}
+.squad {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 28px 28px;
+    gap: 28px;
+    background: rgba(242, 242, 242, 0.3);
+}
+.lineupStyle {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;    
+}
+.player {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+.shirt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 32px;
+    height: 32px;
+}
+.shirt span {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #fff;
+    z-index: 1;
+
+    width: 32px;
+    height: 32px;
+    padding-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.playerInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.playerPos {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(26, 28, 33, 0.5);
+}
+.playerName {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+}
+.flag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.squadTitle {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(26, 28, 33, 0.7);
+}
+/* lineup - end */
+
+@media screen and (max-width:600px) {    
+    .lineupBlock {
+        flex-direction: column;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
