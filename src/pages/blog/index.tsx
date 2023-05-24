@@ -119,8 +119,8 @@ const MainNews: React.FC<MainNewsProps> = (props) => {
 					<Image
 						src="/icons/views.svg"
 						alt="view"
-						width={24}
-						height={24}
+						width={30}
+						height={30}
 					/>
 					{views}
 				</span>
@@ -236,7 +236,7 @@ const TopMatches: React.FC<TopMatchesProps> = (props) => {
 				return (
 					<div className={styles.live}>
 						<Moment
-							format="HH:mm"
+							format="mm:ss"
 							className={styles.date}
 							fromNow
 						>
@@ -248,12 +248,13 @@ const TopMatches: React.FC<TopMatchesProps> = (props) => {
 				return (
 					<div className={styles.upcoming}>
 						<Moment
-							format="HH:mm"
+							format="mm:ss"
 							className={styles.date}
 							toNow
 						>
 							{match.date}
 						</Moment>
+						s
 					</div>
 				);
 			default:

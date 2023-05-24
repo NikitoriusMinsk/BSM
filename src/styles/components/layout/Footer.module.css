@@ -123,6 +123,11 @@
     .container {
         border-radius: 0;
     }
+
+    .container .column:last-child {
+        font-size: 12px;
+        line-height: 20px;
+    }
 }
 
 @media screen and (max-width: 425px) {
