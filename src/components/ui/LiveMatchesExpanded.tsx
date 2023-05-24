@@ -105,19 +105,21 @@ const LiveMatchCard: React.FC<LiveMatchProps> = (props) => {
 					</div>
 				</div>
 				<div className={styles.timeBlock}>
-					<span className={styles.time}>
-						23:30
-					</span>
-					<span className={styles.date}>
-						16/02/2023
-					</span>
+					{match.id==2 && <>
+						<span className={styles.time}>
+							23:30
+						</span>
+						<span className={styles.date}>
+							16/02/2023
+						</span>
+					</>}
 					{/* other types */}
-					{/* <div className={styles.liveTime}>
+					{match.id==3 && <div className={styles.liveTime}>
 						LIVE: 25:33
-					</div>
-					<div className={styles.beforeTime}>
-						25:33
-					</div> */}
+					</div>}
+					{match.id==4 && <div className={styles.beforeTime}>
+						25:33s
+					</div>}
 				</div>
 			</div>
 			<div className={styles.resultBlock}>
