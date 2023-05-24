@@ -185,6 +185,9 @@
     min-width: 18px;
     text-align: center;
 }
+.bet span:last-child {
+    font-weight: 400;
+}
 .centerArrow{
     position: absolute;
     top: 8px;
