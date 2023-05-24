@@ -702,6 +702,8 @@
     #slider {
         border-bottom-right-radius: 0;
         border-top-left-radius: 0;
+        margin-right: 0;
+        margin-left: 0;
     }
 
     .slide {
