@@ -1,9 +1,3 @@
-.dashboardTab {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 40px;
-}
-
 #profit {
     display: flex;
     flex-direction: row;
@@ -15,8 +9,9 @@
     background-position: center;
     background-size: cover;
     grid-row-start: 1;
-    grid-column-start: 1;
-    grid-column-end: 5;
+    grid-column-start: 4;
+    grid-column-end: 7;
+    margin-top: 20px;
 }
 
 #profit .text {
@@ -52,8 +47,9 @@
     background-position: center;
     background-size: cover;
     grid-row-start: 1;
-    grid-column-start: 5;
+    grid-column-start: 7;
     grid-column-end: 13;
+    margin-top: 20px;
 }
 
 #stats .stat {
@@ -91,8 +87,8 @@
     background-position: center;
     background-size: cover;
     grid-row-start: 2;
-    grid-column-start: 1;
-    grid-column-end: 9;
+    grid-column-start: 4;
+    grid-column-end: 10;
 }
 
 #coins .info {
@@ -165,7 +161,7 @@
     gap: 34px;
     align-items: center;
     grid-row-start: 2;
-    grid-column-start: 9;
+    grid-column-start: 10;
     grid-column-end: 13;
 }
 
@@ -194,8 +190,8 @@
     background-position: center;
     background-size: cover;
     grid-row-start: 3;
-    grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-start: 4;
+    grid-column-end: 6;
 }
 
 #sport .info {
@@ -232,8 +228,8 @@
     background-position: center;
     background-size: cover;
     grid-row-start: 3;
-    grid-column-start: 4;
-    grid-column-end: 8;
+    grid-column-start: 6;
+    grid-column-end: 9;
 }
 
 #odds .info {
@@ -276,7 +272,7 @@
     background-position: center;
     background-size: contain;
     grid-row-start: 3;
-    grid-column-start: 8;
+    grid-column-start: 9;
     grid-column-end: 13;
 }
 
@@ -336,8 +332,8 @@
     background-size: cover;
     gap: 40px;
     grid-row-start: 4;
-    grid-column-start: 1;
-    grid-column-end: 8;
+    grid-column-start: 4;
+    grid-column-end: 9;
 }
 
 #bets .info h5 {
@@ -394,16 +390,16 @@
     color: #FF5018;
 }
 
-@media screen and (max-width: 1440px) {
-    .dashboardTab {
-        gap: 30px;
-    }
+.mobileGrid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-start: 1;
+    grid-column-end: 13;
+    gap: 30px;
+    padding: 0 16px;
 }
 
 @media screen and (max-width: 1280px) {
-    .dashboardTab {
-        gap: 28px;
-    }
 
     #odds h5,
     #unit h5 {
@@ -418,11 +414,13 @@
 
 @media screen and (max-width: 1024px) {
     #profit {
-        grid-column-end: 7;
+        grid-column-start: 5;
+        grid-column-end: 9;
     }
 
     #stats {
-        grid-column-start: 7;
+        grid-column-start: 9;
+        grid-column-end: 13;
         flex-wrap: wrap;
         gap: 20px;
     }
@@ -442,13 +440,14 @@
     }
 
     #coins {
+        grid-column-start: 5;
         grid-column-end: 13;
     }
 
     #bookmaker {
         grid-row-start: 3;
-        grid-column-start: 1;
-        grid-column-end: 9;
+        grid-column-start: 5;
+        grid-column-end: 10;
     }
 
     #bookmaker img {
@@ -457,44 +456,42 @@
     }
 
     #sport {
-        grid-column-start: 9;
+        grid-column-start: 10;
         grid-column-end: 13;
     }
 
     #odds {
         grid-row-start: 4;
-        grid-column-start: 1;
-        grid-column-end: 7;
+        grid-column-start: 5;
+        grid-column-end: 9;
     }
 
     #unit {
         grid-row-start: 4;
-        grid-column-start: 7;
+        grid-column-start: 9;
         grid-column-end: 13;
     }
 
     #bets {
         grid-row-start: 5;
-        grid-column-start: 1;
+        grid-column-start: 5;
         grid-column-end: 13;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .dashboardTab {
-        grid-template-columns: repeat(8, 1fr);
-        gap: 16px;
-    }
 
     #profit {
         grid-column-start: 1;
         grid-column-end: 4;
+        margin-top: 0;
     }
 
     #stats {
         grid-column-start: 4;
         grid-column-end: 9;
         gap: unset;
+        margin-top: 0;
     }
 
     #stats .stat {

@@ -14,8 +14,6 @@ import TrackingTipsTab from "@components/dashboard/TrackingTipsTab";
 import PendingTipsTab from "@components/dashboard/PendingTipsTab";
 import HistoricalTipsTab from "@components/dashboard/HistoricalTipsTab";
 import ProfileSettings from "@components/dashboard/ProfileSettings";
-import Slider from "@components/ui/Slider";
-import ArrayToChunks from "src/utils/ArrayToChunks";
 import useWindowSize from "src/utils/useWindowSize";
 
 enum Tabs {
@@ -123,7 +121,9 @@ const UserDashboard: NextPage = () => {
 					/>
 				</div>
 			</div>
-			<div className={styles.mainColumn}>{memoizedPage}</div>
+			{/* <div className={styles.mainColumn}> */}
+			{memoizedPage}
+			{/* </div> */}
 		</>
 	);
 };
