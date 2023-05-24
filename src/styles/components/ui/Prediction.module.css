@@ -167,6 +167,14 @@
     color: #FFFFFF;
 }
 
+.teamLogo {
+    background: #FFFFFF;
+    border: 3px solid #E8E8E9;
+    border-radius: 18px;
+    padding: 5px;
+    display: flex;
+}
+
 .matchInfo .results {
     display: flex;
     flex-direction: column;
@@ -184,6 +192,10 @@
     color: #FFFFFF;
 }
 
+.matchInfo .results .league span:first-child {
+    font-weight: 600;
+}
+
 .matchInfo .score {
     display: flex;
     flex-direction: row;
@@ -194,9 +206,9 @@
 .matchInfo .score span {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
     color: #FFFFFF;
 }
 
@@ -210,9 +222,9 @@
 .matchInfo .date .part:first-child {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
     color: #FFFFFF;
 }
 

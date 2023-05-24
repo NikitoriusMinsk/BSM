@@ -85,12 +85,14 @@ const Prediction: React.FC<inferArrayElementType<TrackingPredictions | PendingPr
 							</div>
 							<div className={styles.matchDetails}>
 								<div className={styles.team}>
-									<Image
-										src={info.match.teams[0].image}
-										height={36}
-										width={36}
-										alt=""
-									/>
+									<div className={styles.teamLogo}>
+										<Image
+											src={info.match.teams[0].image}
+											height={22}
+											width={22}
+											alt=""
+										/>
+									</div>
 									<span>{info.match.teams[0].name}</span>
 								</div>
 								<div className={styles.results}>
@@ -119,12 +121,14 @@ const Prediction: React.FC<inferArrayElementType<TrackingPredictions | PendingPr
 									</div>
 								</div>
 								<div className={styles.team}>
-									<Image
-										src={info.match.teams[1].image}
-										height={36}
-										width={36}
-										alt=""
-									/>
+									<div className={styles.teamLogo}>
+										<Image
+											src={info.match.teams[1].image}
+											height={22}
+											width={22}
+											alt=""
+										/>
+									</div>
 									<span>{info.match.teams[1].name}</span>
 								</div>
 							</div>
@@ -158,22 +162,20 @@ const Prediction: React.FC<inferArrayElementType<TrackingPredictions | PendingPr
 							/>
 							<span className={styles.odd}>{info.bookmaker.odd}</span>
 						</div>
-						{
-							<div className={styles.profit}>
-								<span
-									className={
-										info.profit.potential
-											? styles.potential
-											: info.profit.amount > 0
-											? styles.positive
-											: styles.negative
-									}
-								>
-									{info.profit.potential ? "Potential profit" : info.profit.amount > 0 ? "Success" : "Lost"}
-								</span>
-								<span>$ {info.profit.amount}</span>
-							</div>
-						}
+						<div className={styles.profit}>
+							<span
+								className={
+									info.profit.potential
+										? styles.potential
+										: info.profit.amount > 0
+										? styles.positive
+										: styles.negative
+								}
+							>
+								{info.profit.potential ? "Potential profit" : info.profit.amount > 0 ? "Success" : "Lost"}
+							</span>
+							<span>$ {info.profit.amount}</span>
+						</div>
 						{info.bet_now && (
 							<div className={styles.betNow}>
 								<Image
