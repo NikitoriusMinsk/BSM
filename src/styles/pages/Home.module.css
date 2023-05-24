@@ -792,6 +792,11 @@
 }
 
 @media screen and (max-width: 425px) {
+    #slider {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
     #topTipsters {
         padding: 0 12px;
     }
