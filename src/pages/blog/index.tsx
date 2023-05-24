@@ -80,52 +80,61 @@ const MainNews: React.FC<MainNewsProps> = (props) => {
 	const { title, date, image, likes, comments, views } = props;
 
 	return (
-		<div className={styles.mainNews}>
-			<div className={styles.mainNewsLabel}>Popular</div>
-			<Image
-				src={image}
-				alt={title}
-				fill
-				style={{
-					objectFit: "cover",
-				}}
-			/>
-			<div className={styles.mainNewsInfo}>
-				<span className={styles.mainNewsDate}>
-					<Moment format="DD MMM YYYY">{date}</Moment>
-				</span>
-				<h2 className={styles.mainNewsTitle}>{title}</h2>
+		<>
+			<div className={styles.mobileMainNewsTitle}>
+				<div>
+					<span>TODAY</span>
+					<h2>Blog</h2>
+				</div>
+				<div className={styles.mainNewsLabel}>Popular</div>
 			</div>
-			<div className={styles.mainNewsStats}>
-				<span className={styles.mainNewsStat}>
-					<Image
-						src="/icons/like.svg"
-						alt="like"
-						width={24}
-						height={24}
-					/>
-					{likes}
-				</span>
-				<span className={styles.mainNewsStat}>
-					<Image
-						src="/icons/comment-white.svg"
-						alt="comment"
-						width={24}
-						height={24}
-					/>
-					{comments}
-				</span>
-				<span className={styles.mainNewsStat}>
-					<Image
-						src="/icons/views.svg"
-						alt="view"
-						width={30}
-						height={30}
-					/>
-					{views}
-				</span>
+			<div className={styles.mainNews}>
+				<div className={styles.mainNewsLabel}>Popular</div>
+				<Image
+					src={image}
+					alt={title}
+					fill
+					style={{
+						objectFit: "cover",
+					}}
+				/>
+				<div className={styles.mainNewsInfo}>
+					<span className={styles.mainNewsDate}>
+						<Moment format="DD MMM YYYY">{date}</Moment>
+					</span>
+					<h2 className={styles.mainNewsTitle}>{title}</h2>
+				</div>
+				<div className={styles.mainNewsStats}>
+					<span className={styles.mainNewsStat}>
+						<Image
+							src="/icons/like.svg"
+							alt="like"
+							width={24}
+							height={24}
+						/>
+						{likes}
+					</span>
+					<span className={styles.mainNewsStat}>
+						<Image
+							src="/icons/comment-white.svg"
+							alt="comment"
+							width={24}
+							height={24}
+						/>
+						{comments}
+					</span>
+					<span className={styles.mainNewsStat}>
+						<Image
+							src="/icons/views.svg"
+							alt="view"
+							width={30}
+							height={30}
+						/>
+						{views}
+					</span>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
