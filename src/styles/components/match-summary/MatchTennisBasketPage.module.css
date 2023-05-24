@@ -54,10 +54,18 @@
     gap: 20px;
     align-items: center;
 }
-.tableSummary .player span {
+.tableSummary .player.win span {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(26, 28, 33, 0.7);
+}
+.tableSummary .player span {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
     font-size: 15px;
     line-height: 18px;
     color: rgba(26, 28, 33, 0.7);

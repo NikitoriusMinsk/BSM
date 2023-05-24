@@ -119,7 +119,7 @@ const SummaryTable: React.FC<{type: string}> = ({type}) => {
                 <tbody>
                     <tr>
                         <td>
-                            <div className={styles.player}>
+                            <div className={`${styles.player} ${true && styles.win}`}>
                                 <Image 
                                     src={'/icons/wide-flags/es.png'}
                                     width={30}
@@ -133,7 +133,7 @@ const SummaryTable: React.FC<{type: string}> = ({type}) => {
                             </div>
                         </td>
                         <td>
-                            1
+                            2
                         </td>
                         <td>
                             <div className={styles.tennisScore}>
@@ -152,7 +152,7 @@ const SummaryTable: React.FC<{type: string}> = ({type}) => {
                     </tr>
                     <tr>
                         <td>
-                            <div className={styles.player}>
+                            <div className={`${styles.player} ${false && styles.win}`}>
                                 <Image 
                                     src={'/icons/wide-flags/es.png'}
                                     width={30}
