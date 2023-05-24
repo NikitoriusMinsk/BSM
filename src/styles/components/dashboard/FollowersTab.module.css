@@ -15,8 +15,9 @@
     background-position: center;
     background-size: cover;
     grid-row-start: 1;
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 13;
+    margin-top: 20px;
 }
 
 #followers .info {
@@ -137,7 +138,7 @@
 
 #table {
     grid-row-start: 2;
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 13;
 }
 
@@ -211,6 +212,28 @@
     content: url(/icons/following-gray.svg);
 }
 
+@media screen and (max-width: 1024px) {
+    #followers {
+        grid-column-start: 5;
+    }
+
+    #table {
+        grid-column-start: 5;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #followers {
+        grid-column-start: 1;
+        margin-top: 0;
+    }
+
+    #table {
+        grid-column-start: 1;
+        margin-top: 0;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .followersTab {
         gap: 20px;
@@ -218,6 +241,7 @@
 
     #followers {
         flex-direction: column;
+        grid-column-start: 1;
     }
 
     #followers .info {
@@ -228,4 +252,5 @@
     #followers .search {
         width: 100%;
     }
+
 }
