@@ -125,7 +125,7 @@ const FollowingTab: React.FC = () => {
 	}
 
 	return (
-		<div className={styles.followingTab}>
+		<>
 			<div
 				id={styles.following}
 				className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
@@ -170,7 +170,7 @@ const FollowingTab: React.FC = () => {
 					pageSize={10}
 				/>
 			</div>
-		</div>
+		</>
 	);
 };
 

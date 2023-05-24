@@ -29,7 +29,7 @@ const ProfileSettings: React.FC = () => {
 					<SportModal onClose={() => setIsSportModalOpen(false)} />
 				)}
 			</AnimatePresence>
-			<div className={styles.profileSettings}>
+			<>
 				<div
 					id={styles.accountSettings}
 					className={styles.block}
@@ -141,14 +141,12 @@ const ProfileSettings: React.FC = () => {
 										alt=""
 									/>
 								</div>
-								<span className={styles.name}>
-									{data.country.name}
-								</span>
+								<span className={styles.name}>{data.country.name}</span>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</>
 		</>
 	);
 };
@@ -246,8 +244,7 @@ const PasswordModal: React.FC<{ onClose: () => void }> = (props) => {
 
 const SportModal: React.FC<{ onClose: () => void }> = (props) => {
 	const { onClose } = props;
-	const { data: sports, isLoading: sportsLoading } =
-		trpc.filters.getSports.useQuery();
+	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
 	const { data: clubs, isLoading: clubsLoading } =
 		trpc.filters.getSportClubs.useQuery();
 	const { data: countries, isLoading: countriesLoading } =

@@ -1,6 +1,8 @@
 .sideColumn {
     grid-column-start: 1;
     grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 5;
     padding: 20px 30px 0 60px;
     height: 100%;
     background-color: #FBFBFB;
@@ -234,6 +236,15 @@
     color: #1A1C21;
 }
 
+.mobileGrid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-start: 1;
+    grid-column-end: 13;
+    gap: 30px;
+    padding: 0 16px;
+}
+
 @media screen and (max-width: 1440px) {
     .sideColumn {
         padding-left: 40px;
@@ -253,6 +264,12 @@
     }
 }
 
+@media screen and (max-width: 1366px) {
+    .sideColumn {
+        margin-left: -30px;
+    }
+}
+
 @media screen and (max-width: 1024px) {
     .sideColumn {
         grid-column-end: 5;
@@ -263,17 +280,8 @@
     }
 }
 
-@media screen and (max-width: 1366px) {
-    .sideColumn {
-        margin-left: -30px;
-    }
-}
 
 @media screen and (max-width: 768px) {
-    .mainColumn {
-        min-height: unset;
-    }
-
     .sideColumn {
         grid-row-start: 1;
         grid-row-end: 2;
@@ -281,6 +289,11 @@
         grid-column-end: 13;
         padding: 16px;
         margin-left: 0;
+        padding-bottom: 0;
+    }
+
+    .navigationContainer {
+        padding-bottom: 0;
     }
 
     .mainColumn {

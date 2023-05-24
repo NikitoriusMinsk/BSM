@@ -189,7 +189,7 @@ const SubscriptionTab: React.FC = () => {
 	}
 
 	return (
-		<div className={styles.subscriptionTab}>
+		<>
 			<div
 				id={styles.subscribers}
 				className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
@@ -248,7 +248,7 @@ const SubscriptionTab: React.FC = () => {
 					header={false}
 				/>
 			</div>
-		</div>
+		</>
 	);
 };
 

@@ -116,6 +116,7 @@
 }
 
 .mainNewsStat {
+    position: relative;
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
@@ -134,13 +135,14 @@
 .sideNews {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
 }
 
 .sideNewsMainNews {
     position: relative;
     min-height: 220px;
     border-radius: 16px;
+    padding: 16px;
     overflow: hidden;
 }
 
@@ -149,8 +151,8 @@
     flex-direction: column;
     gap: 4px;
     position: absolute;
-    left: 10px;
-    bottom: 10px;
+    left: 16px;
+    bottom: 16px;
 }
 
 .sideNewsMainNews .info .date {
@@ -340,7 +342,6 @@
     font-size: 12px;
     line-height: 14px;
     color: #FFFFFF;
-    text-transform: uppercase;
 }
 
 .matchDate {
@@ -754,6 +755,10 @@
     color: #1A1C21B2;
 }
 
+.mobileMainNewsTitle {
+    display: none;
+}
+
 @media screen and (max-width: 1440px) {
     .mainNewsContainer {
         margin-left: -40px;
@@ -829,6 +834,10 @@
 
 @media screen and (max-width: 768px) {
 
+    .mainNewsTitle {
+        max-width: calc(100% - 24px);
+    }
+
     .fullWidthNewsBlock {
         margin-right: 0;
         padding-left: 24px;
@@ -848,18 +857,18 @@
     }
 
     .mainNewsLabel {
-        top: 60px;
-        left: 20px;
+        top: 64px;
+        left: 24px;
     }
 
     .mainNewsInfo {
-        left: 20px;
+        left: 24px;
         bottom: 64px;
     }
 
     .mainNewsStats {
         bottom: 28px;
-        left: 20px;
+        left: 24px;
     }
 
     .wideNews {
@@ -872,14 +881,22 @@
 }
 
 @media screen and (max-width: 425px) {
+    .mainNewsContainer {
+        margin-right: 0;
+    }
+
     .fullWidthNewsBlock {
         margin-right: 0;
-        padding-left: 0;
+    }
+
+    .sideNews {
+        padding: 0 24px;
     }
 
     .recentNews,
     .newsBlockContainer {
         margin-right: 0;
+        padding-left: 0;
     }
 
     .recentNews .newsBlockContent .news,
@@ -1007,5 +1024,54 @@
 
     .mainColumn.bottom .newsBlockContent .news {
         width: 100%;
+    }
+
+    .mainNewsStat:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        left: 250%;
+        height: 100%;
+        width: 1px;
+        background-color: #1A1C211A;
+    }
+
+    .mobileMainNewsTitle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+    }
+
+    .mobileMainNewsTitle>div span {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #1a1c2180;
+    }
+
+    .mobileMainNewsTitle>div h2 {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 22px;
+        color: #1A1C21;
+    }
+
+    .mainNewsLabel {
+        position: relative;
+        background-color: #7F3FFC;
+        top: unset;
+        left: unset;
+    }
+
+    .mainNewsContainer {
+        gap: 0;
+    }
+
+    .mainNews .mainNewsLabel {
+        display: none;
     }
 }

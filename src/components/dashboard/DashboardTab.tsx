@@ -6,6 +6,8 @@ import React, { ReactNode, useMemo, useState } from "react";
 import { trpc } from "src/utils/trpc";
 import styles from "@styles/components/dashboard/DashboardTab.module.css";
 import sharedStyles from "@styles/components/dashboard/shared.module.css";
+import DisaperingContainer from "@components/helpers/DisaperingContainer";
+import useWindowSize from "src/utils/useWindowSize";
 
 const DashboardTab: React.FC = () => {
 	const { data, isLoading } = trpc.user.getDashboardInfo.useQuery();
@@ -19,7 +21,7 @@ const DashboardTab: React.FC = () => {
 	}
 
 	return (
-		<div className={styles.dashboardTab}>
+		<>
 			<div
 				id={styles.profit}
 				className={`${sharedStyles.block} ${sharedStyles.narrow} ${
@@ -217,7 +219,7 @@ const DashboardTab: React.FC = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

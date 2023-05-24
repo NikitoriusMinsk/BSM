@@ -40,12 +40,12 @@
 }
 
 #accountSettings {
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 13;
 }
 
 #sportDetails {
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 13;
 }
 
@@ -305,6 +305,26 @@
     font-size: 15px;
     line-height: 18px;
     color: #FFFFFF;
+}
+
+@media screen and (max-width: 1024px) {
+    #accountSettings {
+        grid-column-start: 5;
+    }
+
+    #sportDetails {
+        grid-column-start: 5;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #accountSettings {
+        grid-column-start: 1;
+    }
+
+    #sportDetails {
+        grid-column-start: 1;
+    }
 }
 
 @media screen and (max-width: 425px) {

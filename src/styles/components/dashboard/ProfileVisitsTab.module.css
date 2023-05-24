@@ -15,8 +15,9 @@
     background-position: center;
     background-size: cover;
     grid-row-start: 1;
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 13;
+    margin-top: 20px;
 }
 
 #profileVisits .text {
@@ -93,7 +94,7 @@
 
 #table {
     grid-row-start: 2;
-    grid-column-start: 1;
+    grid-column-start: 4;
     grid-column-end: 13;
 }
 
@@ -165,6 +166,26 @@
 
 .followButton.following::before {
     content: url(/icons/following-gray.svg);
+}
+
+@media screen and (max-width: 1024px) {
+    #profileVisits {
+        grid-column-start: 5;
+    }
+
+    #table {
+        grid-column-start: 5;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #profileVisits {
+        grid-column-start: 1;
+    }
+
+    #table {
+        grid-column-start: 1;
+    }
 }
 
 @media screen and (max-width: 425px) {
