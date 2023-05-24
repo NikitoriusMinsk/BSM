@@ -136,7 +136,12 @@ const SummaryTable: React.FC<{type: string}> = ({type}) => {
                             1
                         </td>
                         <td>
-                            1
+                            <div className={styles.tennisScore}>
+                                {/* big num */}
+                                <span>7</span> 
+                                {/* small num */}
+                                <span>6</span>
+                            </div>
                         </td>
                         <td>
                             1
