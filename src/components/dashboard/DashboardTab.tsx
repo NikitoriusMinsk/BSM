@@ -230,7 +230,7 @@ const StatisticsChart: React.FC<{ data: { time: number; value: number }[] }> = (
 
 	return (
 		<ResponsiveContainer
-			height={50}
+			height={100}
 			width="100%"
 		>
 			<LineChart data={data}>

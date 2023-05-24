@@ -1029,7 +1029,7 @@
     .mainNewsStat:not(:last-child)::after {
         content: "";
         position: absolute;
-        left: 250%;
+        left: 25vw;
         height: 100%;
         width: 1px;
         background-color: #1A1C211A;
