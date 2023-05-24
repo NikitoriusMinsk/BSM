@@ -41,7 +41,7 @@ const PendingTipsTab: React.FC = () => {
 	return (
 		<PortalContext.Provider value={{ portalNode }}>
 			{portalNode && <OutPortal node={portalNode} />}
-			<div className={styles.tipsTab}>
+			<>
 				<div className={styles.filters}>
 					{width > 1024 ? (
 						<>
@@ -110,7 +110,7 @@ const PendingTipsTab: React.FC = () => {
 						/>
 					))}
 				</div>
-			</div>
+			</>
 		</PortalContext.Provider>
 	);
 };
