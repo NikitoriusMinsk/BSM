@@ -138,12 +138,12 @@ const WithdrawTab: React.FC = () => {
 						/>
 						<div className={styles.text}>
 							<h4>Pending Balance</h4>
-							<span>$ {data.pendingBalance}</span>
+							<span>$ {data.pendingBalance.toFixed(2)}</span>
 						</div>
 					</div>
 					<div>
 						<h5>Cash that can be withdrawn right now</h5>
-						<WithdrawButton balance={data.availableBalance} />
+						<WithdrawButton balance={data.availableBalance.toFixed(2)} />
 					</div>
 				</div>
 				<div
@@ -158,7 +158,7 @@ const WithdrawTab: React.FC = () => {
 					/>
 					<div className={styles.text}>
 						<h4>Pending Balance</h4>
-						<span>$ {data.totalEarned}</span>
+						<span>$ {data.totalEarned.toFixed(2)}</span>
 					</div>
 				</div>
 				<div id={styles.table}>
@@ -174,7 +174,7 @@ const WithdrawTab: React.FC = () => {
 	);
 };
 
-const WithdrawButton: React.FC<{ balance: number }> = (props) => {
+const WithdrawButton: React.FC<{ balance: number | string }> = (props) => {
 	const { balance } = props;
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -229,7 +229,9 @@ enum PaymentMethods {
 	MastercardVisa = "mastercard/visa",
 }
 
-const WithdrawModal: React.FC<{ maxValue: number; onClose: () => void }> = (props) => {
+const WithdrawModal: React.FC<{ maxValue: number | string; onClose: () => void }> = (
+	props
+) => {
 	const { maxValue, onClose } = props;
 	const [isMax, setIsMax] = useState<boolean>(false);
 	const [selectedMethod, setSelectedMethod] = useState<PaymentMethods>(
@@ -240,7 +242,7 @@ const WithdrawModal: React.FC<{ maxValue: number; onClose: () => void }> = (prop
 
 	function handleInput(e: ChangeEvent<HTMLInputElement>) {
 		const value = parseInt(e.target.value);
-		if (value > maxValue) {
+		if (value > (maxValue as number)) {
 			if (inputRef.current) {
 				inputRef.current.value = maxValue.toString();
 				setIsMax(true);

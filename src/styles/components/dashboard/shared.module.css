@@ -41,10 +41,6 @@
         padding: 30px;
     }
 
-    .block img {
-        height: 48px;
-        width: 48px;
-    }
 }
 
 @media screen and (max-width:425px) {

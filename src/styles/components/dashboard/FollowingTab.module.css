@@ -18,6 +18,7 @@
     grid-column-start: 4;
     grid-column-end: 13;
     margin-top: 20px;
+    max-height: 150px;
 }
 
 #following .info {
@@ -214,6 +215,12 @@
     content: url(/icons/following-gray.svg);
 }
 
+@media screen and (max-width: 1440px) {
+    #following .search {
+        max-width: 360px;
+    }
+}
+
 @media screen and (max-width: 1024px) {
     #following {
         grid-column-start: 5;
@@ -242,6 +249,7 @@
 
     #following {
         flex-direction: column;
+        max-height: unset;
     }
 
     #following .info {

@@ -12,6 +12,7 @@
     grid-column-start: 4;
     grid-column-end: 13;
     margin-top: 20px;
+    max-height: 150px;
 }
 
 #subscribers .info {
@@ -170,7 +171,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 16px;
+    padding: 10px 24px;
     border: 1px solid #1A1C2133;
     border-radius: 4px;
     font-family: 'Samsung Sans';
@@ -183,8 +184,6 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    min-height: 40px;
-    width: 100%;
 }
 
 .duration {
@@ -257,10 +256,14 @@
 
 .subscribeButton.subscribe::before {
     content: url(/icons/check.svg);
+    height: 16px;
+    width: 16px;
 }
 
 .subscribeButton.subscribed::before {
     content: url(/icons/check-gray.svg);
+    height: 16px;
+    width: 16px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -298,6 +301,7 @@
 
     #subscribers {
         flex-direction: column;
+        max-height: unset;
     }
 
     #subscribers .info {

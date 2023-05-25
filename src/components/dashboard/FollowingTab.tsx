@@ -167,7 +167,7 @@ const FollowingTab: React.FC = () => {
 					}
 					columns={width <= 425 ? mobileColumns : columns}
 					header={false}
-					pageSize={10}
+					pageSize={20}
 				/>
 			</div>
 		</>

@@ -24,9 +24,10 @@
     background-size: cover;
     grid-row-start: 1;
     grid-column-start: 4;
-    grid-column-end: 9;
+    grid-column-end: 10;
     gap: 120px;
     margin-top: 20px;
+    height: 200px;
 }
 
 #withdrawBalance div:first-child {
@@ -85,9 +86,10 @@
     background-position: bottom right;
     background-size: auto;
     grid-row-start: 1;
-    grid-column-start: 9;
+    grid-column-start: 10;
     grid-column-end: 13;
     margin-top: 20px;
+    height: 200px;
 }
 
 #withdrawTotal .text {
