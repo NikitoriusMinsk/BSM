@@ -307,8 +307,8 @@ const TopMatches: React.FC<TopMatchesProps> = (props) => {
 										<Image
 											src={team.image}
 											alt={team.name}
-											width={32}
-											height={32}
+											width={22}
+											height={22}
 										/>
 									</div>
 								))}

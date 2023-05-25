@@ -351,6 +351,7 @@
     justify-content: center;
     gap: 4px;
     padding: 0px 7px;
+    min-width: 60px;
 }
 
 .matchDate .date {
@@ -383,15 +384,18 @@
     align-items: center;
 }
 
-.topMatchTeams .topMatchTeam:not(:last-child) {
-    margin-right: -15px;
-    z-index: -1;
+.topMatchTeams .topMatchTeam:last-child {
+    margin-left: -10px;
+    z-index: 1;
+    outline: 2px solid #fff;
 }
 
 .topMatchTeam {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 5px;
+    background: #fff;
     border: 3px solid #E8E8E9;
     border-radius: 100%;
 }
