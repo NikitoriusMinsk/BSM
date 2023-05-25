@@ -1,5 +1,5 @@
 .container {
-    width: 100%;
+    width: calc(100% - 195px);
     background-color: #26292E;
     border-radius: 16px;
     padding: 60px 80px 30px;
@@ -7,6 +7,8 @@
     flex-direction: column;
     gap: 31px;
     margin-top: 100px;
+    margin-left: 60px;
+    margin-right: 135px;
 }
 
 .row {
@@ -97,6 +99,22 @@
     cursor: pointer;
 }
 
+@media screen and (max-width:1440px) {
+    .container {
+        width: calc(100% - 70px);
+        margin-left: 40px;
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width:1366px) {
+    .container {
+        width: calc(100% - 60px);
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+}
+
 @media screen and (max-width:1280px) {
     .container {
         margin-bottom: 73px;
@@ -109,6 +127,12 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .container {
+        width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
     .row {
         row-gap: 30px;
     }
@@ -121,7 +145,10 @@
 
 @media screen and (max-width: 768px) {
     .container {
-        border-radius: 0;
+        border-radius: 0px;
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
     }
 
     .container .column:last-child {
