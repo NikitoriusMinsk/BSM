@@ -7,9 +7,9 @@ const ArchivePage: React.FC = () => {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.archive}>
-                <table 
-                    className={styles.archiveTable} 
-                    cellPadding={10} 
+                <table
+                    className={styles.archiveTable}
+                    cellPadding={10}
                     cellSpacing={0}
                 >
                     <colgroup>
@@ -23,17 +23,26 @@ const ArchivePage: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {[1,1,1,1,1,1,1,1,1].map((item,index) => (
+                        {[1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
                             <tr key={index}>
-                                <td>Season 2020/2021</td>
+                                <td>
+                                    <div className={styles.season}>
+                                        <span>
+                                            Season
+                                        </span>
+                                        <span>
+                                            2020/2021
+                                        </span>
+                                    </div>
+                                </td>
                                 <td className={styles.teamCell}>
                                     <span>
                                         <div className={styles.teamLogo}>
-                                            <Image 
+                                            <Image
                                                 src="/testimg/club1.png"
                                                 width={20}
                                                 height={20}
-                                                style={{objectFit:'contain'}}
+                                                style={{ objectFit: 'contain' }}
                                                 alt=""
                                             />
                                         </div>
@@ -41,8 +50,8 @@ const ArchivePage: React.FC = () => {
                                     </span>
                                 </td>
                             </tr>
-                        ))}                    
-                    </tbody>               
+                        ))}
+                    </tbody>
                 </table>
             </div>
         </div>
