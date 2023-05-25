@@ -39,8 +39,8 @@ const MatchTipsCard: React.FC<inferArrayElementType<MostTips>> = (props) => {
 							<Image
 								src={team.image}
 								alt={team.name}
-								width={35}
-								height={35}
+								width={25}
+								height={25}
 							/>
 						</div>
 					))}
