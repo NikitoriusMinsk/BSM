@@ -60,14 +60,13 @@ const Filter: React.FC<FilterProps> = (props) => {
 				variants={ItemsVariants}
 				initial={"closed"}
 				animate={isOpen ? "open" : "closed"}
-				transition={{ease:'easeInOut'}}
+				transition={{ ease: 'easeInOut' }}
 			>
 				{items.map((item) => (
 					<div
 						key={item.id}
-						className={`${styles.item} ${
-							selectedItems.includes(item.id) && styles.selected
-						}`}
+						className={`${styles.item} ${selectedItems.includes(item.id) && styles.selected
+							}`}
 						onClick={() => handleSelect(item.id)}
 					>
 						<div className={styles.info}>
@@ -75,8 +74,8 @@ const Filter: React.FC<FilterProps> = (props) => {
 								<Image
 									src={item.image}
 									alt={item.name}
-									width={38}
-									height={38}
+									width={28}
+									height={28}
 								/>
 							</div>
 							<div className={styles.titles}>
@@ -104,7 +103,7 @@ const Filter: React.FC<FilterProps> = (props) => {
 					variants={CevronVariants}
 					initial={"closed"}
 					animate={isOpen ? "open" : "closed"}
-					transition={{ease:'easeInOut'}}
+					transition={{ ease: 'easeInOut' }}
 				>
 					<Image
 						src="/icons/chevron.svg"
