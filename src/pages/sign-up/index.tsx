@@ -9,46 +9,46 @@ import { SyntheticEvent, useState } from "react";
 import Link from "next/link";
 
 const Register: NextPage = () => {
-	const [passwordCheck, setPasswordCheck] = useState([false, false, false, false]);
+    const [passwordCheck, setPasswordCheck] = useState([false, false, false, false]);
 
-	function checkPassword(e: React.ChangeEvent<HTMLInputElement>) {
-		setPasswordCheck([
-			e.target.value?.length >= 12,
+    function checkPassword(e: React.ChangeEvent<HTMLInputElement>) {
+        setPasswordCheck([
+            e.target.value?.length >= 12,
 
-			e.target.value
-				?.split("")
-				.filter(
-					(letter) => isNaN(parseInt(letter)) && letter.toLowerCase() != letter.toUpperCase() && letter == letter.toUpperCase()
-				).length > 0,
+            e.target.value
+                ?.split("")
+                .filter(
+                    (letter) => isNaN(parseInt(letter)) && letter.toLowerCase() != letter.toUpperCase() && letter == letter.toUpperCase()
+                ).length > 0,
 
-			e.target.value?.split("").filter((letter) => !isNaN(parseInt(letter))).length > 0,
+            e.target.value?.split("").filter((letter) => !isNaN(parseInt(letter))).length > 0,
 
-			e.target.value?.split("").filter((letter) => isNaN(parseInt(letter)) && letter.toLowerCase() == letter.toUpperCase()).length >
-				0,
-		]);
-	}
+            e.target.value?.split("").filter((letter) => isNaN(parseInt(letter)) && letter.toLowerCase() == letter.toUpperCase()).length >
+            0,
+        ]);
+    }
 
-	function handleRegister(e: SyntheticEvent) {
-		e.preventDefault();
-		if (passwordCheck.filter((check) => check).length == 4) {
-			const target = e.target as typeof e.target & {
-				email: { value: string };
-				password: { value: string };
-				firstName: { value: string };
-				lastName: { value: string };
-				nickname: { value: string };
-			};
-			const email = target.email.value;
-			const password = target.password.value;
-			const firstName = target.firstName.value;
-			const lastName = target.lastName.value;
-			const nickname = target.nickname.value;
-		} else {
-			alert("invalid data");
-		}
-	}
+    function handleRegister(e: SyntheticEvent) {
+        e.preventDefault();
+        if (passwordCheck.filter((check) => check).length == 4) {
+            const target = e.target as typeof e.target & {
+                email: { value: string };
+                password: { value: string };
+                firstName: { value: string };
+                lastName: { value: string };
+                nickname: { value: string };
+            };
+            const email = target.email.value;
+            const password = target.password.value;
+            const firstName = target.firstName.value;
+            const lastName = target.lastName.value;
+            const nickname = target.nickname.value;
+        } else {
+            alert("invalid data");
+        }
+    }
 
-	return <>
+    return <>
         <Head>
             <title>Optimo Sign Up</title>
             <meta
@@ -63,7 +63,13 @@ const Register: NextPage = () => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <Link href={"/"}>
-                    OPTIMO
+                    <Image
+                        src="/logo.svg"
+                        height={32}
+                        width={136}
+                        alt=""
+                        style={{ objectFit: 'contain' }}
+                    />
                 </Link>
             </div>
             <div className={styles.formArea}>
@@ -127,7 +133,7 @@ const Register: NextPage = () => {
                             type="nickname"
                             placeholder="Nickname"
                             icon="/images/login/dice.svg"
-                            iconClick={() => {}}
+                            iconClick={() => { }}
                             name="nickname"
                         />
                         <PasswordField

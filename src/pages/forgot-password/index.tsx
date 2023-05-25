@@ -9,15 +9,15 @@ import { useState } from "react";
 import Link from "next/link";
 
 const Forgot: NextPage = () => {
-	const [submitForbidden, setSubmitForbidden] = useState(true);
-	const [submitted, setSubmitted] = useState(false);
+    const [submitForbidden, setSubmitForbidden] = useState(true);
+    const [submitted, setSubmitted] = useState(false);
 
-	const submitForgot = (e: React.FormEvent) => {
-		e.preventDefault();
-		setSubmitted(true);
-	};
+    const submitForgot = (e: React.FormEvent) => {
+        e.preventDefault();
+        setSubmitted(true);
+    };
 
-	return <>
+    return <>
         <Head>
             <title>Optimo Forgot Password</title>
             <meta
@@ -32,7 +32,13 @@ const Forgot: NextPage = () => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <Link href={"/"}>
-                    OPTIMO
+                    <Image
+                        src="/logo.svg"
+                        height={32}
+                        width={136}
+                        alt=""
+                        style={{ objectFit: 'contain' }}
+                    />
                 </Link>
             </div>
             <div className={styles.formArea}>

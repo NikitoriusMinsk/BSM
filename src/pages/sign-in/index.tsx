@@ -11,26 +11,26 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const Login: NextPage = () => {
-	const router = useRouter();
+    const router = useRouter();
 
-	function handleLogin(e: SyntheticEvent) {
-		e.preventDefault();
-		const target = e.target as typeof e.target & {
-			email: { value: string };
-			password: { value: string };
-		};
-		const email = target.email.value;
-		const password = target.password.value;
-		signIn("credentials", {
-			email: email,
-			password: password,
-			callbackUrl: (router.query.callbackUrl as string) || "/",
-		})
-			.then((res) => console.log(res))
-			.catch((err) => console.log(err));
-	}
+    function handleLogin(e: SyntheticEvent) {
+        e.preventDefault();
+        const target = e.target as typeof e.target & {
+            email: { value: string };
+            password: { value: string };
+        };
+        const email = target.email.value;
+        const password = target.password.value;
+        signIn("credentials", {
+            email: email,
+            password: password,
+            callbackUrl: (router.query.callbackUrl as string) || "/",
+        })
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+    }
 
-	return <>
+    return <>
         <Head>
             <title>Optimo Login</title>
             <meta
@@ -45,7 +45,13 @@ const Login: NextPage = () => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <Link href={"/"}>
-                    OPTIMO
+                    <Image
+                        src="/logo.svg"
+                        height={32}
+                        width={136}
+                        alt=""
+                        style={{ objectFit: 'contain' }}
+                    />
                 </Link>
             </div>
             <div className={styles.formArea}>

@@ -9,41 +9,41 @@ import { useState } from "react";
 import Link from "next/link";
 
 const Forgot: NextPage = () => {
-	const [passwordCheck, setPasswordCheck] = useState([
-		false,
-		false,
-		false,
-		false,
-	]);
+    const [passwordCheck, setPasswordCheck] = useState([
+        false,
+        false,
+        false,
+        false,
+    ]);
 
-	function checkPassword(e: React.ChangeEvent<HTMLInputElement>) {
-		setPasswordCheck([
-			e.target.value?.length >= 12,
+    function checkPassword(e: React.ChangeEvent<HTMLInputElement>) {
+        setPasswordCheck([
+            e.target.value?.length >= 12,
 
-			e.target.value
-				?.split("")
-				.filter(
-					(letter) =>
-						isNaN(parseInt(letter)) &&
-						letter.toLowerCase() != letter.toUpperCase() &&
-						letter == letter.toUpperCase()
-				).length > 0,
+            e.target.value
+                ?.split("")
+                .filter(
+                    (letter) =>
+                        isNaN(parseInt(letter)) &&
+                        letter.toLowerCase() != letter.toUpperCase() &&
+                        letter == letter.toUpperCase()
+                ).length > 0,
 
-			e.target.value
-				?.split("")
-				.filter((letter) => !isNaN(parseInt(letter))).length > 0,
+            e.target.value
+                ?.split("")
+                .filter((letter) => !isNaN(parseInt(letter))).length > 0,
 
-			e.target.value
-				?.split("")
-				.filter(
-					(letter) =>
-						isNaN(parseInt(letter)) &&
-						letter.toLowerCase() == letter.toUpperCase()
-				).length > 0,
-		]);
-	}
+            e.target.value
+                ?.split("")
+                .filter(
+                    (letter) =>
+                        isNaN(parseInt(letter)) &&
+                        letter.toLowerCase() == letter.toUpperCase()
+                ).length > 0,
+        ]);
+    }
 
-	return <>
+    return <>
         <Head>
             <title>Optimo Reset Password</title>
             <meta
@@ -58,7 +58,13 @@ const Forgot: NextPage = () => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <Link href={"/"}>
-                    OPTIMO
+                    <Image
+                        src="/logo.svg"
+                        height={32}
+                        width={136}
+                        alt=""
+                        style={{ objectFit: 'contain' }}
+                    />
                 </Link>
             </div>
             <div className={styles.formArea}>
