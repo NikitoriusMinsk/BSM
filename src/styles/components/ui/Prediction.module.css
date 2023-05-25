@@ -18,6 +18,7 @@
     display: flex;
     flex-direction: row;
     gap: 60px;
+    align-items: center;
 }
 
 .header .date {
@@ -105,6 +106,7 @@
 
 .header button:before {
     content: url(/icons/plus-violet.svg);
+    height: 18px;
 }
 
 .header .controls {
@@ -313,6 +315,62 @@
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
     height: 100%;
+}
+
+.paidText {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.paidTip {
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1A1C21;
+}
+
+.paidAcc {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(26, 28, 33, 0.7);
+}
+.paidAcc a {
+    color: #7F3FFC;
+}
+
+.paidPrice {
+    display: flex;
+    align-items: flex-end;
+}
+.paidPrice span {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+    margin-bottom: 2px;
+}
+.paidPrice span:first-child {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #1A1C21;
+    margin-bottom: 0px;
+}
+.paidPrice span:last-child {
+    font-weight: 400;
 }
 
 .profit {

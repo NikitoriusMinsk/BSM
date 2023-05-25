@@ -167,58 +167,86 @@ const Prediction: React.FC<
 							<div className={styles.separator} />
 						</>
 					)}
-					<div className={styles.outcomes}>
-						<div className={styles.outcome}>
-							<span>Market</span>
-							<span>{info.market}</span>
-						</div>
-						<div className={styles.outcome}>
-							<span>Selection</span>
-							<span>{info.selection}</span>
-						</div>
-						<div className={styles.outcome}>
-							<span>Stake</span>
-							<span>{info.stake}</span>
-						</div>
-						<div className={styles.bookmaker}>
-							<Image
-								src={info.bookmaker.image}
-								height={20}
-								width={56}
-								alt=""
-							/>
-							<span className={styles.odd}>{info.bookmaker.odd}</span>
-						</div>
-						<div className={styles.profit}>
-							<span
-								className={
-									info.profit.potential
-										? styles.potential
-										: info.profit.amount > 0
-										? styles.positive
-										: styles.negative
-								}
-							>
-								{info.profit.potential
-									? "Potential profit"
-									: info.profit.amount > 0
-									? "Success"
-									: "Lost"}
-							</span>
-							<span>$ {info.profit.amount}</span>
-						</div>
-						{info.bet_now && (
-							<div className={styles.betNow}>
-								<Image
-									src="/icons/refresh.svg"
-									height={24}
-									width={24}
-									alt=""
-								/>
-								Bet Now
+					{(author.subscribed) || (!author.subscribed && !author.paid) ? 
+						<div className={styles.outcomes}>
+							<div className={styles.outcome}>
+								<span>Market</span>
+								<span>{info.market}</span>
 							</div>
-						)}
-					</div>
+							<div className={styles.outcome}>
+								<span>Selection</span>
+								<span>{info.selection}</span>
+							</div>
+							<div className={styles.outcome}>
+								<span>Stake</span>
+								<span>{info.stake}</span>
+							</div>
+							{info.bookmaker && 
+								<div className={styles.bookmaker}>
+									<Image
+										src={info.bookmaker.image}
+										height={20}
+										width={56}
+										alt=""
+									/>
+									<span className={styles.odd}>{info.bookmaker.odd}</span>
+								</div>
+							}						
+							<div className={styles.profit}>
+								<span
+									className={
+										info.profit?.potential
+											? styles.potential
+											: (info.profit?.amount && (info.profit?.amount > 0))
+											? styles.positive
+											: styles.negative
+									}
+								>
+									{info.profit?.potential ? "Potential profit" : (info.profit?.amount && (info.profit?.amount > 0)) ? "Success" : "Lost"}
+								</span>
+								<span>$ {info.profit?.amount}</span>
+							</div>
+							{info.bet_now && (
+								<div className={styles.betNow}>
+									<Image
+										src="/icons/refresh.svg"
+										height={24}
+										width={24}
+										alt=""
+									/>
+									Bet Now
+								</div>
+							)}
+						</div>
+						:
+						<div className={styles.outcomes}>
+							<div className={styles.paidText}>
+								<span className={styles.paidTip}>
+									<Image 
+										src={'/icons/locked.svg'}
+										width={20}
+										height={20}
+										alt=""
+									/>
+									Paid tip
+								</span>
+								<span className={styles.paidAcc}>
+									Please subscrie to <a>Gabriel</a> to gain access to the tip
+								</span>
+							</div>
+							<div className={styles.paidPrice}>
+								<span>
+									$ 36.
+								</span>
+								<span>
+									50
+								</span>
+								<span>
+									/MO
+								</span>
+							</div>
+						</div>
+					}
 					<div className={styles.stats}>
 						<div className={styles.stat}>
 							<Image
@@ -234,46 +262,50 @@ const Prediction: React.FC<
 							<span className={styles.label}>Like</span>
 							<span>{info.like_count}</span>
 						</div>
-						<div className={styles.stat}>
-							<Image
-								src="/icons/comment.svg"
-								height={24}
-								width={24}
-								alt=""
-							/>
-							<span className={styles.label}>Comments</span>
-							<span>{info.comment_count}</span>
-						</div>
-					</div>
-					<div className={styles.commentsContainer}>
-						<div className={styles.comments}>
-							<h3>Comments</h3>
-							<div className={styles.commentsList}>
-								{info.comments.map((comment, index) => (
-									<Comment
-										{...comment}
-										key={`comment_${index}`}
-									/>
-								))}
+						{(author.subscribed) || (!author.subscribed && !author.paid) && 
+							<div className={styles.stat}>
+								<Image
+									src="/icons/comment.svg"
+									height={24}
+									width={24}
+									alt=""
+								/>
+								<span className={styles.label}>Comments</span>
+								<span>{info.comment_count}</span>
 							</div>
-							<div className={styles.input}>
-								<div className={styles.avatar}>
-									<Image
-										src="/images/profile-placeholder.png"
-										height={46}
-										width={46}
-										alt=""
-									/>
+						}
+					</div>
+					{(author.subscribed) || (!author.subscribed && !author.paid) && 
+						<div className={styles.commentsContainer}>
+							<div className={styles.comments}>
+								<h3>Comments</h3>
+								<div className={styles.commentsList}>
+									{info.comments?.map((comment, index) => (
+										<Comment
+											{...comment}
+											key={`comment_${index}`}
+										/>
+									))}
 								</div>
-								<div className={styles.textField}>
-									<TextField
-										placeholder="Write a comment"
-										icon="/icons/send.svg"
-									/>
+								<div className={styles.input}>
+									<div className={styles.avatar}>
+										<Image
+											src="/images/profile-placeholder.png"
+											height={46}
+											width={46}
+											alt=""
+										/>
+									</div>
+									<div className={styles.textField}>
+										<TextField
+											placeholder="Write a comment"
+											icon="/icons/send.svg"
+										/>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					}					
 				</div>
 			)}
 		</div>
