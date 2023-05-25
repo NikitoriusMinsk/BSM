@@ -85,8 +85,8 @@ const League: React.FC<{
 					<div className={styles.image}>
 						<Image
 							src={league.image}
-							height={38}
-							width={38}
+							height={28}
+							width={28}
 							alt={league.name}
 						/>
 					</div>
@@ -239,18 +239,16 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 					</div>
 					<div className={styles.teamNames}>
 						<div
-							className={`${styles.teamName} ${
-								(teams[0]?.score || 0) - (teams[1]?.score || 0) > 0 &&
+							className={`${styles.teamName} ${(teams[0]?.score || 0) - (teams[1]?.score || 0) > 0 &&
 								styles.win
-							}`}
+								}`}
 						>
 							{teams[0]?.name}
 						</div>
 						<div
-							className={`${styles.teamName} ${
-								(teams[1]?.score || 0) - (teams[0]?.score || 0) > 0 &&
+							className={`${styles.teamName} ${(teams[1]?.score || 0) - (teams[0]?.score || 0) > 0 &&
 								styles.win
-							}`}
+								}`}
 						>
 							{teams[1]?.name}
 						</div>
@@ -259,18 +257,16 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 				<div className={styles.details}>
 					<div className={`${styles.outcome} ${styles.score}`}>
 						<span
-							className={`${
-								(teams[0]?.score || 0) - (teams[1]?.score || 0) > 0 &&
+							className={`${(teams[0]?.score || 0) - (teams[1]?.score || 0) > 0 &&
 								styles.win
-							}`}
+								}`}
 						>
 							{teams[0]?.score}
 						</span>
 						<span
-							className={`${
-								(teams[1]?.score || 0) - (teams[0]?.score || 0) > 0 &&
+							className={`${(teams[1]?.score || 0) - (teams[0]?.score || 0) > 0 &&
 								styles.win
-							}`}
+								}`}
 						>
 							{teams[1]?.score}
 						</span>
@@ -301,9 +297,8 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 								</div>
 							</div>
 							<div
-								className={`${styles.total} ${
-									isOpen ? styles.open : styles.closed
-								}`}
+								className={`${styles.total} ${isOpen ? styles.open : styles.closed
+									}`}
 								onClick={() => setIsOpen(!isOpen)}
 							>
 								+ 0000
@@ -327,9 +322,8 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 								</div>
 							</div>
 							<div
-								className={`${styles.total} ${
-									isOpen ? styles.open : styles.closed
-								}`}
+								className={`${styles.total} ${isOpen ? styles.open : styles.closed
+									}`}
 								onClick={() => setIsOpen(!isOpen)}
 							>
 								{tip_count} Tip{tip_count > 1 ? "s" : ""}
