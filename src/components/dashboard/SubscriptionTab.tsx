@@ -35,7 +35,9 @@ const columns = [
 		},
 	}),
 	columnHelper.accessor("amount", {
-		cell: (info) => <span className={styles.price}>$ {info.getValue()}</span>,
+		cell: (info) => (
+			<span className={styles.price}>$ {info.getValue().toFixed(2)}</span>
+		),
 	}),
 	columnHelper.accessor((row) => row, {
 		id: "duration",
