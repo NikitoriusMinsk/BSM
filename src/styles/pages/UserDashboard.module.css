@@ -33,6 +33,7 @@
 }
 
 .navigation .userInfo {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,9 +44,64 @@
 }
 
 .navigation .userInfo .user {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.navigation .userInfo .club,
+.navigation .userInfo .country {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.navigation .userInfo .club>div,
+.navigation .userInfo .country>div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.navigation .userInfo .club h4,
+.navigation .userInfo .country h4 {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #1a1c21b3;
+}
+
+.navigation .userInfo .club span,
+.navigation .userInfo .country span {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+}
+
+.navigation .userInfo .club img,
+.navigation .userInfo .country img {
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.navigation .userInfo .club {
+    top: 24px;
+    left: 28px;
+}
+
+.navigation .userInfo .country {
+    position: absolute;
+    top: 24px;
+    right: 28px;
 }
 
 .navigation .userInfo .details {
@@ -56,6 +112,7 @@
 }
 
 .navigation .userInfo .avatar {
+    padding: 3px;
     position: relative;
     display: flex;
     align-items: center;
@@ -129,10 +186,20 @@
     align-items: center;
     padding: 12px 16px;
     gap: 4px;
-    border: 1px solid #7F3FFC33;
+    border: none;
+    background-color: #F2F2F24D;
     border-radius: 8px;
-    transition: all 0.3s ease-in-out;
     cursor: pointer;
+    color: #1A1C21CC;
+}
+
+.navigation .userInfo .stats .stat:hover {
+    color: #7F3FFC;
+}
+
+.navigation .userInfo .stats .stat.active {
+    color: #7F3FFC;
+    background-color: #F2F2F24D;
 }
 
 .navigation .userInfo .stats .stat h5 {
@@ -141,8 +208,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-    color: #1A1C21CC;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .navigation .userInfo .stats .stat span {
@@ -151,17 +217,7 @@
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
-    color: #1A1C21;
-    transition: all 0.3s ease-in-out;
-}
-
-.navigation .userInfo .stats .stat.active {
-    background-color: #7F3FFC;
-}
-
-.navigation .userInfo .stats .stat.active h5,
-.navigation .userInfo .stats .stat.active span {
-    color: #FFFFFF;
+    transition: all 0.2s ease-in-out;
 }
 
 .navigation nav {
