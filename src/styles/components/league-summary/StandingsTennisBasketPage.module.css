@@ -1,19 +1,22 @@
-.pageContainer{
+.pageContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-.filter{
+
+.filter {
     display: flex;
     align-items: stretch;
-    gap: 10px;
+    gap: 16px;
     margin-bottom: 20px;
     overflow-x: auto;
     width: 100%;
 }
-.filter::-webkit-scrollbar{
+
+.filter::-webkit-scrollbar {
     display: none;
 }
+
 .filtersInside {
     display: flex;
     padding: 8px;
@@ -23,16 +26,19 @@
     align-items: center;
     margin-bottom: 20px;
 }
-.filtersInside > * {
+
+.filtersInside>* {
     padding-top: 8px;
     padding-bottom: 8px;
     background: rgba(26, 28, 33, 0.1);
     border-color: rgba(26, 28, 33, 0.1);
 }
-.standingsTable{
+
+.standingsTable {
     width: 100%;
 }
-.standingsTable th{
+
+.standingsTable th {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
@@ -40,7 +46,8 @@
     line-height: 17px;
     color: #1A1C21;
 }
-.standingsTable td{
+
+.standingsTable td {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
@@ -49,55 +56,69 @@
     color: #1A1C21;
     text-align: center;
 }
+
 .standingsTable tbody td {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
 .standingsTable tbody td:first-child {
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
     color: rgba(26, 28, 33, 0.7);
 }
-.standingsTable td:first-child, .standingsTable th:first-child {
+
+.standingsTable td:first-child,
+.standingsTable th:first-child {
     padding-left: 20px;
 }
-.standingsTable td:last-child, .standingsTable th:last-child {
+
+.standingsTable td:last-child,
+.standingsTable th:last-child {
     padding-right: 20px;
 }
-.boldCell{
-    font-weight: 700!important;
+
+.boldCell {
+    font-weight: 700 !important;
 }
-.teamHead{
+
+.teamHead {
     text-align: start;
     width: auto;
 }
-.teamCell{
-    font-family: 'Samsung Sans'!important;
-    font-style: normal!important;
-    font-weight: 600!important;
-    font-size: 15px!important;
-    line-height: 18px!important;
-    color: #1A1C21!important;
-    text-align: start!important;
+
+.teamCell {
+    font-family: 'Samsung Sans' !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    line-height: 18px !important;
+    color: #1A1C21 !important;
+    text-align: start !important;
 }
-.standingsTable tbody tr:nth-child(2n-1) td{
+
+.standingsTable tbody tr:nth-child(2n-1) td {
     background: rgba(242, 242, 242, 0.3);
 }
-.standingsTable tbody tr:nth-child(2n-1) td:first-child { 
+
+.standingsTable tbody tr:nth-child(2n-1) td:first-child {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
 }
-.standingsTable tbody tr:nth-child(2n-1) td:last-child { 
+
+.standingsTable tbody tr:nth-child(2n-1) td:last-child {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 }
-.teamCell span{
+
+.teamCell span {
     display: flex;
     align-items: center;
     gap: 16px;
 }
-.teamLogo{
+
+.teamLogo {
     overflow: hidden;
     background: #FFF;
     border: 3px solid rgba(26, 28, 33, 0.1);
@@ -108,7 +129,8 @@
     padding: 4px;
     flex-shrink: 0;
 }
-.questionBox{
+
+.questionBox {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,46 +152,52 @@
 .topScorers {
     width: 100%;
 }
+
 .scorersFilter {
     display: flex;
     gap: 40px;
     align-items: center;
     margin-bottom: 20px;
 }
-.topScorers > table {
+
+.topScorers>table {
     width: 100%;
 }
-.topScorersTable{
 
-}
-.topScorersTable th{
+.topScorersTable {}
+
+.topScorersTable th {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    color: rgba(26, 28, 33, 0.7);   
+    color: rgba(26, 28, 33, 0.7);
     background: #F2F2F2;
     text-align: left;
 }
+
 .topScorersTable th:first-child {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     color: #1A1C21;
     text-align: center;
 }
-.topScorersTable td:first-child, 
-.topScorersTable td:last-child, 
+
+.topScorersTable td:first-child,
+.topScorersTable td:last-child,
 .topScorersTable th:last-child,
 .topScorersTable th:nth-last-child(2),
 .topScorersTable td:nth-last-child(2) {
     text-align: center;
 }
+
 .topScorersTable th:last-child {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 }
-.topScorersTable td{
+
+.topScorersTable td {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
@@ -177,66 +205,84 @@
     line-height: 18px;
     color: #1A1C21;
 }
+
 .topScorersTable tbody td {
     padding-top: 20px;
     padding-bottom: 20px;
 }
-.topScorersTable > tbody > tr:nth-child(2n) > td {
-    background: rgba(242, 242, 242, 0.3);;
+
+.topScorersTable>tbody>tr:nth-child(2n)>td {
+    background: rgba(242, 242, 242, 0.3);
+    ;
 }
-.topScorersTable > tbody > tr:nth-child(2n) > td:first-child {
+
+.topScorersTable>tbody>tr:nth-child(2n)>td:first-child {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
 }
-.topScorersTable > tbody > tr:nth-child(2n) > td:last-child {
+
+.topScorersTable>tbody>tr:nth-child(2n)>td:last-child {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+
 .topScorersTable tbody td:first-child {
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     color: rgba(26, 28, 33, 0.7);
 }
-.topScorersTable td:first-child, .topScorersTable th:first-child {
+
+.topScorersTable td:first-child,
+.topScorersTable th:first-child {
     padding-left: 20px;
 }
-.topScorersTable td:last-child, .topScorersTable th:last-child {
+
+.topScorersTable td:last-child,
+.topScorersTable th:last-child {
     padding-right: 20px;
 }
-.boldCell{
-    font-weight: 700!important;
+
+.boldCell {
+    font-weight: 700 !important;
 }
-.teamHead{
+
+.teamHead {
     text-align: start;
     width: auto;
 }
-.teamCell{
-    font-family: 'Samsung Sans'!important;
-    font-style: normal!important;
-    font-weight: 600!important;
-    font-size: 15px!important;
-    line-height: 18px!important;
-    color: #1A1C21!important;
-    text-align: start!important;
+
+.teamCell {
+    font-family: 'Samsung Sans' !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    line-height: 18px !important;
+    color: #1A1C21 !important;
+    text-align: start !important;
 }
-.standingsTable tbody tr:nth-child(2n-1) td{
+
+.standingsTable tbody tr:nth-child(2n-1) td {
     background: rgba(242, 242, 242, 0.3);
 }
-.standingsTable tbody tr:nth-child(2n-1) td:first-child { 
+
+.standingsTable tbody tr:nth-child(2n-1) td:first-child {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
 }
-.standingsTable tbody tr:nth-child(2n-1) td:last-child { 
+
+.standingsTable tbody tr:nth-child(2n-1) td:last-child {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 }
-.teamCell span{
+
+.teamCell span {
     display: flex;
     align-items: center;
     gap: 16px;
 }
-.teamLogo{
+
+.teamLogo {
     overflow: hidden;
     background: #FFF;
     border: 3px solid rgba(26, 28, 33, 0.1);
@@ -247,6 +293,7 @@
     padding: 4px;
     flex-shrink: 0;
 }
+
 /* top scorers table - end */
 
 @media screen and (max-width: 600px) {
@@ -255,46 +302,60 @@
         padding-right: 16px;
         margin-bottom: 24px;
     }
+
     .filtersInside {
         margin-left: 16px;
         margin-right: 16px;
         margin-bottom: 16px;
     }
-    .standingsTable tbody tr:nth-child(2n-1) td:first-child, .standingsTable tbody tr:nth-child(2n-1) td:last-child { 
+
+    .standingsTable tbody tr:nth-child(2n-1) td:first-child,
+    .standingsTable tbody tr:nth-child(2n-1) td:last-child {
         border-radius: 0px;
     }
-    .standingsTable td:first-child, .standingsTable th:first-child {
+
+    .standingsTable td:first-child,
+    .standingsTable th:first-child {
         padding-left: 16px;
     }
-    .standingsTable td:last-child, .standingsTable th:last-child {
+
+    .standingsTable td:last-child,
+    .standingsTable th:last-child {
         padding-right: 16px;
     }
+
     .standingsTable td:last-child {
         border-left: 1px solid rgba(26, 28, 33, 0.1);
     }
+
     .standingsTable tbody td {
         font-weight: 600;
         padding-top: 16px;
         padding-bottom: 16px;
     }
+
     .standingsTable tbody td:first-child {
         font-weight: 400;
         font-size: 12px;
         line-height: 14px;
         color: rgba(26, 28, 33, 0.7);
     }
-    .standingsTable th {        
+
+    .standingsTable th {
         font-size: 15px;
         line-height: 18px;
     }
+
     .teamCell span {
         gap: 8px;
     }
+
     .scorersFilter {
         margin-left: 16px;
         margin-right: 16px;
         gap: 12px;
     }
+
     .filtersMobile {
         display: flex;
         gap: 10px;
@@ -302,13 +363,16 @@
         margin-right: 16px;
         margin-bottom: 16px;
     }
+
     .filterBtnMobile {
         width: 100%;
     }
-    .filterBtnMobile > button {
+
+    .filterBtnMobile>button {
         width: 100%;
         justify-content: center;
     }
+
     .resetBtnM {
         background: rgba(26, 28, 33, 0.3);
         border-radius: 8px;
@@ -326,37 +390,49 @@
         line-height: 18px;
         color: #FFFFFF;
     }
-    .topScorersTable td:first-child, .topScorersTable th:first-child {
+
+    .topScorersTable td:first-child,
+    .topScorersTable th:first-child {
         padding-left: 16px;
     }
-    .topScorersTable td:last-child, .topScorersTable th:last-child {        
+
+    .topScorersTable td:last-child,
+    .topScorersTable th:last-child {
         padding-right: 16px;
     }
+
     .topScorers th {
         background: none;
     }
-    .topScorersTable > tbody > tr:nth-child(2n) > td {
+
+    .topScorersTable>tbody>tr:nth-child(2n)>td {
         background: none;
     }
-    .topScorersTable > tbody > tr:nth-child(2n+1) > td {
+
+    .topScorersTable>tbody>tr:nth-child(2n+1)>td {
         background: rgba(242, 242, 242, 0.3);
     }
+
     .teamHead {
-        text-align: center!important;
-        color: #1A1C21!important;
-        font-size: 15px!important;
-        line-height: 18px!important;
+        text-align: center !important;
+        color: #1A1C21 !important;
+        font-size: 15px !important;
+        line-height: 18px !important;
     }
+
     .topScorersTable td:last-child {
         border-left: 1px solid rgba(26, 28, 33, 0.1);
     }
+
     .topScorersTable .teamCell {
         font-weight: 600;
     }
-    .topScorers tbody td {        
+
+    .topScorers tbody td {
         padding-top: 16px;
         padding-bottom: 16px;
     }
+
     .topScorersTable tbody td:first-child {
         font-size: 12px;
         line-height: 14px;
