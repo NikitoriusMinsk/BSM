@@ -326,7 +326,10 @@ const SportModal: React.FC<{ onClose: () => void }> = (props) => {
 					/>
 					<div className={styles.items}>
 						{sports.map((sport) => (
-							<div className={styles.item}>
+							<div
+								className={styles.item}
+								key={sport.id}
+							>
 								<Image
 									src={sport.image}
 									height={40}
@@ -394,7 +397,10 @@ const ClubModal: React.FC<{ onClose: () => void }> = (props) => {
 					/>
 					<div className={styles.items}>
 						{clubs.map((club) => (
-							<div className={styles.item}>
+							<div
+								className={styles.item}
+								key={club.id}
+							>
 								<Image
 									src={club.image}
 									height={40}
@@ -462,7 +468,10 @@ const CountryModal: React.FC<{ onClose: () => void }> = (props) => {
 					/>
 					<div className={styles.items}>
 						{countries.map((country) => (
-							<div className={styles.item}>
+							<div
+								className={styles.item}
+								key={country.id}
+							>
 								<Image
 									src={country.image}
 									height={40}
