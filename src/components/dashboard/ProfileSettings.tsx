@@ -40,8 +40,8 @@ const ProfileSettings: React.FC = () => {
 							<div className={styles.avatar}>
 								<Image
 									src="/images/profile-placeholder.png"
-									height={140}
-									width={140}
+									height={160}
+									width={160}
 									alt=""
 								/>
 							</div>
