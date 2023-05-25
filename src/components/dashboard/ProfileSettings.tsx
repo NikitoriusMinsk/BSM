@@ -5,11 +5,14 @@ import { trpc } from "src/utils/trpc";
 import { AnimatePresence, motion } from "framer-motion";
 import PasswordField from "@components/ui/PasswordField";
 import Dropdown from "@components/ui/Dropdown";
+import TextField from "@components/ui/TextField";
 
 const ProfileSettings: React.FC = () => {
 	const { data, isLoading } = trpc.user.getInfo.useQuery();
 	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
-	const [isSportModalOpen, setIsSportModalOpen] = useState(false);
+	const [isSportModalOpen, setIsSportModalOpen] = useState<
+		"sport" | "country" | "club" | false
+	>(false);
 
 	if (isLoading) {
 		return <div>Loading...</div>;
@@ -25,8 +28,14 @@ const ProfileSettings: React.FC = () => {
 				{isPasswordModalOpen && (
 					<PasswordModal onClose={() => setIsPasswordModalOpen(false)} />
 				)}
-				{isSportModalOpen && (
+				{isSportModalOpen === "sport" && (
 					<SportModal onClose={() => setIsSportModalOpen(false)} />
+				)}
+				{isSportModalOpen === "country" && (
+					<CountryModal onClose={() => setIsSportModalOpen(false)} />
+				)}
+				{isSportModalOpen === "club" && (
+					<ClubModal onClose={() => setIsSportModalOpen(false)} />
 				)}
 			</AnimatePresence>
 			<>
@@ -92,17 +101,6 @@ const ProfileSettings: React.FC = () => {
 				>
 					<div className={styles.header}>
 						<h2>Sport Details</h2>
-						<div
-							className={styles.edit}
-							onClick={() => setIsSportModalOpen(true)}
-						>
-							<Image
-								src="/icons/pencil.svg"
-								height={18}
-								width={18}
-								alt=""
-							/>
-						</div>
 					</div>
 					<div className={styles.content}>
 						<div className={styles.sportBlockMain}>
@@ -114,7 +112,20 @@ const ProfileSettings: React.FC = () => {
 									alt=""
 								/>
 							</div>
-							<span className={styles.name}>{data.sport.name}</span>
+							<span className={styles.name}>
+								<span>{data.sport.name}</span>
+								<div
+									className={styles.edit}
+									onClick={() => setIsSportModalOpen("sport")}
+								>
+									<Image
+										src="/icons/pencil.svg"
+										height={18}
+										width={18}
+										alt=""
+									/>
+								</div>
+							</span>
 						</div>
 						<div className={styles.sportBlock}>
 							<span className={styles.label}>Club</span>
@@ -129,6 +140,18 @@ const ProfileSettings: React.FC = () => {
 								</div>
 								<span className={styles.name}>{data.club.name}</span>
 							</div>
+							<div
+								className={styles.edit}
+								onClick={() => setIsSportModalOpen("club")}
+							>
+								<span>Edit</span>
+								<Image
+									src="/icons/pencil.svg"
+									height={18}
+									width={18}
+									alt=""
+								/>
+							</div>
 						</div>
 						<div className={styles.sportBlock}>
 							<span className={styles.label}>Country</span>
@@ -142,6 +165,18 @@ const ProfileSettings: React.FC = () => {
 									/>
 								</div>
 								<span className={styles.name}>{data.country.name}</span>
+							</div>
+							<div
+								className={styles.edit}
+								onClick={() => setIsSportModalOpen("club")}
+							>
+								<span>Edit</span>
+								<Image
+									src="/icons/pencil.svg"
+									height={18}
+									width={18}
+									alt=""
+								/>
 							</div>
 						</div>
 					</div>
@@ -245,16 +280,12 @@ const PasswordModal: React.FC<{ onClose: () => void }> = (props) => {
 const SportModal: React.FC<{ onClose: () => void }> = (props) => {
 	const { onClose } = props;
 	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
-	const { data: clubs, isLoading: clubsLoading } =
-		trpc.filters.getSportClubs.useQuery();
-	const { data: countries, isLoading: countriesLoading } =
-		trpc.filters.getCountries.useQuery();
 
-	if (sportsLoading || clubsLoading || countriesLoading) {
+	if (sportsLoading) {
 		return <></>;
 	}
 
-	if (!sports || !clubs || !countries) {
+	if (!sports) {
 		return <></>;
 	}
 
@@ -268,7 +299,7 @@ const SportModal: React.FC<{ onClose: () => void }> = (props) => {
 		>
 			<div className={styles.modal}>
 				<div className={styles.header}>
-					<span>Sport Details</span>
+					<span>Sport</span>
 					<div
 						className={styles.close}
 						onClick={onClose}
@@ -282,57 +313,166 @@ const SportModal: React.FC<{ onClose: () => void }> = (props) => {
 					</div>
 				</div>
 				<div className={styles.content}>
-					<Dropdown
-						items={sports.map((item) => ({
-							name: item.name,
-							id: item.id,
-							label: (
-								<Image
-									src={item.image}
-									height={34}
-									width={34}
-									alt=""
-								/>
-							),
-						}))}
-						onSelect={() => {}}
-						label="Sport"
-						searchable={true}
+					<Image
+						src="/"
+						height={80}
+						width={80}
+						alt=""
 					/>
-					<Dropdown
-						items={clubs.map((item) => ({
-							name: item.name,
-							id: item.id,
-							label: (
-								<Image
-									src={item.image}
-									height={34}
-									width={34}
-									alt=""
-								/>
-							),
-						}))}
-						onSelect={() => {}}
-						label="Club"
-						searchable={true}
+					<TextField
+						placeholder="Search"
+						icon="/icons/search.svg"
+						minWidth={"100%"}
 					/>
-					<Dropdown
-						items={countries.map((item) => ({
-							name: item.name,
-							id: item.id,
-							label: (
+					<div className={styles.items}>
+						{sports.map((sport) => (
+							<div className={styles.item}>
 								<Image
-									src={item.image}
-									height={34}
-									width={34}
-									alt=""
+									src={sport.image}
+									height={40}
+									width={40}
+									alt={sport.name}
 								/>
-							),
-						}))}
-						onSelect={() => {}}
-						label="Country"
-						searchable={true}
+								<span>{sport.name}</span>
+							</div>
+						))}
+					</div>
+				</div>
+				<button>Save</button>
+			</div>
+		</motion.div>
+	);
+};
+
+const ClubModal: React.FC<{ onClose: () => void }> = (props) => {
+	const { onClose } = props;
+	const { data: clubs, isLoading: clubsLoading } =
+		trpc.filters.getSportClubs.useQuery();
+
+	if (clubsLoading) {
+		return <></>;
+	}
+
+	if (!clubs) {
+		return <></>;
+	}
+
+	return (
+		<motion.div
+			className={styles.modalContainer}
+			variants={ModalVariants}
+			initial="closed"
+			animate="open"
+			exit="closed"
+		>
+			<div className={styles.modal}>
+				<div className={styles.header}>
+					<span>Club</span>
+					<div
+						className={styles.close}
+						onClick={onClose}
+					>
+						<Image
+							src="/icons/close.svg"
+							height={24}
+							width={24}
+							alt=""
+						/>
+					</div>
+				</div>
+				<div className={styles.content}>
+					<Image
+						src="/"
+						height={80}
+						width={80}
+						alt=""
 					/>
+					<TextField
+						placeholder="Search"
+						icon="/icons/search.svg"
+						minWidth={"100%"}
+					/>
+					<div className={styles.items}>
+						{clubs.map((club) => (
+							<div className={styles.item}>
+								<Image
+									src={club.image}
+									height={40}
+									width={40}
+									alt={club.name}
+								/>
+								<span>{club.name}</span>
+							</div>
+						))}
+					</div>
+				</div>
+				<button>Save</button>
+			</div>
+		</motion.div>
+	);
+};
+
+const CountryModal: React.FC<{ onClose: () => void }> = (props) => {
+	const { onClose } = props;
+	const { data: countries, isLoading: countriesLoading } =
+		trpc.filters.getCountries.useQuery();
+
+	if (countriesLoading) {
+		return <></>;
+	}
+
+	if (!countries) {
+		return <></>;
+	}
+
+	return (
+		<motion.div
+			className={styles.modalContainer}
+			variants={ModalVariants}
+			initial="closed"
+			animate="open"
+			exit="closed"
+		>
+			<div className={styles.modal}>
+				<div className={styles.header}>
+					<span>Country</span>
+					<div
+						className={styles.close}
+						onClick={onClose}
+					>
+						<Image
+							src="/icons/close.svg"
+							height={24}
+							width={24}
+							alt=""
+						/>
+					</div>
+				</div>
+				<div className={styles.content}>
+					<Image
+						src="/"
+						height={80}
+						width={80}
+						alt=""
+					/>
+					<TextField
+						placeholder="Search"
+						icon="/icons/search.svg"
+						minWidth={"100%"}
+					/>
+					<div className={styles.items}>
+						{countries.map((country) => (
+							<div className={styles.item}>
+								<Image
+									src={country.image}
+									height={40}
+									width={40}
+									alt={country.name}
+								/>
+								<span>{country.name}</span>
+							</div>
+						))}
+					</div>
 				</div>
 				<button>Save</button>
 			</div>
