@@ -18,6 +18,7 @@
     grid-column-start: 4;
     grid-column-end: 13;
     margin-top: 20px;
+    max-height: 150px;
 }
 
 #followers .info {
@@ -242,6 +243,7 @@
     #followers {
         flex-direction: column;
         grid-column-start: 1;
+        max-height: unset;
     }
 
     #followers .info {
