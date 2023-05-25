@@ -145,6 +145,30 @@ const Navigation: React.FC<{
 	return (
 		<div className={styles.navigation}>
 			<div className={styles.userInfo}>
+				<div className={styles.club}>
+					<div>
+						<h4>Club</h4>
+						<span>FCB</span>
+					</div>
+					<Image
+						src={"/images/league-placeholder.png"}
+						height={36}
+						width={36}
+						alt=""
+					/>
+				</div>
+				<div className={styles.country}>
+					<div>
+						<h4>Country</h4>
+						<span>Georgia</span>
+					</div>
+					<Image
+						src={"/images/country-placeholder.svg"}
+						height={36}
+						width={36}
+						alt=""
+					/>
+				</div>
 				<div className={styles.user}>
 					<div
 						className={`${styles.avatar} ${
@@ -161,12 +185,6 @@ const Navigation: React.FC<{
 					<div className={styles.details}>
 						<span className={styles.name}>{userInfo.name}</span>
 						<span className={styles.rank}>
-							<Image
-								src="/icons/star.svg"
-								height={16}
-								width={16}
-								alt=""
-							/>
 							<span>
 								Rank <b>{userInfo.rank}</b>
 							</span>

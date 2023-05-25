@@ -116,6 +116,15 @@
     align-items: center;
 }
 
+.header .controls .tracking {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #1a1c21cc;
+}
+
 .header .controls .track,
 .header .controls .share {
     cursor: pointer;
@@ -638,7 +647,8 @@
         display: none;
     }
 
-    .header .user .avatar, .header .user .avatar * {
+    .header .user .avatar,
+    .header .user .avatar * {
         width: 34px;
         height: 34px;
     }
@@ -684,7 +694,8 @@
         width: 100%;
     }
 
-    .outcome, .profit {
+    .outcome,
+    .profit {
         padding: 10px 12px;
         background: rgba(242, 242, 242, 0.3);
         border-radius: 8px;
@@ -717,7 +728,8 @@
         padding: 0;
     }
 
-    .commentContainer .comment .avatar, .commentContainer .comment .avatar * {
+    .commentContainer .comment .avatar,
+    .commentContainer .comment .avatar * {
         width: 42px;
         height: 42px;
     }
@@ -730,7 +742,8 @@
         gap: 12px;
     }
 
-    .commentContainer .comment .info .name, .commentContainer .comment .info .text {
+    .commentContainer .comment .info .name,
+    .commentContainer .comment .info .text {
         font-size: 15px;
         line-height: 18px;
     }
