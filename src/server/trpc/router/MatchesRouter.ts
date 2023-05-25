@@ -376,6 +376,7 @@ const MatchTips = [
 			name: "John Doe",
 			winrate: 0.53,
 			subscribed: false,
+			paid: false
 		},
 		info: {
 			tracking: true,
@@ -481,6 +482,7 @@ const MatchTips = [
 			name: "Jane Doe",
 			winrate: 0.43,
 			subscribed: false,
+			paid: false
 		},
 		info: {
 			tracking: true,
@@ -559,6 +561,43 @@ const MatchTips = [
 				},
 			],
 		},
+	},
+	{
+		date: getOffsetDate(-3, 0, 0),
+		author: {
+			image: "/images/profile-placeholder.png",
+			name: "Jane Doe",
+			winrate: 0.43,
+			subscribed: false,
+			paid: true
+		},
+		info: {
+			tracking: false,
+			match: {
+				teams: [
+					{
+						name: "EIN",
+						score: 2,
+						image: "/images/team-1-placeholder.svg",
+					},
+					{
+						name: "FCB",
+						score: 0,
+						image: "/images/team-2-placeholder.svg",
+					},
+				],
+				date: getOffsetDate(2, 0, 0),
+				league: "Bundesliga",
+				sport: {
+					name: "Football",
+					image: "/images/sport-placeholder.png",
+				},
+			},
+			
+			liked: false,
+			like_count: 31,
+			comments:[]
+		}
 	},
 ];
 

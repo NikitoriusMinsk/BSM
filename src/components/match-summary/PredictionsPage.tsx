@@ -8,7 +8,7 @@ import Prediction from '@components/ui/Prediction'
 
 const PredictionsPage: React.FC = () => {
     const { data, isLoading } = trpc.matches.getMatchTips.useQuery()
-
+    console.log(data)
     return (
         <div className={styles.pageContainer}>
             <div className={styles.filter}>
