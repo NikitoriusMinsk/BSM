@@ -54,9 +54,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    width: 40px;
     border-radius: 100%;
+    padding: 5px;
     border: 3px solid rgba(26, 28, 33, 0.1);
 }
 
@@ -159,15 +158,15 @@
 .teamImages .teamImage:not(:first-child) {
     margin-left: -10px;
     z-index: +1;
+    outline: 2px solid #fff;
 }
 
 .teamImage {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
     border-radius: 100%;
+    padding: 5px;
     border: 3px solid #E8E8E9;
     background-color: #FFFFFF;
 }
@@ -275,8 +274,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    padding: 1px;
     border-radius: 100%;
     border: 3px solid #E8E8E9;
     background-color: #FFFFFF;

@@ -36,8 +36,8 @@ const Predictions: React.FC<PredictionsProps> = (props) => {
 						<div className={styles.image}>
 							<Image
 								src={league.image}
-								height={30}
-								width={30}
+								height={28}
+								width={28}
 								alt={league.name}
 							/>
 						</div>
@@ -100,8 +100,8 @@ const Match: React.FC<MatchType> = (props) => {
 								<Image
 									src={team.image}
 									alt={team.name}
-									width={30}
-									height={30}
+									width={22}
+									height={22}
 								/>
 							</div>
 						))}
@@ -119,9 +119,8 @@ const Match: React.FC<MatchType> = (props) => {
 				</div>
 				<div className={styles.details}>
 					<div
-						className={`${styles.total} ${
-							isOpen ? styles.open : styles.closed
-						}`}
+						className={`${styles.total} ${isOpen ? styles.open : styles.closed
+							}`}
 						onClick={() => setIsOpen(!isOpen)}
 					>
 						{predictions.length} Tip
@@ -151,8 +150,8 @@ const Match: React.FC<MatchType> = (props) => {
 									<Image
 										src={prediction.user.image}
 										alt={prediction.user.name}
-										width={30}
-										height={30}
+										width={34}
+										height={34}
 									/>
 								</div>
 								<div className={styles.userInfo}>
@@ -181,9 +180,9 @@ const Match: React.FC<MatchType> = (props) => {
 								style={
 									prediction.type == "Paid"
 										? {
-												color: "#7F3FFC",
-												fontWeight: 500,
-										  }
+											color: "#7F3FFC",
+											fontWeight: 500,
+										}
 										: {}
 								}
 							>
