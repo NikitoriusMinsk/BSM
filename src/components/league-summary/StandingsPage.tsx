@@ -225,22 +225,19 @@ const TopScorersTable: React.FC = () => {
                     <>
                         <div className={styles.scorersFilter}>
                             <Dropdown
-                                items={[]}
+                                items={[{ id: '0', name: 'All' }, { id: '1', name: '1' }, { id: '2', name: '2' }]}
                                 onSelect={() => { }}
                                 label="Team"
-                                searchable={true}
                             />
                             <Dropdown
-                                items={[]}
+                                items={[{ id: '0', name: 'All' }, { id: '1', name: '1' }, { id: '2', name: '2' }]}
                                 onSelect={() => { }}
                                 label="Position"
-                                searchable={true}
                             />
                             <Dropdown
-                                items={[]}
+                                items={[{ id: '0', name: 'All' }, { id: '1', name: '1' }, { id: '2', name: '2' }]}
                                 onSelect={() => { }}
                                 label="Nationality"
-                                searchable={true}
                             />
                         </div>
                         <table
