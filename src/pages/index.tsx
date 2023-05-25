@@ -98,12 +98,12 @@ const Home: NextPage = () => {
 					h3="Top Leagues"
 					h2="Football Leagues"
 					items={filters}
-					onChange={(id) => {}}
+					onChange={(id) => { }}
 				/>
 				<Filter
 					h3="Leagues"
 					items={filters}
-					onChange={(id) => {}}
+					onChange={(id) => { }}
 				/>
 			</div>
 			<DisaperingContainer
@@ -310,8 +310,8 @@ const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
 										<Image
 											src={tipster.image}
 											alt={tipster.name}
-											width={30}
-											height={30}
+											width={36}
+											height={36}
 										/>
 									</div>
 									<span className={styles.topTipsterName}>
