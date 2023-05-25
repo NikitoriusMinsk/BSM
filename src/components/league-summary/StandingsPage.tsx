@@ -12,7 +12,7 @@ import usePortal from "src/utils/usePortal";
 import { PortalContext } from "src/utils/portalContext";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
-	ssr: false,
+    ssr: false,
 });
 
 const StandingsPage: React.FC = () => {
@@ -21,7 +21,7 @@ const StandingsPage: React.FC = () => {
 
     const changeTable = (
         item: {
-            id: string | number, 
+            id: string | number,
             name: string
         }
     ) => {
@@ -40,29 +40,29 @@ const StandingsPage: React.FC = () => {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.filter}>
-                <StandingsFilter 
+                <StandingsFilter
                     items={[
                         {
-                            id:'1', 
-                            name:"Standings"
+                            id: '1',
+                            name: "Standings"
                         },
                         {
-                            id:'2', 
-                            name:"Forms"
+                            id: '2',
+                            name: "Forms"
                         },
                         {
-                            id:'3', 
-                            name:"Over/Under"
+                            id: '3',
+                            name: "Over/Under"
                         },
                         {
-                            id:'4', 
-                            name:"HT/FT"
+                            id: '4',
+                            name: "HT/FT"
                         },
                         {
-                            id:'5', 
-                            name:"Top Scorers"
+                            id: '5',
+                            name: "Top Scorers"
                         }
-                    ]} 
+                    ]}
                     onSelect={changeTable}
                 />
             </div>
@@ -72,7 +72,7 @@ const StandingsPage: React.FC = () => {
                     initial={{ y: 10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -10, opacity: 0 }}
-                    transition={{ duration: 0.2, ease:'easeInOut' }}
+                    transition={{ duration: 0.2, ease: 'easeInOut' }}
                 >
                     {selectedTableComponent}
                 </motion.div>
@@ -87,118 +87,129 @@ const StandingsTable: React.FC = () => {
 
     return (
         <>
-        {width <= 600 ? 
-            <table 
-                className={styles.standingsTable} 
-                cellPadding={10} 
-                cellSpacing={0}
-            >
-                <colgroup>
-                    <col width="25" />
-                    <col width="50%" />
-                    <col width="50%" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th className={styles.teamHead}>Team</th>
-                        <th>
-                            <StandigsMenuColumn
-                                items={[{id:'1', value:'MP'}, {id:'2', value:'Wins'}, {id:'3', value:'Draws'}, {id:'4', value:'Loses'}]}
-                                onSelect={setSelectedCol}
-                            />
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {[1,1,1,1,1,1,1,1,1].map((item,index) => (
-                        <tr key={index}>
-                            <td>1</td>
-                            <td className={styles.teamCell}>
-                                <span>
-                                    <div className={styles.teamLogo}>
-                                        <Image 
-                                            src="/testimg/club1.png"
-                                            width={20}
-                                            height={20}
-                                            style={{objectFit:'contain'}}
-                                            alt=""
-                                        />
-                                    </div>
-                                    Team Name
-                                </span>
-                            </td>
-                            <td>selected</td>
+            {width <= 600 ?
+                <table
+                    className={styles.standingsTable}
+                    cellPadding={10}
+                    cellSpacing={0}
+                >
+                    <colgroup>
+                        <col width="25" />
+                        <col width="50%" />
+                        <col width="50%" />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th className={styles.teamHead}>Team</th>
+                            <th>
+                                <StandigsMenuColumn
+                                    items={[{ id: '1', value: 'MP' }, { id: '2', value: 'Wins' }, { id: '3', value: 'Draws' }, { id: '4', value: 'Loses' }]}
+                                    onSelect={setSelectedCol}
+                                />
+                            </th>
                         </tr>
-                    ))}                    
-                </tbody>               
-            </table>
-            :
-            <table 
-                className={styles.standingsTable} 
-                cellPadding={10} 
-                cellSpacing={0}
-            >
-                <colgroup>
-                    <col width="50" />
-                    <col width="" />
-                    <col width="50" />
-                    <col width="50" />
-                    <col width="50" />
-                    <col width="50" />
-                    <col width="50" />
-                    <col width="50" />
-                    <col width="60" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th className={styles.teamHead}>Team</th>
-                        <th>MP</th>
-                        <th>W</th>
-                        <th>D</th>
-                        <th>L</th>
-                        <th>G</th>
-                        <th className={styles.boldCell}>PTS</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {[1,1,1,1,1,1,1,1,1].map((item,index) => (
-                        <tr key={index}>
-                            <td>1</td>
-                            <td className={styles.teamCell}>
-                                <span>
-                                    <div className={styles.teamLogo}>
-                                        <Image 
-                                            src="/testimg/club1.png"
-                                            width={20}
-                                            height={20}
-                                            style={{objectFit:'contain'}}
-                                            alt=""
-                                        />
-                                    </div>
-                                    Team Name
-                                </span>
-                            </td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>
-                                <div className={styles.questionBox}>
-                                    ?
-                                </div>
-                            </td>
+                    </thead>
+                    <tbody>
+                        {[1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
+                            <tr key={index}>
+                                <td>1</td>
+                                <td className={styles.teamCell}>
+                                    <span>
+                                        <div className={styles.teamLogo}>
+                                            <Image
+                                                src="/testimg/club1.png"
+                                                width={20}
+                                                height={20}
+                                                style={{ objectFit: 'contain' }}
+                                                alt=""
+                                            />
+                                        </div>
+                                        Team Name
+                                    </span>
+                                </td>
+                                <td>selected</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                :
+                <table
+                    className={styles.standingsTable}
+                    cellPadding={10}
+                    cellSpacing={0}
+                >
+                    <colgroup>
+                        <col width="50" />
+                        <col width="" />
+                        <col width="50" />
+                        <col width="50" />
+                        <col width="50" />
+                        <col width="50" />
+                        <col width="50" />
+                        <col width="50" />
+                        <col width="60" />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th className={styles.teamHead}>Team</th>
+                            <th>MP</th>
+                            <th>W</th>
+                            <th>D</th>
+                            <th>L</th>
+                            <th>G</th>
+                            <th className={styles.boldCell}>PTS</th>
+                            <th>Form</th>
                         </tr>
-                    ))}                    
-                </tbody>               
-            </table>
-        }
+                    </thead>
+                    <tbody>
+                        {[1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
+                            <tr key={index}>
+                                <td>1</td>
+                                <td className={styles.teamCell}>
+                                    <span>
+                                        <div className={styles.teamLogo}>
+                                            <Image
+                                                src="/testimg/club1.png"
+                                                width={20}
+                                                height={20}
+                                                style={{ objectFit: 'contain' }}
+                                                alt=""
+                                            />
+                                        </div>
+                                        Team Name
+                                    </span>
+                                </td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td className={styles.boldCell}>1</td>
+                                <td>
+                                    <div className={styles.form}>
+                                        <div className={styles.questionBox}>
+                                            ?
+                                        </div>
+                                        <div className={styles.winBox}>
+                                            W
+                                        </div>
+                                        <div className={styles.loseBox}>
+                                            L
+                                        </div>
+                                        <div className={styles.drawBox}>
+                                            D
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            }
         </>
-    )    
+    )
 }
 
 const TopScorersTable: React.FC = () => {
@@ -210,31 +221,31 @@ const TopScorersTable: React.FC = () => {
         <PortalContext.Provider value={{ portalNode }}>
             {portalNode && <OutPortal node={portalNode} />}
             <div className={styles.topScorers}>
-                {width>600 ? 
+                {width > 600 ?
                     <>
                         <div className={styles.scorersFilter}>
                             <Dropdown
-		    	            	items={[]}
-		    	            	onSelect={() => {}}
-		    	            	label="Team"
-		    	            	searchable={true}
-		    	            />
+                                items={[]}
+                                onSelect={() => { }}
+                                label="Team"
+                                searchable={true}
+                            />
                             <Dropdown
-		    	            	items={[]}
-		    	            	onSelect={() => {}}
-		    	            	label="Position"
-		    	            	searchable={true}
-		    	            />
+                                items={[]}
+                                onSelect={() => { }}
+                                label="Position"
+                                searchable={true}
+                            />
                             <Dropdown
-		    	            	items={[]}
-		    	            	onSelect={() => {}}
-		    	            	label="Nationality"
-		    	            	searchable={true}
-		    	            />
+                                items={[]}
+                                onSelect={() => { }}
+                                label="Nationality"
+                                searchable={true}
+                            />
                         </div>
-                        <table 
-                            className={styles.topScorersTable} 
-                            cellPadding={10} 
+                        <table
+                            className={styles.topScorersTable}
+                            cellPadding={10}
                             cellSpacing={0}
                         >
                             <colgroup>
@@ -254,17 +265,17 @@ const TopScorersTable: React.FC = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {[1,1,1,1,1,1,1,1,1].map((item,index) => (
+                                {[1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
                                     <tr key={index}>
                                         <td>1</td>
                                         <td className={styles.teamCell}>
                                             <span>
                                                 <div className={styles.teamLogo}>
-                                                    <Image 
+                                                    <Image
                                                         src="/testimg/club1.png"
                                                         width={20}
                                                         height={20}
-                                                        style={{objectFit:'contain'}}
+                                                        style={{ objectFit: 'contain' }}
                                                         alt=""
                                                     />
                                                 </div>
@@ -275,8 +286,8 @@ const TopScorersTable: React.FC = () => {
                                         <td>1</td>
                                         <td>1</td>
                                     </tr>
-                                ))}                    
-                            </tbody>               
+                                ))}
+                            </tbody>
                         </table>
                     </>
                     :
@@ -284,7 +295,7 @@ const TopScorersTable: React.FC = () => {
                         <div className={styles.filtersMobile}>
                             <div className={styles.filterBtnMobile}>
                                 <FilterModal
-                                    onApply={() => {}}
+                                    onApply={() => { }}
                                     portalNode={portalNode}
                                     filters={[
                                         {
@@ -328,9 +339,9 @@ const TopScorersTable: React.FC = () => {
                             </div>
                             <button className={styles.resetBtnM}>Reset</button>
                         </div>
-                        <table 
-                            className={styles.topScorersTable} 
-                            cellPadding={10} 
+                        <table
+                            className={styles.topScorersTable}
+                            cellPadding={10}
                             cellSpacing={0}
                         >
                             <colgroup>
@@ -344,24 +355,24 @@ const TopScorersTable: React.FC = () => {
                                     <th className={styles.teamHead}>Player</th>
                                     <th>
                                         <StandigsMenuColumn
-                                            items={[{id:'1', value:'Team'}, {id:'2', value:'Goals'}, {id:'3', value:'Assists'}]}
+                                            items={[{ id: '1', value: 'Team' }, { id: '2', value: 'Goals' }, { id: '3', value: 'Assists' }]}
                                             onSelect={setSelectedCol}
                                         />
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {[1,1,1,1,1,1,1,1,1].map((item,index) => (
+                                {[1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
                                     <tr key={index}>
                                         <td>1</td>
                                         <td className={styles.teamCell}>
                                             <span>
                                                 <div className={styles.teamLogo}>
-                                                    <Image 
+                                                    <Image
                                                         src="/testimg/club1.png"
                                                         width={20}
                                                         height={20}
-                                                        style={{objectFit:'contain'}}
+                                                        style={{ objectFit: 'contain' }}
                                                         alt=""
                                                     />
                                                 </div>
@@ -370,14 +381,14 @@ const TopScorersTable: React.FC = () => {
                                         </td>
                                         <td>Club name</td>
                                     </tr>
-                                ))}                    
-                            </tbody>               
+                                ))}
+                            </tbody>
                         </table>
                     </>
                 }
-                
+
             </div>
-        </PortalContext.Provider>        
+        </PortalContext.Provider>
     )
 }
 
