@@ -153,9 +153,9 @@
 .leagueDescription .titles span:first-child {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
     color: #1A1C2199;
 }
 
@@ -163,7 +163,7 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 22px;
     color: #1A1C21;
 }
