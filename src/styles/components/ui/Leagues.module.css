@@ -539,6 +539,18 @@
         align-items: flex-start;
     }
 
+    .matchesOptions button {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .details {
+        gap: 20px;
+    }
+
 }
 
 @media screen and (max-width: 1024px) {
