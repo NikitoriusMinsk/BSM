@@ -84,9 +84,9 @@ const LiveMatch: React.FC<LiveMatchProps> = (props) => {
 						<div className={styles.matchTeamScore}>{team.score}</div>
 					</div>
 				))}
-				<div className={`${styles.matchDuration} ${styles.absolute}`}>
+				{/* <div className={`${styles.matchDuration} ${styles.absolute}`}>
 					{match.duration}
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

@@ -168,7 +168,7 @@ const MatchesPage: NextPage = () => {
 					className={styles.sideColumn}
 					condition={false}
 				>
-					<LiveMatches matches={liveMatches} />
+					<LiveMatches matches={liveMatches.slice(0, 3)} />
 					<Banner
 						height={463}
 						image="/images/banner-placeholder-2.png"
