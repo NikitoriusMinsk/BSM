@@ -226,8 +226,8 @@ const Item: React.FC<ItemType> = (props) => {
 					<div className={styles.image}>
 						<Image
 							src={image}
-							height={30}
-							width={30}
+							height={34}
+							width={34}
 							alt=""
 						/>
 					</div>
