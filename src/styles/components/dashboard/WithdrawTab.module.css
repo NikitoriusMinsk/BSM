@@ -512,6 +512,7 @@
         grid-row-start: 1;
         grid-column-start: 1;
         grid-column-end: 13;
+        height: unset;
     }
 
     #withdrawTotal {
@@ -519,6 +520,7 @@
         grid-column-start: 1;
         grid-column-end: 13;
         flex-direction: row;
+        height: 111px;
     }
 
     #table {
