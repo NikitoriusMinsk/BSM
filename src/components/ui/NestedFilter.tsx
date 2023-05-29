@@ -163,8 +163,8 @@ const Item: React.FC<ItemType> = (props) => {
 					<div className={styles.image}>
 						<Image
 							src={image}
-							height={34}
-							width={34}
+							height={30}
+							width={30}
 							alt=""
 						/>
 					</div>
@@ -199,8 +199,8 @@ const Item: React.FC<ItemType> = (props) => {
 							<div className={styles.image}>
 								<Image
 									src={image}
-									height={34}
-									width={34}
+									height={30}
+									width={30}
 									alt=""
 								/>
 							</div>
