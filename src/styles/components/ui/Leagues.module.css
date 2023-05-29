@@ -17,7 +17,7 @@
 }
 
 .matchLive {
-    padding: 8px 14px 8px 13px;
+    padding: 11px;
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
@@ -26,7 +26,18 @@
     color: #FFFFFF;
     background-color: #CF1F1F;
     border-radius: 4px;
-    text-transform: uppercase;
+}
+
+.matchUpcoming {
+    padding: 11px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+    background-color: #7F3FFC;
+    border-radius: 4px;
 }
 
 .matchesOptions {
@@ -226,7 +237,6 @@
     flex-direction: column;
     justify-content: center;
     gap: 4px;
-    width: 51px;
 }
 
 .time span:first-child {
