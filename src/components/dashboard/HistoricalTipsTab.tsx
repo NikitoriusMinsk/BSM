@@ -85,45 +85,48 @@ const HistoricalTipsTab: React.FC = () => {
 							</div>
 						</>
 					) : (
-						<FilterModal
-							portalNode={portalNode}
-							onApply={() => {}}
-							filters={[
-								{
-									key: "creationDate",
-									type: "buttons",
-									label: "Create Date",
-									items: [
-										{ id: 1, label: "Newest to Oldest" },
-										{ id: 2, label: "Oldest to Newest" },
-									],
-								},
-								{
-									key: "profitability",
-									type: "buttons",
-									label: "Profitability",
-									items: [
-										{ id: 1, label: "Biggest to Lowest" },
-										{ id: 2, label: "Lowest to Biggest" },
-									],
-								},
-								{
-									key: "status",
-									type: "buttons",
-									label: "Status",
-									items: [
-										{ id: 1, label: "All" },
-										{ id: 2, label: "Success" },
-										{ id: 3, label: "Lost" },
-									],
-								},
-								{
-									key: "date",
-									type: "date",
-									label: "Date",
-								},
-							]}
-						/>
+						<>
+							<button className={styles.clear}>Clear</button>
+							<FilterModal
+								portalNode={portalNode}
+								onApply={() => {}}
+								filters={[
+									{
+										key: "creationDate",
+										type: "buttons",
+										label: "Create Date",
+										items: [
+											{ id: 1, label: "Newest to Oldest" },
+											{ id: 2, label: "Oldest to Newest" },
+										],
+									},
+									{
+										key: "profitability",
+										type: "buttons",
+										label: "Profitability",
+										items: [
+											{ id: 1, label: "Biggest to Lowest" },
+											{ id: 2, label: "Lowest to Biggest" },
+										],
+									},
+									{
+										key: "status",
+										type: "buttons",
+										label: "Status",
+										items: [
+											{ id: 1, label: "All" },
+											{ id: 2, label: "Success" },
+											{ id: 3, label: "Lost" },
+										],
+									},
+									{
+										key: "date",
+										type: "date",
+										label: "Date",
+									},
+								]}
+							/>
+						</>
 					)}
 					<div className={`${styles.filter} ${styles.search}`}>
 						<TextField

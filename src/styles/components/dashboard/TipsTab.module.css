@@ -48,6 +48,20 @@
     gap: 40px;
 }
 
+.clear {
+    background-color: #1A1C214D;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 1440px) {
     .filters {
         gap: 30px;
@@ -73,6 +87,7 @@
 @media screen and (max-width: 768px) {
     .filters {
         grid-column-start: 1;
+        flex-direction: row-reverse;
     }
 
     .predictions {
@@ -89,5 +104,9 @@
         flex-direction: row-reverse;
         align-items: center;
         gap: 12px;
+    }
+
+    .clear {
+        display: none;
     }
 }
