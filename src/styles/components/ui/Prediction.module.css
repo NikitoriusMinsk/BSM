@@ -343,6 +343,7 @@
     line-height: 18px;
     color: rgba(26, 28, 33, 0.7);
 }
+
 .paidAcc a {
     color: #7F3FFC;
 }
@@ -351,24 +352,30 @@
     display: flex;
     align-items: flex-end;
 }
+
 .paidPrice span {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
+    /* font is fixed */
     font-size: 15px;
-    line-height: 18px;
+    line-height: 12px;
+    /* font is fixed */
     color: #1A1C21;
-    margin-bottom: 2px;
 }
+
 .paidPrice span:first-child {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
+    /* font is fixed */
     font-size: 24px;
-    line-height: 29px;
+    line-height: 18px;
+    /* font is fixed */
     color: #1A1C21;
     margin-bottom: 0px;
 }
+
 .paidPrice span:last-child {
     font-weight: 400;
 }
