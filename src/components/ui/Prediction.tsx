@@ -27,9 +27,10 @@ const Prediction: React.FC<
 		| PendingPredictions
 		| HistoricalPredictions
 		| MatchPredictions
-	>
+		// this is so dumb, why do i need to remove buttons on the predictions that already have been played just because designers seem to have dementia???
+	> & { withSubscribe?: boolean; withTracking?: boolean }
 > = (props) => {
-	const { author, date, info } = props;
+	const { author, date, info, withSubscribe = true, withTracking = true } = props;
 
 	return (
 		<div className={styles.container}>
@@ -63,29 +64,34 @@ const Prediction: React.FC<
 							<span>Hit Rate {author.winrate * 100}%</span>
 						</div>
 					</div>
-					<button
-						className={`${
-							author.subscribed ? styles.subscribed : styles.subscribe
-						}`}
-					>
-						Subscribe
-					</button>
+					{withSubscribe && (
+						<button
+							className={`${
+								author.subscribed ? styles.subscribed : styles.subscribe
+							}`}
+						>
+							Subscribe
+						</button>
+					)}
 				</div>
 				<div className={styles.controls}>
-					<div className={styles.track}>
-						<Image
-							src={
-								info?.tracking
-									? "/icons/star-filled.svg"
-									: "/icons/star.svg"
-							}
-							height={24}
-							width={24}
-							alt=""
-						/>
-					</div>
-					<span className={styles.tracking}>Tracking: 228</span>
-
+					{withTracking && (
+						<>
+							<div className={styles.track}>
+								<Image
+									src={
+										info?.tracking
+											? "/icons/star-filled.svg"
+											: "/icons/star.svg"
+									}
+									height={24}
+									width={24}
+									alt=""
+								/>
+							</div>
+							<span className={styles.tracking}>Tracking: 228</span>
+						</>
+					)}
 					<div className={styles.share}>
 						<Image
 							src="/icons/share-black.svg"
@@ -167,7 +173,7 @@ const Prediction: React.FC<
 							<div className={styles.separator} />
 						</>
 					)}
-					{(author.subscribed) || (!author.subscribed && !author.paid) ? 
+					{author.subscribed || (!author.subscribed && !author.paid) ? (
 						<div className={styles.outcomes}>
 							<div className={styles.outcome}>
 								<span>Market</span>
@@ -181,7 +187,7 @@ const Prediction: React.FC<
 								<span>Stake</span>
 								<span>{info.stake}</span>
 							</div>
-							{info.bookmaker && 
+							{info.bookmaker && (
 								<div className={styles.bookmaker}>
 									<Image
 										src={info.bookmaker.image}
@@ -189,20 +195,27 @@ const Prediction: React.FC<
 										width={56}
 										alt=""
 									/>
-									<span className={styles.odd}>{info.bookmaker.odd}</span>
+									<span className={styles.odd}>
+										{info.bookmaker.odd}
+									</span>
 								</div>
-							}						
+							)}
 							<div className={styles.profit}>
 								<span
 									className={
 										info.profit?.potential
 											? styles.potential
-											: (info.profit?.amount && (info.profit?.amount > 0))
+											: info.profit?.amount &&
+											  info.profit?.amount > 0
 											? styles.positive
 											: styles.negative
 									}
 								>
-									{info.profit?.potential ? "Potential profit" : (info.profit?.amount && (info.profit?.amount > 0)) ? "Success" : "Lost"}
+									{info.profit?.potential
+										? "Potential profit"
+										: info.profit?.amount && info.profit?.amount > 0
+										? "Success"
+										: "Lost"}
 								</span>
 								<span>$ {info.profit?.amount}</span>
 							</div>
@@ -218,12 +231,12 @@ const Prediction: React.FC<
 								</div>
 							)}
 						</div>
-						:
+					) : (
 						<div className={styles.outcomes}>
 							<div className={styles.paidText}>
 								<span className={styles.paidTip}>
-									<Image 
-										src={'/icons/locked.svg'}
+									<Image
+										src={"/icons/locked.svg"}
 										width={20}
 										height={20}
 										alt=""
@@ -231,22 +244,17 @@ const Prediction: React.FC<
 									Paid tip
 								</span>
 								<span className={styles.paidAcc}>
-									Please subscrie to <a>Gabriel</a> to gain access to the tip
+									Please subscrie to <a>Gabriel</a> to gain access to
+									the tip
 								</span>
 							</div>
 							<div className={styles.paidPrice}>
-								<span>
-									$ 36.
-								</span>
-								<span>
-									50
-								</span>
-								<span>
-									/MO
-								</span>
+								<span>$ 36.</span>
+								<span>50</span>
+								<span>/MO</span>
 							</div>
 						</div>
-					}
+					)}
 					<div className={styles.stats}>
 						<div className={styles.stat}>
 							<Image
@@ -262,50 +270,52 @@ const Prediction: React.FC<
 							<span className={styles.label}>Like</span>
 							<span>{info.like_count}</span>
 						</div>
-						{(author.subscribed) || (!author.subscribed && !author.paid) && 
-							<div className={styles.stat}>
-								<Image
-									src="/icons/comment.svg"
-									height={24}
-									width={24}
-									alt=""
-								/>
-								<span className={styles.label}>Comments</span>
-								<span>{info.comment_count}</span>
-							</div>
-						}
+						{author.subscribed ||
+							(!author.subscribed && !author.paid && (
+								<div className={styles.stat}>
+									<Image
+										src="/icons/comment.svg"
+										height={24}
+										width={24}
+										alt=""
+									/>
+									<span className={styles.label}>Comments</span>
+									<span>{info.comment_count}</span>
+								</div>
+							))}
 					</div>
-					{(author.subscribed) || (!author.subscribed && !author.paid) && 
-						<div className={styles.commentsContainer}>
-							<div className={styles.comments}>
-								<h3>Comments</h3>
-								<div className={styles.commentsList}>
-									{info.comments?.map((comment, index) => (
-										<Comment
-											{...comment}
-											key={`comment_${index}`}
-										/>
-									))}
-								</div>
-								<div className={styles.input}>
-									<div className={styles.avatar}>
-										<Image
-											src="/images/profile-placeholder.png"
-											height={46}
-											width={46}
-											alt=""
-										/>
+					{author.subscribed ||
+						(!author.subscribed && !author.paid && (
+							<div className={styles.commentsContainer}>
+								<div className={styles.comments}>
+									<h3>Comments</h3>
+									<div className={styles.commentsList}>
+										{info.comments?.map((comment, index) => (
+											<Comment
+												{...comment}
+												key={`comment_${index}`}
+											/>
+										))}
 									</div>
-									<div className={styles.textField}>
-										<TextField
-											placeholder="Write a comment"
-											icon="/icons/send.svg"
-										/>
+									<div className={styles.input}>
+										<div className={styles.avatar}>
+											<Image
+												src="/images/profile-placeholder.png"
+												height={46}
+												width={46}
+												alt=""
+											/>
+										</div>
+										<div className={styles.textField}>
+											<TextField
+												placeholder="Write a comment"
+												icon="/icons/send.svg"
+											/>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					}					
+						))}
 				</div>
 			)}
 		</div>

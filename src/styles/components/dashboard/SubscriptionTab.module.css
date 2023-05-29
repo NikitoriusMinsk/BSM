@@ -288,6 +288,15 @@
     #table {
         grid-column-start: 1;
     }
+
+    #subscribers .text h3 {
+        font-size: 18px;
+    }
+
+    #subscribers .search {
+        width: 312px;
+        flex: unset;
+    }
 }
 
 @media screen and (max-width: 425px) {

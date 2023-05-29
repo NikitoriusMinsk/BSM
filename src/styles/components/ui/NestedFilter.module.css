@@ -38,8 +38,8 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 16px;
+    line-height: 19px;
     color: #1A1C2180;
 }
 
@@ -47,8 +47,8 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 28px;
+    line-height: 34px;
     color: #1A1C21;
 }
 
@@ -112,8 +112,8 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 15px;
-    line-height: 18px;
+    font-size: 16px;
+    line-height: 19px;
     color: #1A1C21;
     cursor: pointer;
 }
@@ -122,8 +122,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 28px;
-    width: 28px;
+    padding: 7px 10px;
     border-radius: 8px;
     background-color: #1A1C211A;
     font-family: 'Samsung Sans';
@@ -153,6 +152,7 @@
     overflow: hidden;
     padding-top: 8px;
     padding-left: 52px;
+    padding-right: 6px;
 }
 
 .subItems:before {
@@ -161,8 +161,10 @@
     top: 10px;
     left: 20px;
     height: calc(100% - 30px);
-    width: 1px;
+    width: 20px;
     border-left: 1px solid #1A1C2133;
+    border-bottom: 1px solid #1A1C2133;
+    border-bottom-left-radius: 8px;
 }
 
 .subItem {
@@ -174,7 +176,7 @@
     cursor: pointer;
 }
 
-.subItem:before {
+.subItem:not(:last-child):before {
     content: '';
     position: absolute;
     width: 20px;
@@ -231,4 +233,20 @@
 
 .subItem.active .image {
     border-color: #7F3FFC;
+}
+
+@media screen and (max-width: 1366px) {
+    .header .clear {
+        padding: 12px;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .header {
+        align-items: flex-end;
+    }
+
+    .header h2 {
+        width: 90%;
+    }
 }

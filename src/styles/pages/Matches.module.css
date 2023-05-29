@@ -234,8 +234,27 @@
     }
 
     .sideColumn {
-        grid-row-start: 2;
+        grid-column-start: 4;
+        grid-row-start: 3;
         margin-top: 0;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    .sideColumn>div:nth-child(1) {
+        width: calc(50% - 20px);
+    }
+
+    .sideColumn>div:nth-child(2) {
+        width: calc(50% - 20px);
+    }
+
+    .sideColumn>div:nth-child(3) {
+        width: 100%;
+    }
+
+    .predictions {
+        grid-column-end: 13;
     }
 
 }

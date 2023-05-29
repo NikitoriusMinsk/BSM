@@ -150,7 +150,7 @@ const MatchesByLeague = [
 				],
 				id: 1,
 				date: "2020.01.01 12:00",
-				status: MatchStatus.upcoming,
+				status: MatchStatus.finished,
 				odds: {
 					home: 0.34,
 					draw: 0.17,
@@ -376,7 +376,7 @@ const MatchTips = [
 			name: "John Doe",
 			winrate: 0.53,
 			subscribed: false,
-			paid: false
+			paid: false,
 		},
 		info: {
 			tracking: true,
@@ -482,7 +482,7 @@ const MatchTips = [
 			name: "Jane Doe",
 			winrate: 0.43,
 			subscribed: false,
-			paid: false
+			paid: false,
 		},
 		info: {
 			tracking: true,
@@ -569,7 +569,7 @@ const MatchTips = [
 			name: "Jane Doe",
 			winrate: 0.43,
 			subscribed: false,
-			paid: true
+			paid: true,
 		},
 		info: {
 			tracking: false,
@@ -593,11 +593,11 @@ const MatchTips = [
 					image: "/images/sport-placeholder.png",
 				},
 			},
-			
+
 			liked: false,
 			like_count: 31,
-			comments:[]
-		}
+			comments: [],
+		},
 	},
 ];
 

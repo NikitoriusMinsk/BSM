@@ -7,7 +7,7 @@ import Banner from "@components/ui/Banner";
 import Filter from "@components/ui/Filter";
 import DatePicker from "@components/ui/DatePicker";
 import LiveMatches from "@components/ui/LiveMatches";
-import Matches from "@components/ui/Leagues";
+import Leagues from "@components/ui/Leagues";
 import NestedFilter from "@components/ui/NestedFilter";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import { appRouter } from "src/server/trpc/router/_app";
@@ -159,7 +159,7 @@ const MatchesPage: NextPage = () => {
 					/>
 				</div>
 				<div className={styles.predictions}>
-					<Matches
+					<Leagues
 						leagues={matches}
 						withDatePicker={false}
 					/>
@@ -168,7 +168,7 @@ const MatchesPage: NextPage = () => {
 					className={styles.sideColumn}
 					condition={false}
 				>
-					<LiveMatches matches={liveMatches} />
+					<LiveMatches matches={liveMatches.slice(0, 3)} />
 					<Banner
 						height={463}
 						image="/images/banner-placeholder-2.png"

@@ -17,7 +17,7 @@
 }
 
 .matchLive {
-    padding: 8px 14px 8px 13px;
+    padding: 11px;
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
@@ -26,7 +26,18 @@
     color: #FFFFFF;
     background-color: #CF1F1F;
     border-radius: 4px;
-    text-transform: uppercase;
+}
+
+.matchUpcoming {
+    padding: 11px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+    background-color: #7F3FFC;
+    border-radius: 4px;
 }
 
 .matchesOptions {
@@ -153,9 +164,9 @@
 .leagueDescription .titles span:first-child {
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
     color: #1A1C2199;
 }
 
@@ -163,7 +174,7 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 22px;
     color: #1A1C21;
 }
@@ -226,7 +237,6 @@
     flex-direction: column;
     justify-content: center;
     gap: 4px;
-    width: 51px;
 }
 
 .time span:first-child {
@@ -527,6 +537,18 @@
     .controls {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .matchesOptions button {
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .details {
+        gap: 20px;
     }
 
 }

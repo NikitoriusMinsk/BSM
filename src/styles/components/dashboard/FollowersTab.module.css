@@ -172,6 +172,15 @@
     color: rgba(26, 28, 33, 0.7);
 }
 
+.followersCount {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #1a1c21b3;
+}
+
 .buttonContainer {
     display: flex;
     justify-content: flex-end;
@@ -238,6 +247,15 @@
     #table {
         grid-column-start: 1;
         margin-top: 0;
+    }
+
+    #followers .text h3 {
+        font-size: 18px;
+    }
+
+    #followers .search {
+        width: 312px;
+        flex: unset;
     }
 }
 
