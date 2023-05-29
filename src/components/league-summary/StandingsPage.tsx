@@ -227,17 +227,17 @@ const TopScorersTable: React.FC = () => {
                             <Dropdown
                                 items={[{ id: '0', name: 'All' }, { id: '1', name: '1' }, { id: '2', name: '2' }]}
                                 onSelect={() => { }}
-                                label="Team"
+                                label="Team:"
                             />
                             <Dropdown
                                 items={[{ id: '0', name: 'All' }, { id: '1', name: '1' }, { id: '2', name: '2' }]}
                                 onSelect={() => { }}
-                                label="Position"
+                                label="Position:"
                             />
                             <Dropdown
                                 items={[{ id: '0', name: 'All' }, { id: '1', name: '1' }, { id: '2', name: '2' }]}
                                 onSelect={() => { }}
-                                label="Nationality"
+                                label="Nationality:"
                             />
                         </div>
                         <table

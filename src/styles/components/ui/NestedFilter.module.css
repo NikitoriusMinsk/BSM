@@ -96,6 +96,7 @@
     flex-direction: row;
     gap: 12px;
     align-items: center;
+    cursor: pointer;
 }
 
 .item .info .image {
@@ -172,6 +173,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
 
 .subItem:not(:last-child):before {
@@ -196,6 +198,7 @@
     border: 3px solid #1A1C211A;
     border-radius: 100%;
     transition: all 0.3s ease-in-out;
+    padding: 4px;
 }
 
 .subItem .info .name {

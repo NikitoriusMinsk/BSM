@@ -1,8 +1,8 @@
-.filterItem{
+.filterItem {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 11px 20px;
+    padding: 11px 24px;
     background: #FFFFFF;
     border: 1px solid rgba(26, 28, 33, 0.2);
     border-radius: 8px;
@@ -17,8 +17,9 @@
     line-height: 18px;
     color: #1A1C21;
 }
-.filterActive{
-    background: #7F3FFC!important;
-    border-color: #7F3FFC!important;
-    color: #FFFFFF!important;
+
+.filterActive {
+    background: #7F3FFC !important;
+    border-color: #7F3FFC !important;
+    color: #FFFFFF !important;
 }
