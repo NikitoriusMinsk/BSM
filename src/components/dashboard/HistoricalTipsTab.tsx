@@ -55,12 +55,19 @@ const HistoricalTipsTab: React.FC = () => {
 							{" "}
 							<div className={styles.filter}>
 								<span>STATUS</span>
-								<RadioGroup
-									items={StatusFilterItems}
-									onChange={() => {}}
-									groupName="status"
-									defaultSelected="1"
-								/>
+								{width > 1440 ? (
+									<RadioGroup
+										items={StatusFilterItems}
+										onChange={() => {}}
+										groupName="status"
+										defaultSelected="1"
+									/>
+								) : (
+									<Dropdown
+										items={StatusFilterItems}
+										onSelect={() => {}}
+									/>
+								)}
 							</div>
 							<div className={styles.filter}>
 								<span>CREATE DATE</span>
@@ -130,6 +137,8 @@ const HistoricalTipsTab: React.FC = () => {
 						<Prediction
 							key={`prediction_${index}`}
 							{...prediction}
+							withSubscribe={false}
+							withTracking={false}
 						/>
 					))}
 				</div>
