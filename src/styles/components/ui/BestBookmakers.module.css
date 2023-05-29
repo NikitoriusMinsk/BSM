@@ -53,7 +53,7 @@
 .bestBookmakersList {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
 }
 
 .bestBookmaker {
@@ -110,17 +110,20 @@
 .bestBookmakersList::-webkit-scrollbar {
     display: none;
 }
+
 /* Track */
 .bestBookmakersList::-webkit-scrollbar-track {
     display: none;
 }
+
 /* Handle */
 .bestBookmakersList::-webkit-scrollbar-thumb {
     display: none;
 }
 
 @media screen and (max-width: 768px) {
-    .mobileSlider, 
+
+    .mobileSlider,
     .bestBookmakersList {
         flex-direction: row;
         overflow: scroll;
