@@ -36,7 +36,11 @@ const columns = [
 		header: () => <span>Tipster</span>,
 	}),
 	columnHelper.accessor("follower_count", {
-		cell: (info) => <span>{shortenNumber(info.getValue(), 0)} followers</span>,
+		cell: (info) => (
+			<span className={styles.followersCount}>
+				{shortenNumber(info.getValue(), 0)} followers
+			</span>
+		),
 	}),
 	columnHelper.accessor("following", {
 		cell: (info) => {
