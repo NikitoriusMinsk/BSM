@@ -231,3 +231,19 @@
 .subItem.active .image {
     border-color: #7F3FFC;
 }
+
+@media screen and (max-width: 1366px) {
+    .header .clear {
+        padding: 12px;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .header {
+        align-items: flex-end;
+    }
+
+    .header h2 {
+        width: 90%;
+    }
+}
