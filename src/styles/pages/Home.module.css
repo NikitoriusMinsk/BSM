@@ -314,11 +314,12 @@
     height: 70px;
     width: 70px;
     border-radius: 100%;
-    border: 3px solid #fff;
+    border: 2px solid #fff;
     outline: 3px solid #e8e8e8;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .topThreeTipsters .topTipsterImage::after {
@@ -344,8 +345,8 @@
 .topTipster:first-child .topTipsterImage::after {
     content: '2';
     position: absolute;
-    right: -5px;
-    top: -5px;
+    right: -8px;
+    top: -8px;
     height: 20px;
     width: 20px;
     background-color: #e8e8e8;
@@ -366,8 +367,8 @@
 .topTipster:nth-child(3) .topTipsterImage::after {
     content: '3';
     position: absolute;
-    right: -5px;
-    top: -5px;
+    right: -8px;
+    top: -8px;
     height: 20px;
     width: 20px;
     background-color: #e8e8e8;
@@ -387,8 +388,8 @@
 .topTipster:nth-child(2) .topTipsterImage::after {
     content: url(/icons/crown.svg);
     position: absolute;
-    right: -5px;
-    top: -5px;
+    right: -8px;
+    top: -8px;
     padding-top: 2px;
     height: 18px;
     width: 20px;
@@ -417,7 +418,7 @@
     font-weight: 600;
     font-size: 16px;
     line-height: 19px;
-    color: rgba(26, 28, 33, 0.7);
+    color: rgba(26, 28, 33, 0.8);
 }
 
 .topTipsterWinrate {
@@ -609,6 +610,7 @@
 
     .topTipster {
         flex-direction: row;
+        gap: 14px;
     }
 
     .topTipsterWinrate {
@@ -631,8 +633,8 @@
     }
 
     .topTipsterImage {
-        height: 50px;
-        width: 50px;
+        height: 49px;
+        width: 49px;
     }
 
     .topTipsterWinrate .winratePercent,
@@ -659,26 +661,56 @@
 
     .topTipster:first-child .topTipsterImage::after {
         content: url(/icons/crown.svg);
-        background-color: #7F3FFC;
+        outline-color: #7F3FFC;
+        background: #7F3FFC;
+        padding-top: 2px;
+        height: 18px;
     }
 
     .topTipster:first-child .topTipsterImage {
-        border-color: #7F3FFC;
+        outline-color: #7F3FFC;
     }
 
     .topTipster:nth-child(2) .topTipsterImage::after {
         content: '2';
-        background-color: #1A1C211A;
-        color: #1A1C21CC;
         border: none;
+        padding-top: 0px;
+        height: 20px;
+        background-color: #e8e8e8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        color: rgba(26, 28, 33, 0.7);
+        border: 2px solid #fff;
     }
 
     .topTipster:nth-child(2) .topTipsterImage {
-        border-color: #1A1C211A;
+        outline-color: #1A1C211A;
     }
 
     #tallBanner>div {
         height: 323px !important;
+    }
+
+    .topTipstersList {
+        background: rgba(242, 242, 242, 0.3);
+        border: none;
+    }
+
+    .topTipsters h2 {
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 34px;
+    }
+
+    .topTipstersMore {
+        margin-top: 12px;
     }
 }
 
@@ -783,6 +815,8 @@
     .topThreeTipsters {
         flex-direction: row;
         overflow: scroll;
+        gap: 30px;
+        padding: 5px;
     }
 
     /* Track */
@@ -799,6 +833,11 @@
         display: none;
     }
 
+    .topTipstersList {
+        background: none;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }
 
 @media screen and (max-width: 425px) {
