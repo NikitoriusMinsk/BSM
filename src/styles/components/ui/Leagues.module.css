@@ -674,7 +674,32 @@
         font-size: 14px;
         line-height: 17px;
         text-align: center;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+    }
+
+    .matchLive {
+        background-color: transparent;
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
         color: #CF1F1F;
+        padding: 0;
+    }
+
+    .matchUpcoming {
+        background-color: transparent;
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 17px;
+        color: #7F3FFC;
+        padding: 0;
     }
 
     .outcome {
