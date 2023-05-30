@@ -311,6 +311,10 @@
         height: 42px;
     }
 
+    .clear {
+        min-width: 75px !important;
+    }
+
     .mobileFilters>div {
         display: flex;
         flex-direction: row;
@@ -344,6 +348,10 @@
     .mobileFilters {
         padding: 0 20px;
     }
+
+    .mobileFilters>div>button {
+        min-width: 104px;
+    }
 }
 
 @media screen and (max-width: 425px) {
@@ -366,5 +374,24 @@
         margin-top: 24px;
     }
 
+    .mobileFilters>div {
+        gap: 12px;
+    }
 
+    .mobileFilters>div>div:first-child {
+        width: unset;
+    }
+
+    .mobileFilters {
+        padding: 0 16px;
+    }
+
+    .sideColumn {
+        flex-direction: column;
+    }
+
+    .sideColumn>div:nth-child(1),
+    .sideColumn>div:nth-child(2) {
+        width: 100%;
+    }
 }

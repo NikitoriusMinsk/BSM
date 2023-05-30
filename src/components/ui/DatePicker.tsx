@@ -29,6 +29,7 @@ const DateInput: React.FC<DateInputProps> = (props) => {
 			enableTabLoop={false}
 			wrapperClassName={onlyDropdown ? "dateWrapperHidden" : undefined}
 			open={onlyDropdown}
+			dateFormat={"dd.MM.yy"}
 		/>
 	);
 };

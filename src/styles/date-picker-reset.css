@@ -325,3 +325,13 @@
     border-color: transparent;
     color: #FFFFFF;
 }
+
+@media screen and (max-width: 425px) {
+    .react-datepicker__input-container:before {
+        content: url(/icons/calendar.svg);
+        height: 20px;
+        width: 20px;
+        top: calc(50% - 10px);
+        left: 11px;
+    }
+}
