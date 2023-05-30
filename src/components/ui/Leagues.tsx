@@ -351,7 +351,7 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 						</>
 					)}
 				</div>
-				<span className={styles.timeMobile}>56:45'</span>
+				<span className={styles.timeMobile}>{getTag(status)}</span>
 			</div>
 		</div>
 	);

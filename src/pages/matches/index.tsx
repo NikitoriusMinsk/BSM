@@ -104,6 +104,7 @@ const MatchesPage: NextPage = () => {
 						<TextField
 							icon="/icons/search.svg"
 							placeholder="Search"
+							searchShrinkMobile={true}
 						/>
 						<DatePicker onChange={() => {}} />
 						<FilterModal
