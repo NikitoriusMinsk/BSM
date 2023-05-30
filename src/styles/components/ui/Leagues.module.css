@@ -562,6 +562,11 @@
     .details {
         gap: 8px;
     }
+
+    .matchLive,
+    .matchUpcoming {
+        padding: 8px 12px;
+    }
 }
 
 @media screen and (max-width: 1024px) {
