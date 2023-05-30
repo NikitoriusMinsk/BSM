@@ -303,6 +303,14 @@
         gap: 12px;
     }
 
+    .mobileFilters>div>button {
+        min-width: 140px;
+    }
+
+    .mobileFilters>div:first-child {
+        height: 42px;
+    }
+
     .mobileFilters>div {
         display: flex;
         flex-direction: row;
