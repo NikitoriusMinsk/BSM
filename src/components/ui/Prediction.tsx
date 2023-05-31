@@ -27,7 +27,7 @@ const Prediction: React.FC<
 		| PendingPredictions
 		| HistoricalPredictions
 		| MatchPredictions
-		// this is so dumb, why do i need to remove buttons on the predictions that already have been played just because designers seem to have dementia???
+	// this is so dumb, why do i need to remove buttons on the predictions that already have been played just because designers seem to have dementia???
 	> & { withSubscribe?: boolean; withTracking?: boolean }
 > = (props) => {
 	const { author, date, info, withSubscribe = true, withTracking = true } = props;
@@ -54,8 +54,8 @@ const Prediction: React.FC<
 						<div className={styles.avatar}>
 							<Image
 								src={author.image}
-								height={46}
-								width={46}
+								height={34}
+								width={34}
 								alt=""
 							/>
 						</div>
@@ -66,9 +66,8 @@ const Prediction: React.FC<
 					</div>
 					{withSubscribe && (
 						<button
-							className={`${
-								author.subscribed ? styles.subscribed : styles.subscribe
-							}`}
+							className={`${author.subscribed ? styles.subscribed : styles.subscribe
+								}`}
 						>
 							Subscribe
 						</button>
@@ -206,16 +205,16 @@ const Prediction: React.FC<
 										info.profit?.potential
 											? styles.potential
 											: info.profit?.amount &&
-											  info.profit?.amount > 0
-											? styles.positive
-											: styles.negative
+												info.profit?.amount > 0
+												? styles.positive
+												: styles.negative
 									}
 								>
 									{info.profit?.potential
 										? "Potential profit"
 										: info.profit?.amount && info.profit?.amount > 0
-										? "Success"
-										: "Lost"}
+											? "Success"
+											: "Lost"}
 								</span>
 								<span>$ {info.profit?.amount}</span>
 							</div>
@@ -301,8 +300,8 @@ const Prediction: React.FC<
 										<div className={styles.avatar}>
 											<Image
 												src="/images/profile-placeholder.png"
-												height={46}
-												width={46}
+												height={34}
+												width={34}
 												alt=""
 											/>
 										</div>
@@ -330,8 +329,8 @@ const Comment: React.FC<CommentType> = (props) => {
 				<div className={styles.avatar}>
 					<Image
 						src={user.image}
-						height={46}
-						width={46}
+						height={34}
+						width={34}
 						alt=""
 					/>
 				</div>

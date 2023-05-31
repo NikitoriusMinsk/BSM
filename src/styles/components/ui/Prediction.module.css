@@ -58,9 +58,10 @@
     align-items: center;
     justify-content: center;
     border-radius: 100%;
-    border: 3px solid #1A1C211A;
-    height: 46px;
-    width: 46px;
+    border: 2px solid #1A1C211A;
+    padding: 1px;
+    background: #fff;
+    height: 100%;
 }
 
 .header .user .userDetails {
@@ -480,13 +481,14 @@
 }
 
 .comments .input .avatar {
-    min-height: 46px;
-    min-width: 46px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 100%;
-    border: 3px solid #1A1C211A;
+    border: 2px solid #1A1C211A;
+    padding: 1px;
+    background: #fff;
+    height: 100%;
 }
 
 .comments .input .textField {
@@ -517,14 +519,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid #1A1C211A;
     border-radius: 100%;
-    min-height: 46px;
-    min-width: 46px;
-    height: 46px;
-    width: 46px;
-    max-width: 46px;
-    max-height: 46px;
+    border: 2px solid #1A1C211A;
+    padding: 1px;
+    background: #fff;
+    height: 100%;
 }
 
 .commentContainer .comment .info {
@@ -654,12 +653,6 @@
         display: none;
     }
 
-    .header .user .avatar,
-    .header .user .avatar * {
-        width: 34px;
-        height: 34px;
-    }
-
     .header .date .part:first-child {
         font-size: 14px;
         line-height: 17px;
@@ -733,12 +726,6 @@
 
     .comments {
         padding: 0;
-    }
-
-    .commentContainer .comment .avatar,
-    .commentContainer .comment .avatar * {
-        width: 42px;
-        height: 42px;
     }
 
     .commentsContainer .replies {
