@@ -87,6 +87,25 @@ const StandingsTable: React.FC = () => {
 
     return (
         <>
+            <div className={styles.filtersInside}>
+                <StandingsFilter
+                    items={[
+                        {
+                            id: '1',
+                            name: "Over"
+                        },
+                        {
+                            id: '2',
+                            name: "Home"
+                        },
+                        {
+                            id: '3',
+                            name: "Away"
+                        }
+                    ]}
+                    onSelect={() => { }}
+                />
+            </div>
             {width <= 600 ?
                 <table
                     className={styles.standingsTable}
@@ -152,7 +171,7 @@ const StandingsTable: React.FC = () => {
                     </colgroup>
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th><div>#</div></th>
                             <th className={styles.teamHead}>Team</th>
                             <th>MP</th>
                             <th>W</th>
