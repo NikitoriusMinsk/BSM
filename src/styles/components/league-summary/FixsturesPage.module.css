@@ -1,22 +1,25 @@
-.pageContainer{
+.pageContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 40px;
 }
-.stageStat{
+
+.stageStat {
     width: 100%;
 }
-.stage{
+
+.stage {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 24px;
-    gap: 24px;    
+    gap: 24px;
     background: rgba(242, 242, 242, 0.5);
     border-radius: 8px;
 }
+
 .stage *:first-child {
     font-family: 'Samsung Sans';
     font-weight: 600;
@@ -24,6 +27,7 @@
     line-height: 19px;
     color: #1A1C21;
 }
+
 .stage *:last-child {
     font-family: 'Samsung Sans';
     font-weight: 400;
@@ -31,19 +35,23 @@
     line-height: 18px;
     color: #1A1C21;
 }
+
 .stageTitle {
     display: flex;
     align-items: center;
     gap: 20px;
 }
+
 .stageTitle span:first-child {
     border-right: 1px solid rgba(26, 28, 33, 0.2);
     padding-right: 20px;
 }
-.stage:not(:first-child){    
+
+.stage:not(:first-child) {
     margin-top: 28px;
 }
-.statLine{
+
+.statLine {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
@@ -51,24 +59,30 @@
     line-height: 19px;
     color: rgba(26, 28, 33, 0.7);
 }
-.statLine td{    
+
+.statLine td {
     padding: 24px;
     padding-right: 0px;
 }
-.statLine td:last-child{
+
+.statLine td:last-child {
     padding-right: 24px;
 }
+
 .statLine:nth-child(even) {
     background: rgba(242, 242, 242, 0.3);
     border-radius: 8px;
 }
-.statLine > *:first-child{
+
+.statLine>*:first-child {
     color: #1A1C21;
 }
+
 .teamsLogos {
     display: flex;
     align-items: center;
 }
+
 .logo {
     display: flex;
     flex-direction: row;
@@ -80,15 +94,23 @@
     border-radius: 100px;
     flex-shrink: 0;
 }
+
 .logo:last-child {
     margin-left: -10px;
     z-index: 1;
+    outline: 2px solid #fff;
 }
+
+.statLine:nth-child(even) .logo:last-child {
+    outline: 2px solid #FBFBFB;
+}
+
 .teamNames {
     display: flex;
     gap: 4px;
     flex-direction: column;
 }
+
 .teamNames span {
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -97,6 +119,7 @@
     line-height: 18px;
     color: rgba(26, 28, 33, 0.7);
 }
+
 .teamNames span.win {
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -105,6 +128,7 @@
     line-height: 18px;
     color: #1A1C21;
 }
+
 .teamScores {
     display: flex;
     gap: 4px;
@@ -113,6 +137,7 @@
     padding-right: 16px;
     border-right: 1px solid rgba(26, 28, 33, 0.1);
 }
+
 .teamScores span {
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -121,6 +146,7 @@
     line-height: 18px;
     color: rgba(26, 28, 33, 0.7);
 }
+
 .teamScores span.win {
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -129,6 +155,7 @@
     line-height: 18px;
     color: #1A1C21;
 }
+
 .previewBtn {
     display: flex;
     justify-content: center;
@@ -147,11 +174,13 @@
     line-height: 14px;
     color: #1A1C21;
 }
+
 .matchDate {
     display: flex;
     gap: 4px;
     flex-direction: column;
 }
+
 .matchDate span:first-child {
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -160,6 +189,7 @@
     line-height: 18px;
     color: #1A1C21;
 }
+
 .matchDate span:last-child {
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -168,7 +198,8 @@
     line-height: 14px;
     color: rgba(26, 28, 33, 0.7);
 }
-.seeMore{
+
+.seeMore {
     display: flex;
     align-items: center;
     gap: 7px;
@@ -177,6 +208,7 @@
     cursor: pointer;
     margin-top: 8px;
 }
+
 .moreContainer {
     display: flex;
     flex-direction: column;
@@ -189,6 +221,7 @@
     .stageStat {
         gap: 0px;
     }
+
     .stage {
         border-radius: 0px;
         font-weight: 400;
@@ -196,9 +229,11 @@
         line-height: 18px;
         padding: 12px 16px;
     }
-    .stage:not(:first-child) {        
+
+    .stage:not(:first-child) {
         margin-top: 20px;
     }
+
     .statLine {
         font-weight: 600;
         font-size: 15px;
@@ -206,32 +241,39 @@
         gap: 12px;
         padding: 18px 16px;
     }
+
     .statLine td {
         padding: 16px;
         padding-right: 0px;
     }
+
     .infoLink {
         gap: 8px;
         margin-top: 40px;
     }
+
     .teamsLogos {
         flex-direction: column;
     }
+
     .logo:last-child {
         margin-left: 0px;
         margin-top: -10px;
     }
-    .statLine > *:first-child {
-        min-width: 60px!important;
-        width: 60px!important;
-        max-width: 60px!important;
+
+    .statLine>*:first-child {
+        min-width: 60px !important;
+        width: 60px !important;
+        max-width: 60px !important;
     }
-    .statLine > *:nth-child(2) {
-        min-width: 50px!important;
-        width: 50px!important;
-        max-width: 50px!important;
+
+    .statLine>*:nth-child(2) {
+        min-width: 50px !important;
+        width: 50px !important;
+        max-width: 50px !important;
     }
-    .statLine > *:last-child {
-        padding-right: 16px!important;
+
+    .statLine>*:last-child {
+        padding-right: 16px !important;
     }
 }

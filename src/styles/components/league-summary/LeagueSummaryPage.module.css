@@ -107,7 +107,13 @@
 .logo:last-child {
     margin-left: -10px;
     z-index: 1;
+    outline: 2px solid #fff;
 }
+
+.statLine:nth-child(even) .logo:last-child {
+    outline: 2px solid #FBFBFB;
+}
+
 
 .teamNames {
     display: flex;

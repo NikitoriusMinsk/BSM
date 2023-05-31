@@ -13,30 +13,30 @@ interface LeaguesProps {
 		image: string;
 		id: string;
 	}[];
-    showCount?: boolean;
+	showCount?: boolean;
 }
 
 const Leagues: React.FC<LeaguesProps> = (props) => {
-	const { h3, h2, items, showCount=true } = props;
+	const { h3, h2, items, showCount = true } = props;
 	const [isOpen, setIsOpen] = useState(false);
 
-    const ItemsVariants = {
-        open: {
-            height: "auto",
-        },
-        closed: {
-            height: 405,
-        },
-    };
-    
-    const CevronVariants = {
-        open: {
-            rotate: 180,
-        },
-        closed: {
-            rotate: 0,
-        },
-    };
+	const ItemsVariants = {
+		open: {
+			height: "auto",
+		},
+		closed: {
+			height: 405,
+		},
+	};
+
+	const CevronVariants = {
+		open: {
+			rotate: 180,
+		},
+		closed: {
+			rotate: 0,
+		},
+	};
 
 	return (
 		<div className={styles.container}>
@@ -49,7 +49,7 @@ const Leagues: React.FC<LeaguesProps> = (props) => {
 				variants={ItemsVariants}
 				initial={"closed"}
 				animate={isOpen ? "open" : "closed"}
-				transition={{ease:'easeInOut'}}
+				transition={{ ease: 'easeInOut' }}
 			>
 				{items.map((item) => (
 					<div
@@ -61,8 +61,8 @@ const Leagues: React.FC<LeaguesProps> = (props) => {
 								<Image
 									src={item.image}
 									alt={item.name}
-									width={38}
-									height={38}
+									width={28}
+									height={28}
 								/>
 							</div>
 							<div className={styles.titles}>
@@ -90,7 +90,7 @@ const Leagues: React.FC<LeaguesProps> = (props) => {
 					variants={CevronVariants}
 					initial={"closed"}
 					animate={isOpen ? "open" : "closed"}
-					transition={{ease:'easeInOut'}}
+					transition={{ ease: 'easeInOut' }}
 				>
 					<Image
 						src="/icons/chevron.svg"
