@@ -50,12 +50,11 @@ const columns = [
 						<div
 							className={styles.progressBar}
 							style={{
-								width: `${
-									100 -
+								width: `${100 -
 									((new Date().getTime() - startedOn.getTime()) /
 										(endsOn.getTime() - startedOn.getTime())) *
-										100
-								}%`,
+									100
+									}%`,
 							}}
 						/>
 					</div>
@@ -101,8 +100,8 @@ const mobileColumns = [
 					<div className={styles.avatar}>
 						<Image
 							src={image}
-							height={36}
-							width={36}
+							height={34}
+							width={34}
 							alt=""
 						/>
 					</div>
@@ -137,12 +136,11 @@ const mobileColumns = [
 							<div
 								className={styles.progressBar}
 								style={{
-									width: `${
-										100 -
+									width: `${100 -
 										((new Date().getTime() - startedOn.getTime()) /
 											(endsOn.getTime() - startedOn.getTime())) *
-											100
-									}%`,
+										100
+										}%`,
 								}}
 							/>
 						</div>

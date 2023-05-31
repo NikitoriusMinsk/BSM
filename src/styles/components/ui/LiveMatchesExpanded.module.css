@@ -203,6 +203,7 @@
 
 .logo:last-child {
     margin-left: -10px;
+    outline: 2px solid #fbfbfb;
 }
 
 .timeBlock {
