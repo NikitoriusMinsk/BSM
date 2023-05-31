@@ -35,9 +35,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
     border-radius: 100%;
+}
+
+.user .avatar {
+    background: #FFFFFF;
+    padding: 1px;
+    border: 2px solid rgba(26, 28, 33, 0.1);
 }
 
 .user .userInfo {

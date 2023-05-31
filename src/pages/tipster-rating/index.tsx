@@ -242,20 +242,20 @@ const TipsterRating: NextPage = () => {
 								<Dropdown
 									items={SportItems}
 									label="Sport:"
-									onSelect={() => {}}
+									onSelect={() => { }}
 									minWidth={200}
 								/>
 								<Dropdown
 									items={TimeItems}
 									label="Tipsters by:"
-									onSelect={() => {}}
+									onSelect={() => { }}
 									minWidth={250}
 								/>
 								<button>Clear</button>
 							</div>
 						) : (
 							<FilterModal
-								onApply={() => {}}
+								onApply={() => { }}
 								portalNode={portalNode}
 								filters={[
 									{
@@ -567,7 +567,7 @@ const CountdownTimer: React.FC<CurrentCompetition> = (props) => {
 	const [progress, setProgress] = useState(
 		((new Date().getTime() - startedOn.getTime()) /
 			(endsOn.getTime() - startedOn.getTime())) *
-			100
+		100
 	);
 	const { width } = useWindowSize();
 

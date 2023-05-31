@@ -42,19 +42,11 @@ const TipsterInfo: React.FC<inferArrayElementType<Tipsters>> = (props) => {
 					onMouseEnter={() => setIsHovering(true)}
 					onMouseLeave={() => setIsHovering(false)}
 				>
-					<AnimatePresence initial={false}>
-						{isHovering && (
-							<UserHover
-								{...props}
-								onSubscribe={() => setModalOpen(true)}
-							/>
-						)}
-					</AnimatePresence>
 					<div className={styles.avatar}>
 						<Image
 							src={image}
-							height={36}
-							width={36}
+							height={34}
+							width={34}
 							alt={name}
 						/>
 					</div>
@@ -64,6 +56,14 @@ const TipsterInfo: React.FC<inferArrayElementType<Tipsters>> = (props) => {
 							{shortenNumber(subscriberCount, 0)} subscribers
 						</span>
 					</div>
+					<AnimatePresence initial={false}>
+						{isHovering && (
+							<UserHover
+								{...props}
+								onSubscribe={() => setModalOpen(true)}
+							/>
+						)}
+					</AnimatePresence>
 				</div>
 				<button
 					onClick={() => setModalOpen(!modalOpen)}
@@ -127,9 +127,8 @@ const UserHover: React.FC<inferArrayElementType<Tipsters> & UserHoverProps> = (p
 			exit="closed"
 		>
 			<div
-				className={`${styles.profit} ${
-					avgProfit > 0 ? styles.positive : styles.negative
-				}`}
+				className={`${styles.profit} ${avgProfit > 0 ? styles.positive : styles.negative
+					}`}
 			>
 				<span>Avg. Monthly Profit</span>
 				<span>$ {avgProfit}</span>
@@ -178,9 +177,8 @@ const UserHover: React.FC<inferArrayElementType<Tipsters> & UserHoverProps> = (p
 					</div>
 					<div className={styles.info}>
 						<div
-							className={`${styles.profit} ${
-								avgProfit > 0 ? styles.positive : styles.negative
-							}`}
+							className={`${styles.profit} ${avgProfit > 0 ? styles.positive : styles.negative
+								}`}
 						>
 							<span>Avg. Monthly Profit</span>
 							<span>$ {avgProfit}</span>
@@ -188,9 +186,8 @@ const UserHover: React.FC<inferArrayElementType<Tipsters> & UserHoverProps> = (p
 						<div className={styles.stat}>
 							<span>ROI</span>
 							<span
-								className={`${styles.roi} ${
-									roi < 0 ? styles.negative : styles.positive
-								}`}
+								className={`${styles.roi} ${roi < 0 ? styles.negative : styles.positive
+									}`}
 							>
 								{roi}
 							</span>
@@ -200,9 +197,8 @@ const UserHover: React.FC<inferArrayElementType<Tipsters> & UserHoverProps> = (p
 							<span className={styles.form}>
 								{form.map((el, index) => (
 									<div
-										className={`${styles.dot} ${
-											el ? styles.positive : styles.negative
-										}`}
+										className={`${styles.dot} ${el ? styles.positive : styles.negative
+											}`}
 										key={`form_${name}_${index}`}
 									/>
 								))}

@@ -64,6 +64,11 @@
     gap: 90px;
 }
 
+
+.table tbody tr:first-child td:nth-child(2)>div>div>div:first-child {
+    border: 2px solid #7F3FFC;
+}
+
 /* Current Competition */
 
 .currentCompetition {

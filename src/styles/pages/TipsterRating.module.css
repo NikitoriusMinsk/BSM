@@ -159,8 +159,12 @@
 }
 
 .tipsterCard .avatar img {
-    height: 80px;
-    width: 80px;
+    height: 80px !important;
+    width: 80px !important;
+}
+
+#tableContainer tbody tr:first-child td:nth-child(2)>div>div>div:first-child {
+    border: 2px solid #7F3FFC;
 }
 
 .tipsterCard .info {
