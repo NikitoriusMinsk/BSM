@@ -167,6 +167,16 @@
     color: #7F3FFC;
 }
 
+.avatar {
+    padding: 1px;
+    background: #fff;
+    border: 2px solid rgba(26, 28, 33, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+}
+
 .subscribeButton {
     display: flex;
     align-items: center;
