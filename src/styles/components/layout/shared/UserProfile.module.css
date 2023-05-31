@@ -143,8 +143,9 @@
 }
 
 .profileImage {
-    width: 36px;
-    height: 36px;
+    padding: 2px;
+    height: 40px;
+    width: 40px;
     border-radius: 100%;
     overflow: hidden;
     border: 2px solid #7F3FFC;
