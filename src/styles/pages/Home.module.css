@@ -325,21 +325,22 @@
 .topThreeTipsters .topTipsterImage::after {
     content: attr(data-place);
     position: absolute;
-    right: -5px;
-    top: -5px;
+    right: -8px;
+    top: -8px;
     height: 20px;
     width: 20px;
-    background-color: #1A1C211A;
+    background-color: #e8e8e8;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 100%;
     font-family: 'Samsung Sans';
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 12px;
     line-height: 14px;
-    color: #1A1C21CC;
+    color: rgba(26, 28, 33, 0.7);
+    border: 2px solid #fff;
 }
 
 .topTipster:first-child .topTipsterImage::after {
