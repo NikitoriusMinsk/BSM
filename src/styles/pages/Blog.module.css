@@ -1086,4 +1086,8 @@
     .fullWidthNewsBlock .main .news .stats {
         display: none;
     }
+
+    .fullWidthNewsBlock .main .news .info {
+        width: calc(100% - 40px);
+    }
 }
