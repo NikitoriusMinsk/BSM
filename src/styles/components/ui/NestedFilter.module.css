@@ -21,15 +21,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 20px;
+    padding: 12px;
     border-radius: 8px;
     background-color: #CF1F1F;
     border: none;
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 15px;
+    line-height: 18px;
     color: #FFFFFF;
     cursor: pointer;
 }
@@ -233,12 +233,6 @@
 
 .subItem.active .image {
     border-color: #7F3FFC;
-}
-
-@media screen and (max-width: 1366px) {
-    .header .clear {
-        padding: 12px;
-    }
 }
 
 @media screen and (max-width: 1366px) {
