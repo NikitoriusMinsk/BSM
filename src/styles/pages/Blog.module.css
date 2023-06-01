@@ -88,9 +88,9 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 17px;
-    color: #FFFFFFCC;
+    color: #FFFFFF;
     z-index: 1;
 }
 
@@ -844,10 +844,6 @@
 
     .mainNewsTitle {
         max-width: calc(100% - 24px);
-    }
-
-    .mainNewsDate {
-        font-size: 15px;
     }
 
     .fullWidthNewsBlock {
