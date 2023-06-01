@@ -172,7 +172,15 @@ const DashboardTab: React.FC = () => {
 							}}
 						>
 							<h3>Won</h3>
-							<span>{data.bets.won}</span>
+							<span className={styles.circleInfo}>
+								{data.bets.won}
+								<Image
+									src={"/icons/stonks.svg"}
+									height={20}
+									width={20}
+									alt=""
+								/>
+							</span>
 						</CircularProgressbarWithChildren>
 					</div>
 					<div className={`${styles.progressBar} ${styles.pending}`}>
@@ -214,7 +222,15 @@ const DashboardTab: React.FC = () => {
 							}}
 						>
 							<h3>Lost</h3>
-							<span>{data.bets.lost}</span>
+							<span className={styles.circleInfo}>
+								{data.bets.lost}{" "}
+								<Image
+									src={"/icons/stinks.svg"}
+									height={20}
+									width={20}
+									alt=""
+								/>
+							</span>
 						</CircularProgressbarWithChildren>
 					</div>
 				</div>

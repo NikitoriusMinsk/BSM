@@ -89,6 +89,7 @@
     grid-row-start: 2;
     grid-column-start: 4;
     grid-column-end: 10;
+    padding: 60px;
 }
 
 #coins .info {
@@ -192,6 +193,7 @@
     grid-row-start: 3;
     grid-column-start: 4;
     grid-column-end: 6;
+    max-height: 270px;
 }
 
 #sport .info {
@@ -230,6 +232,7 @@
     grid-row-start: 3;
     grid-column-start: 6;
     grid-column-end: 9;
+    max-height: 270px;
 }
 
 #odds .info {
@@ -274,6 +277,7 @@
     grid-row-start: 3;
     grid-column-start: 9;
     grid-column-end: 13;
+    max-height: 270px;
 }
 
 #unit .info {
@@ -334,6 +338,7 @@
     grid-row-start: 4;
     grid-column-start: 4;
     grid-column-end: 9;
+    padding: 36px 60px;
 }
 
 #bets .info h5 {
@@ -388,6 +393,51 @@
 #bets .progressBar.lost h3,
 #bets .progressBar.lost span {
     color: #FF5018;
+}
+
+#bets .circleInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+@media screen and (max-height: 1440px) {
+
+    #coins,
+    #bookmaker {
+        max-height: 180px;
+    }
+}
+
+@media screen and (max-height: 1366px) {
+
+    #odds,
+    #unit,
+    #sport {
+        position: relative;
+        max-height: 190px;
+        padding-top: 20px;
+    }
+
+    #unit>div:nth-child(2),
+    #odds>div:nth-child(2) {
+        position: absolute;
+        bottom: 10px;
+        width: calc(100% - 60px) !important;
+    }
+
+    #bets {
+        max-height: 224px;
+        gap: 30px;
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+
+    #bets .progressBar {
+        height: 120px;
+        width: 120px;
+    }
 }
 
 @media screen and (max-width: 1280px) {
@@ -550,6 +600,12 @@
         grid-column-start: 1;
         grid-column-end: 9;
     }
+
+    #sport,
+    #odds,
+    #unit {
+        max-height: 180px;
+    }
 }
 
 @media screen and (max-width: 425px) {
@@ -626,15 +682,69 @@
         grid-column-end: 9;
     }
 
-    #bets .progressBar {
-        height: 91px;
-        width: 91px;
-    }
-
     #bets span {
         font-weight: 600;
         font-size: 18px;
         line-height: 22px;
     }
 
+    #coins {
+        max-height: 111px;
+        padding: 35px 40px;
+    }
+
+    #sport {
+        max-height: 94px;
+    }
+
+    #odds {
+        max-height: 111px;
+    }
+
+    #unit {
+        max-height: 149px;
+    }
+
+    #unit .detailed {
+        gap: 20px;
+    }
+
+    #unit>div:nth-child(2),
+    #odds>div:nth-child(2) {
+        position: absolute;
+        bottom: calc(50% - 50px);
+        width: 30% !important;
+        right: 20px;
+    }
+
+    #unit>div:nth-child(2) {
+        right: 50px;
+    }
+
+    #bets {
+        position: relative;
+        padding: 32px 36px;
+        min-height: 261px;
+    }
+
+    #bets .progressBar {
+        position: absolute;
+        height: 91px;
+        width: 91px;
+    }
+
+    #bets .progressBar:nth-child(1) {
+        top: 75px;
+        left: 36px;
+    }
+
+    #bets .progressBar:nth-child(2) {
+        top: 139px;
+        left: calc(50% - 45px);
+    }
+
+    #bets .progressBar:nth-child(3) {
+        top: 75px;
+        right: 36px;
+    }
 }

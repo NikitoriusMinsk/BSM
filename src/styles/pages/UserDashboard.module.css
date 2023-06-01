@@ -338,6 +338,7 @@
 
 
 @media screen and (max-width: 768px) {
+
     .sideColumn {
         grid-row-start: 1;
         grid-row-end: 2;
@@ -376,4 +377,41 @@
         gap: 10px;
     }
 
+    .navigation .userInfo {
+        background-color: transparent;
+    }
+
+    .sideColumn {
+        background-color: #F2F2F280;
+    }
+
+    .navigation .userInfo .stats .stat {
+        background-color: #FFFFFF;
+        width: 220px;
+    }
+
+    .navigation nav {
+        background-color: #FFFFFF;
+        padding-top: 16px;
+    }
+
+    .navigationContainer {
+        overflow: auto;
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+    .navigation .userInfo .stats .stat {
+        width: calc(50vw - 40px);
+        background-color: #F2F2F24D;
+    }
+
+    .navigation .userInfo {
+        background-color: #FFFFFF;
+    }
+
+    .sideColumn {
+        background-color: #FFFFFF;
+    }
 }
