@@ -17,6 +17,12 @@
     color: #1A1C21;
 }
 
+.alternativeStyle {
+    padding: 8px 24px;
+    background: #e2e2e2;
+    border-color: #e2e2e2;
+}
+
 .filterActive {
     background: #7F3FFC;
     border-color: #7F3FFC;

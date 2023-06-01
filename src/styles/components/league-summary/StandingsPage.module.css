@@ -27,13 +27,6 @@
     margin-bottom: 20px;
 }
 
-.filtersInside>* {
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
-    background: rgba(26, 28, 33, 0.1) !important;
-    border-color: rgba(26, 28, 33, 0.1) !important;
-}
-
 .standingsTable {
     width: 100%;
 }
