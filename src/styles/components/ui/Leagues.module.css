@@ -527,8 +527,14 @@
         gap: 30px;
     }
 
-    .controls .matchesOptions button {
-        flex: 1;
+    .controls .matchesOptions button:not(:last-child) {
+        max-width: max-content;
+        min-width: max-content;
+    }
+
+    .controls .matchesOptions button:last-child {
+        width: 100%;
+        justify-content: space-between;
     }
 
     .score {
@@ -549,9 +555,6 @@
         justify-content: space-between;
     }
 
-    .controls .matchesOptions button {
-        flex: 1;
-    }
 
     .controls {
         flex-direction: column;
