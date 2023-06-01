@@ -1,9 +1,10 @@
-.pageContainer{
+.pageContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-.filter{
+
+.filter {
     display: flex;
     align-items: stretch;
     gap: 16px;
@@ -11,21 +12,27 @@
     overflow-x: auto;
     width: 100%;
 }
-.filter::-webkit-scrollbar{
+
+.filter::-webkit-scrollbar {
     display: none;
 }
-.standingsTable{
 
-}
-.standingsTable th{
+.standingsTable {}
+
+.standingsTable th {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
+    color: rgba(26, 28, 33, 0.7);
+}
+
+.standingsTable th:first-child {
     color: #1A1C21;
 }
-.standingsTable td{
+
+.standingsTable td {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
@@ -34,55 +41,69 @@
     color: #1A1C21;
     text-align: center;
 }
+
 .standingsTable tbody td {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
 .standingsTable tbody td:first-child {
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
     color: rgba(26, 28, 33, 0.7);
 }
-.standingsTable td:first-child, .standingsTable th:first-child {
+
+.standingsTable td:first-child,
+.standingsTable th:first-child {
     padding-left: 20px;
 }
-.standingsTable td:last-child, .standingsTable th:last-child {
+
+.standingsTable td:last-child,
+.standingsTable th:last-child {
     padding-right: 20px;
 }
-.boldCell{
-    font-weight: 700!important;
+
+.boldCell {
+    font-weight: 600 !important;
 }
-.teamHead{
+
+.teamHead {
     text-align: start;
     width: auto;
 }
-.teamCell{
-    font-family: 'Samsung Sans'!important;
-    font-style: normal!important;
-    font-weight: 600!important;
-    font-size: 15px!important;
-    line-height: 18px!important;
-    color: #1A1C21!important;
-    text-align: start!important;
+
+.teamCell {
+    font-family: 'Samsung Sans' !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    line-height: 18px !important;
+    color: #1A1C21 !important;
+    text-align: start !important;
 }
-.standingsTable tbody tr:nth-child(2n-1) td{
+
+.standingsTable tbody tr:nth-child(2n-1) td {
     background: rgba(242, 242, 242, 0.3);
 }
-.standingsTable tbody tr:nth-child(2n-1) td:first-child { 
+
+.standingsTable tbody tr:nth-child(2n-1) td:first-child {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
 }
-.standingsTable tbody tr:nth-child(2n-1) td:last-child { 
+
+.standingsTable tbody tr:nth-child(2n-1) td:last-child {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 }
-.teamCell span{
+
+.teamCell span {
     display: flex;
     align-items: center;
     gap: 16px;
 }
-.teamLogo{
+
+.teamLogo {
     overflow: hidden;
     background: #FFF;
     border: 3px solid rgba(26, 28, 33, 0.1);
@@ -93,14 +114,23 @@
     padding: 4px;
     flex-shrink: 0;
 }
-.questionBox{
+
+.form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.questionBox,
+.winBox,
+.loseBox,
+.drawBox {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
     width: 30px;
     height: 30px;
-    background: rgba(26, 28, 33, 0.4);
     border-radius: 4px;
 
     font-family: 'Samsung Sans';
@@ -111,32 +141,57 @@
     color: #FFFFFF;
 }
 
+.questionBox {
+    background: rgba(26, 28, 33, 0.4);
+}
+
+.winBox {
+    background: #2CD114;
+}
+
+.loseBox {
+    background: #CF1F1F;
+}
+
+.drawBox {
+    background: #F7B248;
+}
+
 @media screen and (max-width: 600px) {
-    .pageContainer {
-    }
+    .pageContainer {}
+
     .filter {
         padding-left: 16px;
         padding-right: 16px;
         gap: 12px;
         margin-bottom: 24px;
     }
-    .standingsTable tbody tr:nth-child(2n-1) td:first-child, .standingsTable tbody tr:nth-child(2n-1) td:last-child { 
+
+    .standingsTable tbody tr:nth-child(2n-1) td:first-child,
+    .standingsTable tbody tr:nth-child(2n-1) td:last-child {
         border-radius: 0px;
     }
-    .standingsTable td:first-child, .standingsTable th:first-child {
+
+    .standingsTable td:first-child,
+    .standingsTable th:first-child {
         padding-left: 16px;
     }
-    .standingsTable td:last-child, .standingsTable th:last-child {
+
+    .standingsTable td:last-child,
+    .standingsTable th:last-child {
         padding-right: 16px;
     }
+
     .standingsTable td:last-child {
         border-left: 1px solid rgba(26, 28, 33, 0.1);
     }
+
     .standingsTable tbody td {
         font-weight: 600;
         padding-top: 16px;
         padding-bottom: 16px;
     }
+
     .standingsTable tbody td:first-child {
         font-weight: 400;
         font-size: 12px;

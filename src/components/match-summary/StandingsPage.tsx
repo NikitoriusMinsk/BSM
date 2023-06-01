@@ -5,6 +5,219 @@ import StandingsFilter from "@components/ui/match-summary/StandingsFilter"
 import { motion } from "framer-motion"
 import useWindowSize from "src/utils/useWindowSize";
 import StandigsMenuColumn from "@components/ui/match-summary/StandingsMenuColumn";
+import { createColumnHelper } from "@tanstack/react-table";
+import AdaptiveTable from "@components/ui/AdaptiveTable";
+
+const dataset = [
+    {
+        "position": 1,
+        "team": "Penza",
+        "mp": 6,
+        "w": 10,
+        "d": 2,
+        "l": 5,
+        "tp": "123:22",
+        "pts": 20,
+        "form": ["L", "W", "D", "L", "D"]
+    },
+    {
+        "position": 2,
+        "team": "Izmail",
+        "mp": "0",
+        "w": 6,
+        "d": 2,
+        "l": 9,
+        "tp": "123:22",
+        "pts": 19,
+        "form": ["L", "W", "D", "L", "D"]
+    },
+    {
+        "position": 3,
+        "team": "Lima",
+        "mp": 5,
+        "w": 5,
+        "d": 2,
+        "l": 9,
+        "tp": "123:22",
+        "pts": 18,
+        "form": ["L", "W", "D", "L", "D"]
+    },
+    {
+        "position": 4,
+        "team": "Eugene",
+        "mp": 5,
+        "w": 7,
+        "d": 2,
+        "l": 9,
+        "tp": "123:22",
+        "pts": 17,
+        "form": ["L", "W", "D", "L", "D"]
+    },
+    {
+        "position": 5,
+        "team": "Valparaíso de Goiás",
+        "mp": 6,
+        "w": 3,
+        "d": 2,
+        "l": 7,
+        "tp": "123:22",
+        "pts": 16,
+        "form": ["L", "W", "D", "L", "D"]
+    },
+    {
+        "position": 6,
+        "team": "Bundaberg",
+        "mp": 4,
+        "w": 2,
+        "d": 2,
+        "l": 4,
+        "tp": "123:22",
+        "pts": 15,
+        "form": ["L", "W", "D", "L", "D"]
+    },
+    {
+        "position": 7,
+        "team": "Istanbul",
+        "mp": 4,
+        "w": 6,
+        "d": 2,
+        "l": 8,
+        "tp": "123:22",
+        "pts": 14,
+        "form": ["L", "W", "D", "L", "D"]
+    },
+    {
+        "position": 8,
+        "team": "Houthalen-Helchteren",
+        "mp": 5,
+        "w": 4,
+        "d": 2,
+        "l": 4,
+        "tp": "123:22",
+        "pts": 13,
+        "form": ["L", "W", "D", "L", "D"]
+    },
+    {
+        "position": 9,
+        "team": "Warri",
+        "mp": 5,
+        "w": 8,
+        "d": 2,
+        "l": 4,
+        "tp": "123:22",
+        "pts": 12,
+        "form": ["L", "W", "D", "L", "D"]
+    },
+    {
+        "position": 10,
+        "team": "Marchienne-au-Pont",
+        "mp": 7,
+        "w": 5,
+        "d": 2,
+        "l": 4,
+        "tp": "123:22",
+        "pts": 11,
+        "form": ["L", "W", "D", "L", "D"]
+    }
+]
+
+const columnHelper =
+    createColumnHelper<typeof dataset[0]>();
+
+const columns = [
+    columnHelper.accessor("position", {
+        header: () => '#',
+        cell: info => info.renderValue(),
+        enableSorting: true,
+    }),
+    columnHelper.accessor("team", {
+        header: () => (
+            <div className={styles.teamHead}>
+                Team
+            </div>
+        ),
+        cell: info => (
+            <div className={styles.teamCell}>
+                <span>
+                    <div className={styles.teamLogo}>
+                        <Image
+                            src="/testimg/club1.png"
+                            width={20}
+                            height={20}
+                            style={{ objectFit: 'contain' }}
+                            alt=""
+                        />
+                    </div>
+                    {info.getValue()}
+                </span>
+            </div>
+        ),
+        enableSorting: false
+    }),
+    columnHelper.accessor("mp", {
+        header: () => 'MP',
+        cell: info => info.renderValue(),
+        enableSorting: false
+    }),
+    columnHelper.accessor("w", {
+        header: () => 'W',
+        cell: info => info.renderValue(),
+        enableSorting: false
+    }),
+    columnHelper.accessor("d", {
+        header: () => 'D',
+        cell: info => info.renderValue(),
+        enableSorting: false
+    }),
+    columnHelper.accessor("l", {
+        header: () => 'L',
+        cell: info => info.renderValue(),
+        enableSorting: false
+    }),
+    columnHelper.accessor("tp", {
+        header: () => 'TP',
+        cell: info => info.renderValue(),
+        enableSorting: false
+    }),
+    columnHelper.accessor("pts", {
+        header: () => (
+            <div className={styles.boldCell}>
+                PTS
+            </div>
+        ),
+        cell: info => info.renderValue(),
+        enableSorting: false
+    }),
+    columnHelper.accessor("form", {
+        header: () => 'Form',
+        cell: info => (
+            <div className={styles.form}>
+                {info.getValue().map(res => {
+                    switch (res) {
+                        case 'W':
+                            return <div className={styles.winBox}>
+                                W
+                            </div>
+                            break;
+                        case 'D':
+                            return <div className={styles.drawBox}>
+                                D
+                            </div>
+                            break;
+                        case 'L':
+                            return <div className={styles.loseBox}>
+                                L
+                            </div>
+                            break;
+                        default:
+                            break;
+                    }
+                })}
+            </div>
+        ),
+        enableSorting: false
+    })
+];
 
 const StandingsPage: React.FC = () => {
     const { width } = useWindowSize()
@@ -13,32 +226,32 @@ const StandingsPage: React.FC = () => {
     return (
         <div className={styles.pageContainer}>
             <div className={styles.filter}>
-                <StandingsFilter 
+                <StandingsFilter
                     items={[
                         {
-                            id:'1', 
-                            name:"Standings"
+                            id: '1',
+                            name: "Standings"
                         },
                         {
-                            id:'2', 
-                            name:"Form"
+                            id: '2',
+                            name: "Form"
                         },
                         {
-                            id:'3', 
-                            name:"Over/Under"
+                            id: '3',
+                            name: "Over/Under"
                         },
                         {
-                            id:'4', 
-                            name:"HT/FT"
+                            id: '4',
+                            name: "HT/FT"
                         }
-                    ]} 
-                    onSelect={(id) => {}}
+                    ]}
+                    onSelect={(id) => { }}
                 />
             </div>
-            {width <= 600 ? 
-                <table 
-                    className={styles.standingsTable} 
-                    cellPadding={10} 
+            {width <= 600 ?
+                <table
+                    className={styles.standingsTable}
+                    cellPadding={10}
                     cellSpacing={0}
                 >
                     <colgroup>
@@ -52,24 +265,24 @@ const StandingsPage: React.FC = () => {
                             <th className={styles.teamHead}>Team</th>
                             <th>
                                 <StandigsMenuColumn
-                                    items={[{id:'1', value:'MP'}, {id:'2', value:'Wins'}, {id:'3', value:'Draws'}, {id:'4', value:'Loses'}]}
+                                    items={[{ id: '1', value: 'MP' }, { id: '2', value: 'Wins' }, { id: '3', value: 'Draws' }, { id: '4', value: 'Loses' }]}
                                     onSelect={setSelectedCol}
                                 />
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {[1,1,1,1,1,1,1,1,1].map((item,index) => (
+                        {[1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
                             <tr key={index}>
                                 <td>1</td>
                                 <td className={styles.teamCell}>
                                     <span>
                                         <div className={styles.teamLogo}>
-                                            <Image 
+                                            <Image
                                                 src="/testimg/club1.png"
                                                 width={20}
                                                 height={20}
-                                                style={{objectFit:'contain'}}
+                                                style={{ objectFit: 'contain' }}
                                                 alt=""
                                             />
                                         </div>
@@ -78,73 +291,32 @@ const StandingsPage: React.FC = () => {
                                 </td>
                                 <td>selected</td>
                             </tr>
-                        ))}                    
-                    </tbody>               
+                        ))}
+                    </tbody>
                 </table>
                 :
-                <table 
-                    className={styles.standingsTable} 
-                    cellPadding={10} 
+                <AdaptiveTable
+                    data={dataset}
+                    columns={columns}
+                    tableClass={styles.standingsTable}
+                    sortable
+                    colgroup={
+                        <colgroup>
+                            <col width="50" />
+                            <col width="" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="50" />
+                            <col width="60" />
+                        </colgroup>
+                    }
+                    cellPadding={10}
                     cellSpacing={0}
-                >
-                    <colgroup>
-                        <col width="50" />
-                        <col width="" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="60" />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th className={styles.teamHead}>Team</th>
-                            <th>MP</th>
-                            <th>W</th>
-                            <th>D</th>
-                            <th>L</th>
-                            <th>G</th>
-                            <th className={styles.boldCell}>PTS</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {[1,1,1,1,1,1,1,1,1].map((item,index) => (
-                            <tr key={index}>
-                                <td>1</td>
-                                <td className={styles.teamCell}>
-                                    <span>
-                                        <div className={styles.teamLogo}>
-                                            <Image 
-                                                src="/testimg/club1.png"
-                                                width={20}
-                                                height={20}
-                                                style={{objectFit:'contain'}}
-                                                alt=""
-                                            />
-                                        </div>
-                                        Team Name
-                                    </span>
-                                </td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>
-                                    <div className={styles.questionBox}>
-                                        ?
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}                    
-                    </tbody>               
-                </table>
-            }            
+                />
+            }
         </div>
     )
 }
