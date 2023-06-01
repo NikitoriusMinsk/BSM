@@ -326,6 +326,8 @@
     line-height: 14px;
     color: #FFFFFF;
     text-transform: uppercase;
+    width: 54px;
+    height: 36px;
 }
 
 .upcoming {
@@ -342,6 +344,8 @@
     font-size: 12px;
     line-height: 14px;
     color: #FFFFFF;
+    height: 36px;
+    width: 60px;
 }
 
 .matchDate {
@@ -840,6 +844,10 @@
 
     .mainNewsTitle {
         max-width: calc(100% - 24px);
+    }
+
+    .mainNewsDate {
+        font-size: 15px;
     }
 
     .fullWidthNewsBlock {
