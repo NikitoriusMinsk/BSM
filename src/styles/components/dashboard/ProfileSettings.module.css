@@ -362,6 +362,19 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 1440px) {
+    #accountSettings {
+        grid-column-end: 13;
+    }
+
+    #sportDetails {
+        grid-column-end: 13;
+    }
+
+    #sportDetails .content {
+        gap: 30px;
+    }
+}
 
 @media screen and (max-width: 1024px) {
     #accountSettings {
