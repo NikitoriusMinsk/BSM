@@ -226,6 +226,10 @@
     #followers .search {
         max-width: 360px;
     }
+
+    #followers .search>input {
+        height: 42px;
+    }
 }
 
 @media screen and (max-width: 1024px) {
