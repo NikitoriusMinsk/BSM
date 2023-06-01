@@ -34,7 +34,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 11px 24px;
+    padding: 11px 12px 11px 24px;
     border: 1px solid #1A1C2133;
     border-radius: 8px;
     width: 100%;
@@ -332,6 +332,10 @@
         height: 20px;
         width: 20px;
         top: calc(50% - 10px);
-        left: 11px;
+        left: 5px;
+    }
+
+    .react-datepicker__input-container:after {
+        display: none;
     }
 }

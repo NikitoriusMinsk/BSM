@@ -52,7 +52,7 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    padding: 11px 16px 11px 12px;
+    padding: 11px 20px;
     background: #FFFFFF;
     border: 1px solid rgba(26, 28, 33, 0.2);
     border-radius: 8px;
@@ -311,7 +311,7 @@
 .details {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     gap: 40px;
 }
 
@@ -341,7 +341,6 @@
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     width: max-content;
-    margin: auto;
 }
 
 .total.open {
@@ -451,7 +450,6 @@
     justify-content: center;
     align-items: center;
     gap: 7px;
-    min-width: 50px;
 }
 
 .outcome span:first-child {
@@ -529,8 +527,14 @@
         gap: 30px;
     }
 
-    .controls .matchesOptions button {
-        flex: 1;
+    .controls .matchesOptions button:not(:last-child) {
+        max-width: max-content;
+        min-width: max-content;
+    }
+
+    .controls .matchesOptions button:last-child {
+        width: 100%;
+        justify-content: space-between;
     }
 
     .score {
@@ -551,9 +555,6 @@
         justify-content: space-between;
     }
 
-    .controls .matchesOptions button {
-        flex: 1;
-    }
 
     .controls {
         flex-direction: column;
@@ -577,16 +578,24 @@
 
 @media screen and (max-width: 1280px) {
     .percents {
-        gap: 16px;
+        gap: 24px;
     }
 
     .details {
-        gap: 8px;
+        gap: 16px;
     }
 
     .matchLive,
     .matchUpcoming {
         padding: 8px 12px;
+    }
+
+    .total {
+        margin-left: 8px;
+    }
+
+    .matchesOptions button {
+        gap: 12px;
     }
 }
 
@@ -626,14 +635,11 @@
     display: none;
 }
 
-@media screen and (max-width: 768px) {
-    .matchesOptions button {
-        padding: 10px 20px 10px 19px;
-        gap: 12px;
-    }
-}
-
 @media screen and (max-width:425px) {
+    .matchesOptions {
+        display: none;
+    }
+
     .seeMore {
         display: flex;
     }
