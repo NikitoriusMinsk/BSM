@@ -1082,4 +1082,8 @@
     .mainNews .mainNewsLabel {
         display: none;
     }
+
+    .fullWidthNewsBlock .main .news .stats {
+        display: none;
+    }
 }
