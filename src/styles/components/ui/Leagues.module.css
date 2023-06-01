@@ -183,6 +183,7 @@
 .matches {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .match {
@@ -190,6 +191,7 @@
     flex-direction: column;
     border-radius: 8px;
     background: rgba(242, 242, 242, 0.3);
+    width: 100%;
 }
 
 .match:nth-child(even) {
@@ -497,6 +499,24 @@
     color: rgba(26, 28, 33, 0.7);
 }
 
+.seeMore {
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+    border: 1px solid #1A1C2133;
+    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 16px;
+    display: none;
+}
+
 @media screen and (max-width: 1440px) {
     .controls {
         flex-direction: column;
@@ -614,6 +634,10 @@
 }
 
 @media screen and (max-width:425px) {
+    .seeMore {
+        display: flex;
+    }
+
     .outcome {
         display: none;
     }
