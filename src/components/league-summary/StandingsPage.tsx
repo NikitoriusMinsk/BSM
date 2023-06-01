@@ -104,6 +104,7 @@ const StandingsTable: React.FC = () => {
                         }
                     ]}
                     onSelect={() => { }}
+                    alternativeStyle
                 />
             </div>
             {width <= 600 ?

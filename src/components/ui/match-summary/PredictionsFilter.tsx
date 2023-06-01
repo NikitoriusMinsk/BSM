@@ -4,10 +4,11 @@ import styles from '../../../styles/components/ui/match-summary/PredictionsFilte
 interface FilterProps {
     items: { name: string, id: string }[];
     onSelect: (item: { name: string, id: string }) => void;
+    alternativeStyle?: boolean;
 }
 
 const PredictionsFilter: React.FC<FilterProps> = (props) => {
-    const {items, onSelect} = props
+    const { items, onSelect, alternativeStyle = false } = props
     const [selected, setSelected] = useState(items[0])
 
     function handleSelect(item: { name: string, id: string }) {
@@ -18,10 +19,10 @@ const PredictionsFilter: React.FC<FilterProps> = (props) => {
     return (
         <>
             {items.map(item => (
-                <div 
-                    className={`${styles.filterItem} ${selected?.id == item.id && styles.filterActive}`}
+                <div
+                    className={`${styles.filterItem} ${alternativeStyle && styles.alternativeStyle} ${selected?.id == item.id && styles.filterActive}`}
                     key={item.id}
-                    onClick={()=>handleSelect(item)}
+                    onClick={() => handleSelect(item)}
                 >
                     {item.name}
                 </div>

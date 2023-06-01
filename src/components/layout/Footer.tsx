@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
 				/>
 				<div className={styles.column}>
 					<h3>Social Media</h3>
-					<div className={styles.links}>
+					<div className={`${styles.links} ${styles.linksBtns}`}>
 						{SocialLinks.map(({ href, text, image }) => (
 							<SocialLink
 								key={href}
@@ -159,10 +159,10 @@ const Column: React.FC<ColumnProps> = (props) => {
 
 	return (
 		<div className={styles.column}>
-			<h3>
+			<h3
+				onClick={() => setIsOpen(!isOpen)}>
 				<span>{title}</span>
 				<motion.div
-					onClick={() => setIsOpen(!isOpen)}
 					variants={ChevronVariants}
 					animate={isOpen ? "open" : "closed"}
 				>
