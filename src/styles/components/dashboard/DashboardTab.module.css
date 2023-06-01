@@ -408,9 +408,6 @@
     #bookmaker {
         max-height: 180px;
     }
-}
-
-@media screen and (max-width: 1366px) {
 
     #odds,
     #unit,
