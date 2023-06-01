@@ -590,6 +590,10 @@
     .total {
         margin-left: 8px;
     }
+
+    .matchesOptions button {
+        gap: 12px;
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -636,6 +640,10 @@
 }
 
 @media screen and (max-width:425px) {
+    .matchesOptions {
+        display: none;
+    }
+
     .seeMore {
         display: flex;
     }
