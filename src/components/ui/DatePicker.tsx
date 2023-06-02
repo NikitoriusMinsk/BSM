@@ -1,6 +1,7 @@
 import React, { forwardRef, ReactNode, RefObject, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useWindowSize from "src/utils/useWindowSize";
 
 interface DateInputProps {
 	onChange: (date: Date) => void;
@@ -13,7 +14,7 @@ const DateInput: React.FC<DateInputProps> = (props) => {
 	const [startDate, setStartDate] = useState<Date>(
 		defaultDate ? new Date(defaultDate) : new Date()
 	);
-
+	const { width } = useWindowSize()
 	function handleChange(date: Date) {
 		setStartDate(date);
 		onChange(date);
@@ -29,7 +30,7 @@ const DateInput: React.FC<DateInputProps> = (props) => {
 			enableTabLoop={false}
 			wrapperClassName={onlyDropdown ? "dateWrapperHidden" : undefined}
 			open={onlyDropdown}
-			dateFormat={"dd.MM.yy"}
+			dateFormat={width <= 600 ? "dd.MM" : "dd.MM.yy"}
 		/>
 	);
 };
