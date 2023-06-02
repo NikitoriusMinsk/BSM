@@ -300,7 +300,7 @@
 
     .mobileFilters {
         flex-direction: column;
-        gap: 12px;
+        gap: 20px;
     }
 
     .mobileFilters>div>button {
@@ -309,6 +309,14 @@
 
     .mobileFilters>div:first-child {
         height: 42px;
+    }
+
+    .mobileFilters>div:last-child {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: -20px;
+        margin-right: -20px;
+        width: calc(100% + 40px);
     }
 
     .clear {

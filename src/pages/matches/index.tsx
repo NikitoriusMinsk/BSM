@@ -100,7 +100,7 @@ const MatchesPage: NextPage = () => {
 					/>
 				</div>
 				<div className={styles.mobileFilters}>
-					<div>
+					<div style={{ position: 'relative' }}>
 						<TextField
 							icon="/icons/search.svg"
 							placeholder="Search"
