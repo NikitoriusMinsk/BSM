@@ -88,6 +88,11 @@
     .filters {
         grid-column-start: 1;
         flex-direction: row-reverse;
+        gap: 16px;
+    }
+
+    .filters>button:nth-child(2) {
+        width: 168px;
     }
 
     .predictions {

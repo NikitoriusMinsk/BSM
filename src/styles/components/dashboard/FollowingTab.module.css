@@ -228,6 +228,10 @@
     #following .search {
         max-width: 360px;
     }
+
+    #following .search>input {
+        height: 42px;
+    }
 }
 
 @media screen and (max-width: 1024px) {

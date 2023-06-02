@@ -49,8 +49,7 @@ const ProfileSettings: React.FC = () => {
 							<div className={styles.avatar}>
 								<Image
 									src="/images/profile-placeholder.png"
-									height={160}
-									width={160}
+									fill
 									alt=""
 								/>
 							</div>
@@ -133,12 +132,11 @@ const ProfileSettings: React.FC = () => {
 								<div className={styles.image}>
 									<Image
 										src={data.club.image}
-										height={34}
-										width={34}
+										height={40}
+										width={40}
 										alt=""
 									/>
 								</div>
-								<span className={styles.name}>{data.club.name}</span>
 							</div>
 							<div
 								className={styles.edit}
@@ -159,12 +157,11 @@ const ProfileSettings: React.FC = () => {
 								<div className={styles.image}>
 									<Image
 										src={data.country.image}
-										height={34}
-										width={34}
+										height={40}
+										width={40}
 										alt=""
 									/>
 								</div>
-								<span className={styles.name}>{data.country.name}</span>
 							</div>
 							<div
 								className={styles.edit}

@@ -402,15 +402,12 @@
     gap: 4px;
 }
 
-@media screen and (max-height: 1440px) {
+@media screen and (max-width: 1440px) {
 
     #coins,
     #bookmaker {
         max-height: 180px;
     }
-}
-
-@media screen and (max-height: 1366px) {
 
     #odds,
     #unit,

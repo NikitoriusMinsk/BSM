@@ -413,15 +413,6 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 	const { news, h2, h3 } = props;
 	const { width } = useWindowSize();
 
-	function GetNewsCount(width: number) {
-		switch (true) {
-			case width <= 1280:
-				return 1;
-			default:
-				return 2;
-		}
-	}
-
 	return (
 		<div className={styles.fullWidthNewsBlock}>
 			{(h2 || h3) && (
@@ -435,7 +426,7 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 			)}
 			<div className={styles.fullWidthNewsBlockContent}>
 				<div className={styles.main}>
-					{news.slice(0, GetNewsCount(width)).map((news, index) => (
+					{news.slice(0, 2).map((news, index) => (
 						<div
 							key={`news_${index}`}
 							className={styles.news}
@@ -478,54 +469,52 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 					))}
 				</div>
 				<div className={styles.side}>
-					{news
-						.slice(GetNewsCount(width), GetNewsCount(width) + 3)
-						.map((news, index) => (
-							<div
-								key={`news_${index}`}
-								className={styles.news}
-							>
-								<div className={styles.image}>
-									<Image
-										src={news.image}
-										alt={news.title}
-										height={100}
-										width={100}
-										style={{
-											objectFit: "cover",
-										}}
-									/>
-								</div>
-								<div className={styles.info}>
-									<span className={styles.date}>
-										<Moment format="DD MMM YYYY">{news.date}</Moment>
+					{news.slice(2, 5).map((news, index) => (
+						<div
+							key={`news_${index}`}
+							className={styles.news}
+						>
+							<div className={styles.image}>
+								<Image
+									src={news.image}
+									alt={news.title}
+									height={100}
+									width={100}
+									style={{
+										objectFit: "cover",
+									}}
+								/>
+							</div>
+							<div className={styles.info}>
+								<span className={styles.date}>
+									<Moment format="DD MMM YYYY">{news.date}</Moment>
+								</span>
+								<h2 className={styles.title}>
+									{shortenString(news.title, 45)}
+								</h2>
+								<div className={styles.stats}>
+									<span className={styles.stat}>
+										<Image
+											src="/icons/comment.svg"
+											alt="comment"
+											width={16}
+											height={16}
+										/>
+										{news.comments}
 									</span>
-									<h2 className={styles.title}>
-										{shortenString(news.title, 45)}
-									</h2>
-									<div className={styles.stats}>
-										<span className={styles.stat}>
-											<Image
-												src="/icons/comment.svg"
-												alt="comment"
-												width={16}
-												height={16}
-											/>
-											{news.comments}
-										</span>
-										<span className={styles.stat}>
-											<Image
-												src="/icons/views-gray.svg"
-												alt="views"
-												width={16}
-												height={16}
-											/>
-											{news.views}
-										</span>
-									</div>
+									<span className={styles.stat}>
+										<Image
+											src="/icons/views-gray.svg"
+											alt="views"
+											width={16}
+											height={16}
+										/>
+										{news.views}
+									</span>
 								</div>
 							</div>
-						))}
+						</div>
+					))}
 				</div>
 			</div>
 		</div>
