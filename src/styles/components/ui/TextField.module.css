@@ -2,6 +2,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
 .textFieldContainer input {
@@ -16,6 +17,7 @@
     color: rgba(26, 28, 33, 1);
     outline: none;
     width: 100%;
+    height: 100%;
 }
 
 .textFieldContainer input::placeholder {
@@ -35,36 +37,44 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     position: absolute;
-    right: 24px;
+    right: 26px;
     pointer-events: none;
 }
 
 .shrinkSearch {
     min-width: 42px;
+    width: 42px;
+    position: initial;
 }
 
 .shrinkSearch input {
     position: absolute;
+    transition: all .2s ease-in-out;
     z-index: 3;
+    width: 42px;
 }
 
-.shrinkSearch .icon {
+.shrinkSearch:first-child .icon {
     z-index: 3;
-    left: 9px;
+    left: 11px;
+}
+
+.shrinkSearch:last-child .icon {
+    z-index: 3;
+    right: 11px;
 }
 
 .shrinkSearch:first-child input {
-    padding: 13px 0px 13px 41px;
+    padding: 11px 0px 11px 41px;
     padding-right: 0px !important;
-    transition: all .2s ease-in-out;
     left: 0px;
 }
 
 .shrinkSearch:last-child input {
-    padding: 13px 41px 13px 0px;
+    padding: 11px 41px 11px 0px;
     padding-right: 41px !important;
     transition: all .2s ease-in-out;
     right: 0px;
@@ -74,14 +84,11 @@
     padding-left: 13px;
 }
 
-@media screen and (max-width: 768px) {
-    .shrinkSearch input:focus {
-        width: calc(100vw - 40px);
-    }
+.shrinkSearch:first-child:focus-within input,
+.shrinkSearch:first-child input:focus {
+    padding-right: 13px !important;
 }
 
-@media screen and (max-width: 425px) {
-    .shrinkSearch input:focus {
-        width: calc(100vw - 32px);
-    }
+.shrinkSearch input:focus {
+    width: 100%;
 }

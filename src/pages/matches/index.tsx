@@ -72,7 +72,7 @@ const MatchesPage: NextPage = () => {
 				{portalNode && <OutPortal node={portalNode} />}
 				<div className={styles.filters}>
 					<div>
-						<DatePicker onChange={() => {}} />
+						<DatePicker onChange={() => { }} />
 						<TextField
 							icon="/icons/search.svg"
 							placeholder="Search"
@@ -83,12 +83,12 @@ const MatchesPage: NextPage = () => {
 						items={leagues}
 						h3="BY COUNTRY"
 						h2="Choose Matches"
-						onChange={() => {}}
+						onChange={() => { }}
 					/>
 					<NestedFilter
 						items={leagues}
 						h3="OTHER COUNTRIES"
-						onChange={() => {}}
+						onChange={() => { }}
 						withClearButton={false}
 						colapsible={true}
 					/>
@@ -104,11 +104,11 @@ const MatchesPage: NextPage = () => {
 						<TextField
 							icon="/icons/search.svg"
 							placeholder="Search"
-							searchShrinkMobile={true}
+							shouldShrink={width <= 600 ? true : false}
 						/>
-						<DatePicker onChange={() => {}} />
+						<DatePicker onChange={() => { }} />
 						<FilterModal
-							onApply={() => {}}
+							onApply={() => { }}
 							portalNode={portalNode}
 							filters={[
 								{
@@ -156,7 +156,7 @@ const MatchesPage: NextPage = () => {
 					</div>
 					<LeaguesMobileBlocksFilter
 						items={filters}
-						onChange={() => {}}
+						onChange={() => { }}
 					/>
 				</div>
 				<div className={styles.predictions}>
