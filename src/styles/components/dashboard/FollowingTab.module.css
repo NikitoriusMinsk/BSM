@@ -264,7 +264,7 @@
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .followingTab {
         gap: 20px;
     }

@@ -326,7 +326,7 @@
     color: #FFFFFF;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .react-datepicker__input-container:before {
         content: url(/icons/calendar.svg);
         height: 20px;

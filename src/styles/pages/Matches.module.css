@@ -362,7 +362,7 @@
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .predictions {
         grid-column-end: 13;
         grid-row-start: 3;

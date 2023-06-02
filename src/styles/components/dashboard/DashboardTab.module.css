@@ -605,7 +605,7 @@
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     #profit {
         grid-row-start: 1;
         grid-column-start: 1;

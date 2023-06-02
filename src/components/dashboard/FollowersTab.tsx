@@ -48,9 +48,8 @@ const columns = [
 			return (
 				<div className={styles.buttonContainer}>
 					<button
-						className={`${styles.followButton} ${
-							following ? styles.following : styles.follow
-						}`}
+						className={`${styles.followButton} ${following ? styles.following : styles.follow
+							}`}
 					>
 						{following ? "Following" : "Follow"}
 					</button>
@@ -90,9 +89,8 @@ const mobileColumns = [
 			return (
 				<div className={styles.buttonContainer}>
 					<button
-						className={`${styles.followButton} ${
-							following ? styles.following : styles.follow
-						}`}
+						className={`${styles.followButton} ${following ? styles.following : styles.follow
+							}`}
 					>
 						{following ? "Following" : "Follow"}
 					</button>
@@ -183,7 +181,7 @@ const FollowersTab: React.FC = () => {
 							? searchResults
 							: data.followers
 					}
-					columns={width <= 425 ? mobileColumns : columns}
+					columns={width <= 600 ? mobileColumns : columns}
 					header={false}
 					pageSize={20}
 				/>

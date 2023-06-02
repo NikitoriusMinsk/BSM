@@ -453,7 +453,7 @@
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .bestBookmakers {
         padding: 20px 16px;
         margin-right: 0;

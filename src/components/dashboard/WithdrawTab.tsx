@@ -165,7 +165,7 @@ const WithdrawTab: React.FC = () => {
 					<h2>Historical Withdraws</h2>
 					<Table
 						data={data.history}
-						columns={width <= 425 ? mobileColumns : columns}
+						columns={width <= 600 ? mobileColumns : columns}
 						pageSize={10}
 					/>
 				</div>
@@ -279,8 +279,7 @@ const WithdrawModal: React.FC<{ maxValue: number | string; onClose: () => void }
 			const seconds = _timeLeft - minutes * 60;
 			if (_timeLeft > 0) {
 				setTimeLeft(
-					`${minutes > 9 ? minutes : `0${minutes}`}:${
-						seconds > 9 ? seconds : `0${seconds}`
+					`${minutes > 9 ? minutes : `0${minutes}`}:${seconds > 9 ? seconds : `0${seconds}`
 					}`
 				);
 				_timeLeft--;
@@ -290,8 +289,7 @@ const WithdrawModal: React.FC<{ maxValue: number | string; onClose: () => void }
 			}
 		}, 1000);
 		setTimeLeft(
-			`${minutes > 9 ? minutes : `0${minutes}`}:${
-				seconds > 9 ? seconds : `0${seconds}`
+			`${minutes > 9 ? minutes : `0${minutes}`}:${seconds > 9 ? seconds : `0${seconds}`
 			}`
 		);
 	}
@@ -386,7 +384,7 @@ const WithdrawModal: React.FC<{ maxValue: number | string; onClose: () => void }
 					</div>
 				</div>
 				<div className={styles.code}>
-					<button onClick={!timeLeft ? sendCode : () => {}}>
+					<button onClick={!timeLeft ? sendCode : () => { }}>
 						{!timeLeft ? "Send Code" : timeLeft}
 					</button>
 					<input

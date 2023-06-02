@@ -263,7 +263,7 @@
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .followersTab {
         gap: 20px;
     }

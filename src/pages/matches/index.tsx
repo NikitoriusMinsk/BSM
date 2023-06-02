@@ -95,7 +95,7 @@ const MatchesPage: NextPage = () => {
 				</div>
 				<div className={styles.banner}>
 					<Banner
-						height={width <= 425 ? 400 : 200}
+						height={width <= 600 ? 400 : 200}
 						image="/images/banner-placeholder-1.png"
 					/>
 				</div>

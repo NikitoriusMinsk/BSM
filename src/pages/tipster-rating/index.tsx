@@ -312,7 +312,7 @@ const TipsterRating: NextPage = () => {
 					</div>
 					<Table
 						data={tipsters}
-						columns={width > 425 ? columns : mobileColumns}
+						columns={width > 600 ? columns : mobileColumns}
 						sortable={true}
 					/>
 				</div>
@@ -322,7 +322,7 @@ const TipsterRating: NextPage = () => {
 				>
 					<Banner
 						image={"/images/banner-placeholder-1.png"}
-						height={width > 425 ? 200 : 400}
+						height={width > 600 ? 200 : 400}
 					/>
 				</div>
 				<div
@@ -601,7 +601,7 @@ const CountdownTimer: React.FC<CurrentCompetition> = (props) => {
 				<span>Left before the end of the tournament</span>
 			</div>
 			<div className={styles.progress}>
-				{width > 768 || width <= 425 ? (
+				{width > 768 || width <= 600 ? (
 					<CircularProgressbarWithChildren
 						value={progress}
 						maxValue={100}

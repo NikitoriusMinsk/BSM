@@ -86,7 +86,7 @@ const Home: NextPage = () => {
 				className={styles.sideMargin}
 			>
 				<Banner
-					height={width > 425 ? 200 : 420}
+					height={width > 600 ? 200 : 420}
 					image="/images/banner-placeholder-1.png"
 				/>
 			</div>
@@ -345,7 +345,7 @@ const MostTips: React.FC<{ tips: MostTips }> = (props) => {
 				autoPlay={true}
 				loop={true}
 			>
-				{ArrayToChunks(tips, width <= 425 ? 1 : width <= 768 ? 2 : 3).map(
+				{ArrayToChunks(tips, width <= 600 ? 1 : width <= 768 ? 2 : 3).map(
 					(chunk, index) => (
 						<div
 							className={styles.mostTipsList}

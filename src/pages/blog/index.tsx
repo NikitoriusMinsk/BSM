@@ -53,7 +53,7 @@ const BlogPage: NextPage = () => {
 				/>
 			</div>
 			<DisaperingContainer
-				condition={width <= 425}
+				condition={width <= 600}
 				className={`${styles.sideColumn}`}
 			>
 				<div className={styles.sideNewsContainer}>

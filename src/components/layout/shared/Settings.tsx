@@ -167,10 +167,10 @@ const Settings: React.FC = () => {
 								timezone you choose.
 							</span>
 							<div className={styles.settingsItemContent}>
-								{width > 425 ? (
+								{width > 600 ? (
 									<Dropdown
 										items={Languages}
-										onSelect={(id) => {}}
+										onSelect={(id) => { }}
 									/>
 								) : (
 									<TimezoneTab />
@@ -180,10 +180,10 @@ const Settings: React.FC = () => {
 						<div className={styles.settingItem}>
 							<h3>Choose your language</h3>
 							<div className={styles.settingsItemContent}>
-								{width > 425 ? (
+								{width > 600 ? (
 									<Dropdown
 										items={Languages}
-										onSelect={(id) => {}}
+										onSelect={(id) => { }}
 									/>
 								) : (
 									<LanguageTab />
@@ -313,9 +313,8 @@ const TimezoneTab: React.FC = (props) => {
 						<div className={styles.options}>
 							{timezones.map((tz) => (
 								<div
-									className={`${styles.option} ${
-										selected === tz.id && styles.selected
-									}`}
+									className={`${styles.option} ${selected === tz.id && styles.selected
+										}`}
 									onClick={() => setSelected(tz.id)}
 									key={tz.id}
 								>
@@ -403,9 +402,8 @@ const LanguageTab: React.FC = (props) => {
 						>
 							{Languages.map((lang) => (
 								<div
-									className={`${styles.option} ${
-										selected === lang.id && styles.selected
-									}`}
+									className={`${styles.option} ${selected === lang.id && styles.selected
+										}`}
 									key={lang.id}
 									onClick={() => setSelected(lang.id)}
 								>

@@ -410,7 +410,7 @@
 
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .profileSettings {
         gap: 0;
         row-gap: 40px;

@@ -201,7 +201,7 @@ const PredictionsPage: NextPage = () => {
 						/>
 					</div>
 					<div className={styles.predictions}>
-						{/* {width > 425 ? (
+						{/* {width > 600 ? (
 							<SportsSider
 								sports={[
 									{ name: "All", image: "", id: "0" },
@@ -368,7 +368,7 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 				>
 					{ArrayToChunks(
 						tips,
-						width <= 425 ? 1 : width <= 768 ? 2 : width <= 1366 ? 3 : 4
+						width <= 600 ? 1 : width <= 768 ? 2 : width <= 1366 ? 3 : 4
 					).map((tipsChunk, index) => (
 						<div
 							className={styles.slide}

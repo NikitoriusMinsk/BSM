@@ -182,7 +182,7 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .modalContainer .modal {
         width: 100%;
         height: 100%;

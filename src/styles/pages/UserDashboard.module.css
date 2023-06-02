@@ -401,7 +401,7 @@
 
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .navigation .userInfo .stats .stat {
         width: calc(50vw - 40px);
         background-color: #F2F2F24D;

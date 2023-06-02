@@ -42,9 +42,8 @@ const columns = [
 			return (
 				<div className={styles.buttonContainer}>
 					<button
-						className={`${styles.followButton} ${
-							following ? styles.following : styles.follow
-						}`}
+						className={`${styles.followButton} ${following ? styles.following : styles.follow
+							}`}
 					>
 						{following ? "Following" : "Follow"}
 					</button>
@@ -83,9 +82,8 @@ const mobileColumns = [
 			return (
 				<div className={styles.buttonContainer}>
 					<button
-						className={`${styles.followButton} ${
-							following ? styles.following : styles.follow
-						}`}
+						className={`${styles.followButton} ${following ? styles.following : styles.follow
+							}`}
 					>
 						{following ? "Following" : "Follow"}
 					</button>
@@ -140,7 +138,7 @@ export default function ProfileVisitsTab() {
 				<Table
 					data={data.visitors}
 					pageSize={10}
-					columns={width <= 425 ? mobileColumns : columns}
+					columns={width <= 600 ? mobileColumns : columns}
 					header={false}
 				/>
 			</div>

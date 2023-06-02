@@ -134,7 +134,7 @@
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .bestBookmakersList {
         flex-direction: column;
         overflow: visible;

@@ -210,7 +210,7 @@
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .predictionOffers {
         padding: 16px;
         margin-right: 0;

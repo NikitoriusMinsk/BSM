@@ -247,7 +247,7 @@ const TipsterCompetition: NextPage = () => {
 							<div>
 								<Dropdown
 									items={TableDropdownItems}
-									onSelect={() => {}}
+									onSelect={() => { }}
 									label="Tipsters by:"
 									minWidth={250}
 								/>
@@ -255,7 +255,7 @@ const TipsterCompetition: NextPage = () => {
 						</div>
 						<Table
 							data={tipsters}
-							columns={width > 425 ? columns : mobileColumns}
+							columns={width > 600 ? columns : mobileColumns}
 							pageSize={10}
 							sortable={true}
 						/>
@@ -515,7 +515,7 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 					<div>
 						<Dropdown
 							items={CompetitionDropdownItems}
-							onSelect={() => {}}
+							onSelect={() => { }}
 							label="Time"
 							style={"light"}
 						/>
@@ -523,14 +523,14 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 					<div>
 						<Dropdown
 							items={CompetitionSportItems}
-							onSelect={() => {}}
+							onSelect={() => { }}
 							style={"light"}
 						/>
 					</div>
 				</div>
 				<div className={styles.filterBtnWrap}>
 					<button className={styles.filterBtn}>
-						<Image 
+						<Image
 							src={'/icons/filter-white.svg'}
 							alt=""
 							width={20}
@@ -561,11 +561,11 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 						offset: {
 							next: {
 								top: 0,
-								side: width > 1440 ? 140 : width > 1024 ? 30 : width > 425 ? 20 : 16,
+								side: width > 1440 ? 140 : width > 1024 ? 30 : width > 600 ? 20 : 16,
 							},
 							prev: {
 								top: 0,
-								side: width > 1440 ? 140 : width > 1366 ? 40 : width > 1024 ? 30 : width > 425 ? 20 : 16,
+								side: width > 1440 ? 140 : width > 1366 ? 40 : width > 1024 ? 30 : width > 600 ? 20 : 16,
 							},
 						},
 					}}
@@ -615,7 +615,7 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 						</div>
 					))}
 				</Slider>
-			</div>			
+			</div>
 		</div>
 	);
 };
@@ -626,7 +626,7 @@ interface CompetitionParticipantProps {
 
 const CompetitionParticipant: React.FC<
 	inferArrayElementType<inferArrayElementType<PreviousCompetitions>["users"]> &
-		CompetitionParticipantProps
+	CompetitionParticipantProps
 > = (props) => {
 	const {
 		avgProfit,
@@ -672,9 +672,8 @@ const CompetitionParticipant: React.FC<
 							data-place={place}
 						>
 							<Image
-								src={`/images/competition-crown-${
-									place <= 3 ? place : "other"
-								}.svg`}
+								src={`/images/competition-crown-${place <= 3 ? place : "other"
+									}.svg`}
 								fill
 								alt=""
 							/>
