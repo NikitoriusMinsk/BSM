@@ -632,7 +632,8 @@
     display: flex;
     flex-direction: row;
     gap: 40px;
-    flex: 1;
+    /* dont ask */
+    flex: 9;
 }
 
 .fullWidthNewsBlockContent .main .news {
@@ -667,8 +668,8 @@
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 18px;
+    line-height: 22px;
     color: #FFFFFF;
 }
 
@@ -697,8 +698,9 @@
 .fullWidthNewsBlockContent .side {
     display: flex;
     flex-direction: column;
-    gap: 35px;
-    flex: 0.2;
+    gap: 25px;
+    /* dont ask */
+    flex: 2.77;
 }
 
 .fullWidthNewsBlockContent .side .news {
@@ -788,6 +790,19 @@
     .wideNews {
         margin-left: -40px;
     }
+
+    .fullWidthNewsBlockContent .main .news .info {
+        bottom: 60px;
+        width: calc(100% - 40px)
+    }
+
+    .fullWidthNewsBlockContent .main .news .stats {
+        bottom: 24px;
+    }
+
+    .fullWidthNewsBlockContent {
+        gap: 30px;
+    }
 }
 
 @media screen and (max-width: 1366px) {
@@ -803,6 +818,22 @@
 @media screen and (max-width: 1280px) {
     .newsBlockContainer .newsBlock .newsBlockContent .news {
         width: calc(33% - 17px);
+    }
+
+    .fullWidthNewsBlockContent .side .news:nth-child(3) {
+        display: none;
+    }
+
+    .fullWidthNewsBlockContent .main .news {
+        min-height: unset;
+    }
+
+    .fullWidthNewsBlockContent .main .news .stats {
+        display: none;
+    }
+
+    .fullWidthNewsBlockContent .main .news .info {
+        bottom: 16px;
     }
 }
 
@@ -837,6 +868,26 @@
 
     .wideNews {
         margin-left: -20px;
+    }
+
+    .fullWidthNewsBlockContent .side .news:nth-child(3) {
+        display: flex;
+    }
+
+    .fullWidthNewsBlockContent .main .news:nth-child(2) {
+        display: none;
+    }
+
+    .fullWidthNewsBlockContent {
+        gap: 20px;
+    }
+
+    .fullWidthNewsBlockContent .main {
+        flex: 2;
+    }
+
+    .fullWidthNewsBlockContent .side {
+        flex: 1;
     }
 }
 
@@ -885,6 +936,14 @@
 
     .newsBlockContainer {
         padding-left: 24px;
+    }
+
+    .fullWidthNewsBlockContent .main .news:nth-child(2) {
+        display: flex;
+    }
+
+    .fullWidthNewsBlockContent .main .news {
+        min-height: 234px;
     }
 }
 
@@ -1003,7 +1062,7 @@
 
     .fullWidthNewsBlock {
         margin-right: 0;
-        padding: 16px;
+        padding: 0px;
         grid-row-start: 3;
         grid-row-end: 4;
     }
@@ -1019,10 +1078,12 @@
 
     .fullWidthNewsBlockContent .main .news {
         min-height: 210px;
+        border-radius: 0;
     }
 
     .fullWidthNewsBlockContent .side {
         width: 100%;
+        padding: 0 16px;
     }
 
     .mainColumn.bottom {
