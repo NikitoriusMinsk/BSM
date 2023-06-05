@@ -192,20 +192,20 @@ const columns = [
         header: () => 'Form',
         cell: info => (
             <div className={styles.form}>
-                {info.getValue().map(res => {
+                {info.getValue().map((res, index) => {
                     switch (res) {
                         case 'W':
-                            return <div className={styles.winBox}>
+                            return <div className={styles.winBox} key={info.row.getValue('position') + "-" + index}>
                                 W
                             </div>
                             break;
                         case 'D':
-                            return <div className={styles.drawBox}>
+                            return <div className={styles.drawBox} key={info.row.getValue('position') + "-" + index}>
                                 D
                             </div>
                             break;
                         case 'L':
-                            return <div className={styles.loseBox}>
+                            return <div className={styles.loseBox} key={info.row.getValue('position') + "-" + index}>
                                 L
                             </div>
                             break;
@@ -269,20 +269,20 @@ const StandingsPage: React.FC = () => {
             cell: info => {
                 if (selectedCol.column == 'form')
                     return (<div className={styles.form}>
-                        {[info.getValue()].flat().map(res => {
+                        {[info.getValue()].flat().map((res, index) => {
                             switch (res) {
                                 case 'W':
-                                    return <div className={styles.winBox}>
+                                    return <div className={styles.winBox} key={info.row.getValue('position') + "-" + index}>
                                         W
                                     </div>
                                     break;
                                 case 'D':
-                                    return <div className={styles.drawBox}>
+                                    return <div className={styles.drawBox} key={info.row.getValue('position') + "-" + index}>
                                         D
                                     </div>
                                     break;
                                 case 'L':
-                                    return <div className={styles.loseBox}>
+                                    return <div className={styles.loseBox} key={info.row.getValue('position') + "-" + index}>
                                         L
                                     </div>
                                     break;
