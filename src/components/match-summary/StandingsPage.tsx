@@ -185,7 +185,11 @@ const columns = [
                 PTS
             </div>
         ),
-        cell: info => info.renderValue(),
+        cell: (info) => (
+            <div className={styles.boldCell}>
+                {info.renderValue()}
+            </div>
+        ),
         enableSorting: false
     }),
     columnHelper.accessor("form", {
