@@ -8,26 +8,26 @@ import Prediction from '@components/ui/Prediction'
 
 const PredictionsPage: React.FC = () => {
     const { data, isLoading } = trpc.matches.getMatchTips.useQuery()
-    console.log(data)
+
     return (
         <div className={styles.pageContainer}>
             <div className={styles.filter}>
-                <PredictionsFilter 
+                <PredictionsFilter
                     items={[
                         {
-                            id:'1', 
-                            name:"All"
+                            id: '1',
+                            name: "All"
                         },
                         {
-                            id:'2', 
-                            name:"Free"
+                            id: '2',
+                            name: "Free"
                         },
                         {
-                            id:'3', 
-                            name:"Paid"
+                            id: '3',
+                            name: "Paid"
                         }
-                    ]} 
-                    onSelect={(id) => {}}
+                    ]}
+                    onSelect={(id) => { }}
                 />
             </div>
             <div className={styles.predictions}>
