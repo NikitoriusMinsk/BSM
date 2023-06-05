@@ -3,22 +3,22 @@ import { motion, AnimatePresence } from "framer-motion"
 import styles from '../../../styles/components/ui/match-summary/StandigsMenuColumn.module.css'
 import Image from "next/image"
 import Draggable from 'react-draggable'
-import WheelPicker from 'react-simple-wheel-picker'
+import WheelPicker, { PickerData } from 'react-simple-wheel-picker'
 import SubmitButton from "../SubmitButton"
 
 interface MenuProps {
-    items: { value: string, id: string }[];
-    selectedItem?: { value: string, id: string };
-    onSelect: (item?: { value: string, id: string }) => void;
+    items: { value: string, id: string, column: string }[];
+    selectedItem?: { value: string, id: string, column: string };
+    onSelect: (item?: { value: string, id: string, column: string }) => void;
 }
 
 const StandigsMenuColumn: React.FC<MenuProps> = (props) => {
-    const {items, selectedItem, onSelect} = props
+    const { items, selectedItem, onSelect } = props
     const [isOpen, setIsOpen] = useState(false)
     const [selected, setSelected] = useState(selectedItem || items[0])
     const [selectedDynamic, setSelectedDynamic] = useState(selectedItem || items[0])
-    const [dragState, setDragState] = useState({y: 0})
-    
+    const [dragState, setDragState] = useState({ y: 0 })
+
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden'
@@ -26,7 +26,7 @@ const StandigsMenuColumn: React.FC<MenuProps> = (props) => {
         else {
             document.body.style.overflow = ''
         }
-    },[isOpen])
+    }, [isOpen])
 
     function handleSelect() {
         setSelected(selectedDynamic)
@@ -34,13 +34,14 @@ const StandigsMenuColumn: React.FC<MenuProps> = (props) => {
         setIsOpen(false);
     }
 
-    const handleOnChange = (target: any) => {
-        setSelectedDynamic(target)
+    const handleOnChange = (target: PickerData) => {
+        const sctd = items.find(i => i.id == target.id)
+        setSelectedDynamic(sctd)
     }
 
     return (
         <div className={styles.menuContainer}>
-            <div 
+            <div
                 className={styles.menuTitle}
                 onClick={() => setIsOpen(!isOpen)}
             >
@@ -50,7 +51,7 @@ const StandigsMenuColumn: React.FC<MenuProps> = (props) => {
                         src="/icons/chevron-down.svg"
                         width={20}
                         height={20}
-                        style={{objectFit:'contain',objectPosition:"center center"}}
+                        style={{ objectFit: 'contain', objectPosition: "center center" }}
                         alt=""
                     />
                 </div>
@@ -58,34 +59,34 @@ const StandigsMenuColumn: React.FC<MenuProps> = (props) => {
             <AnimatePresence>
                 {isOpen &&
                     <>
-                        <motion.div 
-                            className={styles.back} 
+                        <motion.div
+                            className={styles.back}
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            transition={{duration:0.2, ease:"easeInOut"}}
+                            transition={{ duration: 0.2, ease: "easeInOut" }}
                             onClick={() => setIsOpen(!isOpen)}
                         />
-                        <Draggable 
-                            handle={'.'+styles.stickArea} 
-                            axis="y" 
-                            bounds={{top: 0}} 
+                        <Draggable
+                            handle={'.' + styles.stickArea}
+                            axis="y"
+                            bounds={{ top: 0 }}
                             onDrag={(e, ui) => {
                                 setDragState({ y: dragState.y + ui.deltaY })
                             }}
-                            onStop = {() => {
-                                if (dragState.y>10) {
-                                    setDragState({y: 0})
+                            onStop={() => {
+                                if (dragState.y > 10) {
+                                    setDragState({ y: 0 })
                                     setIsOpen(false)
                                 }
                             }}
                         >
-                            <motion.div 
+                            <motion.div
                                 className={styles.menuArea}
                                 initial={{ opacity: 0, bottom: -100 }}
                                 animate={{ opacity: 1, bottom: 0 }}
                                 exit={{ opacity: 0, bottom: "-80%" }}
-                                transition={{duration:0.2, ease:"easeInOut"}}
+                                transition={{ duration: 0.2, ease: "easeInOut" }}
                             >
                                 <div className={styles.stickArea} >
                                     <div className={styles.stick} />
@@ -104,7 +105,7 @@ const StandigsMenuColumn: React.FC<MenuProps> = (props) => {
                                         shadowColor="none"
                                     />
                                 </div>
-                                <button 
+                                <button
                                     className={styles.applyButton}
                                     onClick={handleSelect}
                                 >
@@ -114,7 +115,7 @@ const StandigsMenuColumn: React.FC<MenuProps> = (props) => {
                         </Draggable>
                     </>
                 }
-            </AnimatePresence>            
+            </AnimatePresence>
         </div>
     )
 }

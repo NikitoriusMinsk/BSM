@@ -221,7 +221,86 @@ const columns = [
 
 const StandingsPage: React.FC = () => {
     const { width } = useWindowSize()
-    const [selectedCol, setSelectedCol] = useState<{ value: string, id: string }>()
+    const [selectedCol, setSelectedCol] = useState<{ value: string, id: string, column: string }>({ id: '5', value: 'Points', column: 'pts' })
+
+    const columnsMobile = [
+        columnHelper.accessor("position", {
+            header: () => '#',
+            cell: info => info.renderValue(),
+            enableSorting: true,
+        }),
+        columnHelper.accessor("team", {
+            header: () => (
+                <div className={styles.teamHead}>
+                    Team
+                </div>
+            ),
+            cell: info => (
+                <div className={styles.teamCell}>
+                    <span>
+                        <div className={styles.teamLogo}>
+                            <Image
+                                src="/testimg/club1.png"
+                                width={20}
+                                height={20}
+                                style={{ objectFit: 'contain' }}
+                                alt=""
+                            />
+                        </div>
+                        {info.getValue()}
+                    </span>
+                </div>
+            ),
+            enableSorting: false
+        }),
+        columnHelper.accessor(selectedCol.column as keyof typeof dataset[0], {
+            header: () => <StandigsMenuColumn
+                items={[
+                    { id: '1', value: 'MP', column: 'mp' },
+                    { id: '2', value: 'Wins', column: 'w' },
+                    { id: '3', value: 'Draws', column: 'd' },
+                    { id: '4', value: 'Loses', column: 'l' },
+                    { id: '5', value: 'Points', column: 'pts' },
+                    { id: '6', value: 'Form', column: 'form' }
+                ]}
+                onSelect={selectCol}
+                selectedItem={selectedCol}
+            />,
+            cell: info => {
+                if (selectedCol.column == 'form')
+                    return (<div className={styles.form}>
+                        {[info.getValue()].flat().map(res => {
+                            switch (res) {
+                                case 'W':
+                                    return <div className={styles.winBox}>
+                                        W
+                                    </div>
+                                    break;
+                                case 'D':
+                                    return <div className={styles.drawBox}>
+                                        D
+                                    </div>
+                                    break;
+                                case 'L':
+                                    return <div className={styles.loseBox}>
+                                        L
+                                    </div>
+                                    break;
+                                default:
+                                    break;
+                            }
+                        })}
+                    </div>)
+                else
+                    return info.renderValue()
+            },
+            enableSorting: false,
+        }),
+    ]
+
+    const selectCol = (col?: { value: string, id: string, column: string }) => {
+        setSelectedCol(col || { id: '5', value: 'Points', column: 'pts' })
+    }
 
     return (
         <div className={styles.pageContainer}>
@@ -249,51 +328,21 @@ const StandingsPage: React.FC = () => {
                 />
             </div>
             {width <= 600 ?
-                <table
-                    className={styles.standingsTable}
+                <AdaptiveTable
+                    data={dataset}
+                    columns={columnsMobile}
+                    tableClass={styles.standingsTable}
+                    sortable
+                    colgroup={
+                        <colgroup>
+                            <col width="25" />
+                            <col width="50%" />
+                            <col width="50%" />
+                        </colgroup>
+                    }
                     cellPadding={10}
                     cellSpacing={0}
-                >
-                    <colgroup>
-                        <col width="25" />
-                        <col width="50%" />
-                        <col width="50%" />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th className={styles.teamHead}>Team</th>
-                            <th>
-                                <StandigsMenuColumn
-                                    items={[{ id: '1', value: 'MP' }, { id: '2', value: 'Wins' }, { id: '3', value: 'Draws' }, { id: '4', value: 'Loses' }]}
-                                    onSelect={setSelectedCol}
-                                />
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {[1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
-                            <tr key={index}>
-                                <td>1</td>
-                                <td className={styles.teamCell}>
-                                    <span>
-                                        <div className={styles.teamLogo}>
-                                            <Image
-                                                src="/testimg/club1.png"
-                                                width={20}
-                                                height={20}
-                                                style={{ objectFit: 'contain' }}
-                                                alt=""
-                                            />
-                                        </div>
-                                        Team Name
-                                    </span>
-                                </td>
-                                <td>selected</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                />
                 :
                 <AdaptiveTable
                     data={dataset}
