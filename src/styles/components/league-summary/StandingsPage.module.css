@@ -37,7 +37,7 @@
     color: #1A1C21;
 }
 
-.standingsTable th:first-child div:after {
+/* .standingsTable th:first-child div:after {
     content: "";
     border-bottom: 4px solid #1A1C21;
     border-right: 4px solid #1A1C21;
@@ -47,7 +47,7 @@
     width: 0px;
     height: 0px;
     transform: rotateZ(45deg);
-}
+} */
 
 .standingsTable th {
     font-family: 'Samsung Sans';
@@ -466,5 +466,21 @@
     .topScorersTable tbody td:first-child {
         font-size: 12px;
         line-height: 14px;
+    }
+
+    .questionBox,
+    .winBox,
+    .loseBox,
+    .drawBox {
+        font-size: 12px;
+        line-height: 14px;
+        width: 20px;
+        height: 20px;
+        padding: 2px;
+        padding-top: 4px;
+    }
+
+    .form {
+        gap: 6px;
     }
 }
