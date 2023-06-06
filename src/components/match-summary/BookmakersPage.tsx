@@ -127,9 +127,9 @@ const BookmakersPage: React.FC = () => {
                 colgroup={
                     <colgroup>
                         <col width="" />
-                        <col width="50" />
-                        <col width="50" />
-                        <col width="50" />
+                        <col width="80" />
+                        <col width="80" />
+                        <col width="80" />
                     </colgroup>
                 }
                 cellSpacing={0}

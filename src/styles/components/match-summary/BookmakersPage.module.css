@@ -122,7 +122,7 @@
         gap: 16px;
     }
 
-    .bookmaker {
+    .bookmakersTable>tbody>tr {
         padding: 16px;
         gap: 16px;
     }
