@@ -446,10 +446,178 @@ const StandingsTable: React.FC = () => {
     )
 }
 
+const datasetScorers = [
+    {
+        "position": 1,
+        "player": "Isadora Francis",
+        "team": "Köthen",
+        "g": 23,
+        "a": 18
+    },
+    {
+        "position": 2,
+        "player": "Cedric Hodges",
+        "team": "San Juan de Dios",
+        "g": 23,
+        "a": 7
+    },
+    {
+        "position": 3,
+        "player": "Serena Mccormick",
+        "team": "Zhytomyr",
+        "g": 9,
+        "a": 5
+    },
+    {
+        "position": 4,
+        "player": "Emerson Lopez",
+        "team": "Hà Nội",
+        "g": 14,
+        "a": 19
+    },
+    {
+        "position": 5,
+        "player": "Hayes Hernandez",
+        "team": "Daman",
+        "g": 4,
+        "a": 13
+    },
+    {
+        "position": 6,
+        "player": "September Lyons",
+        "team": "San Andrés",
+        "g": 27,
+        "a": 6
+    },
+    {
+        "position": 7,
+        "player": "Axel Delaney",
+        "team": "Kurgan",
+        "g": 12,
+        "a": 28
+    },
+    {
+        "position": 8,
+        "player": "Elliott Payne",
+        "team": "Jackson",
+        "g": 14,
+        "a": 26
+    },
+    {
+        "position": 9,
+        "player": "Otto Pace",
+        "team": "Saint-Étienne-du-Rouvray",
+        "g": 22,
+        "a": 25
+    },
+    {
+        "position": 10,
+        "player": "Carter England",
+        "team": "Khrustalnyi",
+        "g": 6,
+        "a": 14
+    }
+]
+
+const columnHelperScorers =
+    createColumnHelper<typeof datasetScorers[0]>();
+
+const columnsScorers = [
+    columnHelperScorers.accessor("position", {
+        header: () => '#',
+        cell: info => info.renderValue(),
+        enableSorting: true,
+    }),
+    columnHelperScorers.accessor("player", {
+        header: () => 'Player',
+        cell: info => (
+            <div className={styles.teamCell}>
+                <span>
+                    <div className={styles.teamLogo}>
+                        <Image
+                            src="/testimg/club1.png"
+                            width={20}
+                            height={20}
+                            style={{ objectFit: 'contain' }}
+                            alt=""
+                        />
+                    </div>
+                    {info.getValue()}
+                </span>
+            </div>
+        ),
+        enableSorting: false
+    }),
+    columnHelperScorers.accessor("team", {
+        header: () => 'Team',
+        cell: info => info.renderValue(),
+        enableSorting: false
+    }),
+    columnHelperScorers.accessor("g", {
+        header: () => 'G',
+        cell: info => info.renderValue(),
+        enableSorting: false
+    }),
+    columnHelperScorers.accessor("a", {
+        header: () => 'A',
+        cell: info => info.renderValue(),
+        enableSorting: false
+    })
+];
+
 const TopScorersTable: React.FC = () => {
     const { width } = useWindowSize()
     const portalNode = usePortal();
-    const [selectedCol, setSelectedCol] = useState<{ value: string, id: string }>()
+    const [selectedCol, setSelectedCol] = useState<{ value: string, id: string, column: string }>({ id: '2', value: 'Goals', column: 'g' })
+
+    const columnsMobile = [
+        columnHelperScorers.accessor("position", {
+            header: () => '#',
+            cell: info => info.renderValue(),
+            enableSorting: true,
+        }),
+        columnHelperScorers.accessor("player", {
+            header: () => (
+                <div className={styles.teamHead}>
+                    Player
+                </div>
+            ),
+            cell: info => (
+                <div className={styles.teamCell}>
+                    <span>
+                        <div className={styles.teamLogo}>
+                            <Image
+                                src="/testimg/club1.png"
+                                width={20}
+                                height={20}
+                                style={{ objectFit: 'contain' }}
+                                alt=""
+                            />
+                        </div>
+                        {info.getValue()}
+                    </span>
+                </div>
+            ),
+            enableSorting: false
+        }),
+        columnHelperScorers.accessor(selectedCol.column as keyof typeof datasetScorers[0], {
+            header: () => <StandigsMenuColumn
+                items={[
+                    { id: '1', value: 'Team', column: 'team' },
+                    { id: '2', value: 'Goals', column: 'g' },
+                    { id: '3', value: 'Assists', column: 'a' }
+                ]}
+                onSelect={selectCol}
+                selectedItem={selectedCol}
+            />,
+            cell: info => info.renderValue(),
+            enableSorting: false,
+        }),
+    ]
+
+    const selectCol = (col?: { value: string, id: string, column: string }) => {
+        setSelectedCol(col || { id: '2', value: 'Goals', column: 'g' })
+    }
 
     return (
         <PortalContext.Provider value={{ portalNode }}>
@@ -474,52 +642,23 @@ const TopScorersTable: React.FC = () => {
                                 label="Nationality:"
                             />
                         </div>
-                        <table
-                            className={styles.topScorersTable}
+                        <AdaptiveTable
+                            data={datasetScorers}
+                            columns={columnsScorers}
+                            tableClass={styles.topScorersTable}
+                            sortable
+                            colgroup={
+                                <colgroup>
+                                    <col width="50" />
+                                    <col width="" />
+                                    <col width="" />
+                                    <col width="50" />
+                                    <col width="50" />
+                                </colgroup>
+                            }
                             cellPadding={10}
                             cellSpacing={0}
-                        >
-                            <colgroup>
-                                <col width="50" />
-                                <col width="" />
-                                <col width="" />
-                                <col width="50" />
-                                <col width="50" />
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th className={styles.teamHead}>Player</th>
-                                    <th>Team</th>
-                                    <th>G</th>
-                                    <th>A</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {[1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
-                                    <tr key={index}>
-                                        <td>1</td>
-                                        <td className={styles.teamCell}>
-                                            <span>
-                                                <div className={styles.teamLogo}>
-                                                    <Image
-                                                        src="/testimg/club1.png"
-                                                        width={20}
-                                                        height={20}
-                                                        style={{ objectFit: 'contain' }}
-                                                        alt=""
-                                                    />
-                                                </div>
-                                                Team Name
-                                            </span>
-                                        </td>
-                                        <td>Club name</td>
-                                        <td>1</td>
-                                        <td>1</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                        />
                     </>
                     :
                     <>
@@ -570,51 +709,21 @@ const TopScorersTable: React.FC = () => {
                             </div>
                             <button className={styles.resetBtnM}>Reset</button>
                         </div>
-                        <table
-                            className={styles.topScorersTable}
+                        <AdaptiveTable
+                            data={datasetScorers}
+                            columns={columnsMobile}
+                            tableClass={styles.topScorersTable}
+                            sortable
+                            colgroup={
+                                <colgroup>
+                                    <col width="25" />
+                                    <col width="50%" />
+                                    <col width="50%" />
+                                </colgroup>
+                            }
                             cellPadding={10}
                             cellSpacing={0}
-                        >
-                            <colgroup>
-                                <col width="25" />
-                                <col width="50%" />
-                                <col width="50%" />
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th className={styles.teamHead}>Player</th>
-                                    <th>
-                                        {/* <StandigsMenuColumn
-                                            items={[{ id: '1', value: 'Team' }, { id: '2', value: 'Goals' }, { id: '3', value: 'Assists' }]}
-                                            onSelect={setSelectedCol}
-                                        /> */}
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {[1, 1, 1, 1, 1, 1, 1, 1, 1].map((item, index) => (
-                                    <tr key={index}>
-                                        <td>1</td>
-                                        <td className={styles.teamCell}>
-                                            <span>
-                                                <div className={styles.teamLogo}>
-                                                    <Image
-                                                        src="/testimg/club1.png"
-                                                        width={20}
-                                                        height={20}
-                                                        style={{ objectFit: 'contain' }}
-                                                        alt=""
-                                                    />
-                                                </div>
-                                                Player name
-                                            </span>
-                                        </td>
-                                        <td>Club name</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                        />
                     </>
                 }
 
