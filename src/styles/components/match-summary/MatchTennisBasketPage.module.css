@@ -32,7 +32,7 @@
     margin-top: -10px;
 }
 
-.tableSummary .header th {
+.tableSummary>thead>tr th {
     background: rgba(242, 242, 242, 0.5);
     padding: 12px 10px;
     font-family: 'Samsung Sans';
@@ -44,13 +44,13 @@
     text-align: left;
 }
 
-.tableSummary .header th:first-child {
+.tableSummary>thead>tr th:first-child {
     padding-left: 16px;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
 }
 
-.tableSummary .header th:last-child {
+.tableSummary>thead>tr th:last-child {
     padding-right: 16px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -458,13 +458,13 @@
         gap: 12px;
     }
 
-    .tableSummary .header th:first-child,
+    .tableSummary>thead>tr th:first-child,
     .tableSummary tbody td:first-child {
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
     }
 
-    .tableSummary .header th:last-child,
+    .tableSummary>thead>tr th:last-child,
     .tableSummary tbody td:last-child {
         border-top-right-radius: 0px;
         border-bottom-right-radius: 0px;
