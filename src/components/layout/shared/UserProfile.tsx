@@ -17,7 +17,7 @@ const UserProfile: React.FC = () => {
 		return (
 			<button
 				className={styles.button}
-				onClick={() => signIn()}
+				onClick={() => signIn("keycloak")}
 			>
 				Sign In
 			</button>
@@ -315,7 +315,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
 							</div>
 							<div
 								className={styles.menuItem}
-								onClick={() => signOut()}
+								onClick={async () => await signOut()}
 							>
 								<Image
 									src="/icons/profile/logout.svg"

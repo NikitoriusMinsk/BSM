@@ -9,6 +9,9 @@ export const serverSchema = z.object({
     NEXTAUTH_SECRET: z.string(),
     NEXTAUTH_URL: z.string().url().nullish(),
     ANALYZE: z.string().nullish(),
+    KEYCLOAK_CLIENT_ID: z.string(),
+    KEYCLOAK_CLIENT_SECRET: z.string(),
+    KEYCLOAK_ISSUER: z.string().url()
     //   DISCORD_CLIENT_ID: z.string(),
     //   DISCORD_CLIENT_SECRET: z.string(),
 });
@@ -20,7 +23,6 @@ export const serverSchema = z.object({
  */
 export const clientSchema = z.object({
     // NEXT_PUBLIC_BAR: z.string(),
-    NEXT_PUBLIC_API_URL: z.string(),
 });
 
 /**
