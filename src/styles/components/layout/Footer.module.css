@@ -177,6 +177,14 @@
         font-size: 12px;
         line-height: 20px;
     }
+
+    .socialLink {
+        padding: 7px 20px 7px 8px;
+    }
+
+    .column {
+        flex: initial;
+    }
 }
 
 @media screen and (max-width: 600px) {
