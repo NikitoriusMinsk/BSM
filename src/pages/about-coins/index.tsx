@@ -38,6 +38,7 @@ const AboutCoins: NextPage = () => {
 						alt=""
 						style={{
 							objectFit: "contain",
+							objectPosition: "bottom"
 						}}
 					/>
 				</div>

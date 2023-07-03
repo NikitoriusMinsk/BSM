@@ -4,7 +4,7 @@
     grid-column-end: 13;
     grid-row-start: 1;
     grid-row-end: 2;
-    height: 400px;
+    height: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,6 +13,7 @@
     padding: 0 480px;
     margin-right: -135px;
     margin-left: -60px;
+    overflow: hidden;
 }
 
 .header .background {
@@ -26,7 +27,7 @@
 
 .header .coins {
     position: absolute;
-    top: 20px;
+    top: 0px;
     left: -100px;
     height: 100%;
     width: 100%;
@@ -213,30 +214,44 @@
     .header {
         margin-right: -30px;
         margin-left: -40px;
-        padding: 0 300px;
-        height: 300px;
+        padding: 0 250px;
+        /* height: 300px; */
     }
 
     .header .coins {
-        left: -50px;
+        width: calc(100% + 320px);
     }
 
 }
 
+@media screen and (max-width: 1366px) {
+    .header .coins {
+        width: calc(100% + 360px);
+    }
+}
+
 @media screen and (max-width: 1280px) {
     .header {
-        padding: 0 100px;
+        margin-left: -30px;
+        padding: 0 200px;
+    }
+
+    .header .coins {
+        left: -110px;
+        width: calc(100% + 450px);
     }
 }
 
 @media screen and (max-width: 1024px) {
     .header {
-        margin-right: 0;
-        height: 250px;
+        margin-right: -20px;
+        margin-right: -20px;
+        padding: 0 120px;
     }
 
     .header .coins {
-        left: -25px;
+        left: -120px;
+        width: 180%;
     }
 
     .mainColumn {
@@ -247,8 +262,16 @@
 @media screen and (max-width: 768px) {
     .header {
         margin-right: 0;
-        padding: 0 75px;
-        height: 200px;
+        margin-left: 0;
+        padding: 0 50px;
+        /* height: 200px; */
+    }
+
+    .header .coins {
+        left: -55%;
+        width: 220%;
+        height: 380px;
+        margin-top: 40px;
     }
 
     .mainColumn {
@@ -259,11 +282,15 @@
 
 @media screen and (max-width: 600px) {
     .header {
-        height: 120px;
+        height: 130px;
     }
 
     .header .coins {
-        left: -15px;
+        left: -60%;
+        right: -60%;
+        width: 210%;
+        height: 100%;
+        margin-top: 0px;
     }
 
     .header h2 {
