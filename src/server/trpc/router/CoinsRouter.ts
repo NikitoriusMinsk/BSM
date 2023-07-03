@@ -6,37 +6,37 @@ import { publicProcedure, router } from "../trpc";
 const methodsTemp = [
 	{
 		text: "Join our Facebook",
-		icon: "/icons/social/facebook-colored.svg",
+		icon: "/icons/about-coins/facebook.svg",
 		status: MethodStatus.unavailable,
 		reward: 10,
 	},
 	{
 		text: "Complete creating your profile",
-		icon: "/icons/profile.svg",
+		icon: "/icons/about-coins/profile.svg",
 		status: MethodStatus.unavailable,
 		reward: 24,
 	},
 	{
 		text: "Join our Instagram",
-		icon: "/icons/social/instagram-colored.svg",
+		icon: "/icons/about-coins/instagram.svg",
 		status: MethodStatus.available,
 		reward: 10,
 	},
 	{
 		text: "Add an Email address",
-		icon: "/icons/email.svg",
+		icon: "/icons/about-coins/mail.svg",
 		status: MethodStatus.claimed,
 		reward: 10,
 	},
 	{
 		text: "Join our Twitter",
-		icon: "/icons/social/twitter-colored.svg",
+		icon: "/icons/about-coins/twitter.svg",
 		status: MethodStatus.available,
 		reward: 10,
 	},
 	{
 		text: "Join our Telegram",
-		icon: "/icons/social/telegram-colored.svg",
+		icon: "/icons/about-coins/telegram.svg",
 		status: MethodStatus.unavailable,
 		reward: 10,
 	},
