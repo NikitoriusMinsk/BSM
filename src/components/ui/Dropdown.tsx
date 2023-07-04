@@ -91,6 +91,11 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 		};
 	}, []);
 
+	useEffect(() => {
+		setFilteredItems(items);
+		setSelected(items[0]);
+	}, [items]);
+
 	return (
 		<div
 			className={`${styles.container} ${styles[style]}`}
