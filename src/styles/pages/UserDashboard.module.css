@@ -318,6 +318,16 @@
     .navigation .userInfo .stats .stat {
         flex: unset;
     }
+
+    .navigation .userInfo .country {
+        right: 8px;
+        top: 16px;
+    }
+
+    .navigation .userInfo .club {
+        left: 8px;
+        top: 16px;
+    }
 }
 
 @media screen and (max-width: 1366px) {
@@ -399,6 +409,16 @@
         overflow: auto;
     }
 
+    .navigation .userInfo .country {
+        right: 25%;
+        top: 16px;
+    }
+
+    .navigation .userInfo .club {
+        left: 25%;
+        top: 16px;
+    }
+
 }
 
 @media screen and (max-width: 600px) {
@@ -413,5 +433,15 @@
 
     .sideColumn {
         background-color: #FFFFFF;
+    }
+
+    .navigation .userInfo .country {
+        right: 33px;
+        top: 16px;
+    }
+
+    .navigation .userInfo .club {
+        left: 33px;
+        top: 16px;
     }
 }

@@ -43,6 +43,21 @@ const Header: React.FC = () => {
 		}
 	}
 
+	function getTZInfo(width: number, date: string, name: string) {
+		switch (true) {
+			case width > 1440:
+				return (
+					<Moment
+						date={date}
+						tz={name}
+						format={"DD.MM Z"}
+					/>
+				);
+			default:
+				return "";
+		}
+	}
+
 	return (
 		<div className={styles.container}>
 			<Link
@@ -74,13 +89,7 @@ const Header: React.FC = () => {
 				{Timezones && (
 					<Dropdown
 						items={Timezones.map((tz) => ({
-							name: width > 1440 && (
-								<Moment
-									date={tz.date}
-									tz={tz.name}
-									format={"DD.MM Z"}
-								/>
-							),
+							name: getTZInfo(width, tz.date, tz.name),
 							label: (
 								<Moment
 									date={tz.date}

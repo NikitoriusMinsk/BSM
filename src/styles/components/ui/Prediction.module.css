@@ -741,4 +741,8 @@
         font-size: 15px;
         line-height: 18px;
     }
+
+    .matchInfo .matchDetails {
+        gap: 20px;
+    }
 }
