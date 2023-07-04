@@ -567,4 +567,12 @@
         bottom: 24px;
         width: calc(100% - 48px);
     }
+
+    #withdrawBalance>div:last-child {
+        flex-direction: column;
+    }
+
+    #withdrawBalance {
+        max-height: unset;
+    }
 }

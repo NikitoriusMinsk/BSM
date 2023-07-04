@@ -502,12 +502,14 @@
         grid-row-start: 4;
         grid-column-start: 5;
         grid-column-end: 9;
+        height: 180px;
     }
 
     #unit {
         grid-row-start: 4;
         grid-column-start: 9;
         grid-column-end: 13;
+        height: 180px;
     }
 
     #bets {
