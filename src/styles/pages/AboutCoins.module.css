@@ -120,6 +120,7 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    justify-content: center;
 }
 
 .method .textMobile {
@@ -210,6 +211,12 @@
     color: #2CD114;
 }
 
+@media screen and (max-width: 1680px) {
+    .header .coins {
+        width: calc(100% + 60px);
+    }
+}
+
 @media screen and (max-width: 1440px) {
     .header {
         margin-right: -30px;
@@ -221,7 +228,6 @@
     .header .coins {
         width: calc(100% + 320px);
     }
-
 }
 
 @media screen and (max-width: 1366px) {
@@ -314,6 +320,11 @@
     .method {
         flex-direction: column;
         gap: 20px;
+        padding: 18px 16px;
+    }
+
+    .method span.claimed {
+        padding-right: 0px;
     }
 
     .method .info .text h4 {
