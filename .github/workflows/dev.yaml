@@ -1,0 +1,21 @@
+name: CI for betting-media.com website
+on:
+  push:
+    branches:
+      - "dev"
+jobs:
+  login-aws-ecr:
+    runs-on: [self-hosted, linux, x64, lasha]
+    steps:      
+    - uses: actions/checkout@v3
+      env:
+        SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
+      with:
+        repository: 'Optimogroupio/racoon-argocd-test'
+        path: './racoon-argocd-test'
+        ref: 'master'
+        ssh-key: ${{ secrets.ARGOCD_ACCESS_KEY }}
+
+    - name: Build image
+      run: docker build . --file Dockerfile --tag $IMAGE_NAME
+
