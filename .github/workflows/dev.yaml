@@ -2,7 +2,11 @@ name: CI for betting-media.com website
 on:
   push:
     branches:
-      - "dev"
+      - "pipeline-update"
+env:
+  #ECR_REPOSITORY_BASE: 435409235876.dkr.ecr.eu-central-1.amazonaws.com/${{ vars.ECR_REPOSITORY }}
+  #435409235876.dkr.ecr.eu-central-1.amazonaws.com
+  IMAGE_NAME: ${{ vars.ECR_REPOSITORY }}
 jobs:
   login-aws-ecr:
     runs-on: [self-hosted, linux, x64, lasha]
