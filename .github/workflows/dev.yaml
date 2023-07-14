@@ -2,20 +2,31 @@ name: CI for betting-media.com website
 on:
   push:
     branches:
-      - "dev"
+      - "pipeline-update"
+env:
+  ECR_REPOSITORY_BASE: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/bsm-backend
+  ECR_REPOSITORY_GLOBAL: 933445569885.dkr.ecr.eu-central-1.amazonaws.com
+  IMAGE_NAME: ${{ vars.ECR_REPOSITORY }}
 jobs:
   login-aws-ecr:
     runs-on: [self-hosted, linux, x64, lasha]
-    steps:      
-    - uses: actions/checkout@v3
-      env:
-        SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
-      with:
-        repository: 'Optimogroupio/racoon-argocd-test'
-        path: './racoon-argocd-test'
-        ref: 'master'
-        ssh-key: ${{ secrets.ARGOCD_ACCESS_KEY }}
+    steps:
+      - name: login into aws ecr
+        run: |
+          echo "token=$(aws ecr get-login-password)" >> $GITHUB_OUTPUT
+        id: aws
+      - name: read token value
+        run: |
+          echo "${{ steps.aws.outputs.token }}"
+    outputs:
+      token: ${{ steps.aws.outputs.token }}
+  build-and-publish-image:
+    runs-on: [self-hosted, linux, x64, lasha]
+    needs: login-aws-ecr
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build image
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
-    - name: Build image
-      run: docker build . --file Dockerfile --tag $IMAGE_NAME
+
 
