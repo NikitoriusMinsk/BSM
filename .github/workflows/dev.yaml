@@ -28,7 +28,7 @@ jobs:
       - name: Build image
         env:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-        run: docker build . --file Dockerfile -build-arg NEXTAUTH_SECRET=${NEXTAUTH_SECRET} --tag $IMAGE_NAME
+        run: docker build . --file Dockerfile --build-arg NEXTAUTH_SECRET=${NEXTAUTH_SECRET} --tag $IMAGE_NAME
 
 
 
