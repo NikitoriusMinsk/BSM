@@ -4,7 +4,7 @@ on:
     branches:
       - "pipeline-update"
 env:
-  ECR_REPOSITORY_BASE: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/bsm-website
+  ECR_REPOSITORY_BASE: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/${{ vars.ECR_REPOSITORY }}
   ECR_REPOSITORY_GLOBAL: 933445569885.dkr.ecr.eu-central-1.amazonaws.com
   IMAGE_NAME: ${{ vars.ECR_REPOSITORY }}
 jobs:
@@ -73,7 +73,7 @@ jobs:
           repository: 'Optimogroupio/racoon-argocd-test'
           path: './racoon-argocd-test'
           ref: 'master'
-          token: ${{ secrets.PROD_ARGOCD_ACCESS_KEY }}
+          token: ${{ secrets.ARGOCD_ACCESS_KEY }}
 
       - name:  change version
         env:
