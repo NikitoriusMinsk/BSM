@@ -46,4 +46,46 @@ jobs:
           VERSION="${{ github.sha }}"
           docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+  
+  push-to-argocd:
+    runs-on: [self-hosted, linux, x64, lasha]
+    needs: build-and-publish-image
 
+    outputs:
+      token: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
+
+    steps:
+      - name: add github ssh key to ssh agent
+        id: lasha
+        run: |
+          echo "$(/apps/add_github_key.sh)"
+          echo "SSH_AUTH_SOCK=$(cat $HOME/.ssh/agent_auth_sock)" >> $GITHUB_OUTPUT        
+      - name: test ssh auth sock value for test purpose
+        env:
+          SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
+        run: |
+          echo "${{ steps.lasha.outputs.SSH_AUTH_SOCK }}"
+          echo "$(ssh -T git@github.com)"
+      - uses: actions/checkout@v3
+        env:
+          SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
+        with:
+          repository: 'Optimogroupio/racoon-argocd-test'
+          path: './racoon-argocd-test'
+          ref: 'master'
+          token: ${{ secrets.PROD_ARGOCD_ACCESS_KEY }}
+
+      - name:  change version
+        env:
+          SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
+        run: |
+          echo "$(ssh -T git@github.com)"
+          cd racoon-argocd-test
+          cd $ARGOCD_APP
+          cd manifests
+          sed -i 's|image:[ ]\+[0-9]\+\.dkr\.ecr\.eu-central-1\.amazonaws\.com/${{ vars.ECR_REPOSITORY }}:[.a-zA-Z0-9_-]\+|image: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}|g' $ARGOCD_APP_DEPLOYMENT
+          cd ../..
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -am "Bump docker tag: ${{ github.sha }}  app: $ARGOCD_APP file: $ARGOCD_APP_DEPLOYMENT ecr_repository: $ECR_REPOSITORY"
+          git push --force-with-lease
