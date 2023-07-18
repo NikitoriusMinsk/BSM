@@ -20,15 +20,20 @@ jobs:
           echo "${{ steps.aws.outputs.token }}"
     outputs:
       token: ${{ steps.aws.outputs.token }}
+
   build-and-publish-image:
     runs-on: [self-hosted, linux, x64, lasha]
     needs: login-aws-ecr
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Build image
         env:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-        run: docker build . --file Dockerfile --build-arg NEXTAUTH_SECRET=${NEXTAUTH_SECRET} --tag $IMAGE_NAME
-
+        run: |
+          echo "$NEXTAUTH_SECRET"
+          docker build . --file Dockerfile --build-arg NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" --tag ${{ env.IMAGE_NAME }}
 
 
