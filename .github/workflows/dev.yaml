@@ -81,11 +81,11 @@ jobs:
         run: |
           echo "$(ssh -T git@github.com)"
           cd racoon-argocd-test
-          cd $ARGOCD_APP
+          cd ${{ vars.ARGOCD_APP }}
           cd manifests
-          sed -i 's|image:[ ]\+[0-9]\+\.dkr\.ecr\.eu-central-1\.amazonaws\.com/${{ vars.ECR_REPOSITORY }}:[.a-zA-Z0-9_-]\+|image: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}|g' $ARGOCD_APP_DEPLOYMENT
+          sed -i 's|image:[ ]\+[0-9]\+\.dkr\.ecr\.eu-central-1\.amazonaws\.com/${{ vars.ECR_REPOSITORY }}:[.a-zA-Z0-9_-]\+|image: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}|g' ${{ vars.ARGOCD_APP_DEPLOYMENT }}
           cd ../..
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git commit -am "Bump docker tag: ${{ github.sha }}  app: $ARGOCD_APP file: $ARGOCD_APP_DEPLOYMENT ecr_repository: $ECR_REPOSITORY"
+          git commit -am "Bump docker tag: ${{ github.sha }}  app: ${{ vars.ARGOCD_APP }} file: ${{ vars.ARGOCD_APP_DEPLOYMENT }} ecr_repository: ${{ vars.ECR_REPOSITORY }}"
           git push --force-with-lease
