@@ -73,7 +73,7 @@ jobs:
           repository: 'Optimogroupio/racoon-argocd-test'
           path: './racoon-argocd-test'
           ref: 'master'
-          token: ${{ secrets.ARGOCD_ACCESS_KEY }}
+          ssh-key: ${{ secrets.ARGOCD_ACCESS_KEY }}
 
       - name:  change version
         env:
