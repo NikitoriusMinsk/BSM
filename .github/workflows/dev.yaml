@@ -36,5 +36,11 @@ jobs:
           # echo "$NEXTAUTH_SECRET"
           # docker build . --file Dockerfile --build-arg NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" --tag ${{ env.IMAGE_NAME }}
           docker build . --file Dockerfile --build-arg NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" --tag ${{ env.IMAGE_NAME }}
-
+      
+      - name: Docker push
+        run: |
+          IMAGE_ID=$ECR_REPOSITORY_BASE
+          VERSION="${{ github.sha }}"
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
 
