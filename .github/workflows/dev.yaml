@@ -4,7 +4,7 @@ on:
     branches:
       - "pipeline-update"
 env:
-  ECR_REPOSITORY_BASE: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/bsm-backend
+  ECR_REPOSITORY_BASE: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/bsm-website
   ECR_REPOSITORY_GLOBAL: 933445569885.dkr.ecr.eu-central-1.amazonaws.com
   IMAGE_NAME: ${{ vars.ECR_REPOSITORY }}
 jobs:
@@ -37,6 +37,9 @@ jobs:
           # docker build . --file Dockerfile --build-arg NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" --tag ${{ env.IMAGE_NAME }}
           docker build . --file Dockerfile --build-arg NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" --tag ${{ env.IMAGE_NAME }}
       
+      - name: login to ecr
+        run: aws ecr --profile marketing-test get-login-password --region eu-central-1 | docker login --username AWS --password-stdin $ECR_REPOSITORY_GLOBAL
+ 
       - name: Docker push
         run: |
           IMAGE_ID=$ECR_REPOSITORY_BASE
