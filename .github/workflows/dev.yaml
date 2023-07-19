@@ -2,7 +2,7 @@ name: CI for betting-media.com website
 on:
   push:
     branches:
-      - "dev"
+      - "develop"
 env:
   ECR_REPOSITORY_BASE: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/${{ vars.ECR_REPOSITORY }}
   ECR_REPOSITORY_GLOBAL: 933445569885.dkr.ecr.eu-central-1.amazonaws.com
