@@ -11,6 +11,7 @@ import { newsRouter } from "./NewsRouter";
 import { competitionRouter } from "./CompetitionRouter";
 import { coinsRouter } from "./CoinsRouter";
 import { userRouter } from "./UserRouter";
+import { authRouter } from "./AuthRouter";
 import { navigationRouter } from "./NavigationRouter";
 import { router } from "../trpc";
 
@@ -26,6 +27,7 @@ export const appRouter = router({
 	coins: coinsRouter,
 	navigation: navigationRouter,
 	user: userRouter,
+	auth: authRouter,
 });
 
 // export type definition of API

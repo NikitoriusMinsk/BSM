@@ -7,13 +7,14 @@ import PasswordField from "../../components/ui/PasswordField";
 import SubmitButton from "../../components/ui/SubmitButton";
 import { SyntheticEvent, useState } from "react";
 import Link from "next/link";
+import { trpc } from "src/utils/trpc";
 
 const Register: NextPage = () => {
     const [passwordCheck, setPasswordCheck] = useState([false, false, false, false]);
 
     function checkPassword(e: React.ChangeEvent<HTMLInputElement>) {
         setPasswordCheck([
-            e.target.value?.length >= 12,
+            e.target.value?.length >= 8,
 
             e.target.value
                 ?.split("")
@@ -28,23 +29,32 @@ const Register: NextPage = () => {
         ]);
     }
 
+    const userMutation = trpc.auth.registerUser.useMutation()
+
     function handleRegister(e: SyntheticEvent) {
         e.preventDefault();
         if (passwordCheck.filter((check) => check).length == 4) {
             const target = e.target as typeof e.target & {
                 email: { value: string };
                 password: { value: string };
-                firstName: { value: string };
-                lastName: { value: string };
-                nickname: { value: string };
+                confirmedPassword: { value: string };
+                indFirstName: { value: string };
+                indLastName: { value: string };
+                nickName: { value: string };
+                terms: { checked: boolean };
             };
-            const email = target.email.value;
-            const password = target.password.value;
-            const firstName = target.firstName.value;
-            const lastName = target.lastName.value;
-            const nickname = target.nickname.value;
+
+            userMutation.mutateAsync({
+                email: target.email.value,
+                password: target.password.value,
+                confirmedPassword: target.confirmedPassword.value,
+                indFirstName: target.indFirstName.value,
+                indLastName: target.indLastName.value,
+                nickName: target.nickName.value,
+                terms: target.terms.checked,
+            }).catch(r => console.error(r))
         } else {
-            alert("invalid data");
+            alert("Invalid password");
         }
     }
 
@@ -84,7 +94,7 @@ const Register: NextPage = () => {
                             Sign In
                         </Link>
                     </span>
-                    <div className={styles.socials}>
+                    {/* <div className={styles.socials}>
                         <div className={styles.social}>
                             <Image
                                 src="/images/login/facebook.svg"
@@ -110,18 +120,18 @@ const Register: NextPage = () => {
                             />
                         </div>
                     </div>
-                    <span className={styles.separatorOr}>OR</span>
+                    <span className={styles.separatorOr}>OR</span> */}
                     <div className={styles.fields}>
                         <div className={styles.row}>
                             <TextField
                                 type="text"
                                 placeholder="First Name"
-                                name="firstName"
+                                name="indFirstName"
                             />
                             <TextField
                                 type="text"
                                 placeholder="Last Name"
-                                name="lastName"
+                                name="indLastName"
                             />
                         </div>
                         <TextField
@@ -130,11 +140,11 @@ const Register: NextPage = () => {
                             name="email"
                         />
                         <TextField
-                            type="nickname"
+                            type="text"
                             placeholder="Nickname"
                             icon="/images/login/dice.svg"
                             iconClick={() => { }}
-                            name="nickname"
+                            name="nickName"
                         />
                         <PasswordField
                             name="password"
@@ -142,7 +152,7 @@ const Register: NextPage = () => {
                             onChange={checkPassword}
                         />
                         <PasswordField
-                            name="repeat_password"
+                            name="confirmedPassword"
                             placeholder="Repeat Password"
                         />
                     </div>
@@ -154,7 +164,7 @@ const Register: NextPage = () => {
                                 ${passwordCheck[0] && styles.active}
                             `}
                         >
-                            Be at least 12 characters
+                            Be at least 8 characters
                         </span>
                         <span
                             className={`
@@ -183,7 +193,7 @@ const Register: NextPage = () => {
                         <label className={styles.checkTerms}>
                             <input
                                 type={"checkbox"}
-                                name="agree_to_terms"
+                                name="terms"
                             />
                             <div className={styles.checkBox} />
                             <span className={styles.checkText}>
