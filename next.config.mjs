@@ -22,3 +22,4 @@ export default defineNextConfig({
     swcMinify: true,
     output: 'standalone'
 });
+
