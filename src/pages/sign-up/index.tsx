@@ -58,7 +58,7 @@ const Register: NextPage = () => {
                 // useRouter().push('/sign-in')
             })
             .catch(r => {
-                setErrors(r.data.zodError?.fieldErrors || r.data.serverError)
+                setErrors(r.data.zodError?.fieldErrors || r.data.serverError?.errorCodes)
             })
     }
 
