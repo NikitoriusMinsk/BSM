@@ -8,7 +8,7 @@ import MenuLink from "./shared/MenuLink";
 import { useRouter } from "next/router";
 
 const MobileHeader: React.FC = () => {
-	const { data: links } = trpc.navigation.getSports.useQuery();
+	const { data: sports } = trpc.navigation.getSports.useQuery();
 	const router = useRouter();
 
 	return (
@@ -27,13 +27,14 @@ const MobileHeader: React.FC = () => {
 				</Link>
 				<UserProfile />
 			</div>
-			{links && (
+			{sports && (
 				<nav className={styles.navigation}>
-					{links.map((link) => (
+					{sports.map((sport) => (
 						<MenuLink
-							key={link.label}
-							{...link}
-							active={router.pathname.includes(link.href)}
+							key={sport.id}
+							active={router.pathname.includes(`/${sport.name}`)}
+							href={`/${sport.name}`}
+							label={sport.name}
 						/>
 					))}
 				</nav>

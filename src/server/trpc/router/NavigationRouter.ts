@@ -1,6 +1,6 @@
-import { createRouter } from "../context";
-import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
+import makeApiCall from "../utils/makeApiCall";
+import { sportSchema } from "../utils/DTOSchemas";
 
 const Sports = [
 	{ href: "/sport", label: "Football", live: true },
@@ -33,7 +33,9 @@ const Timezones = [
 
 export const navigationRouter = router({
 	getSports: publicProcedure.query(async ({ ctx, input }) => {
-		return Sports;
+		return await makeApiCall("sports", sportSchema.array(), {
+			method: "GET",
+		});
 	}),
 	getTimezones: publicProcedure.query(async ({ ctx, input }) => {
 		return Timezones;

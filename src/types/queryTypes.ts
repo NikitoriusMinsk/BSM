@@ -1,7 +1,7 @@
 import { inferRouterOutputs } from "@trpc/server/dist/core";
 import { AppRouter } from "src/server/trpc/router/_app";
 
-type RouterOutput = inferRouterOutputs<AppRouter>;
+export type RouterOutput = inferRouterOutputs<AppRouter>;
 
 export type Tipsters = RouterOutput["tipsters"]["getAll"];
 
