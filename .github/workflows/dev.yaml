@@ -1,91 +1,88 @@
 name: CI for betting-media.com website
 on:
-  push:
-    branches:
-      - "dev"
+    push:
+        branches:
+            - "dev"
 env:
-  ECR_REPOSITORY_BASE: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/${{ vars.ECR_REPOSITORY }}
-  ECR_REPOSITORY_GLOBAL: 933445569885.dkr.ecr.eu-central-1.amazonaws.com
-  IMAGE_NAME: ${{ vars.ECR_REPOSITORY }}
+    ECR_REPOSITORY_BASE: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/${{ vars.ECR_REPOSITORY }}
+    ECR_REPOSITORY_GLOBAL: 933445569885.dkr.ecr.eu-central-1.amazonaws.com
+    IMAGE_NAME: ${{ vars.ECR_REPOSITORY }}
 jobs:
-  login-aws-ecr:
-    runs-on: [self-hosted, linux, x64, lasha]
-    steps:
-      - name: login into aws ecr
-        run: |
-          echo "token=$(aws ecr get-login-password)" >> $GITHUB_OUTPUT
-        id: aws
-      - name: read token value
-        run: |
-          echo "${{ steps.aws.outputs.token }}"
-    outputs:
-      token: ${{ steps.aws.outputs.token }}
+    login-aws-ecr:
+        runs-on: [self-hosted, linux, x64, lasha]
+        steps:
+            - name: login into aws ecr
+              run: |
+                  echo "token=$(aws ecr get-login-password)" >> $GITHUB_OUTPUT
+              id: aws
+            - name: read token value
+              run: |
+                  echo "${{ steps.aws.outputs.token }}"
+        outputs:
+            token: ${{ steps.aws.outputs.token }}
 
-  build-and-publish-image:
-    runs-on: [self-hosted, linux, x64, lasha]
-    needs: login-aws-ecr
+    build-and-publish-image:
+        runs-on: [self-hosted, linux, x64, lasha]
+        needs: login-aws-ecr
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
 
-      - name: Build image
-        # env:
-        #   NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-        run: |
-          # echo "$NEXTAUTH_SECRET"
-          # docker build . --file Dockerfile --build-arg NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" --tag ${{ env.IMAGE_NAME }}
-          docker build . --file Dockerfile --build-arg NEXTAUTH_SECRET="${NEXTAUTH_SECRET}" --tag ${{ env.IMAGE_NAME }}
-      
-      - name: login to ecr
-        run: aws ecr --profile marketing-test get-login-password --region eu-central-1 | docker login --username AWS --password-stdin $ECR_REPOSITORY_GLOBAL
- 
-      - name: Docker push
-        run: |
-          IMAGE_ID=$ECR_REPOSITORY_BASE
-          VERSION="${{ github.sha }}"
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
-  
-  push-to-argocd:
-    runs-on: [self-hosted, linux, x64, lasha]
-    needs: build-and-publish-image
+            - name: Build image
+              # pass env variables here
+              run: |
+                  docker build . --file Dockerfile --build-arg NEXTAUTH_SECRET="${{secrets.NEXTAUTH_SECRET}}" --build-arg API_URL="${{vars.API_URL}}" --build-arg NEXTAUTH_URL="${{vars.NEXTAUTH_URL}}" --tag ${{ env.IMAGE_NAME }}
 
-    outputs:
-      token: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
+            - name: login to ecr
+              run: aws ecr --profile marketing-test get-login-password --region eu-central-1 | docker login --username AWS --password-stdin $ECR_REPOSITORY_GLOBAL
 
-    steps:
-      - name: add github ssh key to ssh agent
-        id: lasha
-        run: |
-          echo "$(/apps/add_github_key.sh)"
-          echo "SSH_AUTH_SOCK=$(cat $HOME/.ssh/agent_auth_sock)" >> $GITHUB_OUTPUT        
-      - name: test ssh auth sock value for test purpose
-        env:
-          SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
-        run: |
-          echo "${{ steps.lasha.outputs.SSH_AUTH_SOCK }}"
-          echo "$(ssh -T git@github.com)"
-      - uses: actions/checkout@v3
-        env:
-          SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
-        with:
-          repository: 'Optimogroupio/racoon-argocd-test'
-          path: './racoon-argocd-test'
-          ref: 'master'
-          ssh-key: ${{ secrets.ARGOCD_ACCESS_KEY }}
+            - name: Docker push
+              run: |
+                  IMAGE_ID=$ECR_REPOSITORY_BASE
+                  VERSION="${{ github.sha }}"
+                  docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+                  docker push $IMAGE_ID:$VERSION
 
-      - name:  change version
-        env:
-          SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
-        run: |
-          echo "$(ssh -T git@github.com)"
-          cd racoon-argocd-test
-          cd ${{ vars.ARGOCD_APP }}
-          cd manifests
-          sed -i 's|image:[ ]\+[0-9]\+\.dkr\.ecr\.eu-central-1\.amazonaws\.com/${{ vars.ECR_REPOSITORY }}:[.a-zA-Z0-9_-]\+|image: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}|g' ${{ vars.ARGOCD_APP_DEPLOYMENT }}
-          cd ../..
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git commit -am "Bump docker tag: ${{ github.sha }}  app: ${{ vars.ARGOCD_APP }} file: ${{ vars.ARGOCD_APP_DEPLOYMENT }} ecr_repository: ${{ vars.ECR_REPOSITORY }}"
-          git push --force-with-lease
+    push-to-argocd:
+        runs-on: [self-hosted, linux, x64, lasha]
+        needs: build-and-publish-image
+
+        outputs:
+            token: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
+
+        steps:
+            - name: add github ssh key to ssh agent
+              id: lasha
+              run: |
+                  echo "$(/apps/add_github_key.sh)"
+                  echo "SSH_AUTH_SOCK=$(cat $HOME/.ssh/agent_auth_sock)" >> $GITHUB_OUTPUT
+            - name: test ssh auth sock value for test purpose
+              env:
+                  SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
+              run: |
+                  echo "${{ steps.lasha.outputs.SSH_AUTH_SOCK }}"
+                  echo "$(ssh -T git@github.com)"
+            - uses: actions/checkout@v3
+              env:
+                  SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
+              with:
+                  repository: "Optimogroupio/racoon-argocd-test"
+                  path: "./racoon-argocd-test"
+                  ref: "master"
+                  ssh-key: ${{ secrets.ARGOCD_ACCESS_KEY }}
+
+            - name: change version
+              env:
+                  SSH_AUTH_SOCK: ${{ steps.lasha.outputs.SSH_AUTH_SOCK }}
+              run: |
+                  echo "$(ssh -T git@github.com)"
+                  cd racoon-argocd-test
+                  cd ${{ vars.ARGOCD_APP }}
+                  cd manifests
+                  sed -i 's|image:[ ]\+[0-9]\+\.dkr\.ecr\.eu-central-1\.amazonaws\.com/${{ vars.ECR_REPOSITORY }}:[.a-zA-Z0-9_-]\+|image: 933445569885.dkr.ecr.eu-central-1.amazonaws.com/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}|g' ${{ vars.ARGOCD_APP_DEPLOYMENT }}
+                  cd ../..
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  git commit -am "Bump docker tag: ${{ github.sha }}  app: ${{ vars.ARGOCD_APP }} file: ${{ vars.ARGOCD_APP_DEPLOYMENT }} ecr_repository: ${{ vars.ECR_REPOSITORY }}"
+                  git push --force-with-lease

@@ -16,10 +16,12 @@ import debounce from "src/utils/debounce";
 import UserProfile from "./shared/UserProfile";
 import useWindowSize from "src/utils/useWindowSize";
 import { useSession } from "next-auth/react";
+import { inferProcedureOutput } from "@trpc/server";
+import { RouterOutput } from "src/types/queryTypes";
 
 const Header: React.FC = () => {
 	const router = useRouter();
-	const { data: links } = trpc.navigation.getSports.useQuery();
+	const { data: sports } = trpc.navigation.getSports.useQuery();
 	const { data: Timezones } = trpc.navigation.getTimezones.useQuery();
 	const { width } = useWindowSize();
 	const { data: session } = useSession();
@@ -72,17 +74,18 @@ const Header: React.FC = () => {
 				/>
 			</Link>
 			<nav>
-				{links && (
-					<div className={styles.links}>
-						{links.slice(0, GetSportCount(width)).map((link) => (
+				{sports && (
+					<>
+						{sports.slice(0, GetSportCount(width)).map((sport) => (
 							<MenuLink
-								key={link.label}
-								{...link}
-								active={router.pathname.includes(link.href)}
+								key={sport.id}
+								active={router.asPath.includes(`/${sport.name}`)}
+								href={`/${sport.name}`}
+								label={sport.name}
 							/>
 						))}
-						<More items={links.slice(GetSportCount(width))} />
-					</div>
+						<More items={sports.slice(GetSportCount(width))} />
+					</>
 				)}
 			</nav>
 			<div className={styles.controls}>
@@ -110,7 +113,7 @@ const Header: React.FC = () => {
 };
 
 interface MoreProps {
-	items: { href: string; label: string }[];
+	items: RouterOutput["navigation"]["getSports"];
 }
 
 const MoreItemsVariants = {
@@ -144,7 +147,7 @@ const More: React.FC<MoreProps> = (props) => {
 				includeScore: false,
 				includeRefIndex: false,
 				threshold: 0.3,
-				keys: ["label"],
+				keys: ["name"],
 			};
 			const fuse = new Fuse(items, options);
 			const result = fuse.search(e.target.value).map((item) => item.item);
@@ -201,11 +204,11 @@ const More: React.FC<MoreProps> = (props) => {
 						/>
 						{filteredItems.map((item) => (
 							<Link
-								href={item.href}
-								key={item.label}
+								href={`/${item.name}`}
+								key={item.id}
 								className={styles.moreItem}
 							>
-								{item.label}
+								{item.name}
 							</Link>
 						))}
 					</motion.div>

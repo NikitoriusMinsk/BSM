@@ -1,44 +1,57 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import styles from "@styles/components/layout/Sidebar.module.css";
+import { Url } from "url";
+import { LastSportContext } from "src/pages/_app";
 
 const links = [
 	{
-		href: "/",
+		href: "/[sport]",
 		label: "Popular Games",
 		image: "/images/menu/popular-games.svg",
+		isDynamic: true,
 	},
-	{ href: "/matches", label: "Matches", image: "/images/menu/matches.svg" },
 	{
-		href: "/live-matches",
+		href: "/[sport]/matches",
+		label: "Matches",
+		image: "/images/menu/matches.svg",
+		isDynamic: true,
+	},
+	{
+		href: "/[sport]/live-matches",
 		label: "Live Events",
 		image: "/images/menu/live-events.svg",
+		isDynamic: true,
 	},
 	{
-		href: "/tipster-rating",
+		href: "tipster-rating",
 		label: "Tipster Rating",
 		image: "/images/menu/tipster-rating.svg",
+		isDynamic: false,
 	},
 	{
-		href: "/predictions",
+		href: "/[sport]/predictions",
 		label: "Predictions",
 		image: "/images/menu/predictions.svg",
+		isDynamic: true,
 	},
 	{
-		href: "/bookmakers",
+		href: "bookmakers",
 		label: "Bookmakers",
 		image: "/images/menu/bookmakers.svg",
+		isDynamic: false,
 	},
-	{ href: "/blog", label: "Blog", image: "/images/menu/blog.svg" },
+	{ href: "blog", label: "Blog", image: "/images/menu/blog.svg", isDynamic: false },
 ];
 
 const Sidebar: React.FC = () => {
 	const router = useRouter();
 	const [isOpen, setIsOpen] = useState(false);
+	const lastSport = useContext(LastSportContext);
 
 	return (
 		<div className={styles.container}>
@@ -54,23 +67,39 @@ const Sidebar: React.FC = () => {
 				/>
 			</div>
 			<div className={styles.menu}>
-				{links.map(({ href, label, image }) => (
-					<MenuLink
-						key={label}
-						href={href}
-						label={label}
-						image={image}
-						active={router.asPath.split("?")[0] === href}
-						expanded={isOpen}
-					/>
-				))}
+				{links.map(({ href, label, image, isDynamic }) =>
+					isDynamic ? (
+						<MenuLink
+							key={label}
+							href={{
+								pathname: href,
+								query: {
+									sport: router.query.sport ?? lastSport ?? "Football",
+								},
+							}}
+							label={label}
+							image={image}
+							active={router.pathname === href}
+							expanded={isOpen}
+						/>
+					) : (
+						<MenuLink
+							key={label}
+							href={`/${href}`}
+							label={label}
+							image={image}
+							active={router.asPath.includes(href)}
+							expanded={isOpen}
+						/>
+					)
+				)}
 			</div>
 		</div>
 	);
 };
 
 interface MenuLinkProps {
-	href: string;
+	href: LinkProps["href"];
 	label: string;
 	image: string;
 	active?: boolean;

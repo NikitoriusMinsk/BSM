@@ -368,6 +368,27 @@ const MostTips: React.FC<{ tips: MostTips }> = (props) => {
 	);
 };
 
+export const getStaticPaths: GetStaticPaths = async () => {
+	const ssg = createProxySSGHelpers({
+		router: appRouter,
+		ctx: await createContext(),
+		transformer: superjson,
+	});
+
+	const sports = await ssg.navigation.getSports.fetch();
+
+	return {
+		fallback: "blocking",
+		paths: sports.map((sport) => {
+			return {
+				params: {
+					sport: sport.name,
+				},
+			};
+		}),
+	};
+};
+
 export const getStaticProps: GetStaticProps = async (context) => {
 	const ssg = createProxySSGHelpers({
 		router: appRouter,

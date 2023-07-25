@@ -4,11 +4,17 @@ FROM node:16-alpine AS base
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 
-ARG NEXTAUTH_SECRET
-ENV NEXTAUTH_SECRET=$NEXTAUTH_SECRET
-RUN echo "Secret value: $NEXTAUTH_SECRET"
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
+
+ARG NEXTAUTH_SECRET \
+    NEXTAUTH_URL \
+    API_URL 
+
+RUN \
+    echo "NEXTAUTH_SECRET=${NEXTAUTH_SECRET}" >> .env && \
+    echo "NEXTAUTH_URL=${NEXTAUTH_URL}" >> .env && \ 
+    echo "API_URL=${API_URL}" >> .env 
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -19,11 +25,11 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/.env ./.env
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
@@ -48,6 +54,7 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/.env ./.env
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
@@ -58,6 +65,6 @@ USER nextjs
 
 EXPOSE 3000
 
-ENV PORT 3000
+ENV PORT 3000 
 
 CMD ["node", "server.js"]

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import styles from "@styles/pages/Predictions.module.css";
 import { trpc } from "src/utils/trpc";
 import { MostTips, Predictions as PredictionsType, Sports } from "src/types/queryTypes";
@@ -97,7 +97,7 @@ const PredictionsPage: NextPage = () => {
 					<div className={styles.filtersMobile}>
 						<LeaguesMobileBlocksFilter
 							items={leagues}
-							onChange={() => { }}
+							onChange={() => {}}
 						/>
 						<div className={styles.filtersBlockMobile}>
 							<TextField
@@ -106,11 +106,11 @@ const PredictionsPage: NextPage = () => {
 								shouldShrink={width <= 768 ? true : false}
 							/>
 							<div className={styles.dateMobile}>
-								<DatePicker onChange={() => { }} />
+								<DatePicker onChange={() => {}} />
 							</div>
 							<div className={styles.filterBtnMobile}>
 								<FilterModal
-									onApply={() => { }}
+									onApply={() => {}}
 									portalNode={portalNode}
 									filters={[
 										{
@@ -180,24 +180,24 @@ const PredictionsPage: NextPage = () => {
 							<h5>SORT BY</h5>
 							<SortButtons
 								items={SortItems}
-								onChange={() => { }}
+								onChange={() => {}}
 							/>
 						</div>
 						<div className={styles.filterBlock}>
 							<h5>Date</h5>
-							<DatePicker onChange={() => { }} />
+							<DatePicker onChange={() => {}} />
 						</div>
 						<div className={styles.filterBlock}>
 							<h5>Type</h5>
 							<SortButtons
 								items={TypeItems}
-								onChange={() => { }}
+								onChange={() => {}}
 							/>
 						</div>
 						<Filter
 							items={leagues}
 							h3="CHOOSE LEAGUE"
-							onChange={() => { }}
+							onChange={() => {}}
 						/>
 					</div>
 					<div className={styles.predictions}>
@@ -356,8 +356,8 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 									width > 1440
 										? "calc(100% - 210px)"
 										: width > 1024
-											? "calc(100% - 100px)"
-											: "calc(100% - 90px)",
+										? "calc(100% - 100px)"
+										: "calc(100% - 90px)",
 							},
 						},
 						size: {
@@ -451,8 +451,9 @@ const SportsSider: React.FC<{
 					>
 						{sportsChunk.map(({ name, image, id }, index) => (
 							<div
-								className={`${styles.sport} ${selectedItems.includes(id) && styles.active
-									}`}
+								className={`${styles.sport} ${
+									selectedItems.includes(id) && styles.active
+								}`}
 								key={`sports_slide_${slideIndex}_item_${index}`}
 								onClick={() => handleSelect(id)}
 							>
@@ -515,6 +516,13 @@ const SortButtons: React.FC<SortButtonsProps> = (props) => {
 			))}
 		</div>
 	);
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	return {
+		fallback: "blocking",
+		paths: [],
+	};
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {

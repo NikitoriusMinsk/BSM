@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GetServerSideProps, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
 import styles from "@styles/pages/Matches.module.css";
 import { trpc } from "src/utils/trpc";
 import BestBookmakers from "@components/ui/BestBookmakers";
@@ -72,7 +72,7 @@ const MatchesPage: NextPage = () => {
 				{portalNode && <OutPortal node={portalNode} />}
 				<div className={styles.filters}>
 					<div>
-						<DatePicker onChange={() => { }} />
+						<DatePicker onChange={() => {}} />
 						<TextField
 							icon="/icons/search.svg"
 							placeholder="Search"
@@ -83,12 +83,12 @@ const MatchesPage: NextPage = () => {
 						items={leagues}
 						h3="BY COUNTRY"
 						h2="Choose Matches"
-						onChange={() => { }}
+						onChange={() => {}}
 					/>
 					<NestedFilter
 						items={leagues}
 						h3="OTHER COUNTRIES"
-						onChange={() => { }}
+						onChange={() => {}}
 						withClearButton={false}
 						colapsible={true}
 					/>
@@ -100,15 +100,15 @@ const MatchesPage: NextPage = () => {
 					/>
 				</div>
 				<div className={styles.mobileFilters}>
-					<div style={{ position: 'relative' }}>
+					<div style={{ position: "relative" }}>
 						<TextField
 							icon="/icons/search.svg"
 							placeholder="Search"
 							shouldShrink={width <= 600 ? true : false}
 						/>
-						<DatePicker onChange={() => { }} />
+						<DatePicker onChange={() => {}} />
 						<FilterModal
-							onApply={() => { }}
+							onApply={() => {}}
 							portalNode={portalNode}
 							filters={[
 								{
@@ -156,7 +156,7 @@ const MatchesPage: NextPage = () => {
 					</div>
 					<LeaguesMobileBlocksFilter
 						items={filters}
-						onChange={() => { }}
+						onChange={() => {}}
 					/>
 				</div>
 				<div className={styles.predictions}>
@@ -179,6 +179,13 @@ const MatchesPage: NextPage = () => {
 			</PortalContext.Provider>
 		</>
 	);
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	return {
+		fallback: "blocking",
+		paths: [],
+	};
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
