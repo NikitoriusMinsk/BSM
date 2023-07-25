@@ -1,8 +1,10 @@
 .textFieldContainer {
     position: relative;
     display: flex;
-    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
     /* height: 100%; */
+    flex-direction: column;
 }
 
 .textFieldContainer input {
@@ -18,6 +20,7 @@
     outline: none;
     width: 100%;
     height: 100%;
+    transition: all .3s ease-in-out;
 }
 
 .textFieldContainer input::placeholder {
@@ -41,6 +44,7 @@
     height: 20px;
     position: absolute;
     right: 26px;
+    top: 14px;
     pointer-events: none;
 }
 
@@ -90,5 +94,19 @@
 }
 
 .shrinkSearch input:focus {
+    width: 100%;
+}
+
+.errorField input {
+    border-color: #CF1F1F;
+}
+
+.error {
+    color: #CF1F1F;
+    font-family: 'Samsung Sans';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
     width: 100%;
 }

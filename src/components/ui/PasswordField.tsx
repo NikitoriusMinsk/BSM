@@ -1,17 +1,39 @@
 import styles from "../../styles/components/ui/TextField.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const PasswordField: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (
+interface PasswordFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+	errorMessage?: string | string[];
+}
+
+const PasswordField: React.FC<PasswordFieldProps> = (
 	props
 ) => {
+	const {
+		errorMessage,
+		...inputProps
+	} = props;
+	const [errmsg, setErrmsg] = useState<string | string[] | undefined>(errorMessage)
 	const [typeF, setTypeF] = useState(true);
 
+	useEffect(() => {
+		setErrmsg(errorMessage)
+	}, [errorMessage])
+
 	return (
-		<div className={styles.textFieldContainer}>
+		<div
+			className={
+				`${styles.textFieldContainer}` +
+				` ${errmsg && styles.errorField}`
+			}
+		>
 			<input
-				{...props}
+				{...inputProps}
 				type={typeF ? "password" : "text"}
+				onChange={(e) => {
+					setErrmsg(undefined)
+					inputProps.onChange && inputProps.onChange(e)
+				}}
 			/>
 			<div
 				className={styles.eye}
@@ -30,6 +52,9 @@ const PasswordField: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (
 					alt=""
 				/>
 			</div>
+			{errmsg && <span className={styles.error}>
+				{Array.isArray(errmsg) ? errmsg.map(e => e + '. ') : errmsg}
+			</span>}
 		</div>
 	);
 };

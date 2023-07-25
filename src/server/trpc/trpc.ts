@@ -2,18 +2,21 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import type { Context } from "./context";
 import superjson from "superjson";
 import { ZodError } from "zod";
+import TRPCExtendedError from "./utils/types/TRPCExtendedError";
 
 const t = initTRPC.context<Context>().create({
 	transformer: superjson,
 	errorFormatter({ shape, error }) {
+		const err = error as TRPCExtendedError
 		return {
 			...shape,
 			data: {
 				...shape.data,
 				zodError:
-					error.code === 'BAD_REQUEST' && error.cause instanceof ZodError
-						? error.cause.flatten()
+					error.code === 'BAD_REQUEST' && err.cause instanceof ZodError
+						? err.cause.flatten()
 						: null,
+				serverError: err.serverError
 			},
 		}
 	},

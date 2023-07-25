@@ -8,6 +8,7 @@ import SubmitButton from "../../components/ui/SubmitButton";
 import { SyntheticEvent, useState } from "react";
 import Link from "next/link";
 import { trpc } from "src/utils/trpc";
+import { useRouter } from "next/router";
 
 const Register: NextPage = () => {
     const [passwordCheck, setPasswordCheck] = useState([false, false, false, false]);
@@ -29,33 +30,36 @@ const Register: NextPage = () => {
         ]);
     }
 
+    const [errors, setErrors] = useState<any>()
     const userMutation = trpc.auth.registerUser.useMutation()
 
     function handleRegister(e: SyntheticEvent) {
         e.preventDefault();
-        if (passwordCheck.filter((check) => check).length == 4) {
-            const target = e.target as typeof e.target & {
-                email: { value: string };
-                password: { value: string };
-                confirmedPassword: { value: string };
-                indFirstName: { value: string };
-                indLastName: { value: string };
-                nickName: { value: string };
-                terms: { checked: boolean };
-            };
+        const target = e.target as typeof e.target & {
+            email: { value: string };
+            password: { value: string };
+            confirmedPassword: { value: string };
+            indFirstName: { value: string };
+            indLastName: { value: string };
+            nickName: { value: string };
+            terms: { checked: boolean };
+        };
 
-            userMutation.mutateAsync({
-                email: target.email.value,
-                password: target.password.value,
-                confirmedPassword: target.confirmedPassword.value,
-                indFirstName: target.indFirstName.value,
-                indLastName: target.indLastName.value,
-                nickName: target.nickName.value,
-                terms: target.terms.checked,
-            }).catch(r => console.error(r))
-        } else {
-            alert("Invalid password");
-        }
+        userMutation.mutateAsync({
+            email: target.email.value,
+            password: target.password.value,
+            confirmedPassword: target.confirmedPassword.value,
+            indFirstName: target.indFirstName.value,
+            indLastName: target.indLastName.value,
+            nickName: target.nickName.value,
+            terms: target.terms.checked,
+        })
+            .then(r => {
+                // useRouter().push('/sign-in')
+            })
+            .catch(r => {
+                setErrors(r.data.zodError?.fieldErrors || r.data.serverError)
+            })
     }
 
     return <>
@@ -127,33 +131,39 @@ const Register: NextPage = () => {
                                 type="text"
                                 placeholder="First Name"
                                 name="indFirstName"
+                                errorMessage={errors?.indFirstName || null}
                             />
                             <TextField
                                 type="text"
                                 placeholder="Last Name"
                                 name="indLastName"
+                                errorMessage={errors?.indLastName || null}
                             />
                         </div>
                         <TextField
                             type="email"
                             placeholder="Email Address"
                             name="email"
+                            errorMessage={errors?.email || null}
                         />
                         <TextField
                             type="text"
                             placeholder="Nickname"
-                            icon="/images/login/dice.svg"
-                            iconClick={() => { }}
+                            // icon="/images/login/dice.svg"
+                            // iconClick={() => { }}
                             name="nickName"
+                            errorMessage={errors?.nickName || null}
                         />
                         <PasswordField
                             name="password"
                             placeholder="Password"
                             onChange={checkPassword}
+                            errorMessage={errors?.password || null}
                         />
                         <PasswordField
                             name="confirmedPassword"
                             placeholder="Repeat Password"
+                            errorMessage={errors?.confirmedPassword || null}
                         />
                     </div>
                     <div className={styles.passwordDescription}>
@@ -198,14 +208,17 @@ const Register: NextPage = () => {
                             <div className={styles.checkBox} />
                             <span className={styles.checkText}>
                                 I confirm that I am over 18 years old and I agree with the{" "}
-                                <Link href="/sign-in">
+                                <Link href="?">
                                     Terms and Conditions and Privacy Policy.
                                 </Link>
+                                {userMutation.error?.data?.zodError?.fieldErrors?.terms && <p className={styles.error}>
+                                    {userMutation.error?.data?.zodError?.fieldErrors?.terms}
+                                </p>}
                             </span>
                         </label>
                     </div>
                     <div className={styles.formBtns}>
-                        <SubmitButton>Sign Up</SubmitButton>
+                        <SubmitButton disabled={userMutation.isLoading}>Sign Up</SubmitButton>
                     </div>
                 </form>
             </div>

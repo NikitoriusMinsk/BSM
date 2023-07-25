@@ -27,12 +27,16 @@ export const authRouter = router({
 					.min(1, "Email is required")
 					.max(256, "Email must be 250 characters max"),
 				terms: z.literal<boolean>(true, {
-					errorMap: () => ({ message: "You must accept the terms and conditions" }),
+					errorMap: (errors) => ({ ...errors, message: "You must accept the terms and conditions" }),
 				}),
 			})
 				.refine((data) => data.password === data.confirmedPassword, {
+					path: ["password"],
+					message: "Passwords do not match"
+				})
+				.refine((data) => data.password === data.confirmedPassword, {
 					path: ["confirmedPassword"],
-					message: "Passwords do not match",
+					message: "Passwords do not match"
 				})
 		)
 		.mutation(async ({ ctx, input }) => {
