@@ -79,7 +79,7 @@ const Header: React.FC = () => {
 						{sports.slice(0, GetSportCount(width)).map((sport) => (
 							<MenuLink
 								key={sport.id}
-								active={router.pathname.includes(`/${sport.name}`)}
+								active={router.asPath.includes(`/${sport.name}`)}
 								href={`/${sport.name}`}
 								label={sport.name}
 							/>

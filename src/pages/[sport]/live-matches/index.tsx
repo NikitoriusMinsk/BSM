@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import styles from "@styles/pages/Live-Matches.module.css";
 import React from "react";
 import { trpc } from "src/utils/trpc";
@@ -137,6 +137,13 @@ const LiveMatches: NextPage = () => {
 			</PortalContext.Provider>
 		</>
 	);
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+	return {
+		fallback: "blocking",
+		paths: [],
+	};
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
