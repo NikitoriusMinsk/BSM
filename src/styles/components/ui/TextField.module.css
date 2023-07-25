@@ -110,3 +110,31 @@
     line-height: normal;
     width: 100%;
 }
+
+.floating {
+    position: absolute;
+    display: block;
+    top: 0px;
+    left: 25px;
+    transform: translateY(16px);
+    transform-origin: left center;
+    transition: all .2s;
+    pointer-events: none;
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    color: rgba(26, 28, 33, 0.5);
+}
+
+.floatingPlaceholder input:focus+.floating,
+.floating.up {
+    font-size: 10px;
+    transform: translateY(4px);
+}
+
+.floatingPlaceholder input {
+    padding-bottom: 10px;
+    padding-top: 20px;
+}

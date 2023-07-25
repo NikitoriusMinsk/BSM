@@ -132,12 +132,14 @@ const Register: NextPage = () => {
                                 placeholder="First Name"
                                 name="indFirstName"
                                 errorMessage={errors?.indFirstName || null}
+                                floatingPlaceholder
                             />
                             <TextField
                                 type="text"
                                 placeholder="Last Name"
                                 name="indLastName"
                                 errorMessage={errors?.indLastName || null}
+                                floatingPlaceholder
                             />
                         </div>
                         <TextField
@@ -145,6 +147,7 @@ const Register: NextPage = () => {
                             placeholder="Email Address"
                             name="email"
                             errorMessage={errors?.email || null}
+                            floatingPlaceholder
                         />
                         <TextField
                             type="text"
@@ -153,17 +156,20 @@ const Register: NextPage = () => {
                             // iconClick={() => { }}
                             name="nickName"
                             errorMessage={errors?.nickName || null}
+                            floatingPlaceholder
                         />
                         <PasswordField
                             name="password"
                             placeholder="Password"
                             onChange={checkPassword}
                             errorMessage={errors?.password || null}
+                            floatingPlaceholder
                         />
                         <PasswordField
                             name="confirmedPassword"
                             placeholder="Repeat Password"
                             errorMessage={errors?.confirmedPassword || null}
+                            floatingPlaceholder
                         />
                     </div>
                     <div className={styles.passwordDescription}>

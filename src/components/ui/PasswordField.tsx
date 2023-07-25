@@ -4,6 +4,7 @@ import Image from "next/image";
 
 interface PasswordFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	errorMessage?: string | string[];
+	floatingPlaceholder?: boolean;
 }
 
 const PasswordField: React.FC<PasswordFieldProps> = (
@@ -11,30 +12,42 @@ const PasswordField: React.FC<PasswordFieldProps> = (
 ) => {
 	const {
 		errorMessage,
+		floatingPlaceholder,
 		...inputProps
 	} = props;
 	const [errmsg, setErrmsg] = useState<string | string[] | undefined>(errorMessage)
 	const [typeF, setTypeF] = useState(true);
+	const [val, setVal] = useState<any>(inputProps.defaultValue || inputProps.value || null)
 
 	useEffect(() => {
 		setErrmsg(errorMessage)
 	}, [errorMessage])
 
+	useEffect(() => {
+		setVal(inputProps.defaultValue || inputProps.value || null)
+	}, [inputProps.defaultValue, inputProps.value])
+
 	return (
 		<div
 			className={
 				`${styles.textFieldContainer}` +
-				` ${errmsg && styles.errorField}`
+				` ${errmsg && styles.errorField}` +
+				` ${floatingPlaceholder && styles.floatingPlaceholder}`
 			}
 		>
 			<input
 				{...inputProps}
+				placeholder={floatingPlaceholder ? undefined : inputProps.placeholder}
 				type={typeF ? "password" : "text"}
 				onChange={(e) => {
 					setErrmsg(undefined)
+					setVal(e.currentTarget.value)
 					inputProps.onChange && inputProps.onChange(e)
 				}}
 			/>
+			{floatingPlaceholder &&
+				<label className={`${styles.floating} ${val && styles.up}`}>{inputProps.placeholder}</label>
+			}
 			<div
 				className={styles.eye}
 				onClick={() => {

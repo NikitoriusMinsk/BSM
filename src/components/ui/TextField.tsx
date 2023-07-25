@@ -9,6 +9,7 @@ interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	minWidth?: number | string;
 	shouldShrink?: boolean;
 	errorMessage?: string | string[];
+	floatingPlaceholder?: boolean;
 }
 
 const TextField: React.FC<TextFieldProps> = (props) => {
@@ -17,20 +18,27 @@ const TextField: React.FC<TextFieldProps> = (props) => {
 		minWidth,
 		shouldShrink,
 		errorMessage,
+		floatingPlaceholder,
 		...inputProps
 	} = props;
 	const [errmsg, setErrmsg] = useState<string | string[] | undefined>(errorMessage)
+	const [val, setVal] = useState<any>(inputProps.defaultValue || inputProps.value || null)
 
 	useEffect(() => {
 		setErrmsg(errorMessage)
 	}, [errorMessage])
+
+	useEffect(() => {
+		setVal(inputProps.defaultValue || inputProps.value || null)
+	}, [inputProps.defaultValue, inputProps.value])
 
 	return (
 		<div
 			className={
 				`${styles.textFieldContainer}` +
 				` ${shouldShrink && styles.shrinkSearch}` +
-				` ${errmsg && styles.errorField}`
+				` ${errmsg && styles.errorField}` +
+				` ${floatingPlaceholder && styles.floatingPlaceholder}`
 			}
 			style={{
 				minWidth: minWidth,
@@ -38,12 +46,17 @@ const TextField: React.FC<TextFieldProps> = (props) => {
 		>
 			<input
 				{...inputProps}
+				placeholder={floatingPlaceholder ? undefined : inputProps.placeholder}
 				style={inputProps.icon ? { paddingRight: 48 } : {}}
 				onChange={(e) => {
 					setErrmsg(undefined)
+					setVal(e.currentTarget.value)
 					inputProps.onChange && inputProps.onChange(e)
 				}}
 			/>
+			{floatingPlaceholder &&
+				<label className={`${styles.floating} ${val && styles.up}`}>{inputProps.placeholder}</label>
+			}
 			{inputProps.icon && (
 				<div
 					className={styles.icon}
