@@ -2,7 +2,7 @@ import { SessionProvider } from "next-auth/react";
 import "@styles/date-picker-reset.css";
 import "@styles/globals.css";
 import MainLayout from "../components/layout/MainLayout";
-import { ReactElement, createContext, useContext, useEffect, useState } from "react";
+import { ReactElement, createContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
