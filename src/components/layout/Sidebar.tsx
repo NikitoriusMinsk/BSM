@@ -74,7 +74,10 @@ const Sidebar: React.FC = () => {
 							href={{
 								pathname: href,
 								query: {
-									sport: router.query.sport ?? lastSport ?? "Football",
+									sport:
+										router.query.sport ??
+										lastSport?.name ??
+										"Football",
 								},
 							}}
 							label={label}
