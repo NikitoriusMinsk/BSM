@@ -5,11 +5,26 @@ import oddsSchema from "./Odds";
 const matchSchema = z.object({
 	id: z.number(),
 	teams: teamSchema.array(),
-	duration: z.string(),
-	date: z.date(),
-	status: z.string(),
+	duration: z.string().nullish(),
+	date: z.string(),
+	status: z.enum([
+		"Abnormal",
+		"Not started",
+		"First half",
+		"Half-time",
+		"Second half",
+		"Overtime",
+		"Overtime(deprecated)",
+		"Penalty Shoot-out",
+		"End",
+		"Delay",
+		"Interrupt",
+		"Cut in half",
+		"Cancel",
+		"To be determined",
+	]),
 	odds: oddsSchema,
-	tipCount: z.number(),
+	tipCount: z.number().nullish(),
 });
 
 export default matchSchema;
