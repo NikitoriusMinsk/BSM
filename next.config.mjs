@@ -20,6 +20,23 @@ const _withBundleAnalyzer = withBundleAnalyzer({
 export default defineNextConfig({
     reactStrictMode: true,
     swcMinify: true,
-    output: 'standalone'
+    output: 'standalone',
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'img.thesports.com',
+            }
+        ]
+    },
+    async redirects() {
+        return [
+            {
+                source: '/',
+                destination: '/Football',
+                permanent: true
+            }
+        ]
+    }
 });
 
