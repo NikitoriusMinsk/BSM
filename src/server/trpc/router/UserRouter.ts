@@ -595,7 +595,7 @@ const TrackingTips = [
 			name: "John Doe",
 			winrate: 0.53,
 			subscribed: false,
-			paid: false
+			paid: false,
 		},
 		info: {
 			tracking: true,
@@ -721,7 +721,7 @@ const TrackingTips = [
 			name: "Jane Doe",
 			winrate: 0.43,
 			subscribed: false,
-			paid: false
+			paid: false,
 		},
 		info: {
 			tracking: true,
@@ -811,7 +811,7 @@ const PendingTips = [
 			name: "John Doe",
 			winrate: 0.53,
 			subscribed: false,
-			paid: false
+			paid: false,
 		},
 		info: {
 			tracking: false,
@@ -937,7 +937,7 @@ const PendingTips = [
 			name: "Jane Doe",
 			winrate: 0.43,
 			subscribed: false,
-			paid: false
+			paid: false,
 		},
 		info: {
 			tracking: false,
@@ -1027,7 +1027,7 @@ const HistoricalTips = [
 			name: "John Doe",
 			winrate: 0.53,
 			subscribed: false,
-			paid: false
+			paid: false,
 		},
 		info: {
 			tracking: true,
@@ -1153,7 +1153,7 @@ const HistoricalTips = [
 			name: "Jane Doe",
 			winrate: 0.43,
 			subscribed: false,
-			paid: false
+			paid: false,
 		},
 		info: {
 			tracking: true,

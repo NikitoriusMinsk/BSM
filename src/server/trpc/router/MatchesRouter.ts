@@ -635,4 +635,7 @@ export const matchesRouter = router({
 	getMatchTips: publicProcedure.query(async ({ ctx, input }) => {
 		return MatchTips;
 	}),
+	getTop: publicProcedure.query(async ({ ctx, input }) => {
+		return MatchesTemp;
+	}),
 });

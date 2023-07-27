@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import styles from "@styles/pages/MatchSummary.module.css";
 import Image from "next/image";
@@ -262,7 +262,27 @@ const MatchSummary: NextPage<{ type: string }> = ({ type }) => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticPaths: GetStaticPaths = async (context) => {
+	const matches = [
+		{ sport: "Football", id: 1 },
+		{ sport: "Football", id: 2 },
+		{ sport: "Football", id: 3 },
+	];
+
+	return {
+		fallback: "blocking",
+		paths: matches.map((match) => {
+			return {
+				params: {
+					sport: match.sport,
+					id: match.id.toString(),
+				},
+			};
+		}),
+	};
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
 	return {
 		props: {
 			type: context.params?.id || "default",
