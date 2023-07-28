@@ -216,13 +216,23 @@ export const Match: React.FC<
 			case "Not started":
 				return (
 					<div className={styles.matchUpcoming}>
-						<Moment
-							format="HH:mm"
-							toNow
-						>
-							{date}
-						</Moment>
-						s
+						{new Date().getTime() - new Date(date).getTime() >= 3600000 ? (
+							<>
+								<Moment
+									format="mm:ss"
+									to={date}
+								/>
+								s
+							</>
+						) : (
+							<>
+								<Moment
+									to={date}
+									format="hh:mm"
+								/>
+								m
+							</>
+						)}
 					</div>
 				);
 			case "Cancel":

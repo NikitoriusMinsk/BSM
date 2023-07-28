@@ -259,10 +259,8 @@ const TopMatches: React.FC<TopMatchesProps> = (props) => {
 						<Moment
 							format="mm:ss"
 							className={styles.date}
-							toNow
-						>
-							{match.date}
-						</Moment>
+							to={match.date}
+						/>
 						s
 					</div>
 				);
