@@ -21,9 +21,14 @@ import { trpc } from "src/utils/trpc";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import DisaperingContainer from "@components/helpers/DisaperingContainer";
 import Matches from "@components/ui/Matches";
+import { useContext, useState } from "react";
+import { LastSportContext } from "../_app";
+import moment from "moment-timezone";
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
+	const [topMatchesDate, setTopMatchesDate] = useState<Date>(new Date());
+	const sport = useContext(LastSportContext);
 	const { data: bookmakers, isLoading: bookmakersLoading } =
 		trpc.bookmakers.getTop.useQuery();
 	const { data: filters, isLoading: filtersLoading } =
@@ -32,8 +37,10 @@ const Home: NextPage = () => {
 		trpc.predictions.getAll.useQuery();
 	const { data: liveMatches, isLoading: liveMatchesLoading } =
 		trpc.matches.getAllLive.useQuery();
-	const { data: matches, isLoading: matchesLoading } =
-		trpc.matches.getAllByLeague.useQuery();
+	const { data: matches, isLoading: matchesLoading } = trpc.matches.getTop.useQuery({
+		sportId: sport!.id,
+		date: moment(topMatchesDate).format("YYYY-MM-DD"),
+	});
 	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery();
 	const { data: tipsters, isLoading: tipstersLoading } =
 		trpc.tipsters.getAll.useQuery();
@@ -45,21 +52,12 @@ const Home: NextPage = () => {
 		predictionsLoading ||
 		liveMatchesLoading ||
 		tipsLoading ||
-		tipstersLoading ||
-		matchesLoading
+		tipstersLoading
 	) {
 		return <div>Loading...</div>;
 	}
 
-	if (
-		!bookmakers ||
-		!filters ||
-		!predictions ||
-		!liveMatches ||
-		!tips ||
-		!tipsters ||
-		!matches
-	) {
+	if (!bookmakers || !filters || !predictions || !liveMatches || !tips || !tipsters) {
 		return <div>Error</div>;
 	}
 
@@ -114,11 +112,14 @@ const Home: NextPage = () => {
 					id={styles.matchList}
 					condition={width > 768}
 				>
-					<Matches
-						leagues={matches}
-						h2={"Top Matches"}
-						h3={"Today"}
-					/>
+					{!matchesLoading && matches && (
+						<Matches
+							matches={matches}
+							h2={"Top Matches"}
+							h3={"Today"}
+							dateState={[topMatchesDate, setTopMatchesDate]}
+						/>
+					)}
 				</DisaperingContainer>
 				<DisaperingContainer
 					id={styles.predictionList}
@@ -400,7 +401,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	await ssg.filters.getLeagues.prefetch();
 	await ssg.predictions.getAll.prefetch();
 	await ssg.matches.getAllLive.prefetch();
-	await ssg.matches.getAllByLeague.prefetch();
+	await ssg.matches.getTop.prefetch({
+		sportId: 1, //temporary, no idea how to get the current sport id for now
+		date: moment(new Date()).format("YYYY-MM-DD"),
+	});
 	await ssg.tips.getAll.prefetch();
 	await ssg.tipsters.getAll.prefetch();
 

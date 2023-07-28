@@ -2,6 +2,8 @@ import { z } from "zod";
 import { MatchStatus } from "src/types/matchStatus";
 import Fuse from "fuse.js";
 import { publicProcedure, router } from "../trpc";
+import makeApiCall from "../utils/makeApiCall";
+import { leagueSchema, matchSchema, paginatorHelper } from "../utils/DTOSchemas";
 
 // THIS IS A TEMPORARY FUNCTION FOR GENERATING DATES
 function getOffsetDate(days: number, months: number, years: number) {
@@ -608,9 +610,26 @@ export const matchesRouter = router({
 	getAll: publicProcedure.query(async ({ ctx, input }) => {
 		return MatchesTemp;
 	}),
-	getAllByLeague: publicProcedure.query(async ({ ctx, input }) => {
-		return MatchesByLeague;
-	}),
+	getAllByLeague: publicProcedure
+		.input(
+			z.object({
+				page: z.number(),
+				size: z.number(),
+				sportId: z.number(),
+				leagueId: z.number().array(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
+			const { leagueId, page, size, sportId } = input;
+
+			return await makeApiCall(
+				`matches?page=${page}&size=${size}&sportId=${sportId}${leagueId
+					.map((id) => id.toString()) // have to perform an additional .toString conversion because typescript infers accumulator value type from array
+					.reduce((acc, id) => acc + `&leagueId=${id}`, "")}`,
+				paginatorHelper(leagueSchema.array()),
+				{ method: "GET" }
+			);
+		}),
 	search: publicProcedure
 		.input(
 			z.object({
@@ -635,7 +654,20 @@ export const matchesRouter = router({
 	getMatchTips: publicProcedure.query(async ({ ctx, input }) => {
 		return MatchTips;
 	}),
-	getTop: publicProcedure.query(async ({ ctx, input }) => {
-		return MatchesTemp;
-	}),
+	getTop: publicProcedure
+		.input(
+			z.object({
+				date: z.string().refine((str) => str.match(/\d\d\d\d-\d\d-\d\d/gm)), // YYYY-MM-DD
+				sportId: z.number(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
+			const { date, sportId } = input;
+
+			return await makeApiCall(
+				`matches/top?date=${date}&sportId=${sportId}`,
+				matchSchema.array(),
+				{ method: "GET" }
+			);
+		}),
 });

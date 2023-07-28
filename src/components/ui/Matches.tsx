@@ -1,34 +1,30 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "@styles/components/ui/Leagues.module.css";
 import Image from "next/image";
-import { MatchesByLeague } from "src/types/queryTypes";
-import { inferArrayElementType } from "src/utils/inferArrayElementType";
-import { motion } from "framer-motion";
-import { MatchStatus } from "src/types/matchStatus";
 import Moment from "react-moment";
 import { Match } from "./Leagues";
+import { matchSchema } from "src/server/trpc/utils/DTOSchemas";
 
 interface MatchesInfoProps {
-	leagues: MatchesByLeague;
+	matches: (typeof matchSchema._type)[];
 	h3?: string;
 	h2?: string;
 	withLiveMatchesButton?: boolean;
 	withDatePicker?: boolean;
+	dateState: [Date, Dispatch<SetStateAction<Date>>];
 }
-
-type LeagueType = inferArrayElementType<MatchesByLeague>;
-type MatchType = inferArrayElementType<inferArrayElementType<MatchesByLeague>["matches"]>;
 
 const Matches: React.FC<MatchesInfoProps> = (props) => {
 	const {
-		leagues,
+		matches,
 		h2,
 		h3,
 		withLiveMatchesButton = true,
 		withDatePicker = true,
+		dateState,
 	} = props;
 
-	const [selectedDate, setSelectedDate] = useState(new Date());
+	const [selectedDate, setSelectedDate] = dateState;
 	const [modeState, setModeState] = useState<"live" | "odds" | "stats">("odds");
 
 	function nextDate() {
@@ -135,15 +131,13 @@ const Matches: React.FC<MatchesInfoProps> = (props) => {
 					)}
 				</div>
 			</div>
-			{leagues.map((league, leagueIndex) => {
-				return league.matches.map((match, index) => (
-					<Match
-						{...match}
-						mode={modeState}
-						key={`matches_match_${index}`}
-					/>
-				));
-			})}
+			{matches.map((match, index) => (
+				<Match
+					{...match}
+					mode={modeState}
+					key={`matches_match_${index}`}
+				/>
+			))}
 		</div>
 	);
 };

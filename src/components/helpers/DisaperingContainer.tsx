@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 
 interface DisaperingContainerProps {
-	children: ReactElement[] | ReactElement;
+	children: ReactElement[] | ReactElement | null | undefined | boolean;
 	className?: string | undefined;
 	id?: string | undefined;
 	condition: boolean;

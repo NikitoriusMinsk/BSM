@@ -5,6 +5,7 @@ import sportSchema from "./Sport";
 import matchSchema from "./Match";
 import teamSchema from "./Team";
 import oddsSchema from "./Odds";
+import leagueSchema from "./League";
 import paginatorHelper from "./PaginatorHelper";
 
 export {
@@ -15,5 +16,6 @@ export {
 	matchSchema,
 	teamSchema,
 	oddsSchema,
+	leagueSchema,
 	paginatorHelper,
 };

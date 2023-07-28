@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useReducer, useState } from "react";
 import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
 import styles from "@styles/pages/Matches.module.css";
 import { trpc } from "src/utils/trpc";
@@ -21,19 +21,37 @@ import TextField from "@components/ui/TextField";
 import FilterModal from "@components/ui/FilterModal";
 import DisaperingContainer from "@components/helpers/DisaperingContainer";
 import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
+import { LastSportContext } from "src/pages/_app";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
 });
 
 const MatchesPage: NextPage = () => {
+	const sport = useContext(LastSportContext);
+	const [selectedLeagues, setSelectedLeagues] = useReducer(
+		(state: number[], action: number[]) => {
+			const newState = state.concat(action);
+			return Array.from(new Set(newState));
+		},
+		[],
+		() => []
+	);
 	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery();
 	const { data: matches, isLoading: matchesLoading } =
-		trpc.matches.getAllByLeague.useQuery();
+		trpc.matches.getAllByLeague.useQuery(
+			{
+				leagueId: selectedLeagues,
+				page: 0,
+				size: selectedLeagues.length,
+				sportId: sport.id,
+			},
+			{ enabled: selectedLeagues.length > 0 }
+		);
 	const { data: bookmakers, isLoading: bookmakersLoading } =
 		trpc.bookmakers.getTop.useQuery();
 	const { data: leagues, isLoading: leaguesLoading } =
-		trpc.filters.getLeaguesByCountry.useQuery();
+		trpc.filters.getLeaguesByCountry.useQuery({ sportId: sport.id });
 	const { data: filters, isLoading: filtersLoading } =
 		trpc.filters.getLeagues.useQuery();
 	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
@@ -48,21 +66,12 @@ const MatchesPage: NextPage = () => {
 		leaguesLoading ||
 		sportsLoading ||
 		liveMatchesLoading ||
-		matchesLoading ||
 		filtersLoading
 	) {
 		return <div>Loading...</div>;
 	}
 
-	if (
-		!tips ||
-		!liveMatches ||
-		!bookmakers ||
-		!leagues ||
-		!sports ||
-		!matches ||
-		!filters
-	) {
+	if (!tips || !liveMatches || !bookmakers || !leagues || !sports || !filters) {
 		return <div>Error...</div>;
 	}
 
@@ -80,15 +89,15 @@ const MatchesPage: NextPage = () => {
 						/>
 					</div>
 					<NestedFilter
-						items={leagues}
+						items={leagues.slice(0, 5)}
 						h3="BY COUNTRY"
 						h2="Choose Matches"
-						onChange={() => {}}
+						onChange={(countries, leagues) => setSelectedLeagues(leagues)}
 					/>
 					<NestedFilter
-						items={leagues}
+						items={leagues.slice(5)}
 						h3="OTHER COUNTRIES"
-						onChange={() => {}}
+						onChange={(countries, leagues) => setSelectedLeagues(leagues)}
 						withClearButton={false}
 						colapsible={true}
 					/>
@@ -160,10 +169,12 @@ const MatchesPage: NextPage = () => {
 					/>
 				</div>
 				<div className={styles.predictions}>
-					<Leagues
-						leagues={matches}
-						withDatePicker={false}
-					/>
+					{!matchesLoading && matches && (
+						<Leagues
+							leagues={matches.content}
+							withDatePicker={false}
+						/>
+					)}
 				</div>
 				<DisaperingContainer
 					className={styles.sideColumn}
@@ -196,9 +207,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	});
 
 	await ssg.tips.getAll.prefetch();
-	await ssg.matches.getAllByLeague.prefetch();
+	// await ssg.matches.getAllByLeague.prefetch({
+	// 	leagueId: [],
+	// 	page: 1,
+	// 	size: 20,
+	// 	sportId: 1,
+	// });
 	await ssg.bookmakers.getTop.prefetch();
-	await ssg.filters.getLeaguesByCountry.prefetch();
+	await ssg.filters.getLeaguesByCountry.prefetch({ sportId: 1 });
 	await ssg.filters.getSports.prefetch();
 	await ssg.matches.getAllLive.prefetch();
 

@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import styles from "@styles/pages/Live-Matches.module.css";
-import React from "react";
+import React, { useContext } from "react";
 import { trpc } from "src/utils/trpc";
 import Filter from "@components/ui/Filter";
 import Leagues from "@components/ui/Leagues";
@@ -14,15 +14,22 @@ import { PortalContext } from "src/utils/portalContext";
 import dynamic from "next/dynamic";
 import usePortal from "src/utils/usePortal";
 import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
+import { LastSportContext } from "src/pages/_app";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
 });
 const LiveMatches: NextPage = () => {
+	const sport = useContext(LastSportContext);
 	const { data: filters, isLoading: filtersLoading } =
 		trpc.filters.getLeagues.useQuery();
 	const { data: matches, isLoading: matchesLoading } =
-		trpc.matches.getAllByLeague.useQuery();
+		trpc.matches.getAllByLeague.useQuery({
+			leagueId: [],
+			page: 1,
+			size: 20,
+			sportId: sport.id,
+		});
 	const portalNode = usePortal();
 
 	if (filtersLoading || matchesLoading) {
@@ -129,7 +136,7 @@ const LiveMatches: NextPage = () => {
 						/>
 					</div>
 					<Leagues
-						leagues={matches}
+						leagues={matches.content}
 						withLiveMatchesButton={false}
 						withDatePicker={false}
 					/>
@@ -154,7 +161,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	});
 
 	await ssg.filters.getLeagues.prefetch();
-	await ssg.matches.getAllByLeague.prefetch();
+	await ssg.matches.getAllByLeague.prefetch({
+		leagueId: [],
+		page: 1,
+		size: 20,
+		sportId: 1,
+	});
 
 	return {
 		props: {

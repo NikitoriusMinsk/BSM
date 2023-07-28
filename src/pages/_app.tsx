@@ -10,9 +10,10 @@ import useWindowSize from "src/utils/useWindowSize";
 import MobileLayout from "@components/layout/MobileLayout";
 import { trpc } from "src/utils/trpc";
 
-export const LastSportContext = createContext<{ name: string; id: number } | undefined>(
-	undefined
-);
+export const LastSportContext = createContext<{ name: string; id: number }>({
+	name: "Football",
+	id: 1,
+});
 
 function MyApp(appProps: AppProps<{ session: Session }>) {
 	const {
@@ -22,7 +23,10 @@ function MyApp(appProps: AppProps<{ session: Session }>) {
 
 	const { width } = useWindowSize();
 	const router = useRouter();
-	const [lastSport, setLastSport] = useState<{ name: string; id: number }>();
+	const [lastSport, setLastSport] = useState<{ name: string; id: number }>({
+		name: "Football",
+		id: 1,
+	});
 	const { data: sports } = trpc.navigation.getSports.useQuery();
 	const noLayoutRoutes = [
 		"/sign-in",
@@ -53,7 +57,12 @@ function MyApp(appProps: AppProps<{ session: Session }>) {
 
 	useEffect(() => {
 		router.query.sport &&
-			setLastSport(sports?.find((sport) => sport.name === router.query.sport));
+			setLastSport(
+				sports?.find((sport) => sport.name === router.query.sport) ?? {
+					name: "Football",
+					id: 1,
+				}
+			);
 	}, [router.query.sport]);
 
 	return (

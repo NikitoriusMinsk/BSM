@@ -3,21 +3,18 @@ import styles from "@styles/components/ui/Leagues.module.css";
 import Image from "next/image";
 import { MatchesByLeague } from "src/types/queryTypes";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
-import { motion } from "framer-motion";
-import { MatchStatus } from "src/types/matchStatus";
 import Moment from "react-moment";
+import { leagueSchema, matchSchema } from "src/server/trpc/utils/DTOSchemas";
+import { useRouter } from "next/router";
 
 interface MatchesInfoProps {
-	leagues: MatchesByLeague;
+	leagues: (typeof leagueSchema._type)[];
 	h3?: string;
 	h2?: string;
 	withLiveMatchesButton?: boolean;
 	withDatePicker?: boolean;
 	mode?: "live" | "odds" | "stats";
 }
-
-type LeagueType = inferArrayElementType<MatchesByLeague>;
-type MatchType = inferArrayElementType<inferArrayElementType<MatchesByLeague>["matches"]>;
 
 const Leagues: React.FC<MatchesInfoProps> = (props) => {
 	const {
@@ -51,7 +48,7 @@ const Leagues: React.FC<MatchesInfoProps> = (props) => {
 };
 
 const League: React.FC<{
-	league: LeagueType;
+	league: typeof leagueSchema._type;
 	withLiveMatchesButton: boolean;
 	withDatePicker: boolean;
 	mode?: "live" | "odds" | "stats";
@@ -59,6 +56,7 @@ const League: React.FC<{
 	const { league, withDatePicker, withLiveMatchesButton, mode } = props;
 	const [selectedDate, setSelectedDate] = useState(new Date());
 	const [modeState, setModeState] = useState(mode || "odds");
+	const router = useRouter();
 
 	function nextDate() {
 		const _date = new Date(
@@ -84,7 +82,7 @@ const League: React.FC<{
 				<div className={styles.leagueWrapper}>
 					<div className={styles.image}>
 						<Image
-							src={league.image}
+							src={league.image ?? "/placeholeder.png"}
 							height={28}
 							width={28}
 							alt={league.name}
@@ -92,7 +90,7 @@ const League: React.FC<{
 					</div>
 					<div className={styles.titles}>
 						<span>
-							{league.country} • {league.sport.name}
+							{league.country} • {router.query.sport}
 						</span>
 						<span>{league.name}</span>
 					</div>
@@ -175,7 +173,7 @@ const League: React.FC<{
 				</div>
 			</div>
 			<div className={styles.matches}>
-				{league.matches.map((match, index) => (
+				{league.matches?.map((match, index) => (
 					<Match
 						{...match}
 						mode={modeState}
@@ -188,15 +186,20 @@ const League: React.FC<{
 	);
 };
 
-export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> = (
-	props
-) => {
-	const { status, teams, date, odds, tip_count, mode } = props;
+export const Match: React.FC<
+	typeof matchSchema._type & { mode?: "live" | "odds" | "stats" }
+> = (props) => {
+	const { status, teams, date, odds, tipCount, mode } = props;
 	const [isOpen, setIsOpen] = useState(false);
 
-	function getTag(status: MatchStatus) {
+	function getTag(status: typeof matchSchema._type.status) {
 		switch (status) {
-			case MatchStatus.live:
+			case "Half-time":
+			case "Overtime":
+			case "Overtime(deprecated)":
+			case "Second half":
+			case "Penalty Shoot-out":
+			case "First half":
 				return (
 					<div className={styles.matchLive}>
 						<Moment
@@ -207,7 +210,10 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 						</Moment>
 					</div>
 				);
-			case MatchStatus.upcoming:
+			case "Delay":
+			case "Interrupt":
+			case "To be determined":
+			case "Not started":
 				return (
 					<div className={styles.matchUpcoming}>
 						<Moment
@@ -219,7 +225,8 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 						s
 					</div>
 				);
-			case MatchStatus.finished:
+			case "Cancel":
+			case "End":
 				return (
 					<div className={styles.matchDate}>
 						<Moment format="HH:mm">{date}</Moment>
@@ -244,7 +251,7 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 								className={styles.teamImage}
 							>
 								<Image
-									src={team.image}
+									src={team.image ?? "/placeholeder.png"}
 									alt={team.name}
 									width={22}
 									height={22}
@@ -298,21 +305,27 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 									style={{ gap: "4px", marginTop: "-12px" }}
 								>
 									<span>Home</span>
-									<span className={styles.oddVal}>{odds.home}</span>
+									<span className={styles.oddVal}>
+										{odds.home ?? 0}
+									</span>
 								</div>
 								<div
 									className={styles.outcome}
 									style={{ gap: "4px", marginTop: "-12px" }}
 								>
 									<span>Draw</span>
-									<span className={styles.oddVal}>{odds.draw}</span>
+									<span className={styles.oddVal}>
+										{odds.draw ?? 0}
+									</span>
 								</div>
 								<div
 									className={styles.outcome}
 									style={{ gap: "4px", marginTop: "-12px" }}
 								>
 									<span>Away</span>
-									<span className={styles.oddVal}>{odds.away}</span>
+									<span className={styles.oddVal}>
+										{odds.away ?? 0}
+									</span>
 								</div>
 							</div>
 							<div
@@ -330,15 +343,15 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 							<div className={styles.percents}>
 								<div className={styles.outcome}>
 									<span>Home</span>
-									<span>{odds.home * 100}%</span>
+									<span>{(odds.home ?? 0) * 100}%</span>
 								</div>
 								<div className={styles.outcome}>
 									<span>Draw</span>
-									<span>{odds.draw * 100}%</span>
+									<span>{(odds.draw ?? 0) * 100}%</span>
 								</div>
 								<div className={styles.outcome}>
 									<span>Away</span>
-									<span>{odds.away * 100}%</span>
+									<span>{(odds.away ?? 0) * 100}%</span>
 								</div>
 							</div>
 							<div
@@ -347,7 +360,7 @@ export const Match: React.FC<MatchType & { mode?: "live" | "odds" | "stats" }> =
 								}`}
 								onClick={() => setIsOpen(!isOpen)}
 							>
-								{tip_count} Tip{tip_count > 1 ? "s" : ""}
+								{tipCount} Tip{(tipCount ?? 0) > 1 ? "s" : ""}
 							</div>
 						</>
 					)}

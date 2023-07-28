@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
+import { countrySchema } from "../utils/DTOSchemas";
+import makeApiCall from "../utils/makeApiCall";
 
 const SportLeagues = [
 	{
@@ -426,9 +428,23 @@ export const filtersRouter = router({
 	getSports: publicProcedure.query(async ({ ctx, input }) => {
 		return Sports;
 	}),
-	getLeaguesByCountry: publicProcedure.query(async ({ ctx, input }) => {
-		return LeaguesByCountry;
-	}),
+	getLeaguesByCountry: publicProcedure
+		.input(
+			z.object({
+				sportId: z.number(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
+			const { sportId } = input;
+
+			return await makeApiCall(
+				`countries/leagues?sportId=${sportId}`,
+				countrySchema.array(),
+				{
+					method: "GET",
+				}
+			);
+		}),
 	getCountries: publicProcedure.query(async ({ ctx, input }) => {
 		return Countries;
 	}),
