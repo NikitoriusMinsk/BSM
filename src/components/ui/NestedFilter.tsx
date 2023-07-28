@@ -250,6 +250,9 @@ const Item: React.FC<ItemType> = (props) => {
 							height={34}
 							width={34}
 							alt=""
+							style={{
+								objectFit: "cover",
+							}}
 						/>
 					</div>
 					<span className={styles.name}>{name}</span>

@@ -29,27 +29,23 @@ const OutPortal = dynamic(async () => (await import("react-reverse-portal")).Out
 
 const MatchesPage: NextPage = () => {
 	const sport = useContext(LastSportContext);
-	const [selectedLeagues, setSelectedLeagues] = useReducer(
-		(state: number[], action: number[]) => {
-			const newState = state.concat(action);
-			return Array.from(new Set(newState));
-		},
-		[],
-		() => []
-	);
+	const [selectedTopLeagues, setSelectedTopLeagues] = useState<number[]>([]);
+	const [selectedLeagues, setSelectedLeagues] = useState<number[]>([]);
 	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery();
 	const { data: matches, isLoading: matchesLoading } =
-		trpc.matches.getAllByLeague.useQuery(
-			{
-				leagueId: selectedLeagues,
-				page: 0,
-				size: selectedLeagues.length,
-				sportId: sport.id,
-			},
-			{ enabled: selectedLeagues.length > 0 }
-		);
+		trpc.matches.getAllByLeague.useQuery({
+			leagueId: Array.from(new Set(selectedLeagues.concat(selectedTopLeagues))),
+			page: 0,
+			size:
+				selectedLeagues.concat(selectedTopLeagues).length === 0
+					? 5
+					: selectedLeagues.concat(selectedTopLeagues).length,
+			sportId: sport.id,
+		});
 	const { data: bookmakers, isLoading: bookmakersLoading } =
 		trpc.bookmakers.getTop.useQuery();
+	const { data: leaguesTop, isLoading: leaguesTopLoading } =
+		trpc.filters.getTopLeaguesByCountry.useQuery({ sportId: sport.id });
 	const { data: leagues, isLoading: leaguesLoading } =
 		trpc.filters.getLeaguesByCountry.useQuery({ sportId: sport.id });
 	const { data: filters, isLoading: filtersLoading } = trpc.filters.getLeagues.useQuery(
@@ -65,6 +61,7 @@ const MatchesPage: NextPage = () => {
 		tipsLoading ||
 		bookmakersLoading ||
 		leaguesLoading ||
+		leaguesTopLoading ||
 		sportsLoading ||
 		liveMatchesLoading ||
 		filtersLoading
@@ -72,7 +69,15 @@ const MatchesPage: NextPage = () => {
 		return <div>Loading...</div>;
 	}
 
-	if (!tips || !liveMatches || !bookmakers || !leagues || !sports || !filters) {
+	if (
+		!tips ||
+		!liveMatches ||
+		!bookmakers ||
+		!leagues ||
+		!leaguesTop ||
+		!sports ||
+		!filters
+	) {
 		return <div>Error...</div>;
 	}
 
@@ -90,13 +95,13 @@ const MatchesPage: NextPage = () => {
 						/>
 					</div>
 					<NestedFilter
-						items={leagues.slice(0, 5)}
+						items={leaguesTop}
 						h3="BY COUNTRY"
 						h2="Choose Matches"
-						onChange={(countries, leagues) => setSelectedLeagues(leagues)}
+						onChange={(countries, leagues) => setSelectedTopLeagues(leagues)}
 					/>
 					<NestedFilter
-						items={leagues.slice(5)}
+						items={leagues}
 						h3="OTHER COUNTRIES"
 						onChange={(countries, leagues) => setSelectedLeagues(leagues)}
 						withClearButton={false}
@@ -208,12 +213,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	});
 
 	await ssg.tips.getAll.prefetch();
-	// await ssg.matches.getAllByLeague.prefetch({
-	// 	leagueId: [],
-	// 	page: 1,
-	// 	size: 20,
-	// 	sportId: 1,
-	// });
+	await ssg.matches.getAllByLeague.prefetch({
+		leagueId: [],
+		page: 1,
+		size: 5,
+		sportId: 1,
+	});
 	await ssg.bookmakers.getTop.prefetch();
 	await ssg.filters.getLeaguesByCountry.prefetch({ sportId: 1 });
 	await ssg.filters.getSports.prefetch();
