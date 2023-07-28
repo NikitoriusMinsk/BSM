@@ -6,7 +6,7 @@ import { Match } from "./Leagues";
 import { matchSchema } from "src/server/trpc/utils/DTOSchemas";
 
 interface MatchesInfoProps {
-	matches: (typeof matchSchema._type)[];
+	matches: (typeof matchSchema._type)[] | undefined;
 	h3?: string;
 	h2?: string;
 	withLiveMatchesButton?: boolean;
@@ -131,7 +131,7 @@ const Matches: React.FC<MatchesInfoProps> = (props) => {
 					)}
 				</div>
 			</div>
-			{matches.map((match, index) => (
+			{matches?.map((match, index) => (
 				<Match
 					{...match}
 					mode={modeState}

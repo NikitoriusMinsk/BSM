@@ -112,14 +112,12 @@ const Home: NextPage = () => {
 					id={styles.matchList}
 					condition={width > 768}
 				>
-					{!matchesLoading && matches && (
-						<Matches
-							matches={matches}
-							h2={"Top Matches"}
-							h3={"Today"}
-							dateState={[topMatchesDate, setTopMatchesDate]}
-						/>
-					)}
+					<Matches
+						matches={matches}
+						h2={"Top Matches"}
+						h3={"Today"}
+						dateState={[topMatchesDate, setTopMatchesDate]}
+					/>
 				</DisaperingContainer>
 				<DisaperingContainer
 					id={styles.predictionList}
