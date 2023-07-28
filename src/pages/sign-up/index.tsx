@@ -8,10 +8,12 @@ import SubmitButton from "../../components/ui/SubmitButton";
 import { SyntheticEvent, useState } from "react";
 import Link from "next/link";
 import { trpc } from "src/utils/trpc";
-import { useRouter } from "next/router";
+import { AnimatePresence } from "framer-motion";
+import MessageModal from "@components/ui/MessageModal";
 
 const Register: NextPage = () => {
     const [passwordCheck, setPasswordCheck] = useState([false, false, false, false]);
+    const [internalError, setInternalError] = useState<string | boolean>(false);
 
     function checkPassword(e: React.ChangeEvent<HTMLInputElement>) {
         setPasswordCheck([
@@ -59,6 +61,12 @@ const Register: NextPage = () => {
             })
             .catch(r => {
                 setErrors(r.data.zodError?.fieldErrors || r.data.serverError?.errorCodes)
+                if (r.data.httpStatus == 500) {
+                    let errorTxt: string = r.data.serverError?.error || r.data.serverError?.message || "Internal server error. Try again later."
+                    if (errorTxt.toLocaleLowerCase() == 'internal server error')
+                        errorTxt += '. Try again later.'
+                    setInternalError(errorTxt)
+                }
             })
     }
 
@@ -74,6 +82,18 @@ const Register: NextPage = () => {
                 href="/favicon.ico"
             />
         </Head>
+        <AnimatePresence initial={false}>
+            {internalError && (
+                <MessageModal
+                    title="Error"
+                    close={() => setInternalError(false)}
+                    closeOnClickOutside
+                    containerStyle={{ minWidth: "30vw" }}
+                >
+                    <p>{internalError}</p>
+                </MessageModal>
+            )}
+        </AnimatePresence>
         <div className={styles.container}>
             <div className={styles.header}>
                 <Link href={"/"}>
