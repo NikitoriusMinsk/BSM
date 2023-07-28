@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
-import { countrySchema } from "../utils/DTOSchemas";
+import { countrySchema, leagueSchema, paginatorHelper } from "../utils/DTOSchemas";
 import makeApiCall from "../utils/makeApiCall";
 
 const SportLeagues = [
@@ -422,12 +422,64 @@ const SportClubs = [
 ];
 
 export const filtersRouter = router({
-	getLeagues: publicProcedure.query(async ({ ctx, input }) => {
-		return SportLeagues;
-	}),
+	getLeagues: publicProcedure
+		.input(
+			z.object({
+				page: z.number(),
+				size: z.number(),
+				sportId: z.number(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
+			const { page, size, sportId } = input;
+
+			return await makeApiCall(
+				`leagues?page=${page}&size=${size}&sportId=${sportId}`,
+				paginatorHelper(leagueSchema.array()),
+				{
+					method: "GET",
+				}
+			);
+		}),
+	getTopLeagues: publicProcedure
+		.input(
+			z.object({
+				page: z.number(),
+				size: z.number(),
+				sportId: z.number(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
+			const { page, size, sportId } = input;
+
+			return await makeApiCall(
+				`leagues/top?page=${page}&size=${size}&sportId=${sportId}`,
+				paginatorHelper(leagueSchema.array()),
+				{
+					method: "GET",
+				}
+			);
+		}),
 	getSports: publicProcedure.query(async ({ ctx, input }) => {
 		return Sports;
 	}),
+	getTopLeaguesByCountry: publicProcedure
+		.input(
+			z.object({
+				sportId: z.number(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
+			const { sportId } = input;
+
+			return await makeApiCall(
+				`countries/leagues/top?sportId=${sportId}`,
+				countrySchema.array(),
+				{
+					method: "GET",
+				}
+			);
+		}),
 	getLeaguesByCountry: publicProcedure
 		.input(
 			z.object({

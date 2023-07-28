@@ -9,9 +9,9 @@ interface LeaguesProps {
 	items: {
 		name: string;
 		subName?: string;
-		count?: number;
-		image: string;
-		id: string;
+		count?: number | null;
+		image?: string | null;
+		id: number;
 	}[];
 	showCount?: boolean;
 }
@@ -49,7 +49,7 @@ const Leagues: React.FC<LeaguesProps> = (props) => {
 				variants={ItemsVariants}
 				initial={"closed"}
 				animate={isOpen ? "open" : "closed"}
-				transition={{ ease: 'easeInOut' }}
+				transition={{ ease: "easeInOut" }}
 			>
 				{items.map((item) => (
 					<div
@@ -59,16 +59,14 @@ const Leagues: React.FC<LeaguesProps> = (props) => {
 						<div className={styles.info}>
 							<div className={styles.image}>
 								<Image
-									src={item.image}
+									src={item.image ?? "/placeholder.png"}
 									alt={item.name}
 									width={28}
 									height={28}
 								/>
 							</div>
 							<div className={styles.titles}>
-								<span className={styles.itemName}>
-									{item.name}
-								</span>
+								<span className={styles.itemName}>{item.name}</span>
 								{item.subName && (
 									<span className={styles.itemSubname}>
 										{item.subName}
@@ -90,7 +88,7 @@ const Leagues: React.FC<LeaguesProps> = (props) => {
 					variants={CevronVariants}
 					initial={"closed"}
 					animate={isOpen ? "open" : "closed"}
-					transition={{ ease: 'easeInOut' }}
+					transition={{ ease: "easeInOut" }}
 				>
 					<Image
 						src="/icons/chevron.svg"
@@ -104,4 +102,4 @@ const Leagues: React.FC<LeaguesProps> = (props) => {
 	);
 };
 
-export default Leagues
+export default Leagues;

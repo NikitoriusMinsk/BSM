@@ -3,7 +3,7 @@ import Head from "next/head";
 import styles from "@styles/pages/LeagueSummary.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GetServerSideProps } from "next";
 import LeagueSummaryPage from "@components/league-summary/LeagueSummaryPage";
@@ -16,6 +16,7 @@ import PagesSlider from "@components/ui/match-summary/PagesSlider";
 import { trpc } from "src/utils/trpc";
 import Leagues from "@components/ui/league-summary/Leagues";
 import LeaguesMobileBlocksLinks from "@components/ui/LeaguesMobileBlocksLinks";
+import { LastSportContext } from "src/pages/_app";
 
 const pages = [
 	{
@@ -42,12 +43,14 @@ const pages = [
 
 const LeagueSummary: NextPage<{ type: string }> = ({ type }) => {
 	const router = useRouter();
+	const sport = useContext(LastSportContext);
 	const [selectedPage, setSelectedPage] = useState(0);
 	const [selectedPageComponent, setSelectedPageComponent] = useState(
 		<LeagueSummaryPage />
 	);
-	const { data: leagues, isLoading: leaguesLoading } =
-		trpc.filters.getLeagues.useQuery();
+	const { data: leagues, isLoading: leaguesLoading } = trpc.filters.getLeagues.useQuery(
+		{ page: 0, size: 20, sportId: sport.id }
+	);
 
 	useEffect(() => {
 		switch (selectedPage) {
@@ -188,13 +191,13 @@ const LeagueSummary: NextPage<{ type: string }> = ({ type }) => {
 			<div className={styles.sideBar}>
 				<Leagues
 					h3="Top Leagues"
-					items={leagues}
+					items={leagues.content}
 					showCount={false}
 				/>
 			</div>
 			<div className={styles.leaguesMobile}>
 				<span className={styles.leaguesMobileTitle}>Top Leagues</span>
-				<LeaguesMobileBlocksLinks items={leagues} />
+				<LeaguesMobileBlocksLinks items={leagues.content} />
 			</div>
 		</>
 	);

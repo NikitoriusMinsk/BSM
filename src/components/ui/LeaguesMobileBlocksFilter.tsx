@@ -7,22 +7,23 @@ interface FilterProps {
 	items: {
 		name: string;
 		subName?: string;
-		count: number;
-		image: string;
-		id: string;
+		count?: number | null;
+		image?: string | null;
+		id: number;
 	}[];
-	onChange: (ids: string[]) => void;
+	onChange: (ids: number[]) => void;
 }
 
 const LeaguesMobileBlocksFilter: React.FC<FilterProps> = (props) => {
 	const { items, onChange } = props;
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectedItems, setSelectedItems] = useState<string[]>([]);
+	const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
-	const sliderRef = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
-    const { events } = useDraggable(sliderRef);
+	const sliderRef =
+		useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+	const { events } = useDraggable(sliderRef);
 
-	function handleSelect(id: string) {
+	function handleSelect(id: number) {
 		if (selectedItems.includes(id)) {
 			setSelectedItems(selectedItems.filter((item) => item !== id));
 			onChange(selectedItems.filter((item) => item !== id));
@@ -33,7 +34,11 @@ const LeaguesMobileBlocksFilter: React.FC<FilterProps> = (props) => {
 	}
 
 	return (
-		<div className={styles.container} {...events} ref={sliderRef}>
+		<div
+			className={styles.container}
+			{...events}
+			ref={sliderRef}
+		>
 			{items.map((item) => (
 				<div
 					key={item.id}
@@ -44,7 +49,7 @@ const LeaguesMobileBlocksFilter: React.FC<FilterProps> = (props) => {
 				>
 					<div className={styles.image}>
 						<Image
-							src={item.image}
+							src={item.image ?? "/placeholder.png"}
 							alt={item.name}
 							width={32}
 							height={32}
@@ -52,13 +57,9 @@ const LeaguesMobileBlocksFilter: React.FC<FilterProps> = (props) => {
 						<span className={styles.count}>{item.count}</span>
 					</div>
 					<div className={styles.titles}>
-						<span className={styles.itemName}>
-							{item.name}
-						</span>
+						<span className={styles.itemName}>{item.name}</span>
 						{item.subName && (
-							<span className={styles.itemSubname}>
-								{item.subName}
-							</span>
+							<span className={styles.itemSubname}>{item.subName}</span>
 						)}
 					</div>
 				</div>

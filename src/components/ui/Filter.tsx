@@ -9,11 +9,11 @@ interface FilterProps {
 	items: {
 		name: string;
 		subName?: string;
-		count: number;
-		image: string;
-		id: string;
+		count?: number | null;
+		image?: string | null;
+		id: number;
 	}[];
-	onChange: (ids: string[]) => void;
+	onChange: (ids: number[]) => void;
 }
 
 const ItemsVariants = {
@@ -37,9 +37,9 @@ const CevronVariants = {
 const Filter: React.FC<FilterProps> = (props) => {
 	const { h3, h2, items, onChange } = props;
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectedItems, setSelectedItems] = useState<string[]>([]);
+	const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
-	function handleSelect(id: string) {
+	function handleSelect(id: number) {
 		if (selectedItems.includes(id)) {
 			setSelectedItems(selectedItems.filter((item) => item !== id));
 			onChange(selectedItems.filter((item) => item !== id));
@@ -60,28 +60,27 @@ const Filter: React.FC<FilterProps> = (props) => {
 				variants={ItemsVariants}
 				initial={"closed"}
 				animate={isOpen ? "open" : "closed"}
-				transition={{ ease: 'easeInOut' }}
+				transition={{ ease: "easeInOut" }}
 			>
 				{items.map((item) => (
 					<div
 						key={item.id}
-						className={`${styles.item} ${selectedItems.includes(item.id) && styles.selected
-							}`}
+						className={`${styles.item} ${
+							selectedItems.includes(item.id) && styles.selected
+						}`}
 						onClick={() => handleSelect(item.id)}
 					>
 						<div className={styles.info}>
 							<div className={styles.image}>
 								<Image
-									src={item.image}
+									src={item.image ?? "/placeholder.png"}
 									alt={item.name}
 									width={28}
 									height={28}
 								/>
 							</div>
 							<div className={styles.titles}>
-								<span className={styles.itemName}>
-									{item.name}
-								</span>
+								<span className={styles.itemName}>{item.name}</span>
 								{item.subName && (
 									<span className={styles.itemSubname}>
 										{item.subName}
@@ -89,7 +88,7 @@ const Filter: React.FC<FilterProps> = (props) => {
 								)}
 							</div>
 						</div>
-						<div className={styles.count}>{item.count}</div>
+						<div className={styles.count}>{item.count ?? 0}</div>
 					</div>
 				))}
 			</motion.div>
@@ -103,7 +102,7 @@ const Filter: React.FC<FilterProps> = (props) => {
 					variants={CevronVariants}
 					initial={"closed"}
 					animate={isOpen ? "open" : "closed"}
-					transition={{ ease: 'easeInOut' }}
+					transition={{ ease: "easeInOut" }}
 				>
 					<Image
 						src="/icons/chevron.svg"

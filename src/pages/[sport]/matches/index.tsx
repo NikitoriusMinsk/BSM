@@ -52,8 +52,9 @@ const MatchesPage: NextPage = () => {
 		trpc.bookmakers.getTop.useQuery();
 	const { data: leagues, isLoading: leaguesLoading } =
 		trpc.filters.getLeaguesByCountry.useQuery({ sportId: sport.id });
-	const { data: filters, isLoading: filtersLoading } =
-		trpc.filters.getLeagues.useQuery();
+	const { data: filters, isLoading: filtersLoading } = trpc.filters.getLeagues.useQuery(
+		{ page: 0, size: 20, sportId: sport.id }
+	);
 	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
 	const { data: liveMatches, isLoading: liveMatchesLoading } =
 		trpc.matches.getAllLive.useQuery();
@@ -164,7 +165,7 @@ const MatchesPage: NextPage = () => {
 						<button className={styles.clear}>Clear</button>
 					</div>
 					<LeaguesMobileBlocksFilter
-						items={filters}
+						items={filters.content}
 						onChange={() => {}}
 					/>
 				</div>

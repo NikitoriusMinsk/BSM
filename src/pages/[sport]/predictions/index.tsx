@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import styles from "@styles/pages/Predictions.module.css";
 import { trpc } from "src/utils/trpc";
@@ -23,6 +23,7 @@ import dynamic from "next/dynamic";
 import usePortal from "src/utils/usePortal";
 import { PortalContext } from "src/utils/portalContext";
 import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
+import { LastSportContext } from "src/pages/_app";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
@@ -59,14 +60,16 @@ const TypeItems = [
 ];
 
 const PredictionsPage: NextPage = () => {
+	const sport = useContext(LastSportContext);
 	const [limit, setLimit] = useState<number>(3);
 	const [previousPredictions, setPreviousPredictions] =
 		useState<PredictionsType | null>(null);
 	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery();
 	const { data: bookmakers, isLoading: bookmakersLoading } =
 		trpc.bookmakers.getTop.useQuery();
-	const { data: leagues, isLoading: leaguesLoading } =
-		trpc.filters.getLeagues.useQuery();
+	const { data: leagues, isLoading: leaguesLoading } = trpc.filters.getLeagues.useQuery(
+		{ page: 0, size: 20, sportId: sport.id }
+	);
 	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
 	const { data: predictions, isLoading: predictionsLoading } =
 		trpc.predictions.getAll.useQuery(
@@ -96,7 +99,7 @@ const PredictionsPage: NextPage = () => {
 				<div className={styles.mainColumn}>
 					<div className={styles.filtersMobile}>
 						<LeaguesMobileBlocksFilter
-							items={leagues}
+							items={leagues.content}
 							onChange={() => {}}
 						/>
 						<div className={styles.filtersBlockMobile}>
@@ -195,7 +198,7 @@ const PredictionsPage: NextPage = () => {
 							/>
 						</div>
 						<Filter
-							items={leagues}
+							items={leagues.content}
 							h3="CHOOSE LEAGUE"
 							onChange={() => {}}
 						/>
@@ -534,7 +537,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 	await ssg.tips.getAll.prefetch();
 	await ssg.bookmakers.getTop.prefetch();
-	await ssg.filters.getLeagues.prefetch();
+	await ssg.filters.getLeagues.prefetch({ page: 0, size: 20, sportId: 1 });
 	await ssg.filters.getSports.prefetch();
 	await ssg.predictions.getAll.prefetch({ limit: 3 });
 

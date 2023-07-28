@@ -21,18 +21,29 @@ import { trpc } from "src/utils/trpc";
 import { createProxySSGHelpers } from "@trpc/react-query/ssg";
 import DisaperingContainer from "@components/helpers/DisaperingContainer";
 import Matches from "@components/ui/Matches";
-import { useContext, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import { LastSportContext } from "../_app";
 import moment from "moment-timezone";
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
+	const [selectedLeagues, setSelectedLeagues] = useReducer(
+		(state: number[], action: number[]) => {
+			const newState = state.concat(action);
+			return Array.from(new Set(newState));
+		},
+		[],
+		() => []
+	);
 	const [topMatchesDate, setTopMatchesDate] = useState<Date>(new Date());
 	const sport = useContext(LastSportContext);
 	const { data: bookmakers, isLoading: bookmakersLoading } =
 		trpc.bookmakers.getTop.useQuery();
-	const { data: filters, isLoading: filtersLoading } =
-		trpc.filters.getLeagues.useQuery();
+	const { data: filtersTop, isLoading: filtersTopLoading } =
+		trpc.filters.getTopLeagues.useQuery({ page: 0, size: 20, sportId: sport.id });
+	const { data: filters, isLoading: filtersLoading } = trpc.filters.getLeagues.useQuery(
+		{ page: 0, size: 20, sportId: sport.id }
+	);
 	const { data: predictions, isLoading: predictionsLoading } =
 		trpc.predictions.getAll.useQuery();
 	const { data: liveMatches, isLoading: liveMatchesLoading } =
@@ -49,6 +60,7 @@ const Home: NextPage = () => {
 	if (
 		bookmakersLoading ||
 		filtersLoading ||
+		filtersTopLoading ||
 		predictionsLoading ||
 		liveMatchesLoading ||
 		tipsLoading ||
@@ -57,7 +69,15 @@ const Home: NextPage = () => {
 		return <div>Loading...</div>;
 	}
 
-	if (!bookmakers || !filters || !predictions || !liveMatches || !tips || !tipsters) {
+	if (
+		!bookmakers ||
+		!filters ||
+		!filtersTop ||
+		!predictions ||
+		!liveMatches ||
+		!tips ||
+		!tipsters
+	) {
 		return <div>Error</div>;
 	}
 
@@ -95,13 +115,13 @@ const Home: NextPage = () => {
 				<Filter
 					h3="Top Leagues"
 					h2="Football Leagues"
-					items={filters}
-					onChange={(id) => {}}
+					items={filtersTop.content}
+					onChange={(ids) => setSelectedLeagues(ids)}
 				/>
 				<Filter
 					h3="Leagues"
-					items={filters}
-					onChange={(id) => {}}
+					items={filters.content}
+					onChange={(ids) => setSelectedLeagues(ids)}
 				/>
 			</div>
 			<DisaperingContainer
@@ -396,7 +416,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	});
 
 	await ssg.bookmakers.getTop.prefetch();
-	await ssg.filters.getLeagues.prefetch();
+	await ssg.filters.getLeagues.prefetch({ page: 0, size: 20, sportId: 1 });
+	await ssg.filters.getTopLeagues.prefetch({ page: 0, size: 20, sportId: 1 });
 	await ssg.predictions.getAll.prefetch();
 	await ssg.matches.getAllLive.prefetch();
 	await ssg.matches.getTop.prefetch({

@@ -21,8 +21,9 @@ const OutPortal = dynamic(async () => (await import("react-reverse-portal")).Out
 });
 const LiveMatches: NextPage = () => {
 	const sport = useContext(LastSportContext);
-	const { data: filters, isLoading: filtersLoading } =
-		trpc.filters.getLeagues.useQuery();
+	const { data: filters, isLoading: filtersLoading } = trpc.filters.getLeagues.useQuery(
+		{ page: 0, size: 20, sportId: sport.id }
+	);
 	const { data: matches, isLoading: matchesLoading } =
 		trpc.matches.getAllByLeague.useQuery({
 			leagueId: [],
@@ -48,7 +49,7 @@ const LiveMatches: NextPage = () => {
 					<Filter
 						h3="Top Leagues"
 						h2="Football Leagues"
-						items={filters}
+						items={filters.content}
 						onChange={() => {}}
 					/>
 				</div>
@@ -131,7 +132,7 @@ const LiveMatches: NextPage = () => {
 					</div>
 					<div className={styles.leaguesMobile}>
 						<LeaguesMobileBlocksFilter
-							items={filters}
+							items={filters.content}
 							onChange={() => {}}
 						/>
 					</div>
@@ -160,7 +161,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		transformer: superjson,
 	});
 
-	await ssg.filters.getLeagues.prefetch();
+	await ssg.filters.getLeagues.prefetch({ page: 0, size: 20, sportId: 1 });
 	await ssg.matches.getAllByLeague.prefetch({
 		leagueId: [],
 		page: 1,
