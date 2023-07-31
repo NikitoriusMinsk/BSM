@@ -6,6 +6,8 @@ import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import Moment from "react-moment";
 import { leagueSchema, matchSchema } from "src/server/trpc/utils/DTOSchemas";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import moment from "moment-timezone";
 
 interface MatchesInfoProps {
 	leagues: (typeof leagueSchema._type)[];
@@ -92,7 +94,19 @@ const League: React.FC<{
 						<span>
 							{league.country} • {router.query.sport}
 						</span>
-						<span>{league.name}</span>
+						<span>
+							<Link
+								href={{
+									pathname: "/[sport]/leagues/[id]",
+									query: {
+										sport: router.query.sport,
+										id: league.name, // this should be replaced with a slug property
+									},
+								}}
+							>
+								{league.name}
+							</Link>
+						</span>
 					</div>
 				</div>
 				<div className={styles.matchesOptions}>
@@ -189,8 +203,9 @@ const League: React.FC<{
 export const Match: React.FC<
 	typeof matchSchema._type & { mode?: "live" | "odds" | "stats" }
 > = (props) => {
-	const { status, teams, date, odds, tipCount, mode } = props;
+	const { status, teams, date, odds, tipCount, mode, id, duration } = props;
 	const [isOpen, setIsOpen] = useState(false);
+	const router = useRouter();
 
 	function getTag(status: typeof matchSchema._type.status) {
 		switch (status) {
@@ -252,42 +267,54 @@ export const Match: React.FC<
 	return (
 		<div className={styles.match}>
 			<div className={styles.header}>
-				<div className={styles.info}>
-					<div className={styles.time}>{getTag(status)}</div>
-					<div className={styles.teamImages}>
-						{teams.map((team, index) => (
+				<Link
+					href={{
+						pathname: "/[sport]/matches/[id]",
+						query: {
+							sport: router.query.sport,
+							id: `${teams[0]?.name}-${teams[1]?.name}-${moment(
+								date
+							).format("DD-MM-YYYY-HH-mm")}`,
+						}, // this should be replaced with a slug property
+					}}
+				>
+					<div className={styles.info}>
+						<div className={styles.time}>{getTag(status)}</div>
+						<div className={styles.teamImages}>
+							{teams.map((team, index) => (
+								<div
+									key={index}
+									className={styles.teamImage}
+								>
+									<Image
+										src={team.image ?? "/placeholeder.png"}
+										alt={team.name}
+										width={22}
+										height={22}
+									/>
+								</div>
+							))}
+						</div>
+						<div className={styles.teamNames}>
 							<div
-								key={index}
-								className={styles.teamImage}
+								className={`${styles.teamName} ${
+									(teams[0]?.score || 0) - (teams[1]?.score || 0) > 0 &&
+									styles.win
+								}`}
 							>
-								<Image
-									src={team.image ?? "/placeholeder.png"}
-									alt={team.name}
-									width={22}
-									height={22}
-								/>
+								{teams[0]?.name}
 							</div>
-						))}
-					</div>
-					<div className={styles.teamNames}>
-						<div
-							className={`${styles.teamName} ${
-								(teams[0]?.score || 0) - (teams[1]?.score || 0) > 0 &&
-								styles.win
-							}`}
-						>
-							{teams[0]?.name}
-						</div>
-						<div
-							className={`${styles.teamName} ${
-								(teams[1]?.score || 0) - (teams[0]?.score || 0) > 0 &&
-								styles.win
-							}`}
-						>
-							{teams[1]?.name}
+							<div
+								className={`${styles.teamName} ${
+									(teams[1]?.score || 0) - (teams[0]?.score || 0) > 0 &&
+									styles.win
+								}`}
+							>
+								{teams[1]?.name}
+							</div>
 						</div>
 					</div>
-				</div>
+				</Link>
 				<div className={styles.details}>
 					<div className={`${styles.outcome} ${styles.score}`}>
 						<span

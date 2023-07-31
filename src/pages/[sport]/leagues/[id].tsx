@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import styles from "@styles/pages/LeagueSummary.module.css";
 import Image from "next/image";
@@ -17,6 +17,10 @@ import { trpc } from "src/utils/trpc";
 import Leagues from "@components/ui/league-summary/Leagues";
 import LeaguesMobileBlocksLinks from "@components/ui/LeaguesMobileBlocksLinks";
 import { LastSportContext } from "src/pages/_app";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { appRouter } from "src/server/trpc/router/_app";
+import { createContext } from "src/server/trpc/context";
+import superjson from "superjson";
 
 const pages = [
 	{
@@ -203,7 +207,20 @@ const LeagueSummary: NextPage<{ type: string }> = ({ type }) => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticPaths: GetStaticPaths = async (context) => {
+	const ssg = createProxySSGHelpers({
+		router: appRouter,
+		ctx: await createContext(),
+		transformer: superjson,
+	});
+
+	return {
+		fallback: "blocking",
+		paths: [],
+	};
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
 	return {
 		props: {
 			type: context.params?.id || "default",
