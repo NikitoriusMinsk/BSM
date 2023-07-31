@@ -10,19 +10,18 @@ import Fuse from "fuse.js";
 import Settings from "@components/layout/shared/Settings";
 import MenuLink from "@components/layout/shared/MenuLink";
 import { trpc } from "src/utils/trpc";
-import "moment-timezone";
 import Moment from "react-moment";
 import debounce from "src/utils/debounce";
 import UserProfile from "./shared/UserProfile";
 import useWindowSize from "src/utils/useWindowSize";
 import { useSession } from "next-auth/react";
-import { inferProcedureOutput } from "@trpc/server";
 import { RouterOutput } from "src/types/queryTypes";
+import moment from "moment-timezone";
+import timezones from "src/utils/Timezones";
 
 const Header: React.FC = () => {
 	const router = useRouter();
 	const { data: sports } = trpc.navigation.getSports.useQuery();
-	const { data: Timezones } = trpc.navigation.getTimezones.useQuery();
 	const { width } = useWindowSize();
 	const { data: session } = useSession();
 
@@ -45,14 +44,13 @@ const Header: React.FC = () => {
 		}
 	}
 
-	function getTZInfo(width: number, date: string, name: string) {
+	function getTZInfo(width: number, name: string) {
 		switch (true) {
 			case width > 1440:
 				return (
 					<Moment
-						date={date}
 						tz={name}
-						format={"DD.MM Z"}
+						format={`DD.MM [${name.replace("_", " ")}] Z`}
 					/>
 				);
 			default:
@@ -89,22 +87,22 @@ const Header: React.FC = () => {
 				)}
 			</nav>
 			<div className={styles.controls}>
-				{Timezones && (
-					<Dropdown
-						items={Timezones.map((tz) => ({
-							name: getTZInfo(width, tz.date, tz.name),
-							label: (
-								<Moment
-									date={tz.date}
-									format={"HH:mm"}
-									tz={tz.name}
-								/>
-							),
-							id: tz.id,
-						}))}
-						onSelect={(id) => {}}
-					/>
-				)}
+				<Dropdown
+					defaultSelectedId={moment.tz.guess()}
+					items={timezones.map((tz) => ({
+						name: getTZInfo(width, tz.timezone),
+						label: (
+							<Moment
+								format={"HH:mm"}
+								tz={tz.timezone}
+							/>
+						),
+						id: tz.timezone,
+					}))}
+					onSelect={(tz) => {
+						Moment.globalTimezone = tz;
+					}}
+				/>
 				<Settings />
 				<UserProfile />
 			</div>

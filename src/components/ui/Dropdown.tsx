@@ -17,6 +17,7 @@ interface DropdownProps {
 	minWidth?: string | number;
 	searchable?: boolean;
 	style?: "light" | "default";
+	defaultSelectedId?: string;
 }
 
 const DropdownVariants = {
@@ -45,9 +46,12 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 		searchable = false,
 		minWidth,
 		style = "default",
+		defaultSelectedId,
 	} = props;
 	const [isOpen, setIsOpen] = useState(false);
-	const [selected, setSelected] = useState(items[0]);
+	const [selected, setSelected] = useState(
+		items.find((item) => item.id === defaultSelectedId) ?? items[0]
+	);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const [filteredItems, setFilteredItems] = useState(items);
 
@@ -93,7 +97,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 
 	useEffect(() => {
 		setFilteredItems(items);
-		setSelected(items[0]);
+		setSelected(items.find((item) => item.id === defaultSelectedId) ?? items[0]);
 	}, [items]);
 
 	return (
