@@ -203,7 +203,7 @@ const League: React.FC<{
 export const Match: React.FC<
 	typeof matchSchema._type & { mode?: "live" | "odds" | "stats" }
 > = (props) => {
-	const { status, teams, date, odds, tipCount, mode, id, duration } = props;
+	let { status, teams, date, odds, tipCount, mode, id, duration } = props;
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
 
@@ -229,38 +229,42 @@ export const Match: React.FC<
 			case "Interrupt":
 			case "To be determined":
 			case "Not started":
-				return (
-					<div className={styles.matchUpcoming}>
-						{new Date().getTime() - new Date(date).getTime() >= 3600000 ? (
-							<>
+				switch (true) {
+					// match start date is past current date
+					case new Date(date).getTime() - new Date().getTime() <= 0:
+						break;
+					// match start date is less than an hour away from now
+					case new Date(date).getTime() - new Date().getTime() <= 3600000:
+						return (
+							<div className={styles.matchUpcoming}>
 								<Moment
-									format="mm:ss"
-									to={date}
+									date={date}
+									format="mm:ss[s]"
+									duration={new Date().getTime()}
 								/>
-								s
-							</>
-						) : (
-							<>
-								<Moment
-									to={date}
-									format="hh:mm"
-								/>
-								m
-							</>
-						)}
-					</div>
-				);
+							</div>
+						);
+					//match date is today but more than an hour from now
+					case moment(date).isSame(moment(), "day"):
+						return (
+							<div className={styles.matchDate}>
+								<Moment format="HH:mm">{date}</Moment>
+								<time>Today</time>
+							</div>
+						);
+					default:
+						break;
+				}
+
 			case "Cancel":
 			case "End":
+			default:
 				return (
 					<div className={styles.matchDate}>
 						<Moment format="HH:mm">{date}</Moment>
 						<Moment format="DD MMM">{date}</Moment>
 					</div>
 				);
-
-			default:
-				return <></>;
 		}
 	}
 

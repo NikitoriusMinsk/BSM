@@ -9,11 +9,14 @@ import type { Session } from "next-auth";
 import useWindowSize from "src/utils/useWindowSize";
 import MobileLayout from "@components/layout/MobileLayout";
 import { trpc } from "src/utils/trpc";
+import Moment from "react-moment";
 
 export const LastSportContext = createContext<{ name: string; id: number }>({
 	name: "Football",
 	id: 1,
 });
+
+Moment.startPooledTimer(5000);
 
 function MyApp(appProps: AppProps<{ session: Session }>) {
 	const {

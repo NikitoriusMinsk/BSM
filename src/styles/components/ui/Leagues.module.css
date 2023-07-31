@@ -141,6 +141,7 @@
     padding: 6px;
     border-radius: 100%;
     border: 3px solid #1A1C211A;
+    overflow: hidden;
 }
 
 .leagueDescription {
@@ -152,6 +153,7 @@
 
 .leagueWrapper {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 
