@@ -617,13 +617,17 @@ export const matchesRouter = router({
 				size: z.number(),
 				sportId: z.number(),
 				leagueId: z.number().array(),
+				date: z
+					.string()
+					.refine((str) => str.match(/\d\d\d\d-\d\d-\d\d/gm)) // YYYY-MM-DD
+					.nullish(),
 			})
 		)
 		.query(async ({ ctx, input }) => {
-			const { leagueId, page, size, sportId } = input;
+			const { leagueId, page, size, sportId, date } = input;
 
 			return await makeApiCall(
-				`matches?page=${page}&size=${size}&sportId=${sportId}${leagueId
+				`matches?page=${page}&size=${size}&date=${date}&sportId=${sportId}${leagueId
 					.map((id) => id.toString()) // have to perform an additional .toString conversion because typescript infers accumulator value type from array
 					.reduce((acc, id) => acc + `&leagueId=${id}`, "")}`,
 				paginatorHelper(leagueSchema.array()),

@@ -22,6 +22,7 @@ import FilterModal from "@components/ui/FilterModal";
 import DisaperingContainer from "@components/helpers/DisaperingContainer";
 import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
 import { LastSportContext } from "src/pages/_app";
+import moment from "moment-timezone";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
@@ -31,6 +32,7 @@ const MatchesPage: NextPage = () => {
 	const sport = useContext(LastSportContext);
 	const [selectedTopLeagues, setSelectedTopLeagues] = useState<number[]>([]);
 	const [selectedLeagues, setSelectedLeagues] = useState<number[]>([]);
+	const [selecteDate, setSelectedDate] = useState<Date>(new Date());
 	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery();
 	const { data: matches, isLoading: matchesLoading } =
 		trpc.matches.getAllByLeague.useQuery({
@@ -41,6 +43,7 @@ const MatchesPage: NextPage = () => {
 					? 5
 					: selectedLeagues.concat(selectedTopLeagues).length,
 			sportId: sport.id,
+			date: moment(selecteDate).format("YYYY-MM-DD"),
 		});
 	const { data: bookmakers, isLoading: bookmakersLoading } =
 		trpc.bookmakers.getTop.useQuery();
@@ -87,7 +90,7 @@ const MatchesPage: NextPage = () => {
 				{portalNode && <OutPortal node={portalNode} />}
 				<div className={styles.filters}>
 					<div>
-						<DatePicker onChange={() => {}} />
+						<DatePicker onChange={(date) => setSelectedDate(date)} />
 						<TextField
 							icon="/icons/search.svg"
 							placeholder="Search"
@@ -218,6 +221,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		page: 1,
 		size: 5,
 		sportId: 1,
+		date: moment(new Date()).format("YYYY-MM-DD"),
 	});
 	await ssg.bookmakers.getTop.prefetch();
 	await ssg.filters.getLeaguesByCountry.prefetch({ sportId: 1 });
