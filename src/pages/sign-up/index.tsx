@@ -10,6 +10,7 @@ import Link from "next/link";
 import { trpc } from "src/utils/trpc";
 import { AnimatePresence } from "framer-motion";
 import MessageModal from "@components/ui/MessageModal";
+import { useRouter } from "next/router";
 
 const Register: NextPage = () => {
     const [passwordCheck, setPasswordCheck] = useState([false, false, false, false]);
@@ -57,7 +58,7 @@ const Register: NextPage = () => {
             terms: target.terms.checked,
         })
             .then(r => {
-                // useRouter().push('/sign-in')
+                useRouter().push('/sign-up-success')
             })
             .catch(r => {
                 setErrors(r.data.zodError?.fieldErrors || r.data.serverError?.errorCodes)
