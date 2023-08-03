@@ -30,9 +30,9 @@
     padding-right: calc((100% - 520px)/2);
 }
 
-.form::-webkit-scrollbar {
+/* .form::-webkit-scrollbar {
     display: none;
-}
+} */
 
 .loginTitle {
     font-family: 'Samsung Sans';
@@ -265,6 +265,17 @@
     width: 100%;
     margin-top: 5px;
     margin-bottom: 0px;
+}
+
+.congratsText {
+    color: #1A1C21;
+    /* Body 15 Regular */
+    font-family: 'Samsung Sans';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 40px;
 }
 
 @media screen and (max-width:1440px) {

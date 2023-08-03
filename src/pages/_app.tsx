@@ -35,6 +35,7 @@ function MyApp(appProps: AppProps<{ session: Session }>) {
 		"/sign-up",
 		"/forgot-password",
 		"/reset-password",
+		"/sign-up-success",
 	];
 
 	function getLayout(): ReactElement {
