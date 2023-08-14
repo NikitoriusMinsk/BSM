@@ -7,6 +7,7 @@ import teamSchema from "./Team";
 import oddsSchema from "./Odds";
 import leagueSchema from "./League";
 import paginatorHelper from "./PaginatorHelper";
+import matchH2HSchema from "./MatchH2H";
 
 export {
 	partySchema,
@@ -18,4 +19,5 @@ export {
 	oddsSchema,
 	leagueSchema,
 	paginatorHelper,
+	matchH2HSchema,
 };

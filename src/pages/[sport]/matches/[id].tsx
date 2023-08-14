@@ -17,6 +17,10 @@ import NewsPage from "@components/match-summary/NewsPage";
 import PagesSlider from "@components/ui/match-summary/PagesSlider";
 import LiveMatchesExpanded from "@components/ui/LiveMatchesExpanded";
 import { trpc } from "src/utils/trpc";
+import { createProxySSGHelpers } from "@trpc/react-query/ssg";
+import { appRouter } from "src/server/trpc/router/_app";
+import { createContext } from "src/server/trpc/context";
+import superjson from "superjson";
 
 const pages = [
 	{

@@ -3,7 +3,12 @@ import { MatchStatus } from "src/types/matchStatus";
 import Fuse from "fuse.js";
 import { publicProcedure, router } from "../trpc";
 import makeApiCall from "../utils/makeApiCall";
-import { leagueSchema, matchSchema, paginatorHelper } from "../utils/DTOSchemas";
+import {
+	leagueSchema,
+	matchH2HSchema,
+	matchSchema,
+	paginatorHelper,
+} from "../utils/DTOSchemas";
 
 // THIS IS A TEMPORARY FUNCTION FOR GENERATING DATES
 function getOffsetDate(days: number, months: number, years: number) {
@@ -607,9 +612,22 @@ export const matchesRouter = router({
 	getAllLive: publicProcedure.query(async ({ ctx, input }) => {
 		return LiveMatchesTemp;
 	}),
-	getAll: publicProcedure.query(async ({ ctx, input }) => {
-		return MatchesTemp;
-	}),
+	getAll: publicProcedure
+		.input(
+			z.object({
+				page: z.number(),
+				size: z.number(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
+			const { page, size } = input;
+
+			return await makeApiCall(
+				`matches?page=${page}&size=${size}`,
+				paginatorHelper(leagueSchema.array()),
+				{ method: "GET" }
+			);
+		}),
 	getAllByLeague: publicProcedure
 		.input(
 			z.object({
@@ -671,6 +689,22 @@ export const matchesRouter = router({
 			return await makeApiCall(
 				`matches/top?date=${date}&sportId=${sportId}`,
 				matchSchema.array(),
+				{ method: "GET" }
+			);
+		}),
+	getMatchH2H: publicProcedure
+		.input(
+			z.object({
+				matchId: z.number(),
+				matchCountPerTeam: z.number(),
+			})
+		)
+		.query(async ({ ctx, input }) => {
+			const { matchCountPerTeam, matchId } = input;
+
+			return await makeApiCall(
+				`matches/${matchId}/h2h?matchCountPerTeam=${matchCountPerTeam}`,
+				matchH2HSchema,
 				{ method: "GET" }
 			);
 		}),

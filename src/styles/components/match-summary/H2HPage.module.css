@@ -188,6 +188,11 @@
     margin-left: -76px;
 }
 
+.result {
+    height: 30px;
+    width: 30px;
+}
+
 .resultWin {
     display: flex;
     justify-content: center;
