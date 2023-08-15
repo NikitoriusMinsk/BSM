@@ -21,16 +21,18 @@ const TextField: React.FC<TextFieldProps> = (props) => {
 		floatingPlaceholder,
 		...inputProps
 	} = props;
-	const [errmsg, setErrmsg] = useState<string | string[] | undefined>(errorMessage)
-	const [val, setVal] = useState<any>(inputProps.defaultValue || inputProps.value || null)
+	const [errmsg, setErrmsg] = useState<string | string[] | undefined>(errorMessage);
+	const [val, setVal] = useState<any>(
+		inputProps.defaultValue || inputProps.value || null
+	);
 
 	useEffect(() => {
-		setErrmsg(errorMessage)
-	}, [errorMessage])
+		setErrmsg(errorMessage);
+	}, [errorMessage]);
 
 	useEffect(() => {
-		setVal(inputProps.defaultValue || inputProps.value || null)
-	}, [inputProps.defaultValue, inputProps.value])
+		setVal(inputProps.defaultValue || inputProps.value || null);
+	}, [inputProps.defaultValue, inputProps.value]);
 
 	return (
 		<div
@@ -49,14 +51,16 @@ const TextField: React.FC<TextFieldProps> = (props) => {
 				placeholder={floatingPlaceholder ? undefined : inputProps.placeholder}
 				style={inputProps.icon ? { paddingRight: 48 } : {}}
 				onChange={(e) => {
-					setErrmsg(undefined)
-					setVal(e.currentTarget.value)
-					inputProps.onChange && inputProps.onChange(e)
+					setErrmsg(undefined);
+					setVal(e.currentTarget.value);
+					inputProps.onChange && inputProps.onChange(e);
 				}}
 			/>
-			{floatingPlaceholder &&
-				<label className={`${styles.floating} ${val && styles.up}`}>{inputProps.placeholder}</label>
-			}
+			{floatingPlaceholder && (
+				<label className={`${styles.floating} ${val && styles.up}`}>
+					{inputProps.placeholder}
+				</label>
+			)}
 			{inputProps.icon && (
 				<div
 					className={styles.icon}
@@ -73,9 +77,11 @@ const TextField: React.FC<TextFieldProps> = (props) => {
 					/>
 				</div>
 			)}
-			{errmsg && <span className={styles.error}>
-				{Array.isArray(errmsg) ? errmsg.map(e => e + '. ') : errmsg}
-			</span>}
+			{errmsg && (
+				<span className={styles.error}>
+					{Array.isArray(errmsg) ? errmsg.map((e) => e + ". ") : errmsg}
+				</span>
+			)}
 		</div>
 	);
 };
