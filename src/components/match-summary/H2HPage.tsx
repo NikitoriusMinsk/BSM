@@ -68,12 +68,12 @@ const H2HPage: React.FC = () => {
 				return (
 					<>
 						<MatchesBlock
-							matches={data.team1.homeMatches}
+							matches={data.team2.homeMatches}
 							title={`Home Matches - ${data.team2.teamName}`}
 							winner={"1"}
 						/>
 						<MatchesBlock
-							matches={data.team1.awayMatches}
+							matches={data.team2.awayMatches}
 							title={`Away Matches - ${data.team2.teamName}`}
 							winner={"1"}
 						/>
