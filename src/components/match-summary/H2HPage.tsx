@@ -183,20 +183,24 @@ const MatchesBlock: React.FC<MatchesBlockProps> = (props) => {
 									<div className={styles.champ}>
 										<div className={styles.champLogo}>
 											<Image
-												src="/testimg/world.png"
+												src={
+													item.leagueLogo ?? "/placeholder.png"
+												}
 												width={24}
 												height={24}
 												style={{ objectFit: "contain" }}
 												alt=""
 											/>
 										</div>
-										<span className={styles.champName}>Champ</span>
+										<span className={styles.champName}>
+											{item.leagueName}
+										</span>
 									</div>
 								</div>
 								<div className={styles.dateChampMobile}>
 									<div className={styles.champLogo}>
 										<Image
-											src="/testimg/world.png"
+											src={item.leagueLogo ?? "/placeholder.png"}
 											width={24}
 											height={24}
 											style={{ objectFit: "contain" }}
@@ -204,8 +208,15 @@ const MatchesBlock: React.FC<MatchesBlockProps> = (props) => {
 										/>
 									</div>
 									<div className={styles.champ}>
-										<span className={styles.champName}>Champ</span>
-										<span className={styles.date}>13.09.22</span>
+										<span className={styles.champName}>
+											{item.leagueName}
+										</span>
+										<Moment
+											format="DD.MM.YYYY"
+											className={styles.date}
+										>
+											{item.date}
+										</Moment>
 									</div>
 								</div>
 								<div className={styles.teams}>

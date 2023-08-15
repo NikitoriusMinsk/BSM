@@ -14,6 +14,11 @@ const matchSchema = z.object({
 	duration: z.string().nullish(),
 	date: z.string(),
 	status: matchStatus,
+	leagueId: z.number(),
+	leagueName: z.string(),
+	leagueLogo: z.string().url().nullish(),
+	countryId: z.number(),
+	countryLogo: z.string().url().nullish(),
 });
 
 const teamStatisticSchema = z.object({
