@@ -43,6 +43,7 @@ export const authOptions: NextAuthOptions = {
 						expiresAt: new Date().getTime() / 1000 + parseInt(data.expiresIn),
 						refreshExpiresAt:
 							new Date().getTime() / 1000 + parseInt(data.refreshExpiresIn),
+						image: data.avatarLink,
 					};
 				} catch (err) {
 					return null;

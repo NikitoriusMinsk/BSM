@@ -16,6 +16,7 @@ const authSchema = z.object({
 	lastName: z.string(),
 	subscribeQty: z.string().nullish(),
 	subscribersQty: z.string().nullish(),
+	avatarLink: z.string().url().nullish(),
 });
 
 export default authSchema;
