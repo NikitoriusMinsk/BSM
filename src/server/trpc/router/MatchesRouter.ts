@@ -622,11 +622,7 @@ export const matchesRouter = router({
 		.query(async ({ ctx, input }) => {
 			const { page, size } = input;
 
-			return await makeApiCall(
-				`matches?page=${page}&size=${size}`,
-				paginatorHelper(leagueSchema.array()),
-				{ method: "GET" }
-			);
+			return MatchesTemp;
 		}),
 	getAllByLeague: publicProcedure
 		.input(

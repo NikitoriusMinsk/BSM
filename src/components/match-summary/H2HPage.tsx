@@ -168,7 +168,10 @@ const MatchesBlock: React.FC<MatchesBlockProps> = (props) => {
 					const isDraw = item.teams[0]?.score! === item.teams[1]?.score!;
 
 					return (
-						<div className={styles.match}>
+						<div
+							key={item.matchId}
+							className={styles.match}
+						>
 							<div className={styles.matchData}>
 								<div className={styles.dateChamp}>
 									<Moment

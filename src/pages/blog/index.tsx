@@ -15,7 +15,10 @@ import useWindowSize from "src/utils/useWindowSize";
 
 const BlogPage: NextPage = () => {
 	const { data: news, isLoading: newsLoading } = trpc.news.getAll.useQuery();
-	const { data: matches, isLoading: matchesLoading } = trpc.matches.getAll.useQuery();
+	const { data: matches, isLoading: matchesLoading } = trpc.matches.getAll.useQuery({
+		page: 0,
+		size: 20,
+	});
 	const { width } = useWindowSize();
 
 	if (newsLoading || matchesLoading) {
@@ -527,7 +530,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	});
 
 	await ssg.news.getAll.prefetch();
-	await ssg.matches.getAll.prefetch();
+	await ssg.matches.getAll.prefetch({ page: 0, size: 20 });
 
 	return {
 		props: {
