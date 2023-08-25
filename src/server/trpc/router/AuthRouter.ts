@@ -74,11 +74,7 @@ export const authRouter = router({
 				}),
 			};
 
-			return await makeApiCall(
-				"api/auth/unauthenticated/create",
-				partySchema,
-				options
-			);
+			return await makeApiCall("auth/unauthenticated/create", partySchema, options);
 		}),
 	authUser: publicProcedure
 		.input(
@@ -106,7 +102,7 @@ export const authRouter = router({
 			const { email } = input;
 
 			return await makeApiCall(
-				`api/auth/unauthenticated/recovery-password/request?email=${email}`,
+				`auth/unauthenticated/recovery-password/request?email=${email}`,
 				z.object({}),
 				{
 					method: "POST",
@@ -129,7 +125,7 @@ export const authRouter = router({
 			headers.append("Accept", "application/json");
 
 			return await makeApiCall(
-				"api/auth/unauthenticated/recovery-password/confirmation",
+				"auth/unauthenticated/recovery-password/confirmation",
 				z.object({}),
 				{
 					method: "POST",
