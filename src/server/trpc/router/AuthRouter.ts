@@ -74,17 +74,11 @@ export const authRouter = router({
 				}),
 			};
 
-			const result = await fetch(`${process.env.API_URL}/auth/create`, options);
-
-			if (result.ok) {
-				const response = await result.json();
-
-				const party = partySchema.parse(response);
-
-				return party;
-			} else {
-				throw await getTRPCError(result);
-			}
+			return await makeApiCall(
+				"api/auth/unauthenticated/create",
+				partySchema,
+				options
+			);
 		}),
 	authUser: publicProcedure
 		.input(
@@ -100,7 +94,7 @@ export const authRouter = router({
 			headers.append("Content-Type", "application/json");
 			headers.append("Accept", "application/json");
 
-			return await makeApiCall("auth/authenticate", authSchema, {
+			return await makeApiCall("auth/unauthenticated/authenticate", authSchema, {
 				method: "POST",
 				body: JSON.stringify({ password, username }),
 				headers,
