@@ -100,4 +100,42 @@ export const authRouter = router({
 				headers,
 			});
 		}),
+	requestPasswordReset: publicProcedure
+		.input(z.object({ email: z.string().email() }))
+		.mutation(async ({ ctx, input }) => {
+			const { email } = input;
+
+			return await makeApiCall(
+				`api/auth/unauthenticated/recovery-password/request?email=${email}`,
+				z.object({}),
+				{
+					method: "POST",
+				}
+			);
+		}),
+	resetPassword: publicProcedure
+		.input(
+			z.object({
+				password: z.string(),
+				passwordConfirmation: z.string(),
+				code: z.string(),
+			})
+		)
+		.mutation(async ({ ctx, input }) => {
+			const { code, password, passwordConfirmation } = input;
+
+			const headers = new Headers();
+			headers.append("Content-Type", "application/json");
+			headers.append("Accept", "application/json");
+
+			return await makeApiCall(
+				"api/auth/unauthenticated/recovery-password/confirmation",
+				z.object({}),
+				{
+					method: "POST",
+					headers,
+					body: JSON.stringify({ password, passwordConfirmation, code }),
+				}
+			);
+		}),
 });
