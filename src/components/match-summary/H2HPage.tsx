@@ -17,9 +17,6 @@ enum Pages {
 }
 
 const H2HPage: React.FC = () => {
-	const sliderRef = useRef<HTMLDivElement>(null);
-	// const { events } = useDraggable(sliderRef);
-
 	const router = useRouter();
 	const { data, isLoading } = trpc.matches.getMatchH2H.useQuery({
 		matchCountPerTeam: 10,
@@ -92,11 +89,7 @@ const H2HPage: React.FC = () => {
 
 	return (
 		<div className={styles.pageContainer}>
-			<div
-				className={styles.filter}
-				// {...events}
-				ref={sliderRef}
-			>
+			<FiltersWrap>
 				<H2HFilter
 					items={[
 						{
@@ -114,11 +107,26 @@ const H2HPage: React.FC = () => {
 					]}
 					onSelect={({ id }) => setCurrentPage(id as Pages)}
 				/>
-			</div>
+			</FiltersWrap>
 			<div className={styles.matches}>{memoizedPage}</div>
 		</div>
 	);
 };
+
+const FiltersWrap: React.FC<{ children?: React.ReactNode | React.ReactNode[] }>  = ({children}) => {
+	const sliderRef = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+	const { events } = useDraggable(sliderRef);
+
+	return (
+		<div
+			className={styles.filter}
+			{...events}
+			ref={sliderRef}
+		>
+			{children}
+		</div>
+	)
+}
 
 interface MatchesBlockProps {
 	// have to hack this like that because our backend creates new DTOs for everything and none of them intersect eachanother 😎👍
