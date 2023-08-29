@@ -4,10 +4,10 @@
     flex-direction: column;
     padding: 20px 32px 20px 30px;
     gap: 20px;
-    border: 1px solid #1A1C211A;
     border-radius: 8px;
     background-color: #FFFFFF;
     justify-content: space-between;
+    background: rgba(242, 242, 242, 0.30);
 }
 
 .mostTipsRow {
