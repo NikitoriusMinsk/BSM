@@ -54,21 +54,11 @@ const H2HPage: React.FC = () => {
 							title={`Home Matches - ${data.team1.teamName}`}
 							winner={"0"}
 						/>
-						<MatchesBlock
-							matches={data.team1.awayMatches}
-							title={`Away Matches - ${data.team1.teamName}`}
-							winner={"0"}
-						/>
 					</>
 				);
 			case Pages.Team2:
 				return (
 					<>
-						<MatchesBlock
-							matches={data.team2.homeMatches}
-							title={`Home Matches - ${data.team2.teamName}`}
-							winner={"1"}
-						/>
 						<MatchesBlock
 							matches={data.team2.awayMatches}
 							title={`Away Matches - ${data.team2.teamName}`}
@@ -231,7 +221,7 @@ const MatchesBlock: React.FC<MatchesBlockProps> = (props) => {
 									<div className={styles.teamsLogos}>
 										<div className={styles.teamLogo}>
 											<Image
-												src="/testimg/club1.png"
+												src={item.teams[0]?.image ?? "/placeholder.png"}
 												width={20}
 												height={20}
 												style={{ objectFit: "contain" }}
@@ -240,7 +230,7 @@ const MatchesBlock: React.FC<MatchesBlockProps> = (props) => {
 										</div>
 										<div className={styles.teamLogo}>
 											<Image
-												src="/testimg/club2.png"
+												src={item.teams[1]?.image ?? "/placeholder.png"}
 												width={20}
 												height={20}
 												style={{ objectFit: "contain" }}
