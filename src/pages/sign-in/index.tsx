@@ -63,7 +63,7 @@ const Login: NextPage = () => {
 							Don’t have an account?&nbsp;&nbsp;&nbsp;
 							<Link href="/sign-up">Create one</Link>
 						</span>
-						<div className={styles.socials}>
+						{/* <div className={styles.socials}>
 							<div className={styles.social}>
 								<Image
 									src="/images/login/facebook.svg"
@@ -89,18 +89,20 @@ const Login: NextPage = () => {
 								/>
 							</div>
 						</div>
-						<span className={styles.separatorOr}>OR</span>
+						<span className={styles.separatorOr}>OR</span> */}
 						<div className={styles.fields}>
 							<TextField
 								type={"text"}
 								name="email"
 								placeholder="Email Address"
+								floatingPlaceholder
 								errorMessage={router.query.error && " "}
 							/>
 							<PasswordField
 								name="password"
 								type={"password"}
 								placeholder="Password"
+								floatingPlaceholder
 								errorMessage={router.query.error && " "}
 							/>
 							{router.query.error && (
