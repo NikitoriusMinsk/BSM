@@ -297,14 +297,14 @@
 	flex-direction: column;
 	gap: 0px;
 	padding: 20px 16px 6px;
-	border: 1px solid #1a1c211a;
 	border-radius: 8px;
+	background: rgba(242, 242, 242, 0.30);
 }
 
 .topThreeTipsters {
 	display: flex;
 	flex-direction: row;
-	gap: 38px;
+	gap: 20px;
 	justify-content: space-between;
 }
 
@@ -448,7 +448,7 @@
 	font-family: "Samsung Sans";
 	font-style: normal;
 	font-weight: 600;
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 22px;
 	border: 1px solid #1a1c211a;
 	border-radius: 8px;
@@ -461,6 +461,7 @@
 
 .winratePercent {
 	color: #1a1c21cc;
+	font-size: 16px;
 }
 
 .topTipster:first-child .topTipsterWinrate {
@@ -583,13 +584,29 @@
 	margin: 0px 20px;
 }
 
+@media screen and (max-width: 1600px) and (min-width: 1280.1px) {
+
+	.topThreeTipsters,
+	.topOther,
+	.topTipstersList .topTipstersMore {
+		transform: scale(0.8);
+		width: 120%;
+		margin-left: -10%;
+		margin-top: -5%;
+	}
+
+	.topTipstersOther {
+		margin-top: 16px;
+	}
+
+	.topTipstersList .topTipstersMore {
+		padding-top: 20px;
+	}
+}
+
 @media screen and (max-width: 1440px) {
 	#slider {
 		margin-left: -40px;
-	}
-
-	.topThreeTipsters {
-		gap: 19px;
 	}
 
 	#tallBanner>div {
