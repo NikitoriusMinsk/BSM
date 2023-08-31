@@ -50,7 +50,7 @@
     grid-column-start: 10;
     grid-column-end: 13;
     grid-row-start: 2;
-    grid-row-end: 3;
+    grid-row-end: 10;
 }
 
 /* Tips Slider */
@@ -404,6 +404,14 @@
 
     .mobileFilters {
         margin-top: 24px;
+    }
+
+    .mobileFilters>div:last-child {
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-left: -16px;
+        margin-right: -16px;
+        width: calc(100% + 32px);
     }
 
     .mobileFilters>div {
