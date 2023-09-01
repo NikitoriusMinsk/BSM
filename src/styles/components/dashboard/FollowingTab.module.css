@@ -244,7 +244,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     #following {
         margin-top: 0;
         grid-column-start: 1;

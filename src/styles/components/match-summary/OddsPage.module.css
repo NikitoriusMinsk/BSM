@@ -127,14 +127,15 @@
     display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     .oddsFilter {
         margin: 0px -20px;
         width: calc(100% + 40px);
         padding: 0px 20px;
     }
+
     .chevronMobile {
-        display: flex; 
+        display: flex;
         align-items: center;
         justify-content: center;
         position: absolute;
@@ -145,7 +146,7 @@
         padding-right: 20px;
         text-align: left;
         background: #fff;
-        cursor: pointer!important;
+        cursor: pointer !important;
     }
 }
 

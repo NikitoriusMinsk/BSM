@@ -217,7 +217,7 @@
 
 /* Tab component */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     .settingsIcon span {
         display: block;
     }

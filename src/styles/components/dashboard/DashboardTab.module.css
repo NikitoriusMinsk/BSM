@@ -519,7 +519,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
 
     #profit {
         grid-column-start: 1;

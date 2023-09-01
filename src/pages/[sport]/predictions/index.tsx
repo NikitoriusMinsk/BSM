@@ -1,33 +1,40 @@
-import React, { useState, useRef, useContext } from "react";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import styles from "@styles/pages/Predictions.module.css";
-import { trpc } from "src/utils/trpc";
-import { MostTips, Predictions as PredictionsType, Sports } from "src/types/queryTypes";
-import Slider from "@components/ui/Slider";
-import MatchTipsCard from "@components/ui/MatchTipsCard";
-import Image from "next/image";
-import BestBookmakers from "@components/ui/BestBookmakers";
-import Banner from "@components/ui/Banner";
-import Filter from "@components/ui/Filter";
-import Predictions from "@components/ui/Predictions";
-import TextField from "@components/ui/TextField";
-import DatePicker from "@components/ui/DatePicker";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
-import { appRouter } from "src/server/trpc/router/_app";
-import { createContext } from "src/server/trpc/context";
-import superjson from "superjson";
-import ArrayToChunks from "src/utils/ArrayToChunks";
-import useWindowSize from "src/utils/useWindowSize";
-import FilterModal from "@components/ui/FilterModal";
-import dynamic from "next/dynamic";
-import usePortal from "src/utils/usePortal";
-import { PortalContext } from "src/utils/portalContext";
-import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
-import { LastSportContext } from "src/pages/_app";
+import React, { useState, useRef, useContext } from "react"
+import { GetStaticPaths, GetStaticProps, NextPage } from "next"
+import styles from "@styles/pages/Predictions.module.css"
+import { trpc } from "src/utils/trpc"
+import {
+	MostTips,
+	Predictions as PredictionsType,
+	Sports,
+} from "src/types/queryTypes"
+import Slider from "@components/ui/Slider"
+import MatchTipsCard from "@components/ui/MatchTipsCard"
+import Image from "next/image"
+import BestBookmakers from "@components/ui/BestBookmakers"
+import Banner from "@components/ui/Banner"
+import Filter from "@components/ui/Filter"
+import Predictions from "@components/ui/Predictions"
+import TextField from "@components/ui/TextField"
+import DatePicker from "@components/ui/DatePicker"
+import { createProxySSGHelpers } from "@trpc/react-query/ssg"
+import { appRouter } from "src/server/trpc/router/_app"
+import { createContext } from "src/server/trpc/context"
+import superjson from "superjson"
+import ArrayToChunks from "src/utils/ArrayToChunks"
+import useWindowSize from "src/utils/useWindowSize"
+import FilterModal from "@components/ui/FilterModal"
+import dynamic from "next/dynamic"
+import usePortal from "src/utils/usePortal"
+import { PortalContext } from "src/utils/portalContext"
+import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter"
+import { LastSportContext } from "src/pages/_app"
 
-const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
-	ssr: false,
-});
+const OutPortal = dynamic(
+	async () => (await import("react-reverse-portal")).OutPortal,
+	{
+		ssr: false,
+	}
+)
 
 const SortItems = [
 	{
@@ -42,7 +49,7 @@ const SortItems = [
 		name: "Multiple",
 		id: "3",
 	},
-];
+]
 
 const TypeItems = [
 	{
@@ -57,36 +64,40 @@ const TypeItems = [
 		name: "Paid",
 		id: "2",
 	},
-];
+]
 
 const PredictionsPage: NextPage = () => {
-	const sport = useContext(LastSportContext);
-	const [limit, setLimit] = useState<number>(3);
+	const sport = useContext(LastSportContext)
+	const [limit, setLimit] = useState<number>(3)
 	const [previousPredictions, setPreviousPredictions] =
-		useState<PredictionsType | null>(null);
-	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery();
+		useState<PredictionsType | null>(null)
+	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery()
 	const { data: bookmakers, isLoading: bookmakersLoading } =
-		trpc.bookmakers.getTop.useQuery();
-	const { data: leagues, isLoading: leaguesLoading } = trpc.filters.getLeagues.useQuery(
-		{ page: 0, size: 20, sportId: sport.id }
-	);
-	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
+		trpc.bookmakers.getTop.useQuery()
+	const { data: leagues, isLoading: leaguesLoading } =
+		trpc.filters.getLeagues.useQuery({
+			page: 0,
+			size: 20,
+			sportId: sport.id,
+		})
+	const { data: sports, isLoading: sportsLoading } =
+		trpc.filters.getSports.useQuery()
 	const { data: predictions, isLoading: predictionsLoading } =
 		trpc.predictions.getAll.useQuery(
 			{ limit: limit },
 			{
 				onSuccess: (data) => setPreviousPredictions(data),
 			}
-		);
-	const { width } = useWindowSize();
-	const portalNode = usePortal();
+		)
+	const { width } = useWindowSize()
+	const portalNode = usePortal()
 
 	if (tipsLoading || bookmakersLoading || leaguesLoading || sportsLoading) {
-		return <div>Loading...</div>;
+		return <div>Loading...</div>
 	}
 
 	if (!tips || !bookmakers || !leagues || !sports) {
-		return <div>Error...</div>;
+		return <div>Error...</div>
 	}
 
 	return (
@@ -106,7 +117,7 @@ const PredictionsPage: NextPage = () => {
 							<TextField
 								placeholder="Search"
 								icon="/icons/search.svg"
-								shouldShrink={width <= 768 ? true : false}
+								shouldShrink={width <= 900 ? true : false}
 							/>
 							<div className={styles.dateMobile}>
 								<DatePicker onChange={() => {}} />
@@ -321,12 +332,12 @@ const PredictionsPage: NextPage = () => {
 				</div>
 			</PortalContext.Provider>
 		</>
-	);
-};
+	)
+}
 
 const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
-	const { tips } = props;
-	const { width } = useWindowSize();
+	const { tips } = props
+	const { width } = useWindowSize()
 
 	return (
 		<div className={styles.tipsSlider}>
@@ -346,12 +357,13 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 					loop={true}
 					swipable={true}
 					autoPlay={true}
-					showArrows={width > 768 ? true : false}
+					showArrows={width > 900 ? true : false}
 					arrowOptions={{
 						offset: {
 							next: {
 								top: -54,
-								side: width > 1440 ? 135 : width > 1024 ? 30 : 20,
+								side:
+									width > 1440 ? 135 : width > 1024 ? 30 : 20,
 							},
 							prev: {
 								top: -54,
@@ -371,7 +383,13 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 				>
 					{ArrayToChunks(
 						tips,
-						width <= 600 ? 1 : width <= 768 ? 2 : width <= 1366 ? 3 : 4
+						width <= 600
+							? 1
+							: width <= 900
+							? 2
+							: width <= 1366
+							? 3
+							: 4
 					).map((tipsChunk, index) => (
 						<div
 							className={styles.slide}
@@ -388,37 +406,42 @@ const TipsSlider: React.FC<{ tips: MostTips }> = (props) => {
 				</Slider>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
 const SportsSider: React.FC<{
-	sports: Sports;
-	onChange: (ids: string[]) => void;
+	sports: Sports
+	onChange: (ids: string[]) => void
 }> = (props) => {
-	const { sports, onChange } = props;
-	const _sports = sliceIntoChunks(sports, 5);
-	const [selectedItems, setSelectedItems] = useState<string[]>(["0"]);
+	const { sports, onChange } = props
+	const _sports = sliceIntoChunks(sports, 5)
+	const [selectedItems, setSelectedItems] = useState<string[]>(["0"])
 
 	function sliceIntoChunks(arr: Sports, chunkSize: number) {
-		const res = [];
+		const res = []
 		for (let i = 0; i < arr.length; i += chunkSize) {
-			const chunk = arr.slice(i, i + chunkSize);
-			res.push(chunk);
+			const chunk = arr.slice(i, i + chunkSize)
+			res.push(chunk)
 		}
-		return res;
+		return res
 	}
 
 	function handleSelect(id: string) {
 		if (id === "0") {
-			setSelectedItems(["0"]);
-			return;
+			setSelectedItems(["0"])
+			return
 		}
 		if (selectedItems.includes(id)) {
-			setSelectedItems(selectedItems.filter((item) => item !== id && item !== "0"));
-			onChange(selectedItems.filter((item) => item !== id));
+			setSelectedItems(
+				selectedItems.filter((item) => item !== id && item !== "0")
+			)
+			onChange(selectedItems.filter((item) => item !== id))
 		} else {
-			setSelectedItems([...selectedItems.filter((item) => item !== "0"), id]);
-			onChange([...selectedItems, id]);
+			setSelectedItems([
+				...selectedItems.filter((item) => item !== "0"),
+				id,
+			])
+			onChange([...selectedItems, id])
 		}
 	}
 
@@ -477,32 +500,37 @@ const SportsSider: React.FC<{
 				))}
 			</Slider>
 		</div>
-	);
-};
+	)
+}
 
 interface SortButtonsProps {
 	items: {
-		name: string;
-		id: string;
-	}[];
-	onChange: (ids: string[]) => void;
+		name: string
+		id: string
+	}[]
+	onChange: (ids: string[]) => void
 }
 
 const SortButtons: React.FC<SortButtonsProps> = (props) => {
-	const { items, onChange } = props;
-	const [selectedItems, setSelectedItems] = useState<string[]>(["0"]);
+	const { items, onChange } = props
+	const [selectedItems, setSelectedItems] = useState<string[]>(["0"])
 
 	function handleSelect(id: string) {
 		if (id === "0") {
-			setSelectedItems(["0"]);
-			return;
+			setSelectedItems(["0"])
+			return
 		}
 		if (selectedItems.includes(id)) {
-			setSelectedItems(selectedItems.filter((item) => item !== id && item !== "0"));
-			onChange(selectedItems.filter((item) => item !== id));
+			setSelectedItems(
+				selectedItems.filter((item) => item !== id && item !== "0")
+			)
+			onChange(selectedItems.filter((item) => item !== id))
 		} else {
-			setSelectedItems([...selectedItems.filter((item) => item !== "0"), id]);
-			onChange([...selectedItems, id]);
+			setSelectedItems([
+				...selectedItems.filter((item) => item !== "0"),
+				id,
+			])
+			onChange([...selectedItems, id])
 		}
 	}
 
@@ -512,41 +540,43 @@ const SortButtons: React.FC<SortButtonsProps> = (props) => {
 				<button
 					key={`sort_button_${id}_${name}`}
 					onClick={() => handleSelect(id)}
-					className={selectedItems.includes(id) ? styles.active : undefined}
+					className={
+						selectedItems.includes(id) ? styles.active : undefined
+					}
 				>
 					{name}
 				</button>
 			))}
 		</div>
-	);
-};
+	)
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	return {
 		fallback: "blocking",
 		paths: [],
-	};
-};
+	}
+}
 
 export const getStaticProps: GetStaticProps = async (context) => {
 	const ssg = createProxySSGHelpers({
 		router: appRouter,
 		ctx: await createContext(),
 		transformer: superjson,
-	});
+	})
 
-	await ssg.tips.getAll.prefetch();
-	await ssg.bookmakers.getTop.prefetch();
-	await ssg.filters.getLeagues.prefetch({ page: 0, size: 20, sportId: 1 });
-	await ssg.filters.getSports.prefetch();
-	await ssg.predictions.getAll.prefetch({ limit: 3 });
+	await ssg.tips.getAll.prefetch()
+	await ssg.bookmakers.getTop.prefetch()
+	await ssg.filters.getLeagues.prefetch({ page: 0, size: 20, sportId: 1 })
+	await ssg.filters.getSports.prefetch()
+	await ssg.predictions.getAll.prefetch({ limit: 3 })
 
 	return {
 		props: {
 			trpcState: ssg.dehydrate(),
 		},
 		revalidate: 60,
-	};
-};
+	}
+}
 
-export default PredictionsPage;
+export default PredictionsPage

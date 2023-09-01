@@ -188,7 +188,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     #profileVisits {
         grid-column-start: 1;
     }

@@ -43,7 +43,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     .mainColumn {
         margin-right: 24px;
         margin-left: 24px;

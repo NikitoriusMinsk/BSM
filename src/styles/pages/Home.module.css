@@ -843,7 +843,7 @@
 	}
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
 	#slider {
 		border-bottom-right-radius: 0;
 		border-top-left-radius: 0;

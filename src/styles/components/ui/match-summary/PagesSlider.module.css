@@ -1,4 +1,4 @@
-.pageSelector{
+.pageSelector {
     overflow-x: auto;
     width: calc(100% + 60px);
     margin-left: -60px;
@@ -6,6 +6,7 @@
     margin-bottom: 32px;
     position: relative;
 }
+
 .pagesLine {
     display: flex;
     gap: 60px;
@@ -13,7 +14,8 @@
     width: max-content;
     min-width: 100%;
 }
-.pageSelector::-webkit-scrollbar{
+
+.pageSelector::-webkit-scrollbar {
     display: none;
 }
 
@@ -22,34 +24,36 @@
         gap: 48px;
     }
 }
-@media screen and (max-width: 1366px) {
 
-}
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1366px) {}
 
-}
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px) {}
 
-}
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {}
+
+@media screen and (max-width: 900px) {
     .pagesLine {
         gap: 28px;
     }
-    .pageSelector {        
+
+    .pageSelector {
         width: calc(100% + 80px);
         padding-right: 20px;
     }
 }
+
 @media screen and (max-width: 600px) {
     .pageActive {
         font-weight: 600;
     }
+
     .pageSelector {
         width: 100%;
         padding: 0px 16px;
         margin-left: 0px;
         margin-bottom: 24px;
     }
+
     .pagesLine {
         gap: 40px;
     }

@@ -1,10 +1,11 @@
-.container{
+.container {
     padding-left: 40px;
     padding-right: 115px;
     display: flex;
     gap: 40px;
 }
-.main{
+
+.main {
     width: calc(100% + 60px);
     display: flex;
     flex-direction: column;
@@ -16,15 +17,17 @@
     margin-bottom: 100px;
     margin-left: -60px;
 }
-.leaguePreview{
+
+.leaguePreview {
     position: relative;
     height: 270px;
-    border-top-left-radius: 16px;    
+    border-top-left-radius: 16px;
     border-bottom-right-radius: 16px;
     overflow: hidden;
     padding: 40px 20px 20px 60px;
 }
-.leaguePreview::after{
+
+.leaguePreview::after {
     background: linear-gradient(90deg, rgba(26, 28, 33, 0.8) 14.3%, rgba(26, 28, 33, 0.1) 100%);
     content: "";
     left: 0;
@@ -33,21 +36,24 @@
     height: 100%;
     position: absolute;
 }
-.leagueInfo{
+
+.leagueInfo {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     z-index: 1;
 }
-.leagueHeader{
+
+.leagueHeader {
     display: flex;
     z-index: 1;
     align-items: center;
     justify-content: center;
     position: relative;
 }
-.buttonBack{
+
+.buttonBack {
     width: 38px;
     height: 38px;
     background: rgba(255, 255, 255, 0.2);
@@ -60,6 +66,7 @@
     left: 0;
     top: 0;
 }
+
 .leagueData {
     display: flex;
     align-items: center;
@@ -70,12 +77,14 @@
     margin-bottom: auto;
     z-index: 1;
 }
+
 .leagueLogo {
     display: flex;
     padding: 5px;
     background: #FFFFFF;
     border-radius: 8px;
 }
+
 .leagueFields {
     display: flex;
     flex-direction: column;
@@ -84,11 +93,13 @@
     height: 100%;
     padding: 6px 0px;
 }
-.leagueTitle {    
+
+.leagueTitle {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
+
 .leagueTitleName {
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -97,6 +108,7 @@
     line-height: 29px;
     color: #FFFFFF;
 }
+
 .leagueTitleDate {
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -105,11 +117,13 @@
     line-height: 18px;
     color: rgba(255, 255, 255, 0.8);
 }
+
 .countryName {
     display: flex;
     align-items: center;
     gap: 8px;
 }
+
 .countryNameField {
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -118,6 +132,7 @@
     line-height: 22px;
     color: #FFFFFF;
 }
+
 .countryFlag {
     overflow: hidden;
     border-radius: 100px;
@@ -127,13 +142,14 @@
 }
 
 
-.matchStatPages{
+.matchStatPages {
     display: flex;
     flex-direction: column;
     width: calc(100% - 60px);
     margin-left: 60px;
 }
-.page{
+
+.page {
     font-family: 'Samsung Sans';
     font-style: normal;
     font-weight: 400;
@@ -144,28 +160,31 @@
     min-width: max-content;
     position: relative;
     transition: all 0.2s ease-in-out;
-    display:inline-block;
-    text-align:center;
+    display: inline-block;
+    text-align: center;
     cursor: pointer;
     padding-bottom: 19px;
     z-index: 2;
 }
-.page::before{
+
+.page::before {
     display: block;
-    content: attr(aria-label);  
+    content: attr(aria-label);
     font-family: 'Samsung Sans';
     font-style: normal;
     font-size: 18px;
-    line-height: 22px;  
+    line-height: 22px;
     font-weight: 700;
     height: 0;
-	overflow: hidden;
-	visibility: hidden;
+    overflow: hidden;
+    visibility: hidden;
 }
-.pageActive{
+
+.pageActive {
     font-weight: 700;
 }
-.pageUnderline{
+
+.pageUnderline {
     background: #1A1C21;
     border-radius: 2px;
     width: 100%;
@@ -195,14 +214,17 @@
         margin-left: 40px;
         width: calc(100% - 40px);
     }
-    .main {        
+
+    .main {
         gap: 30px;
         margin-left: -40px;
         width: calc(100% + 40px);
     }
+
     .sideBar {
         padding-top: 30px;
     }
+
     .leaguePreview {
         padding-left: 40px;
     }
@@ -213,10 +235,12 @@
         margin-left: 30px;
         width: calc(100% - 30px);
     }
+
     .main {
         margin-left: -30px;
         width: calc(100% + 30px);
     }
+
     .leaguePreview {
         padding-left: 30px;
     }
@@ -227,7 +251,8 @@
         margin-left: 30px;
         width: calc(100% - 30px);
     }
-    .main {        
+
+    .main {
         gap: 24px;
     }
 }
@@ -237,15 +262,18 @@
         margin-left: 20px;
         width: calc(100% - 20px);
     }
-    .main {        
+
+    .main {
         gap: 24px;
         grid-column-end: 13;
         margin-left: -20px;
         width: calc(100% + 20px);
     }
+
     .sideBar {
         display: none;
     }
+
     .leaguePreview {
         padding-left: 20px;
         padding-top: 24px;
@@ -254,20 +282,23 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     .leaguePreview {
         margin-right: 0px;
         border-top-left-radius: 0px;
     }
-    .main {        
+
+    .main {
         margin-left: 00px;
         width: 100%;
     }
+
     .matchStatPages {
         margin-left: 20px;
         margin-right: 20px;
         width: calc(100% - 40px);
     }
+
     .leagueData {
         margin-left: 80px;
     }
@@ -279,6 +310,7 @@
         gap: 20px;
         margin-bottom: 0px;
     }
+
     .sideBar {
         grid-column-start: 1;
         grid-column-end: 13;
@@ -287,19 +319,23 @@
         margin-top: 30px;
         margin-bottom: 30px;
     }
+
     .leaguePreview {
         height: 60vw;
         padding: 16px;
         border-radius: 0px;
     }
+
     .buttonBack {
         width: 36px;
         height: 36px;
     }
-    .buttonBack *{
-        width: 20px!important;
-        height: 20px!important;
+
+    .buttonBack * {
+        width: 20px !important;
+        height: 20px !important;
     }
+
     .leagueData {
         gap: 10px;
         width: 100%;
@@ -308,45 +344,57 @@
         justify-content: space-around;
         flex-direction: column;
     }
+
     .leagueLogo {
         width: 74px;
         height: 74px;
     }
+
     .leagueLogo img {
         width: 100%;
         height: 100%;
     }
-    .leagueFields, .leagueTitle {
+
+    .leagueFields,
+    .leagueTitle {
         align-items: center;
     }
+
     .leagueFields {
         gap: 12px;
     }
+
     .leagueTitleName {
         font-size: 18px;
         line-height: 22px;
     }
+
     .leaguePreview::after {
         background: rgba(26, 28, 33, 0.5);
     }
+
     .countryNameField {
         font-size: 15px;
         line-height: 18px;
     }
+
     .matchStatPages {
         margin-left: 0px;
         margin-right: 0px;
         width: 100%;
     }
+
     .page {
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
         padding-bottom: 13px;
     }
+
     .pageActive {
         font-weight: 600;
     }
+
     .leaguesMobile {
         display: flex;
         flex-direction: column;
@@ -357,10 +405,12 @@
         grid-row-end: 3;
         margin-top: 30px;
     }
-    .leaguesMobile > div {        
+
+    .leaguesMobile>div {
         padding-left: 16px;
         padding-right: 16px;
     }
+
     .leaguesMobileTitle {
         font-family: 'Samsung Sans';
         font-style: normal;

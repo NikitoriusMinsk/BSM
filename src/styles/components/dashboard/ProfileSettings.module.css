@@ -390,7 +390,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     #accountSettings {
         grid-column-start: 1;
     }

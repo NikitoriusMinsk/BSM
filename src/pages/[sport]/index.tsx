@@ -134,11 +134,11 @@ const Home: NextPage = () => {
 			</div>
 			<DisaperingContainer
 				id={styles.matches}
-				condition={width <= 768}
+				condition={width <= 900}
 			>
 				<DisaperingContainer
 					id={styles.matchList}
-					condition={width > 768}
+					condition={width > 900}
 				>
 					<Matches
 						matches={matches}
@@ -149,7 +149,7 @@ const Home: NextPage = () => {
 				</DisaperingContainer>
 				<DisaperingContainer
 					id={styles.predictionList}
-					condition={width > 768}
+					condition={width > 900}
 				>
 					<Predictions
 						leagues={predictions}
@@ -160,7 +160,7 @@ const Home: NextPage = () => {
 			</DisaperingContainer>
 			<DisaperingContainer
 				className={styles.sideColumn}
-				condition={width <= 768}
+				condition={width <= 900}
 			>
 				<div id={styles.topTipsters}>
 					{!session && <SignUpPropose />}
@@ -289,7 +289,7 @@ const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
 
 	function GetTipsterCount(width: number) {
 		switch (true) {
-			case width > 768:
+			case width > 900:
 				return 3
 			case width >= 320:
 				return tipsters.length
