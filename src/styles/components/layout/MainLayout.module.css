@@ -1,7 +1,7 @@
 .pageWrap {
-    margin-top: 87px;
+    margin-top: 86px;
     margin-left: 80px;
-    max-height: calc(100vh - 87px);
+    max-height: calc(100vh - 86px);
     /* overflow-y: scroll; */
     /* border: 1px solid #D9D9D9; */
 }
