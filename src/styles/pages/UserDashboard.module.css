@@ -1,8 +1,7 @@
 .sideColumn {
     grid-column-start: 1;
     grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 5;
+    grid-row: 1 / 1;
     padding: 20px 30px 0 60px;
     height: 100%;
     background-color: #FBFBFB;
@@ -10,18 +9,25 @@
 }
 
 .mainColumn {
-    padding-top: 20px;
-    grid-column-start: 4;
+    grid-column-start: 1;
     grid-column-end: 13;
-    min-height: 100vh;
+    grid-row: 1 / 1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: inherit;
+    gap: inherit;
 }
 
 .navigationContainer {
     position: sticky;
-    top: 20px;
+    top: 105px;
     padding-bottom: 20px;
     overflow-y: scroll;
     max-height: 100%;
+}
+
+.navigationContainer::-webkit-scrollbar {
+    display: none;
 }
 
 /* Navigation */
@@ -298,7 +304,7 @@
     grid-column-start: 1;
     grid-column-end: 13;
     gap: 30px;
-    padding: 0 16px;
+    padding: 0 24px;
 }
 
 @media screen and (max-width: 1440px) {
@@ -342,19 +348,16 @@
     }
 
     .mainColumn {
-        grid-column-start: 5;
+        /* grid-column-start: 5; */
     }
 }
 
 
 @media screen and (max-width: 900px) {
-
     .sideColumn {
-        grid-row-start: 1;
-        grid-row-end: 2;
         grid-column-start: 1;
         grid-column-end: 13;
-        padding: 16px;
+        padding: 24px;
         margin-left: 0;
         padding-bottom: 0;
     }
@@ -364,16 +367,20 @@
     }
 
     .mainColumn {
-        grid-row-start: 2;
-        grid-row-end: 3;
-        grid-column-start: 1;
-        grid-column-end: 13;
-        padding: 16px;
+        grid-row: 2 / 2;
+        padding: 0px;
     }
 
     .navigation nav {
         flex-direction: row;
         overflow: scroll;
+        margin-left: -24px;
+        margin-right: -24px;
+        /* width: 100%; */
+        background-color: #FFFFFF;
+        padding-top: 24px;
+        padding-left: 24px;
+        padding-right: 24px;
     }
 
     .navigation nav::-webkit-scrollbar {
@@ -400,13 +407,8 @@
         width: 220px;
     }
 
-    .navigation nav {
-        background-color: #FFFFFF;
-        padding-top: 16px;
-    }
-
     .navigationContainer {
-        overflow: auto;
+        overflow: visible;
     }
 
     .navigation .userInfo .country {
@@ -422,8 +424,28 @@
 }
 
 @media screen and (max-width: 600px) {
+    .mobileGrid {
+        padding: 0px 16px;
+    }
+
+    .navigation nav {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-top: 16px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .sideColumn {
+        padding: 16px;
+    }
+
+    .navigation .userInfo {
+        padding: 0px;
+    }
+
     .navigation .userInfo .stats .stat {
-        width: calc(50vw - 40px);
+        width: calc(50% - 6px);
         background-color: #F2F2F24D;
     }
 

@@ -124,12 +124,14 @@ const UserDashboard: NextPage = () => {
 					/>
 				</div>
 			</div>
-			<DisaperingContainer
-				condition={width > 900}
-				className={styles.mobileGrid}
-			>
-				{memoizedPage}
-			</DisaperingContainer>
+			<div className={styles.mainColumn}>
+				<DisaperingContainer
+					condition={width > 900}
+					className={styles.mobileGrid}
+				>
+					{memoizedPage}
+				</DisaperingContainer>
+			</div>
 		</>
 	)
 }
