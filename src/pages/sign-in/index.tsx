@@ -1,31 +1,31 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import styles from "../../styles/pages/Auth.module.css";
-import Image from "next/image";
-import TextField from "../../components/ui/TextField";
-import PasswordField from "../../components/ui/PasswordField";
-import SubmitButton from "../../components/ui/SubmitButton";
-import Link from "next/link";
-import { SyntheticEvent } from "react";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
+import type { NextPage } from "next"
+import Head from "next/head"
+import styles from "../../styles/pages/Auth.module.css"
+import Image from "next/image"
+import TextField from "../../components/ui/TextField"
+import PasswordField from "../../components/ui/PasswordField"
+import SubmitButton from "../../components/ui/SubmitButton"
+import Link from "next/link"
+import { SyntheticEvent } from "react"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/router"
 
 const Login: NextPage = () => {
-	const router = useRouter();
+	const router = useRouter()
 
 	function handleLogin(e: SyntheticEvent) {
-		e.preventDefault();
+		e.preventDefault()
 		const target = e.target as typeof e.target & {
-			email: { value: string };
-			password: { value: string };
-		};
-		const email = target.email.value;
-		const password = target.password.value;
+			email: { value: string }
+			password: { value: string }
+		}
+		const email = target.email.value
+		const password = target.password.value
 		signIn("credentials", {
 			email: email,
 			password: password,
 			callbackUrl: (router.query.callbackUrl as string) || "/",
-		});
+		})
 	}
 
 	return (
@@ -61,7 +61,14 @@ const Login: NextPage = () => {
 						<h1 className={styles.loginTitle}>Sign In</h1>
 						<span className={styles.formText}>
 							Don’t have an account?&nbsp;&nbsp;&nbsp;
-							<Link href="/sign-up">Create one</Link>
+							<Link
+								href={{
+									pathname: "/sign-up",
+									query: router.query,
+								}}
+							>
+								Create one
+							</Link>
 						</span>
 						{/* <div className={styles.socials}>
 							<div className={styles.social}>
@@ -94,7 +101,7 @@ const Login: NextPage = () => {
 							<TextField
 								type={"text"}
 								name="email"
-								placeholder="Email Address"
+								placeholder="Username"
 								floatingPlaceholder
 								errorMessage={router.query.error && " "}
 							/>
@@ -113,7 +120,14 @@ const Login: NextPage = () => {
 						</div>
 						<div className={styles.formBtns}>
 							<span className={styles.formText}>
-								<Link href="/forgot-password">Forgot Password?</Link>
+								<Link
+									href={{
+										pathname: "/forgot-password",
+										query: router.query,
+									}}
+								>
+									Forgot Password?
+								</Link>
 							</span>
 							<SubmitButton type="submit">Sign In</SubmitButton>
 						</div>
@@ -131,7 +145,7 @@ const Login: NextPage = () => {
 				</div>
 			</div>
 		</>
-	);
-};
+	)
+}
 
-export default Login;
+export default Login

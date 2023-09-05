@@ -1,33 +1,35 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import styles from "../../styles/pages/Auth.module.css";
-import Image from "next/image";
-import TextField from "../../components/ui/TextField";
-import PasswordField from "../../components/ui/PasswordField";
-import SubmitButton from "../../components/ui/SubmitButton";
-import { useState } from "react";
-import Link from "next/link";
-import { trpc } from "src/utils/trpc";
+import type { NextPage } from "next"
+import Head from "next/head"
+import styles from "../../styles/pages/Auth.module.css"
+import Image from "next/image"
+import TextField from "../../components/ui/TextField"
+import PasswordField from "../../components/ui/PasswordField"
+import SubmitButton from "../../components/ui/SubmitButton"
+import { useState } from "react"
+import Link from "next/link"
+import { trpc } from "src/utils/trpc"
+import { useRouter } from "next/router"
 
 const Forgot: NextPage = () => {
-	const [submitForbidden, setSubmitForbidden] = useState(true);
-	const [submitted, setSubmitted] = useState(false);
-	const reset = trpc.auth.requestPasswordReset.useMutation();
+	const router = useRouter()
+	const [submitForbidden, setSubmitForbidden] = useState(true)
+	const [submitted, setSubmitted] = useState(false)
+	const reset = trpc.auth.requestPasswordReset.useMutation()
 
 	const submitForgot = (e: React.FormEvent) => {
-		e.preventDefault();
+		e.preventDefault()
 		const target = e.target as typeof e.target & {
-			email: { value: string };
-		};
-		const email = target.email.value;
+			email: { value: string }
+		}
+		const email = target.email.value
 
 		reset
 			.mutateAsync({ email })
 			.then(() => {
-				setSubmitted(true);
+				setSubmitted(true)
 			})
-			.catch((err) => alert(`Oops! Error\n${err}`));
-	};
+			.catch((err) => alert(`Oops! Error\n${err}`))
+	}
 
 	return (
 		<>
@@ -61,7 +63,10 @@ const Forgot: NextPage = () => {
 							onSubmit={submitForgot}
 						>
 							<Link
-								href="/sign-in"
+								href={{
+									pathname: "/sign-in",
+									query: router.query,
+								}}
 								className={styles.backToLogin}
 							>
 								<Image
@@ -72,11 +77,14 @@ const Forgot: NextPage = () => {
 								/>
 								Back to Login
 							</Link>
-							<h1 className={styles.loginTitle}>Forgot your password?</h1>
+							<h1 className={styles.loginTitle}>
+								Forgot your password?
+							</h1>
 							<span className={styles.formTextForgot}>
-								Happens to all of us, but we’ll help you reset your
-								password. Enter the email associated with your account,
-								we’ll send you a link to reset password.
+								Happens to all of us, but we’ll help you reset
+								your password. Enter the email associated with
+								your account, we’ll send you a link to reset
+								password.
 							</span>
 							<div className={styles.fields}>
 								<TextField
@@ -86,9 +94,9 @@ const Forgot: NextPage = () => {
 									onChange={(e) => {
 										if (e.target.validity.valid) {
 											e.target.value.length > 0 &&
-												setSubmitForbidden(false);
+												setSubmitForbidden(false)
 										} else {
-											setSubmitForbidden(true);
+											setSubmitForbidden(true)
 										}
 									}}
 								/>
@@ -104,7 +112,9 @@ const Forgot: NextPage = () => {
 						</form>
 					) : (
 						<div className={styles.form}>
-							<h1 className={styles.loginTitle}>Check your Email</h1>
+							<h1 className={styles.loginTitle}>
+								Check your Email
+							</h1>
 							<span className={styles.formText}>
 								The link has been sent to the email.
 							</span>
@@ -123,7 +133,7 @@ const Forgot: NextPage = () => {
 				</div>
 			</div>
 		</>
-	);
-};
+	)
+}
 
-export default Forgot;
+export default Forgot
