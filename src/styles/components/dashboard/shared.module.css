@@ -9,6 +9,8 @@
     border: 1px solid #7F3FFC1A;
     border-radius: 16px;
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .block.positive {
@@ -34,6 +36,12 @@
 .block.hidden {
     border: none;
     background: none;
+}
+
+@media screen and (max-width: 1600px) {
+    .block {
+        padding: 30px 40px;
+    }
 }
 
 @media screen and (max-width: 1440px) {

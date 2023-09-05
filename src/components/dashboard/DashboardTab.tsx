@@ -1,23 +1,23 @@
-import Image from "next/image";
-import Link from "next/link";
-import { LineChart, Line, ResponsiveContainer } from "recharts";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-import React, { ReactNode, useMemo, useState } from "react";
-import { trpc } from "src/utils/trpc";
-import styles from "@styles/components/dashboard/DashboardTab.module.css";
-import sharedStyles from "@styles/components/dashboard/shared.module.css";
-import DisaperingContainer from "@components/helpers/DisaperingContainer";
-import useWindowSize from "src/utils/useWindowSize";
+import Image from "next/image"
+import Link from "next/link"
+import { LineChart, Line, ResponsiveContainer } from "recharts"
+import { CircularProgressbarWithChildren } from "react-circular-progressbar"
+import React, { ReactNode, useMemo, useState } from "react"
+import { trpc } from "src/utils/trpc"
+import styles from "@styles/components/dashboard/DashboardTab.module.css"
+import sharedStyles from "@styles/components/dashboard/shared.module.css"
+import DisaperingContainer from "@components/helpers/DisaperingContainer"
+import useWindowSize from "src/utils/useWindowSize"
 
 const DashboardTab: React.FC = () => {
-	const { data, isLoading } = trpc.user.getDashboardInfo.useQuery();
+	const { data, isLoading } = trpc.user.getDashboardInfo.useQuery()
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <div>Loading...</div>
 	}
 
 	if (!data) {
-		return <div>Error...</div>;
+		return <div>Error...</div>
 	}
 
 	return (
@@ -25,7 +25,9 @@ const DashboardTab: React.FC = () => {
 			<div
 				id={styles.profit}
 				className={`${sharedStyles.block} ${sharedStyles.narrow} ${
-					data.avgProfit > 0 ? sharedStyles.positive : sharedStyles.negative
+					data.avgProfit > 0
+						? sharedStyles.positive
+						: sharedStyles.negative
 				}`}
 			>
 				<Image
@@ -75,8 +77,8 @@ const DashboardTab: React.FC = () => {
 				</div>
 				<div className={styles.description}>
 					<span>
-						If you want to know more about the local currency and how to get
-						it, visit the “About Coin” page
+						If you want to know more about the local currency and
+						how to get it, visit the “About Coin” page
 					</span>
 					<Link href="/about-coins">
 						<span>View more about coin</span>
@@ -88,12 +90,14 @@ const DashboardTab: React.FC = () => {
 				className={`${sharedStyles.block} ${sharedStyles.narrow}`}
 			>
 				<h5>Favorite Bookmaker</h5>
-				<Image
-					src={data.favoriteBookmaker.image}
-					height={50}
-					width={140}
-					alt=""
-				/>
+				<div className={styles.bookmakerLogo}>
+					<Image
+						src={data.favoriteBookmaker.image}
+						fill
+						style={{ objectFit: "contain" }}
+						alt=""
+					/>
+				</div>
 			</div>
 
 			<div
@@ -195,7 +199,8 @@ const DashboardTab: React.FC = () => {
 								},
 								root: {
 									transform: `rotate(${
-										360 - (data.bets.won / data.bets.total) * 360
+										360 -
+										(data.bets.won / data.bets.total) * 360
 									}deg)`,
 								},
 							}}
@@ -216,7 +221,8 @@ const DashboardTab: React.FC = () => {
 								},
 								root: {
 									transform: `rotate(${
-										360 - (data.bets.lost / data.bets.total) * 360
+										360 -
+										(data.bets.lost / data.bets.total) * 360
 									}deg)`,
 								},
 							}}
@@ -236,13 +242,13 @@ const DashboardTab: React.FC = () => {
 				</div>
 			</div>
 		</>
-	);
-};
+	)
+}
 
 const StatisticsChart: React.FC<{ data: { time: number; value: number }[] }> = (
 	props
 ) => {
-	const { data } = props;
+	const { data } = props
 
 	return (
 		<ResponsiveContainer
@@ -260,7 +266,7 @@ const StatisticsChart: React.FC<{ data: { time: number; value: number }[] }> = (
 				/>
 			</LineChart>
 		</ResponsiveContainer>
-	);
-};
+	)
+}
 
-export default DashboardTab;
+export default DashboardTab

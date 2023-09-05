@@ -180,8 +180,7 @@ const Navigation: React.FC<{
 					>
 						<Image
 							src={userInfo.image}
-							height={80}
-							width={80}
+							fill
 							alt=""
 						/>
 					</div>
