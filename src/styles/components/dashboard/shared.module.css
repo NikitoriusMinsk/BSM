@@ -58,5 +58,6 @@
 
     .block {
         padding: 36px;
+        align-items: initial;
     }
 }

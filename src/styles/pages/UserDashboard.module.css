@@ -185,6 +185,7 @@
     justify-content: center;
     gap: 12px;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .navigation .userInfo .stats .stat {
@@ -344,7 +345,7 @@
     }
 
     .navigation .userInfo .stats .stat {
-        flex: unset;
+        /* flex: unset; */
     }
 
     .navigation .userInfo .country {
@@ -386,7 +387,7 @@
     }
 }
 
-@media screen and (max-width: 1200px) and (min-width: 1024.1px) {
+@media screen and (max-width: 1200px) and (min-width: 1100.1px) {
 
     .navigation>.userInfo>div,
     .navigation>nav>span>* {
@@ -394,7 +395,7 @@
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1100px) {
     .sideColumn {
         grid-column-end: 5;
     }
@@ -473,6 +474,9 @@
         top: 16px;
     }
 
+    .mobileGrid {
+        gap: 16px;
+    }
 }
 
 @media screen and (max-width: 600px) {

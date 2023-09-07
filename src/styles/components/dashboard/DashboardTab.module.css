@@ -216,6 +216,7 @@
     font-size: 14px;
     line-height: 17px;
     color: #1A1C21;
+    text-align: center;
 }
 
 #sport h2 {
@@ -360,6 +361,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 }
 
 #bets .progressBar {
@@ -368,6 +370,7 @@
     border-radius: 100%;
     border: none;
     background-color: #7F3FFC08;
+    flex-shrink: 0;
 }
 
 #bets h3 {
@@ -456,7 +459,18 @@
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px) and (min-width: 1100.1px) {
+    #bets {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .progressBarContainer>* {
+        transform: scale(0.9);
+    }
+}
+
+@media screen and (max-width: 1100px) {
     #profit {
         grid-column-start: 5;
         grid-column-end: 9;
@@ -502,6 +516,7 @@
     #sport {
         grid-column-start: 10;
         grid-column-end: 13;
+        height: 180px;
     }
 
     #odds {
@@ -536,7 +551,7 @@
     #stats {
         grid-column-start: 4;
         grid-column-end: 9;
-        gap: unset;
+        /* gap: unset; */
         margin-top: 0;
     }
 
@@ -609,7 +624,40 @@
     #sport,
     #odds,
     #unit {
-        max-height: 180px;
+        max-height: initial;
+        height: initial;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #coins {
+        grid-column-start: 1;
+        grid-column-end: 9;
+    }
+
+    #bookmaker {
+        grid-row-start: 4;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        max-height: initial;
+    }
+
+    #bets {
+        grid-column-start: 3;
+        grid-column-end: 9;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media screen and (max-width: 700px) and (min-width: 600.1px) {
+    #profit {
+        grid-column-start: 1;
+        grid-column-end: 5;
+    }
+
+    #stats {
+        grid-column-start: 5;
     }
 }
 
@@ -621,7 +669,7 @@
     }
 
     #stats {
-        flex-direction: column;
+        /* flex-direction: column; */
         gap: 48px;
         grid-row-start: 2;
         grid-column-start: 1;
@@ -662,6 +710,12 @@
     #bookmaker,
     #sport {
         flex-direction: row;
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+
+    .bookmakerLogo {
+        height: 100%;
     }
 
     #sport .info {
@@ -696,10 +750,6 @@
     #coins {
         max-height: 111px;
         padding: 35px 40px;
-    }
-
-    #sport {
-        max-height: 94px;
     }
 
     #odds {
