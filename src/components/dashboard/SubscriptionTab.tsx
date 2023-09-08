@@ -1,24 +1,24 @@
-import React, { ChangeEvent, useState } from "react";
-import styles from "@styles/components/dashboard/SubscriptionTab.module.css";
-import sharedStyles from "@styles/components/dashboard/shared.module.css";
-import { trpc } from "src/utils/trpc";
-import Image from "next/image";
-import debounce from "src/utils/debounce";
-import { createColumnHelper } from "@tanstack/react-table";
-import { inferArrayElementType } from "src/utils/inferArrayElementType";
-import { SubscriptionInfo } from "src/types/queryTypes";
-import Moment from "react-moment";
-import Table from "@components/ui/Table";
-import useWindowSize from "src/utils/useWindowSize";
+import React, { ChangeEvent, useState } from "react"
+import styles from "@styles/components/dashboard/SubscriptionTab.module.css"
+import sharedStyles from "@styles/components/dashboard/shared.module.css"
+import { trpc } from "src/utils/trpc"
+import Image from "next/image"
+import debounce from "src/utils/debounce"
+import { createColumnHelper } from "@tanstack/react-table"
+import { inferArrayElementType } from "src/utils/inferArrayElementType"
+import { SubscriptionInfo } from "src/types/queryTypes"
+import Moment from "react-moment"
+import Table from "@components/ui/Table"
+import useWindowSize from "src/utils/useWindowSize"
 
 const columnHelper =
-	createColumnHelper<inferArrayElementType<SubscriptionInfo["subscribers"]>>();
+	createColumnHelper<inferArrayElementType<SubscriptionInfo["subscribers"]>>()
 
 const columns = [
 	columnHelper.accessor((row) => ({ ...row }), {
 		id: "user",
 		cell: (info) => {
-			const { image, name } = info.getValue();
+			const { image, name } = info.getValue()
 			return (
 				<div className={styles.user}>
 					<div className={styles.avatar}>
@@ -31,7 +31,7 @@ const columns = [
 					</div>
 					<span>{name}</span>
 				</div>
-			);
+			)
 		},
 	}),
 	columnHelper.accessor("amount", {
@@ -42,7 +42,7 @@ const columns = [
 	columnHelper.accessor((row) => row, {
 		id: "duration",
 		cell: (info) => {
-			const { endsOn, startedOn } = info.getValue();
+			const { endsOn, startedOn } = info.getValue()
 			return (
 				<div className={styles.duration}>
 					<Moment format="DD MMM YYYY">{startedOn}</Moment>
@@ -50,17 +50,20 @@ const columns = [
 						<div
 							className={styles.progressBar}
 							style={{
-								width: `${100 -
-									((new Date().getTime() - startedOn.getTime()) /
-										(endsOn.getTime() - startedOn.getTime())) *
-									100
-									}%`,
+								width: `${
+									100 -
+									((new Date().getTime() -
+										startedOn.getTime()) /
+										(endsOn.getTime() -
+											startedOn.getTime())) *
+										100
+								}%`,
 							}}
 						/>
 					</div>
 					<Moment format="DD MMM YYYY">{endsOn}</Moment>
 				</div>
-			);
+			)
 		},
 	}),
 	columnHelper.accessor("endsOn", {
@@ -82,19 +85,21 @@ const columns = [
 		id: "button",
 		cell: (info) => (
 			<div className={styles.buttonContainer}>
-				<button className={`${styles.subscribeButton} ${styles.subscribed}`}>
+				<button
+					className={`${styles.subscribeButton} ${styles.subscribed}`}
+				>
 					Subscribed
 				</button>
 			</div>
 		),
 	}),
-];
+]
 
 const mobileColumns = [
 	columnHelper.accessor((row) => ({ ...row }), {
 		id: "user",
 		cell: (info) => {
-			const { image, name, amount } = info.getValue();
+			const { image, name, amount } = info.getValue()
 			return (
 				<div className={styles.user}>
 					<div className={styles.avatar}>
@@ -110,13 +115,13 @@ const mobileColumns = [
 						<span className={styles.userPrice}>${amount}</span>
 					</div>
 				</div>
-			);
+			)
 		},
 	}),
 	columnHelper.accessor((row) => row, {
 		id: "duration",
 		cell: (info) => {
-			const { endsOn, startedOn } = info.getValue();
+			const { endsOn, startedOn } = info.getValue()
 			return (
 				<div className={styles.durationContainer}>
 					<div className={styles.timeLeft}>
@@ -136,56 +141,61 @@ const mobileColumns = [
 							<div
 								className={styles.progressBar}
 								style={{
-									width: `${100 -
-										((new Date().getTime() - startedOn.getTime()) /
-											(endsOn.getTime() - startedOn.getTime())) *
-										100
-										}%`,
+									width: `${
+										100 -
+										((new Date().getTime() -
+											startedOn.getTime()) /
+											(endsOn.getTime() -
+												startedOn.getTime())) *
+											100
+									}%`,
 								}}
 							/>
 						</div>
 						<Moment format="DD MMM YYYY">{endsOn}</Moment>
 					</div>
 				</div>
-			);
+			)
 		},
 	}),
 	columnHelper.accessor((row) => ({ ...row }), {
 		id: "button",
 		cell: (info) => (
 			<div className={styles.buttonContainer}>
-				<button className={`${styles.subscribeButton} ${styles.subscribed}`}>
+				<button
+					className={`${styles.subscribeButton} ${styles.subscribed}`}
+				>
 					Subscribed
 				</button>
 			</div>
 		),
 	}),
-];
+]
 
 const SubscriptionTab: React.FC = () => {
-	const [searchString, setSearchString] = useState<string>("");
-	const { data, isLoading } = trpc.user.getSubscriptionInfo.useQuery();
+	const [searchString, setSearchString] = useState<string>("")
+	const { data, isLoading } = trpc.user.getSubscriptionInfo.useQuery()
 	const { data: searchResults, isLoading: searchResultsLoading } =
-		trpc.user.searchSubscribers.useQuery({ searchString: searchString });
-	const [shouldShowSearchResuts, setShouldShowSearchResults] = useState(false);
-	const { width } = useWindowSize();
+		trpc.user.searchSubscribers.useQuery({ searchString: searchString })
+	const [shouldShowSearchResuts, setShouldShowSearchResults] = useState(false)
+	const { width } = useWindowSize()
 
 	function handleSearch(e: ChangeEvent<HTMLInputElement>) {
-		const value = e.target.value;
+		const value = e.target.value
 		if (value !== "") {
-			setSearchString(value);
-			setShouldShowSearchResults(true);
+			setSearchString(value)
+			setShouldShowSearchResults(true)
 		} else {
-			setShouldShowSearchResults(false);
+			setShouldShowSearchResults(false)
 		}
 	}
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <div>Loading...</div>
 	}
 
 	if (!data) {
-		return <div>Error...</div>;
+		return <div>Error...</div>
 	}
 
 	return (
@@ -215,7 +225,8 @@ const SubscriptionTab: React.FC = () => {
 										: styles.negative
 								}
 							>
-								{(data.subscribers_difference * 100).toFixed(2)}%
+								{(data.subscribers_difference * 100).toFixed(2)}
+								%
 							</span>
 						</div>
 					</div>
@@ -239,17 +250,19 @@ const SubscriptionTab: React.FC = () => {
 			<div id={styles.table}>
 				<Table
 					data={
-						shouldShowSearchResuts && searchResults && !searchResultsLoading
+						shouldShowSearchResuts &&
+						searchResults &&
+						!searchResultsLoading
 							? searchResults
 							: data.subscribers
 					}
-					columns={width <= 1024 ? mobileColumns : columns}
+					columns={width <= 1100 ? mobileColumns : columns}
 					pageSize={10}
 					header={false}
 				/>
 			</div>
 		</>
-	);
-};
+	)
+}
 
-export default SubscriptionTab;
+export default SubscriptionTab

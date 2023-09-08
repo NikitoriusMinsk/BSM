@@ -178,7 +178,7 @@
     content: url(/icons/following-gray.svg);
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1100px) {
     #profileVisits {
         grid-column-start: 5;
     }

@@ -1,41 +1,44 @@
-import React from "react";
-import { trpc } from "src/utils/trpc";
-import styles from "@styles/components/dashboard/TipsTab.module.css";
-import Dropdown from "@components/ui/Dropdown";
-import DateInput from "@components/ui/DatePicker";
-import TextField from "@components/ui/TextField";
-import Prediction from "@components/ui/Prediction";
-import FilterModal from "@components/ui/FilterModal";
-import useWindowSize from "src/utils/useWindowSize";
-import usePortal from "src/utils/usePortal";
-import { PortalContext } from "src/utils/portalContext";
-import dynamic from "next/dist/shared/lib/dynamic";
+import React from "react"
+import { trpc } from "src/utils/trpc"
+import styles from "@styles/components/dashboard/TipsTab.module.css"
+import Dropdown from "@components/ui/Dropdown"
+import DateInput from "@components/ui/DatePicker"
+import TextField from "@components/ui/TextField"
+import Prediction from "@components/ui/Prediction"
+import FilterModal from "@components/ui/FilterModal"
+import useWindowSize from "src/utils/useWindowSize"
+import usePortal from "src/utils/usePortal"
+import { PortalContext } from "src/utils/portalContext"
+import dynamic from "next/dist/shared/lib/dynamic"
 
-const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
-	ssr: false,
-});
+const OutPortal = dynamic(
+	async () => (await import("react-reverse-portal")).OutPortal,
+	{
+		ssr: false,
+	}
+)
 
 const DateFilterItems = [
 	{ name: "Newest to Oldest", id: "1" },
 	{ name: "Oldest to Newest", id: "2" },
-];
+]
 
 const ProfitabilityFilterItems = [
 	{ name: "Biggest to Lowest", id: "1" },
 	{ name: "Lowest to Biggest", id: "2" },
-];
+]
 
 const PendingTipsTab: React.FC = () => {
-	const { data, isLoading } = trpc.user.getPendingTips.useQuery();
-	const { width } = useWindowSize();
-	const portalNode = usePortal();
+	const { data, isLoading } = trpc.user.getPendingTips.useQuery()
+	const { width } = useWindowSize()
+	const portalNode = usePortal()
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <div>Loading...</div>
 	}
 
 	if (!data) {
-		return <div>Error...</div>;
+		return <div>Error...</div>
 	}
 
 	return (
@@ -43,7 +46,7 @@ const PendingTipsTab: React.FC = () => {
 			{portalNode && <OutPortal node={portalNode} />}
 			<>
 				<div className={styles.filters}>
-					{width > 1024 ? (
+					{width > 1100 ? (
 						<>
 							<div className={styles.filter}>
 								<span>CREATE DATE</span>
@@ -76,8 +79,14 @@ const PendingTipsTab: React.FC = () => {
 										type: "buttons",
 										label: "Create Date",
 										items: [
-											{ id: 1, label: "Newest to Oldest" },
-											{ id: 2, label: "Oldest to Newest" },
+											{
+												id: 1,
+												label: "Newest to Oldest",
+											},
+											{
+												id: 2,
+												label: "Oldest to Newest",
+											},
 										],
 									},
 									{
@@ -85,8 +94,14 @@ const PendingTipsTab: React.FC = () => {
 										type: "buttons",
 										label: "Profitability",
 										items: [
-											{ id: 1, label: "Biggest to Lowest" },
-											{ id: 2, label: "Lowest to Biggest" },
+											{
+												id: 1,
+												label: "Biggest to Lowest",
+											},
+											{
+												id: 2,
+												label: "Lowest to Biggest",
+											},
 										],
 									},
 									{
@@ -115,7 +130,7 @@ const PendingTipsTab: React.FC = () => {
 				</div>
 			</>
 		</PortalContext.Provider>
-	);
-};
+	)
+}
 
-export default PendingTipsTab;
+export default PendingTipsTab
