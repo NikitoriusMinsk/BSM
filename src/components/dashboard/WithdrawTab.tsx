@@ -1,39 +1,46 @@
-import Image from "next/image";
-import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
-import { trpc } from "src/utils/trpc";
-import styles from "@styles/components/dashboard/WithdrawTab.module.css";
-import sharedStyles from "@styles/components/dashboard/shared.module.css";
-import { createColumnHelper } from "@tanstack/react-table";
-import { inferArrayElementType } from "src/utils/inferArrayElementType";
-import { WithdrawInfo } from "src/types/queryTypes";
-import Moment from "react-moment";
-import { TransactionStatus } from "src/types/transactionStatus";
-import usePortal from "src/utils/usePortal";
-import { PortalContext } from "src/utils/portalContext";
-import { AnimatePresence, motion } from "framer-motion";
-import Table from "@components/ui/Table";
-import dynamic from "next/dynamic";
-import useWindowSize from "src/utils/useWindowSize";
+import Image from "next/image"
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react"
+import { trpc } from "src/utils/trpc"
+import styles from "@styles/components/dashboard/WithdrawTab.module.css"
+import sharedStyles from "@styles/components/dashboard/shared.module.css"
+import { createColumnHelper } from "@tanstack/react-table"
+import { inferArrayElementType } from "src/utils/inferArrayElementType"
+import { WithdrawInfo } from "src/types/queryTypes"
+import Moment from "react-moment"
+import { TransactionStatus } from "src/types/transactionStatus"
+import usePortal from "src/utils/usePortal"
+import { PortalContext } from "src/utils/portalContext"
+import { AnimatePresence, motion } from "framer-motion"
+import Table from "@components/ui/Table"
+import dynamic from "next/dynamic"
+import useWindowSize from "src/utils/useWindowSize"
 
-const InPortal = dynamic(async () => (await import("react-reverse-portal")).InPortal, {
-	ssr: false,
-});
-const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
-	ssr: false,
-});
+const InPortal = dynamic(
+	async () => (await import("react-reverse-portal")).InPortal,
+	{
+		ssr: false,
+	}
+)
+const OutPortal = dynamic(
+	async () => (await import("react-reverse-portal")).OutPortal,
+	{
+		ssr: false,
+	}
+)
 
-const columnHelper = createColumnHelper<inferArrayElementType<WithdrawInfo["history"]>>();
+const columnHelper =
+	createColumnHelper<inferArrayElementType<WithdrawInfo["history"]>>()
 
 function getStyleByStatus(status: TransactionStatus) {
 	switch (status) {
 		case TransactionStatus.Pending:
-			return styles.pending;
+			return styles.pending
 		case TransactionStatus.Blocked:
-			return styles.blocked;
+			return styles.blocked
 		case TransactionStatus.Success:
-			return styles.success;
+			return styles.success
 		default:
-			return undefined;
+			return undefined
 	}
 }
 
@@ -44,7 +51,9 @@ const columns = [
 		enableSorting: false,
 	}),
 	columnHelper.accessor("amount", {
-		cell: (info) => <span className={styles.amount}>{info.getValue()}</span>,
+		cell: (info) => (
+			<span className={styles.amount}>{info.getValue()}</span>
+		),
 		header: () => <span>Amount</span>,
 		enableSorting: false,
 	}),
@@ -60,17 +69,19 @@ const columns = [
 	}),
 	columnHelper.accessor("status", {
 		cell: (info) => {
-			const status = info.getValue();
+			const status = info.getValue()
 			return (
-				<span className={`${styles.status} ${getStyleByStatus(status)}`}>
+				<span
+					className={`${styles.status} ${getStyleByStatus(status)}`}
+				>
 					{info.getValue()}
 				</span>
-			);
+			)
 		},
 		header: () => <span>Status</span>,
 		enableSorting: false,
 	}),
-];
+]
 
 const mobileColumns = [
 	columnHelper.accessor((row) => row, {
@@ -78,7 +89,9 @@ const mobileColumns = [
 		header: "",
 		cell: (props) => (
 			<div className={styles.transactionInfo}>
-				<span className={styles.amount}>${props.getValue().amount}</span>
+				<span className={styles.amount}>
+					${props.getValue().amount}
+				</span>
 				<span className={styles.id}>{props.getValue().id}</span>
 			</div>
 		),
@@ -96,69 +109,75 @@ const mobileColumns = [
 	}),
 	columnHelper.accessor("status", {
 		cell: (info) => {
-			const status = info.getValue();
+			const status = info.getValue()
 			return (
-				<span className={`${styles.status} ${getStyleByStatus(status)}`}>
+				<span
+					className={`${styles.status} ${getStyleByStatus(status)}`}
+				>
 					{info.getValue()}
 				</span>
-			);
+			)
 		},
 		header: "",
 		enableSorting: false,
 	}),
-];
+]
 
 const WithdrawTab: React.FC = () => {
-	const { data, isLoading } = trpc.user.getWithdrawInfo.useQuery();
-	const portalNode = usePortal();
-	const { width } = useWindowSize();
+	const { data, isLoading } = trpc.user.getWithdrawInfo.useQuery()
+	const portalNode = usePortal()
+	const { width } = useWindowSize()
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <div>Loading...</div>
 	}
 
 	if (!data) {
-		return <div>Error...</div>;
+		return <div>Error...</div>
 	}
 
 	return (
 		<>
 			<PortalContext.Provider value={{ portalNode: portalNode }}>
 				{portalNode && <OutPortal node={portalNode} />}
-				<div
-					id={styles.withdrawBalance}
-					className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
-				>
-					<div>
+				<div className={styles.withdrawStat}>
+					<div
+						id={styles.withdrawBalance}
+						className={`${sharedStyles.block} ${sharedStyles.wide} ${sharedStyles.positive}`}
+					>
+						<div>
+							<Image
+								src="/images/dashboard/wallet.svg"
+								height={60}
+								width={60}
+								alt=""
+							/>
+							<div className={styles.text}>
+								<h4>Pending Balance</h4>
+								<span>$ {data.pendingBalance.toFixed(2)}</span>
+							</div>
+						</div>
+						<div>
+							<h5>Cash that can be withdrawn right now</h5>
+							<WithdrawButton
+								balance={data.availableBalance.toFixed(2)}
+							/>
+						</div>
+					</div>
+					<div
+						id={styles.withdrawTotal}
+						className={`${sharedStyles.block} ${sharedStyles.narrow}`}
+					>
 						<Image
-							src="/images/dashboard/wallet.svg"
+							src="/images/dashboard/total.svg"
 							height={60}
 							width={60}
 							alt=""
 						/>
 						<div className={styles.text}>
 							<h4>Pending Balance</h4>
-							<span>$ {data.pendingBalance.toFixed(2)}</span>
+							<span>$ {data.totalEarned.toFixed(2)}</span>
 						</div>
-					</div>
-					<div>
-						<h5>Cash that can be withdrawn right now</h5>
-						<WithdrawButton balance={data.availableBalance.toFixed(2)} />
-					</div>
-				</div>
-				<div
-					id={styles.withdrawTotal}
-					className={`${sharedStyles.block} ${sharedStyles.narrow}`}
-				>
-					<Image
-						src="/images/dashboard/total.svg"
-						height={60}
-						width={60}
-						alt=""
-					/>
-					<div className={styles.text}>
-						<h4>Pending Balance</h4>
-						<span>$ {data.totalEarned.toFixed(2)}</span>
 					</div>
 				</div>
 				<div id={styles.table}>
@@ -171,12 +190,12 @@ const WithdrawTab: React.FC = () => {
 				</div>
 			</PortalContext.Provider>
 		</>
-	);
-};
+	)
+}
 
 const WithdrawButton: React.FC<{ balance: number | string }> = (props) => {
-	const { balance } = props;
-	const [isOpen, setIsOpen] = useState(false);
+	const { balance } = props
+	const [isOpen, setIsOpen] = useState(false)
 
 	return (
 		<>
@@ -204,8 +223,8 @@ const WithdrawButton: React.FC<{ balance: number | string }> = (props) => {
 				<span>$ {balance}</span>
 			</button>
 		</>
-	);
-};
+	)
+}
 
 const ModalVariants = {
 	open: {
@@ -222,76 +241,79 @@ const ModalVariants = {
 			ease: "easeInOut",
 		},
 	},
-};
+}
 
 enum PaymentMethods {
 	Paypal = "paypal",
 	MastercardVisa = "mastercard/visa",
 }
 
-const WithdrawModal: React.FC<{ maxValue: number | string; onClose: () => void }> = (
-	props
-) => {
-	const { maxValue, onClose } = props;
-	const [isMax, setIsMax] = useState<boolean>(false);
+const WithdrawModal: React.FC<{
+	maxValue: number | string
+	onClose: () => void
+}> = (props) => {
+	const { maxValue, onClose } = props
+	const [isMax, setIsMax] = useState<boolean>(false)
 	const [selectedMethod, setSelectedMethod] = useState<PaymentMethods>(
 		PaymentMethods.Paypal
-	);
-	const inputRef = useRef<HTMLInputElement | null>(null);
-	const [timeLeft, setTimeLeft] = useState<string | null>(null);
+	)
+	const inputRef = useRef<HTMLInputElement | null>(null)
+	const [timeLeft, setTimeLeft] = useState<string | null>(null)
 
 	function handleInput(e: ChangeEvent<HTMLInputElement>) {
-		const value = parseInt(e.target.value);
+		const value = parseInt(e.target.value)
 		if (value > (maxValue as number)) {
 			if (inputRef.current) {
-				inputRef.current.value = maxValue.toString();
-				setIsMax(true);
+				inputRef.current.value = maxValue.toString()
+				setIsMax(true)
 			}
-			return;
+			return
 		}
 		if (value === maxValue) {
-			setIsMax(true);
+			setIsMax(true)
 		} else {
-			setIsMax(false);
+			setIsMax(false)
 		}
 	}
 
 	function setMax(e: React.MouseEvent<HTMLButtonElement>) {
-		e.preventDefault();
+		e.preventDefault()
 		if (inputRef.current) {
-			inputRef.current.value = maxValue.toString();
-			setIsMax(true);
+			inputRef.current.value = maxValue.toString()
+			setIsMax(true)
 		}
 	}
 
 	function onSubmit(e: FormEvent) {
-		e.preventDefault();
-		onClose();
+		e.preventDefault()
+		onClose()
 	}
 
 	function sendCode(e: React.MouseEvent<HTMLButtonElement>) {
-		e.preventDefault();
-		let _timeLeft = 120;
-		const minutes = Math.floor(_timeLeft / 60);
-		const seconds = _timeLeft - minutes * 60;
+		e.preventDefault()
+		let _timeLeft = 120
+		const minutes = Math.floor(_timeLeft / 60)
+		const seconds = _timeLeft - minutes * 60
 		const interval = setInterval(() => {
-			const minutes = Math.floor(_timeLeft / 60);
-			const seconds = _timeLeft - minutes * 60;
+			const minutes = Math.floor(_timeLeft / 60)
+			const seconds = _timeLeft - minutes * 60
 			if (_timeLeft > 0) {
 				setTimeLeft(
-					`${minutes > 9 ? minutes : `0${minutes}`}:${seconds > 9 ? seconds : `0${seconds}`
+					`${minutes > 9 ? minutes : `0${minutes}`}:${
+						seconds > 9 ? seconds : `0${seconds}`
 					}`
-				);
-				_timeLeft--;
+				)
+				_timeLeft--
 			} else {
-				clearInterval(interval);
-				setTimeLeft(null);
+				clearInterval(interval)
+				setTimeLeft(null)
 			}
-		}, 1000);
+		}, 1000)
 		setTimeLeft(
-			`${minutes > 9 ? minutes : `0${minutes}`}:${seconds > 9 ? seconds : `0${seconds}`
+			`${minutes > 9 ? minutes : `0${minutes}`}:${
+				seconds > 9 ? seconds : `0${seconds}`
 			}`
-		);
+		)
 	}
 
 	return (
@@ -360,7 +382,9 @@ const WithdrawModal: React.FC<{ maxValue: number | string; onClose: () => void }
 					</div>
 					<div
 						className={styles.method}
-						onClick={() => setSelectedMethod(PaymentMethods.MastercardVisa)}
+						onClick={() =>
+							setSelectedMethod(PaymentMethods.MastercardVisa)
+						}
 					>
 						<div>
 							<Image
@@ -379,12 +403,14 @@ const WithdrawModal: React.FC<{ maxValue: number | string; onClose: () => void }
 						<input
 							type={"checkbox"}
 							readOnly
-							checked={selectedMethod === PaymentMethods.MastercardVisa}
+							checked={
+								selectedMethod === PaymentMethods.MastercardVisa
+							}
 						/>
 					</div>
 				</div>
 				<div className={styles.code}>
-					<button onClick={!timeLeft ? sendCode : () => { }}>
+					<button onClick={!timeLeft ? sendCode : () => {}}>
 						{!timeLeft ? "Send Code" : timeLeft}
 					</button>
 					<input
@@ -401,7 +427,7 @@ const WithdrawModal: React.FC<{ maxValue: number | string; onClose: () => void }
 				</button>
 			</form>
 		</motion.div>
-	);
-};
+	)
+}
 
-export default WithdrawTab;
+export default WithdrawTab
