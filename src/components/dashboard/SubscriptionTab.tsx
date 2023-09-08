@@ -256,7 +256,7 @@ const SubscriptionTab: React.FC = () => {
 							? searchResults
 							: data.subscribers
 					}
-					columns={width <= 1100 ? mobileColumns : columns}
+					columns={width <= 1200 ? mobileColumns : columns}
 					pageSize={10}
 					header={false}
 				/>
