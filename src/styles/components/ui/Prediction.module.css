@@ -639,6 +639,12 @@
     color: #FFFFFF;
 }
 
+@media screen and (max-width: 1280px) {
+    .header .info {
+        gap: 20px;
+    }
+}
+
 @media screen and (max-width: 600px) {
     .header {
         background: rgba(242, 242, 242, 0.3);

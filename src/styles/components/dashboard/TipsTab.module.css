@@ -72,11 +72,16 @@
     .filter {
         flex: 1;
     }
+
+    .filters {
+        gap: 16px;
+    }
 }
 
 @media screen and (max-width: 1100px) {
     .filters {
         grid-column-start: 5;
+        gap: 30px;
     }
 
     .predictions {
