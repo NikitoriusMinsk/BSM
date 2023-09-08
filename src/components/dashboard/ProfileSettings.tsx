@@ -1,32 +1,34 @@
-import React, { useState } from "react";
-import styles from "@styles/components/dashboard/ProfileSettings.module.css";
-import Image from "next/image";
-import { trpc } from "src/utils/trpc";
-import { AnimatePresence, motion } from "framer-motion";
-import PasswordField from "@components/ui/PasswordField";
-import Dropdown from "@components/ui/Dropdown";
-import TextField from "@components/ui/TextField";
+import React, { useState } from "react"
+import styles from "@styles/components/dashboard/ProfileSettings.module.css"
+import Image from "next/image"
+import { trpc } from "src/utils/trpc"
+import { AnimatePresence, motion } from "framer-motion"
+import PasswordField from "@components/ui/PasswordField"
+import Dropdown from "@components/ui/Dropdown"
+import TextField from "@components/ui/TextField"
 
 const ProfileSettings: React.FC = () => {
-	const { data, isLoading } = trpc.user.getInfo.useQuery();
-	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+	const { data, isLoading } = trpc.user.getInfo.useQuery()
+	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false)
 	const [isSportModalOpen, setIsSportModalOpen] = useState<
 		"sport" | "country" | "club" | false
-	>(false);
+	>(false)
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return <div>Loading...</div>
 	}
 
 	if (!data) {
-		return <div>Error...</div>;
+		return <div>Error...</div>
 	}
 
 	return (
 		<>
 			<AnimatePresence initial={false}>
 				{isPasswordModalOpen && (
-					<PasswordModal onClose={() => setIsPasswordModalOpen(false)} />
+					<PasswordModal
+						onClose={() => setIsPasswordModalOpen(false)}
+					/>
 				)}
 				{isSportModalOpen === "sport" && (
 					<SportModal onClose={() => setIsSportModalOpen(false)} />
@@ -46,7 +48,9 @@ const ProfileSettings: React.FC = () => {
 					<h2>Account Settings</h2>
 					<div className={styles.content}>
 						<div className={styles.imageInput}>
-							<div className={styles.avatar}>
+							<div
+								className={`${styles.avatar} ${styles.verified}`}
+							>
 								<Image
 									src="/images/profile-placeholder.png"
 									fill
@@ -180,12 +184,14 @@ const ProfileSettings: React.FC = () => {
 				</div>
 			</>
 		</>
-	);
-};
+	)
+}
 
-const ProfileField: React.FC<{ label: string; defaultValue?: string }> = (props) => {
-	const { label, defaultValue } = props;
-	const [editable, setEditable] = useState(false);
+const ProfileField: React.FC<{ label: string; defaultValue?: string }> = (
+	props
+) => {
+	const { label, defaultValue } = props
+	const [editable, setEditable] = useState(false)
 
 	return (
 		<div className={styles.profileField}>
@@ -217,8 +223,8 @@ const ProfileField: React.FC<{ label: string; defaultValue?: string }> = (props)
 				</button>
 			)}
 		</div>
-	);
-};
+	)
+}
 
 const ModalVariants = {
 	open: {
@@ -235,10 +241,10 @@ const ModalVariants = {
 			ease: "easeInOut",
 		},
 	},
-};
+}
 
 const PasswordModal: React.FC<{ onClose: () => void }> = (props) => {
-	const { onClose } = props;
+	const { onClose } = props
 
 	return (
 		<motion.div
@@ -271,19 +277,20 @@ const PasswordModal: React.FC<{ onClose: () => void }> = (props) => {
 				<button>Save new password</button>
 			</div>
 		</motion.div>
-	);
-};
+	)
+}
 
 const SportModal: React.FC<{ onClose: () => void }> = (props) => {
-	const { onClose } = props;
-	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
+	const { onClose } = props
+	const { data: sports, isLoading: sportsLoading } =
+		trpc.filters.getSports.useQuery()
 
 	if (sportsLoading) {
-		return <></>;
+		return <></>
 	}
 
 	if (!sports) {
-		return <></>;
+		return <></>
 	}
 
 	return (
@@ -341,20 +348,20 @@ const SportModal: React.FC<{ onClose: () => void }> = (props) => {
 				<button>Save</button>
 			</div>
 		</motion.div>
-	);
-};
+	)
+}
 
 const ClubModal: React.FC<{ onClose: () => void }> = (props) => {
-	const { onClose } = props;
+	const { onClose } = props
 	const { data: clubs, isLoading: clubsLoading } =
-		trpc.filters.getSportClubs.useQuery();
+		trpc.filters.getSportClubs.useQuery()
 
 	if (clubsLoading) {
-		return <></>;
+		return <></>
 	}
 
 	if (!clubs) {
-		return <></>;
+		return <></>
 	}
 
 	return (
@@ -412,20 +419,20 @@ const ClubModal: React.FC<{ onClose: () => void }> = (props) => {
 				<button>Save</button>
 			</div>
 		</motion.div>
-	);
-};
+	)
+}
 
 const CountryModal: React.FC<{ onClose: () => void }> = (props) => {
-	const { onClose } = props;
+	const { onClose } = props
 	const { data: countries, isLoading: countriesLoading } =
-		trpc.filters.getCountries.useQuery();
+		trpc.filters.getCountries.useQuery()
 
 	if (countriesLoading) {
-		return <></>;
+		return <></>
 	}
 
 	if (!countries) {
-		return <></>;
+		return <></>
 	}
 
 	return (
@@ -483,7 +490,7 @@ const CountryModal: React.FC<{ onClose: () => void }> = (props) => {
 				<button>Save</button>
 			</div>
 		</motion.div>
-	);
-};
+	)
+}
 
-export default ProfileSettings;
+export default ProfileSettings

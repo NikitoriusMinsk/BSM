@@ -154,13 +154,13 @@
     align-items: center;
     justify-content: center;
     border-radius: 100%;
-    padding: 3px;
-    background: #fff;
-    border: 3px solid rgba(26, 28, 33, 0.1);
-    position: relative;
+    border: 3px solid #fff;
+    outline: 3px solid rgba(26, 28, 33, 0.1);
+    width: 170px;
+    height: 170px;
 }
 
-.avatar:after {
+.avatar.verified::after {
     content: '';
     background-image: url(/icons/check-white.svg);
     background-repeat: no-repeat;
@@ -168,8 +168,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 26px;
-    width: 26px;
+    height: 30px;
+    width: 30px;
     position: absolute;
     border-radius: 100%;
     background-color: #2CD114;
@@ -388,6 +388,18 @@
     #sportDetails {
         grid-column-start: 5;
     }
+
+    .avatar {
+        width: 132px;
+        height: 132px;
+    }
+
+    .avatar.verified::after {
+        width: 28px;
+        height: 28px;
+        top: 0px;
+        right: 0px;
+    }
 }
 
 @media screen and (max-width: 900px) {
@@ -408,9 +420,33 @@
         width: 120px;
     }
 
+    .avatar.verified::after {
+        width: 28px;
+        height: 28px;
+        top: -2px;
+        right: -2px;
+    }
+
+    .info {
+        gap: 20px;
+    }
+
+    #sportDetails .content {
+        gap: 20px;
+    }
+
+    .info>div,
+    #sportDetails .sportBlock {
+        width: calc(50% - 10px);
+    }
 }
 
 @media screen and (max-width: 600px) {
+    .block {
+        padding: 16px;
+        padding-top: 24px;
+    }
+
     .profileSettings {
         gap: 0;
         row-gap: 40px;
@@ -418,15 +454,17 @@
 
     .info {
         flex-direction: column;
+        gap: 20px;
     }
 
     .profileField,
     .changePassword {
-        width: 100%;
+        width: 100% !important;
     }
 
     #sportDetails .content {
         flex-direction: column;
+        gap: 20px;
     }
 
     #sportDetails .sportBlock {

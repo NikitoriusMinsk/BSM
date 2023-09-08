@@ -25,7 +25,7 @@ enum Tabs {
 	TrackingTips = "Tracking Tips",
 	PendingTips = "Pending Tips",
 	HistoricalTips = "Historical Tips",
-	Settings = "Profile Settings",
+	Settings = "Edit Profile",
 	Followers = "Followers",
 	Following = "Following",
 }
