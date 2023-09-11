@@ -380,19 +380,19 @@
     font-size: 14px;
     line-height: 24px;
     color: #FFFFFF;
-    min-width: 172px;
+    min-width: 176px;
 }
 
-/* .timer .timeHint span:first-child {
-    margin-left: -25px;
-} */
+.timer .timeHint span {
+    text-align: center;
+}
 
 .timer .timeHint span:nth-child(2) {
     margin-right: -8px;
 }
 
 .timer .timeHint span:last-child {
-    margin-right: -15px;
+    margin-right: -12px;
 }
 
 .timer .rules {
@@ -540,6 +540,14 @@
     left: -20px;
 }
 
+@media screen and (max-width: 1600px) and (min-width: 1440.1px) {
+
+    .timer .time,
+    .timer .timeHint {
+        transform: scale(0.9);
+    }
+}
+
 @media screen and (max-width: 1440px) {
     .mainBlock {
         margin-left: -40px;
@@ -551,9 +559,43 @@
     }
 }
 
+@media screen and (max-width: 1400px) and (min-width: 1366.1px) {
+
+    .timer .time,
+    .timer .timeHint {
+        transform: scale(0.9);
+    }
+}
+
 @media screen and (max-width: 1366px) {
     .mainBlock {
         margin-left: -30px;
+    }
+
+    .timer .time {
+        width: max-content;
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        word-spacing: 12px;
+        color: #FFFFFF;
+        text-align: center;
+    }
+
+    .timer .timeHint {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: center;
+        font-family: 'Samsung Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: #FFFFFF;
+        min-width: 136px;
     }
 }
 
@@ -569,6 +611,26 @@
 
     .tipsterSlide {
         gap: 10px;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1100.1px) {
+
+    .timer .time,
+    .timer .timeHint {
+        transform: scale(0.9);
+        word-spacing: 10px;
+        min-width: 128px;
+    }
+}
+
+@media screen and (max-width: 1100px) and (min-width: 1024.1px) {
+
+    .timer .time,
+    .timer .timeHint {
+        transform: scale(0.8);
+        word-spacing: 8px;
+        min-width: 120px;
     }
 }
 
@@ -591,7 +653,7 @@
     }
 
     .timer .timeHint {
-        min-width: 130px;
+        min-width: 120px;
     }
 }
 
