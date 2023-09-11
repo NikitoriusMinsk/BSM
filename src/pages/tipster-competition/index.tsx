@@ -281,14 +281,14 @@ const CurrentCompetition: React.FC<CurrentCompetition> = (props) => {
 
 	return (
 		<div className={styles.currentCompetition}>
-			<div className={styles.share}>
+			{/* <div className={styles.share}>
 				<Image
 					src="/icons/share.svg"
 					height={24}
 					width={24}
 					alt=""
 				/>
-			</div>
+			</div> */}
 			<Image
 				src="/images/tipster-competition-background.png"
 				fill
