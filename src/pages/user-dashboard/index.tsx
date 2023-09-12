@@ -1,21 +1,22 @@
-import { GetServerSideProps, NextPage } from "next"
-import React, { useMemo, useState } from "react"
-import styles from "@styles/pages/UserDashboard.module.css"
-import { trpc } from "src/utils/trpc"
-import { UserInfo } from "src/types/queryTypes"
-import Image from "next/image"
-import DashboardTab from "@components/dashboard/DashboardTab"
-import WithdrawTab from "@components/dashboard/WithdrawTab"
-import FollowersTab from "@components/dashboard/FollowersTab"
-import FollowingTab from "@components/dashboard/FollowingTab"
-import SubscriptionTab from "@components/dashboard/SubscriptionTab"
-import ProfileVisitsTab from "@components/dashboard/ProfileVisitsTab"
-import TrackingTipsTab from "@components/dashboard/TrackingTipsTab"
-import PendingTipsTab from "@components/dashboard/PendingTipsTab"
-import HistoricalTipsTab from "@components/dashboard/HistoricalTipsTab"
-import ProfileSettings from "@components/dashboard/ProfileSettings"
-import useWindowSize from "src/utils/useWindowSize"
-import DisaperingContainer from "@components/helpers/DisaperingContainer"
+import { GetServerSideProps, NextPage } from "next";
+import React, { useMemo, useState } from "react";
+import styles from "@styles/pages/UserDashboard.module.css";
+import { trpc } from "src/utils/trpc";
+import { UserInfo } from "src/types/queryTypes";
+import Image from "next/image";
+import DashboardTab from "@components/dashboard/DashboardTab";
+import WithdrawTab from "@components/dashboard/WithdrawTab";
+import FollowersTab from "@components/dashboard/FollowersTab";
+import FollowingTab from "@components/dashboard/FollowingTab";
+import SubscriptionTab from "@components/dashboard/SubscriptionTab";
+import ProfileVisitsTab from "@components/dashboard/ProfileVisitsTab";
+import TrackingTipsTab from "@components/dashboard/TrackingTipsTab";
+import PendingTipsTab from "@components/dashboard/PendingTipsTab";
+import HistoricalTipsTab from "@components/dashboard/HistoricalTipsTab";
+import ProfileSettings from "@components/dashboard/ProfileSettings";
+import useWindowSize from "src/utils/useWindowSize";
+import DisaperingContainer from "@components/helpers/DisaperingContainer";
+import { useSession } from "next-auth/react";
 
 enum Tabs {
 	Dashboard = "Dashboard",
@@ -71,46 +72,45 @@ const NavigationItems = [
 		icon: "/icons/dashboard/settings.svg",
 		activeIcon: "/icons/dashboard/settings-white.svg",
 	},
-]
+];
 
 const UserDashboard: NextPage = () => {
-	const { data: userInfo, isLoading: userInfoLoading } =
-		trpc.user.getInfo.useQuery()
-	const [currentPage, setCurrentPage] = useState(Tabs.Dashboard)
+	const { data: userInfo, isLoading: userInfoLoading } = trpc.user.getInfo.useQuery();
+	const [currentPage, setCurrentPage] = useState(Tabs.Dashboard);
 	const memoizedPage = useMemo(() => {
 		switch (currentPage) {
 			case Tabs.Dashboard:
-				return <DashboardTab />
+				return <DashboardTab />;
 			case Tabs.Withdraw:
-				return <WithdrawTab />
+				return <WithdrawTab />;
 			case Tabs.Subscription:
-				return <SubscriptionTab />
+				return <SubscriptionTab />;
 			case Tabs.ProfileVisits:
-				return <ProfileVisitsTab />
+				return <ProfileVisitsTab />;
 			case Tabs.TrackingTips:
-				return <TrackingTipsTab />
+				return <TrackingTipsTab />;
 			case Tabs.PendingTips:
-				return <PendingTipsTab />
+				return <PendingTipsTab />;
 			case Tabs.HistoricalTips:
-				return <HistoricalTipsTab />
+				return <HistoricalTipsTab />;
 			case Tabs.Settings:
-				return <ProfileSettings />
+				return <ProfileSettings />;
 			case Tabs.Following:
-				return <FollowingTab />
+				return <FollowingTab />;
 			case Tabs.Followers:
-				return <FollowersTab />
+				return <FollowersTab />;
 			default:
-				return <></>
+				return <></>;
 		}
-	}, [currentPage])
-	const { width } = useWindowSize()
+	}, [currentPage]);
+	const { width } = useWindowSize();
 
 	if (userInfoLoading) {
-		return <div>Loading...</div>
+		return <div>Loading...</div>;
 	}
 
 	if (!userInfo) {
-		return <div>Error...</div>
+		return <div>Error...</div>;
 	}
 
 	return (
@@ -133,17 +133,17 @@ const UserDashboard: NextPage = () => {
 				</DisaperingContainer>
 			</div>
 		</>
-	)
-}
+	);
+};
 
 const Navigation: React.FC<{
-	userInfo: UserInfo
-	currentPage: Tabs
-	onPageChange: (page: Tabs) => void
+	userInfo: UserInfo;
+	currentPage: Tabs;
+	onPageChange: (page: Tabs) => void;
 }> = (props) => {
-	const { userInfo, currentPage, onPageChange } = props
-
-	const { width } = useWindowSize()
+	const { userInfo, currentPage, onPageChange } = props;
+	const { data: session } = useSession();
+	const { width } = useWindowSize();
 
 	return (
 		<div className={styles.navigation}>
@@ -179,7 +179,9 @@ const Navigation: React.FC<{
 						}`}
 					>
 						<Image
-							src={userInfo.image}
+							src={
+								session?.user?.image ?? "/images/profile-placeholder.png"
+							}
 							fill
 							alt=""
 						/>
@@ -234,18 +236,18 @@ const Navigation: React.FC<{
 				))}
 			</nav>
 		</div>
-	)
-}
+	);
+};
 
 const MenuItem: React.FC<{
-	page: Tabs
-	onNavigate: () => void
-	active: boolean
-	icon: string
-	activeIcon: string
-	counter?: number
+	page: Tabs;
+	onNavigate: () => void;
+	active: boolean;
+	icon: string;
+	activeIcon: string;
+	counter?: number;
 }> = (props) => {
-	const { active, onNavigate, page, icon, activeIcon, counter } = props
+	const { active, onNavigate, page, icon, activeIcon, counter } = props;
 
 	return (
 		<span
@@ -263,7 +265,7 @@ const MenuItem: React.FC<{
 			</div>
 			{counter && <span className={styles.counter}>{counter}</span>}
 		</span>
-	)
-}
+	);
+};
 
-export default UserDashboard
+export default UserDashboard;

@@ -39,7 +39,7 @@ const UserProfile: React.FC = () => {
 			<Profile
 				name={session.user.name}
 				id={1}
-				image="/images/profile-placeholder.png"
+				image={session?.user?.image ?? "/images/profile-placeholder.png"}
 			/>
 		</div>
 	);
@@ -244,8 +244,9 @@ const Profile: React.FC<ProfileProps> = (props) => {
 				<Image
 					src={image}
 					alt="profile"
-					width={32}
-					height={32}
+					// width={32}
+					// height={32}
+					fill
 				/>
 			</div>
 			<AnimatePresence initial={false}>
