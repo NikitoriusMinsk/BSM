@@ -3,17 +3,20 @@ import Head from "next/head"
 import styles from "../../styles/pages/Auth.module.css"
 import Image from "next/image"
 import TextField from "../../components/ui/TextField"
-import PasswordField from "../../components/ui/PasswordField"
 import SubmitButton from "../../components/ui/SubmitButton"
 import { useState } from "react"
 import Link from "next/link"
 import { trpc } from "src/utils/trpc"
 import { useRouter } from "next/router"
+import { AnimatePresence } from "framer-motion"
+import MessageModal from "@components/ui/MessageModal"
 
 const Forgot: NextPage = () => {
 	const router = useRouter()
 	const [submitForbidden, setSubmitForbidden] = useState(true)
 	const [submitted, setSubmitted] = useState(false)
+	const [errors, setErrors] = useState<any>()
+	const [internalError, setInternalError] = useState<string | boolean>(false)
 	const reset = trpc.auth.requestPasswordReset.useMutation()
 
 	const submitForgot = (e: React.FormEvent) => {
@@ -28,7 +31,21 @@ const Forgot: NextPage = () => {
 			.then(() => {
 				setSubmitted(true)
 			})
-			.catch((err) => alert(`Oops! Error\n${err}`))
+			.catch((err) => {
+				setErrors(
+					err.data.zodError?.fieldErrors ||
+						err.data.serverError?.errorCodes
+				)
+				if (err.data.httpStatus == 500) {
+					let errorTxt: string =
+						err.data.serverError?.error ||
+						err.data.serverError?.message ||
+						"Internal server error. Try again later."
+					if (errorTxt.toLocaleLowerCase() == "internal server error")
+						errorTxt += ". Try again later."
+					setInternalError(errorTxt)
+				}
+			})
 	}
 
 	return (
@@ -44,6 +61,18 @@ const Forgot: NextPage = () => {
 					href="/favicon.ico"
 				/>
 			</Head>
+			<AnimatePresence initial={false}>
+				{internalError && (
+					<MessageModal
+						title="Error"
+						close={() => setInternalError(false)}
+						closeOnClickOutside
+						containerStyle={{ minWidth: "30vw" }}
+					>
+						<p>{internalError}</p>
+					</MessageModal>
+				)}
+			</AnimatePresence>
 			<div className={styles.container}>
 				<div className={styles.header}>
 					<Link href={"/"}>
@@ -91,6 +120,8 @@ const Forgot: NextPage = () => {
 									type="email"
 									name="email"
 									placeholder="Email Address"
+									floatingPlaceholder
+									errorMessage={errors?.email || null}
 									onChange={(e) => {
 										if (e.target.validity.valid) {
 											e.target.value.length > 0 &&

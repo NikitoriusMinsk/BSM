@@ -1,8 +1,8 @@
-import { z } from "zod";
-import { publicProcedure, router } from "../trpc";
-import getTRPCError from "../utils/getTRPCError";
-import { authSchema, partySchema } from "../utils/DTOSchemas";
-import makeApiCall from "../utils/makeApiCall";
+import { z } from "zod"
+import { publicProcedure, router } from "../trpc"
+import getTRPCError from "../utils/getTRPCError"
+import { authSchema, partySchema } from "../utils/DTOSchemas"
+import makeApiCall from "../utils/makeApiCall"
 
 export const authRouter = router({
 	registerUser: publicProcedure
@@ -54,11 +54,11 @@ export const authRouter = router({
 				confirmedPassword,
 				indFirstName,
 				indLastName,
-			} = input;
+			} = input
 
-			const headers = new Headers();
-			headers.append("Content-Type", "application/json");
-			headers.append("Accept", "application/json");
+			const headers = new Headers()
+			headers.append("Content-Type", "application/json")
+			headers.append("Accept", "application/json")
 
 			const options: RequestInit = {
 				method: "POST",
@@ -72,9 +72,13 @@ export const authRouter = router({
 					indFirstName,
 					indLastName,
 				}),
-			};
+			}
 
-			return await makeApiCall("auth/unauthenticated/create", partySchema, options);
+			return await makeApiCall(
+				"auth/unauthenticated/create",
+				partySchema,
+				options
+			)
 		}),
 	authUser: publicProcedure
 		.input(
@@ -84,22 +88,26 @@ export const authRouter = router({
 			})
 		)
 		.query(async ({ ctx, input }) => {
-			const { password, username } = input;
+			const { password, username } = input
 
-			const headers = new Headers();
-			headers.append("Content-Type", "application/json");
-			headers.append("Accept", "application/json");
+			const headers = new Headers()
+			headers.append("Content-Type", "application/json")
+			headers.append("Accept", "application/json")
 
-			return await makeApiCall("auth/unauthenticated/authenticate", authSchema, {
-				method: "POST",
-				body: JSON.stringify({ password, username }),
-				headers,
-			});
+			return await makeApiCall(
+				"auth/unauthenticated/authenticate",
+				authSchema,
+				{
+					method: "POST",
+					body: JSON.stringify({ password, username }),
+					headers,
+				}
+			)
 		}),
 	requestPasswordReset: publicProcedure
-		.input(z.object({ email: z.string().email() }))
+		.input(z.object({ email: z.string().email("Invalid email") }))
 		.mutation(async ({ ctx, input }) => {
-			const { email } = input;
+			const { email } = input
 
 			return await makeApiCall(
 				`auth/unauthenticated/recovery-password/request?email=${email}`,
@@ -107,22 +115,39 @@ export const authRouter = router({
 				{
 					method: "POST",
 				}
-			);
+			)
 		}),
 	resetPassword: publicProcedure
 		.input(
-			z.object({
-				password: z.string(),
-				passwordConfirmation: z.string(),
-				code: z.string(),
-			})
+			z
+				.object({
+					password: z
+						.string()
+						.min(1, "Password is required")
+						.min(8, "Password must be at least 8 characters")
+						.max(250, "Password must be 250 characters max"),
+					passwordConfirmation: z
+						.string()
+						.min(1, "Confirmation is required")
+						.min(8, "Confirmation must be at least 8 characters")
+						.max(250, "Confirmation must be 250 characters max"),
+					code: z.string(),
+				})
+				.refine((data) => data.password === data.passwordConfirmation, {
+					path: ["password"],
+					message: "Passwords do not match",
+				})
+				.refine((data) => data.password === data.passwordConfirmation, {
+					path: ["passwordConfirmation"],
+					message: "Passwords do not match",
+				})
 		)
 		.mutation(async ({ ctx, input }) => {
-			const { code, password, passwordConfirmation } = input;
+			const { code, password, passwordConfirmation } = input
 
-			const headers = new Headers();
-			headers.append("Content-Type", "application/json");
-			headers.append("Accept", "application/json");
+			const headers = new Headers()
+			headers.append("Content-Type", "application/json")
+			headers.append("Accept", "application/json")
 
 			return await makeApiCall(
 				"auth/unauthenticated/recovery-password/confirmation",
@@ -130,8 +155,12 @@ export const authRouter = router({
 				{
 					method: "POST",
 					headers,
-					body: JSON.stringify({ password, passwordConfirmation, code }),
+					body: JSON.stringify({
+						password,
+						passwordConfirmation,
+						code,
+					}),
 				}
-			);
+			)
 		}),
-});
+})
