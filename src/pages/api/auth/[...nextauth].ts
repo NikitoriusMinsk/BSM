@@ -7,6 +7,9 @@ import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
 
 export const authOptions: NextAuthOptions = {
+	session: {
+		strategy: "jwt",
+	},
 	pages: {
 		signIn: "/sign-in",
 		newUser: "/sign-up",
@@ -35,15 +38,21 @@ export const authOptions: NextAuthOptions = {
 
 					return {
 						id: data.userId,
+						userId: data.userId,
+						partyId: data.partyId,
 						name: `${data.fistName} ${data.lastName}`,
 						email: data.email,
 						nickname: data.nickname,
-						token: data.accessToken,
-						refreshToken: data.refreshToken,
-						expiresAt: new Date().getTime() / 1000 + parseInt(data.expiresIn),
-						refreshExpiresAt:
-							new Date().getTime() / 1000 + parseInt(data.refreshExpiresIn),
 						image: data.avatarLink,
+						tokens: {
+							accessToken: data.accessToken,
+							accessTokenExpires:
+								new Date().getTime() + parseInt(data.expiresIn) * 1000,
+							refreshToken: data.refreshToken,
+							refreshTokenExpires:
+								new Date().getTime() +
+								parseInt(data.refreshExpiresIn) * 1000,
+						},
 					};
 				} catch (err) {
 					return null;
@@ -52,15 +61,52 @@ export const authOptions: NextAuthOptions = {
 		}),
 	],
 	callbacks: {
-		jwt: async ({ token, user }) => {
-			if (user) {
-				token.exp = user.expiresAt;
-				token.idToken = user.token;
-				token.refreshToken = user.refreshToken;
-				token.refreshExp = user.refreshExpiresAt;
+		jwt: async ({ token, user, trigger, session }) => {
+			if (user && (trigger === "signIn" || trigger === "signUp")) {
+				return {
+					accessToken: user.tokens.accessToken,
+					accessTokenExpires: user.tokens.accessTokenExpires,
+					refreshToken: user.tokens.refreshToken,
+					refreshTokenExpires: user.tokens.refreshTokenExpires,
+					user: {
+						email: user.email,
+						userId: user.userId,
+						partyId: user.partyId,
+						name: user.name,
+						nickname: user.nickname,
+						image: user.image,
+					},
+				};
+			}
+
+			if (trigger === "update") {
+				return {
+					...token,
+					user: { ...token.user, ...session },
+				};
 			}
 
 			return token;
+		},
+		session: async ({ session, token, trigger }) => {
+			if ((token && session.user) || trigger === "update") {
+				session.user = {
+					tokens: {
+						accessToken: token.accessToken,
+						accessTokenExpires: token.accessTokenExpires,
+						refreshToken: token.refreshToken,
+						refreshTokenExpires: token.refreshTokenExpires,
+					},
+					id: token.user.userId,
+					email: token.user.email,
+					userId: token.user.userId,
+					partyId: token.user.partyId,
+					name: token.user.name,
+					nickname: token.user.nickname,
+					image: token.user.image,
+				};
+			}
+			return session;
 		},
 	},
 	debug: process.env.NODE_ENV === "development",

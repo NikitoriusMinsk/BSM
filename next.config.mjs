@@ -26,6 +26,10 @@ export default defineNextConfig({
             {
                 protocol: 'https',
                 hostname: 'img.thesports.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 's3.betting-media.com'
             }
         ]
     },

@@ -10,6 +10,7 @@ const authSchema = z.object({
 	sessionState: z.string(),
 	scope: z.string(),
 	userId: z.string(),
+	partyId: z.number(),
 	nickname: z.string(),
 	email: z.string(),
 	fistName: z.string(),

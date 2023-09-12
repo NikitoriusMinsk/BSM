@@ -1,25 +1,70 @@
-import React, { useState } from "react"
-import styles from "@styles/components/dashboard/ProfileSettings.module.css"
-import Image from "next/image"
-import { trpc } from "src/utils/trpc"
-import { AnimatePresence, motion } from "framer-motion"
-import PasswordField from "@components/ui/PasswordField"
-import Dropdown from "@components/ui/Dropdown"
-import TextField from "@components/ui/TextField"
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
+import styles from "@styles/components/dashboard/ProfileSettings.module.css";
+import Image from "next/image";
+import { trpc } from "src/utils/trpc";
+import { AnimatePresence, motion } from "framer-motion";
+import PasswordField from "@components/ui/PasswordField";
+import Dropdown from "@components/ui/Dropdown";
+import TextField from "@components/ui/TextField";
+import { useSession } from "next-auth/react";
+import makeApiCall from "src/server/trpc/utils/makeApiCall";
+import { z } from "zod";
 
 const ProfileSettings: React.FC = () => {
-	const { data, isLoading } = trpc.user.getInfo.useQuery()
-	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false)
+	const { data, isLoading } = trpc.user.getInfo.useQuery();
+	const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 	const [isSportModalOpen, setIsSportModalOpen] = useState<
 		"sport" | "country" | "club" | false
-	>(false)
+	>(false);
+	const { data: session, update: updateSession } = useSession();
+	const { mutateAsync: updateEmail } = trpc.user.updateEmail.useMutation();
+	const { mutateAsync: updateNickname } = trpc.user.updateNickname.useMutation();
+	const { mutateAsync: updatePassword } = trpc.user.updatePassword.useMutation();
 
 	if (isLoading) {
-		return <div>Loading...</div>
+		return <div>Loading...</div>;
 	}
 
 	if (!data) {
-		return <div>Error...</div>
+		return <div>Error...</div>;
+	}
+
+	function handleAvatarUpload(e: ChangeEvent<HTMLInputElement>) {
+		if (!e.target.files) return;
+		const files = e.target.files;
+		const formData = new FormData();
+		files[0] && formData.append("file", files[0]);
+		fetch(
+			`https://bsm-backend.betting-media.com/bsm-backend/api/files/avatars/parties/${session?.user?.partyId}`,
+			{
+				method: "POST",
+				body: formData,
+			}
+		)
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((e) => console.log(e));
+	}
+
+	function handleUpdateEmail(value: string) {
+		updateEmail({ email: value }).then(() => updateSession({ email: value }));
+	}
+
+	function handleUpdateNickname(value: string) {
+		updateNickname({ nickname: value }).then(() =>
+			updateSession({ nickname: value })
+		);
+	}
+
+	async function handleUpdatePassword(
+		oldPassword: string,
+		newPassword: string,
+		newPasswordConfirm: string
+	) {
+		updatePassword({ oldPassword, newPassword, newPasswordConfirm })
+			.then(() => setIsPasswordModalOpen(false))
+			.catch((e) => alert(e));
 	}
 
 	return (
@@ -28,6 +73,7 @@ const ProfileSettings: React.FC = () => {
 				{isPasswordModalOpen && (
 					<PasswordModal
 						onClose={() => setIsPasswordModalOpen(false)}
+						onSave={handleUpdatePassword}
 					/>
 				)}
 				{isSportModalOpen === "sport" && (
@@ -48,12 +94,14 @@ const ProfileSettings: React.FC = () => {
 					<h2>Account Settings</h2>
 					<div className={styles.content}>
 						<div className={styles.imageInput}>
-							<div
-								className={`${styles.avatar} ${styles.verified}`}
-							>
+							<div className={`${styles.avatar} ${styles.verified}`}>
 								<Image
-									src="/images/profile-placeholder.png"
+									src={
+										session?.user?.image ??
+										"/images/profile-placeholder.png"
+									}
 									fill
+									style={{ objectFit: "cover" }}
 									alt=""
 								/>
 							</div>
@@ -67,35 +115,43 @@ const ProfileSettings: React.FC = () => {
 									/>
 								</div>
 								<span>Upload picture</span>
-								<input type={"file"} />
+								<input
+									type={"file"}
+									multiple={false}
+									onChange={handleAvatarUpload}
+								/>
 							</label>
 						</div>
-						<div className={styles.info}>
-							<ProfileField
-								label="Username"
-								defaultValue={data.nickname}
-							/>
-							<ProfileField
-								label="Full Name"
-								defaultValue={data.name.split(" ")[0]}
-							/>
-							<ProfileField
-								label="Email"
-								defaultValue={data.email}
-							/>
-							<div
-								className={styles.changePassword}
-								onClick={() => setIsPasswordModalOpen(true)}
-							>
-								<span>Change Password</span>
-								<Image
-									src="/icons/pencil.svg"
-									height={18}
-									width={18}
-									alt=""
+						{session?.user && (
+							<div className={styles.info}>
+								<ProfileField
+									label="Username"
+									defaultValue={session.user.nickname}
+									onSave={handleUpdateNickname}
 								/>
+								<ProfileField
+									label="Full Name"
+									defaultValue={session.user.name}
+								/>
+								<ProfileField
+									label="Email"
+									defaultValue={session.user.email}
+									onSave={handleUpdateEmail}
+								/>
+								<div
+									className={styles.changePassword}
+									onClick={() => setIsPasswordModalOpen(true)}
+								>
+									<span>Change Password</span>
+									<Image
+										src="/icons/pencil.svg"
+										height={18}
+										width={18}
+										alt=""
+									/>
+								</div>
 							</div>
-						</div>
+						)}
 					</div>
 				</div>
 				<div
@@ -184,14 +240,23 @@ const ProfileSettings: React.FC = () => {
 				</div>
 			</>
 		</>
-	)
-}
+	);
+};
 
-const ProfileField: React.FC<{ label: string; defaultValue?: string }> = (
-	props
-) => {
-	const { label, defaultValue } = props
-	const [editable, setEditable] = useState(false)
+const ProfileField: React.FC<{
+	label: string;
+	defaultValue?: string;
+	onSave?: (value: string) => void;
+}> = (props) => {
+	const { label, defaultValue, onSave } = props;
+	const [editable, setEditable] = useState(false);
+	const ref = useRef<HTMLInputElement>(null);
+
+	function handleSave() {
+		if (!ref.current?.value) return;
+		onSave && onSave(ref.current.value);
+		setEditable(false);
+	}
 
 	return (
 		<div className={styles.profileField}>
@@ -201,6 +266,7 @@ const ProfileField: React.FC<{ label: string; defaultValue?: string }> = (
 				readOnly={!editable}
 				placeholder={label}
 				defaultValue={defaultValue}
+				ref={ref}
 			/>
 			{!editable ? (
 				<div
@@ -217,14 +283,14 @@ const ProfileField: React.FC<{ label: string; defaultValue?: string }> = (
 			) : (
 				<button
 					className={styles.icon}
-					onClick={() => setEditable(false)}
+					onClick={handleSave}
 				>
 					Save
 				</button>
 			)}
 		</div>
-	)
-}
+	);
+};
 
 const ModalVariants = {
 	open: {
@@ -241,10 +307,31 @@ const ModalVariants = {
 			ease: "easeInOut",
 		},
 	},
-}
+};
 
-const PasswordModal: React.FC<{ onClose: () => void }> = (props) => {
-	const { onClose } = props
+const PasswordModal: React.FC<{
+	onClose: () => void;
+	onSave?: (
+		oldPassword: string,
+		newPassword: string,
+		newPasswordConfirm: string
+	) => void;
+}> = (props) => {
+	const { onClose, onSave } = props;
+
+	function handleSubmit(e: React.FormEvent) {
+		e.preventDefault();
+		const target = e.target as typeof e.target & {
+			new: { value: string };
+			newConfirm: { value: string };
+			old: { value: string };
+		};
+		const newPassword = target.new.value;
+		const newPasswordConfirmation = target.newConfirm.value;
+		const oldPassword = target.old.value;
+
+		onSave && onSave(oldPassword, newPassword, newPasswordConfirmation);
+	}
 
 	return (
 		<motion.div
@@ -254,7 +341,10 @@ const PasswordModal: React.FC<{ onClose: () => void }> = (props) => {
 			animate="open"
 			exit="closed"
 		>
-			<div className={styles.modal}>
+			<form
+				className={styles.modal}
+				onSubmit={handleSubmit}
+			>
 				<div className={styles.header}>
 					<span>Change Password</span>
 					<div
@@ -270,27 +360,35 @@ const PasswordModal: React.FC<{ onClose: () => void }> = (props) => {
 					</div>
 				</div>
 				<div className={styles.content}>
-					<PasswordField placeholder="Old Password" />
-					<PasswordField placeholder="New Password" />
-					<PasswordField placeholder="Repeat Password" />
+					<PasswordField
+						name="old"
+						placeholder="Old Password"
+					/>
+					<PasswordField
+						name="new"
+						placeholder="New Password"
+					/>
+					<PasswordField
+						name="newConfirm"
+						placeholder="Repeat Password"
+					/>
 				</div>
-				<button>Save new password</button>
-			</div>
+				<button type="submit">Save new password</button>
+			</form>
 		</motion.div>
-	)
-}
+	);
+};
 
 const SportModal: React.FC<{ onClose: () => void }> = (props) => {
-	const { onClose } = props
-	const { data: sports, isLoading: sportsLoading } =
-		trpc.filters.getSports.useQuery()
+	const { onClose } = props;
+	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
 
 	if (sportsLoading) {
-		return <></>
+		return <></>;
 	}
 
 	if (!sports) {
-		return <></>
+		return <></>;
 	}
 
 	return (
@@ -348,20 +446,20 @@ const SportModal: React.FC<{ onClose: () => void }> = (props) => {
 				<button>Save</button>
 			</div>
 		</motion.div>
-	)
-}
+	);
+};
 
 const ClubModal: React.FC<{ onClose: () => void }> = (props) => {
-	const { onClose } = props
+	const { onClose } = props;
 	const { data: clubs, isLoading: clubsLoading } =
-		trpc.filters.getSportClubs.useQuery()
+		trpc.filters.getSportClubs.useQuery();
 
 	if (clubsLoading) {
-		return <></>
+		return <></>;
 	}
 
 	if (!clubs) {
-		return <></>
+		return <></>;
 	}
 
 	return (
@@ -419,20 +517,20 @@ const ClubModal: React.FC<{ onClose: () => void }> = (props) => {
 				<button>Save</button>
 			</div>
 		</motion.div>
-	)
-}
+	);
+};
 
 const CountryModal: React.FC<{ onClose: () => void }> = (props) => {
-	const { onClose } = props
+	const { onClose } = props;
 	const { data: countries, isLoading: countriesLoading } =
-		trpc.filters.getCountries.useQuery()
+		trpc.filters.getCountries.useQuery();
 
 	if (countriesLoading) {
-		return <></>
+		return <></>;
 	}
 
 	if (!countries) {
-		return <></>
+		return <></>;
 	}
 
 	return (
@@ -490,7 +588,7 @@ const CountryModal: React.FC<{ onClose: () => void }> = (props) => {
 				<button>Save</button>
 			</div>
 		</motion.div>
-	)
-}
+	);
+};
 
-export default ProfileSettings
+export default ProfileSettings;

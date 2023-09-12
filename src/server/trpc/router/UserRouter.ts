@@ -3,6 +3,8 @@ import { z } from "zod";
 import { TransactionStatus } from "src/types/transactionStatus";
 import Fuse from "fuse.js";
 import { protectedProcedure, router } from "../trpc";
+import makeApiCall from "../utils/makeApiCall";
+import { TRPCError } from "@trpc/server";
 
 // THIS IS A TEMPORARY FUNCTION FOR GENERATING DATES
 function getOffsetDate(days: number, months: number, years: number) {
@@ -1416,4 +1418,76 @@ export const userRouter = router({
 	getNotifications: protectedProcedure.query(async ({ ctx, input }) => {
 		return UserNotifications;
 	}),
+	updateEmail: protectedProcedure
+		.input(z.object({ email: z.string().email() }))
+		.mutation(async ({ ctx, input }) => {
+			const { email } = input;
+			const { session } = ctx;
+
+			const headers = new Headers();
+			headers.append("Content-Type", "application/json");
+			headers.append("Accept", "application/json");
+
+			return await makeApiCall(
+				`parties/${session.user.partyId}/email`,
+				z.object({}),
+				{
+					method: "PATCH",
+					headers,
+					body: email,
+				}
+			);
+		}),
+	updateNickname: protectedProcedure
+		.input(z.object({ nickname: z.string() }))
+		.mutation(async ({ ctx, input }) => {
+			const { nickname } = input;
+			const { session } = ctx;
+
+			const headers = new Headers();
+			headers.append("Content-Type", "application/json");
+			headers.append("Accept", "application/json");
+
+			return await makeApiCall(
+				`parties/${session.user.partyId}/nickname`,
+				z.object({}),
+				{
+					method: "PATCH",
+					headers,
+					body: nickname,
+				}
+			);
+		}),
+	updatePassword: protectedProcedure
+		.input(
+			z.object({
+				oldPassword: z.string(),
+				newPassword: z.string(),
+				newPasswordConfirm: z.string(),
+			})
+		)
+		.mutation(async ({ ctx, input }) => {
+			const { newPassword, newPasswordConfirm, oldPassword } = input;
+			const { session } = ctx;
+
+			if (newPassword !== newPasswordConfirm)
+				throw new TRPCError({
+					code: "BAD_REQUEST",
+					message: "passwords dont match",
+				});
+
+			const headers = new Headers();
+			headers.append("Content-Type", "application/json");
+			headers.append("Accept", "application/json");
+
+			return await makeApiCall(
+				`parties/${session.user.partyId}/password`,
+				z.object({}),
+				{
+					method: "PATCH",
+					headers,
+					body: JSON.stringify({ oldPassword, newPassword }),
+				}
+			);
+		}),
 });
