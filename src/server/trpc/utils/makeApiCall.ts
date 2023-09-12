@@ -1,25 +1,23 @@
-import { env } from "src/env/server.mjs"
-import { z } from "zod"
-import getTRPCError from "./getTRPCError"
+import { env } from "src/env/server.mjs";
+import { z } from "zod";
+import getTRPCError from "./getTRPCError";
 
 export default async function makeApiCall<O extends object>(
 	path: string,
 	schema: z.Schema<O>,
 	options?: RequestInit
 ) {
-	const result = await fetch(`${env.API_URL}/${path}`, options)
+	const result = await fetch(`${env.API_URL}/${path}`, options);
 
 	if (result.ok) {
-		try {
-			const response = await result.json()
+		if (result.headers.get("Content-Length") === "0") return schema.parse({});
 
-			const parsedObject = schema.parse(response)
+		const response = await result.json();
 
-			return parsedObject
-		} catch {
-			if (result.status == 200) return {}
-		}
+		const parsedObject = schema.parse(response);
+
+		return parsedObject;
 	} else {
-		throw await getTRPCError(result)
+		throw await getTRPCError(result);
 	}
 }

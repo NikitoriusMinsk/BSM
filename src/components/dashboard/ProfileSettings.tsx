@@ -41,8 +41,10 @@ const ProfileSettings: React.FC = () => {
 				body: formData,
 			}
 		)
-			.then((res) => {
-				console.log(res);
+			.then(async (res) => {
+				const url = await res.json();
+
+				updateSession({ image: url });
 			})
 			.catch((e) => console.log(e));
 	}
@@ -57,7 +59,7 @@ const ProfileSettings: React.FC = () => {
 		);
 	}
 
-	async function handleUpdatePassword(
+	function handleUpdatePassword(
 		oldPassword: string,
 		newPassword: string,
 		newPasswordConfirm: string
