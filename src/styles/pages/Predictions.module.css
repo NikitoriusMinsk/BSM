@@ -161,6 +161,10 @@
     padding: 0 135px 50px 60px;
 }
 
+.tipsSlider .slide>div {
+    background: #fff;
+}
+
 /* Sports Slider */
 
 .sportsSlider {

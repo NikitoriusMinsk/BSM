@@ -6,7 +6,7 @@
 }
 
 .content {
-    margin-top: 113px;
+    margin-top: 104px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     row-gap: 40px;
