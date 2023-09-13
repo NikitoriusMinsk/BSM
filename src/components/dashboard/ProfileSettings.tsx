@@ -48,14 +48,14 @@ const ProfileSettings: React.FC = () => {
 			.catch((e) => console.log(e));
 	}
 
-	function handleUpdateEmail(value: string) {
-		updateEmail({ email: value }).then(() => updateSession({ email: value }));
+	async function handleUpdateEmail(value: string) {
+		await updateEmail({ email: value });
+		updateSession({ email: value });
 	}
 
-	function handleUpdateNickname(value: string) {
-		updateNickname({ nickname: value }).then(() =>
-			updateSession({ nickname: value })
-		);
+	async function handleUpdateNickname(value: string) {
+		await updateNickname({ nickname: value });
+		updateSession({ nickname: value });
 	}
 
 	function handleUpdatePassword(
@@ -129,15 +129,18 @@ const ProfileSettings: React.FC = () => {
 									label="Username"
 									defaultValue={session.user.nickname}
 									onSave={handleUpdateNickname}
+									type={"text"}
 								/>
 								<ProfileField
 									label="Full Name"
 									defaultValue={session.user.name}
+									type={"text"}
 								/>
 								<ProfileField
 									label="Email"
 									defaultValue={session.user.email}
 									onSave={handleUpdateEmail}
+									type={"email"}
 								/>
 								<div
 									className={styles.changePassword}
@@ -247,32 +250,43 @@ const ProfileSettings: React.FC = () => {
 const ProfileField: React.FC<{
 	label: string;
 	defaultValue?: string;
-	onSave?: (value: string) => void;
+	onSave?: (value: string) => Promise<void>;
+	type?: HTMLInputElement["type"];
 }> = (props) => {
-	const { label, defaultValue, onSave } = props;
+	const { label, defaultValue, onSave, type } = props;
 	const [editable, setEditable] = useState(false);
 	const ref = useRef<HTMLInputElement>(null);
+	const previousValue = useRef<string | undefined>(defaultValue);
+	const [error, setError] = useState<string>();
 
-	function handleSave() {
+	async function handleSave() {
 		if (!ref.current?.value) return;
-		onSave && onSave(ref.current.value);
-		setEditable(false);
+		onSave &&
+			onSave(ref.current.value)
+				.then(() => setEditable(false))
+				.catch((e) => {
+					setError(e.message);
+				});
 	}
 
 	return (
 		<div className={styles.profileField}>
 			<span className={styles.label}>{label}</span>
 			<input
-				type={"text"}
+				type={type}
 				readOnly={!editable}
 				placeholder={label}
 				defaultValue={defaultValue}
 				ref={ref}
 			/>
+			{error && <span className={styles.error}>{error}</span>}
 			{!editable ? (
 				<div
 					className={styles.icon}
-					onClick={() => setEditable(true)}
+					onClick={() => {
+						setEditable(true);
+						previousValue.current = ref.current?.value;
+					}}
 				>
 					<Image
 						src="/icons/pencil.svg"

@@ -226,11 +226,17 @@
     position: relative;
     width: calc(50% - 20px);
     display: flex;
-    align-items: center;
+    flex-direction: column;
+}
+
+.profileField .error {
+    color: red;
+    padding-left: 16px;
 }
 
 .profileField .label {
     position: absolute;
+    top: 18px;
     left: 16px;
     font-family: 'Samsung Sans';
     font-style: normal;
@@ -242,6 +248,7 @@
 
 .profileField .icon {
     position: absolute;
+    top: 18px;
     right: 16px;
     cursor: pointer;
 }
@@ -260,9 +267,11 @@
     line-height: 14px;
     color: #FFFFFF;
     border: none;
+    top: 10px;
 }
 
-.profileField input[type="text"] {
+.profileField input[type="text"],
+.profileField input[type="email"] {
     width: 100%;
     padding: 16px 50px 16px 80px;
     font-family: 'Samsung Sans';

@@ -1419,7 +1419,7 @@ export const userRouter = router({
 		return UserNotifications;
 	}),
 	updateEmail: protectedProcedure
-		.input(z.object({ email: z.string().email() }))
+		.input(z.object({ email: z.string().email({ message: "Invalid Email" }) }))
 		.mutation(async ({ ctx, input }) => {
 			const { email } = input;
 			const { session } = ctx;
