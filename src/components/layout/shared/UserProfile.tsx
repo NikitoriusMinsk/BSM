@@ -244,9 +244,8 @@ const Profile: React.FC<ProfileProps> = (props) => {
 				<Image
 					src={image}
 					alt="profile"
-					// width={32}
-					// height={32}
 					fill
+					style={{ objectFit: "cover" }}
 				/>
 			</div>
 			<AnimatePresence initial={false}>

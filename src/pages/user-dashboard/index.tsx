@@ -184,6 +184,7 @@ const Navigation: React.FC<{
 							}
 							fill
 							alt=""
+							style={{ objectFit: "cover" }}
 						/>
 					</div>
 					<div className={styles.details}>
