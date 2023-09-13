@@ -9,6 +9,7 @@ import TextField from "@components/ui/TextField";
 import { useSession } from "next-auth/react";
 import makeApiCall from "src/server/trpc/utils/makeApiCall";
 import { z } from "zod";
+import MessageModal from "@components/ui/MessageModal";
 
 const ProfileSettings: React.FC = () => {
 	const { data, isLoading } = trpc.user.getInfo.useQuery();
@@ -20,6 +21,7 @@ const ProfileSettings: React.FC = () => {
 	const { mutateAsync: updateEmail } = trpc.user.updateEmail.useMutation();
 	const { mutateAsync: updateNickname } = trpc.user.updateNickname.useMutation();
 	const { mutateAsync: updatePassword } = trpc.user.updatePassword.useMutation();
+	const [error, setError] = useState<string>();
 
 	if (isLoading) {
 		return <div>Loading...</div>;
@@ -65,7 +67,7 @@ const ProfileSettings: React.FC = () => {
 	) {
 		updatePassword({ oldPassword, newPassword, newPasswordConfirm })
 			.then(() => setIsPasswordModalOpen(false))
-			.catch((e) => alert(e));
+			.catch((e) => setError(e.message));
 	}
 
 	return (
@@ -85,6 +87,14 @@ const ProfileSettings: React.FC = () => {
 				)}
 				{isSportModalOpen === "club" && (
 					<ClubModal onClose={() => setIsSportModalOpen(false)} />
+				)}
+				{error && (
+					<MessageModal
+						title="Error!"
+						close={() => setError(undefined)}
+					>
+						{error}
+					</MessageModal>
 				)}
 			</AnimatePresence>
 			<>
@@ -263,7 +273,10 @@ const ProfileField: React.FC<{
 		if (!ref.current?.value) return;
 		onSave &&
 			onSave(ref.current.value)
-				.then(() => setEditable(false))
+				.then(() => {
+					setEditable(false);
+					setError(undefined);
+				})
 				.catch((e) => {
 					setError(e.message);
 				});
@@ -333,9 +346,37 @@ const PasswordModal: React.FC<{
 	) => void;
 }> = (props) => {
 	const { onClose, onSave } = props;
+	const [passwordCheck, setPasswordCheck] = useState([false, false, false, false]);
+
+	function checkPassword(e: React.ChangeEvent<HTMLInputElement>) {
+		setPasswordCheck([
+			e.target.value?.length >= 8,
+
+			e.target.value
+				?.split("")
+				.filter(
+					(letter) =>
+						isNaN(parseInt(letter)) &&
+						letter.toLowerCase() != letter.toUpperCase() &&
+						letter == letter.toUpperCase()
+				).length > 0,
+
+			e.target.value?.split("").filter((letter) => !isNaN(parseInt(letter)))
+				.length > 0,
+
+			e.target.value
+				?.split("")
+				.filter(
+					(letter) =>
+						isNaN(parseInt(letter)) &&
+						letter.toLowerCase() == letter.toUpperCase()
+				).length > 0,
+		]);
+	}
 
 	function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
+
 		const target = e.target as typeof e.target & {
 			new: { value: string };
 			newConfirm: { value: string };
@@ -386,7 +427,43 @@ const PasswordModal: React.FC<{
 					<PasswordField
 						name="newConfirm"
 						placeholder="Repeat Password"
+						onChange={checkPassword}
 					/>
+				</div>
+				<div className={styles.passwordDescription}>
+					<span className={styles.passwordTitle}>Your new password must:</span>
+					<span
+						className={`
+                                ${styles.checkOption} 
+                                ${passwordCheck[0] && styles.active}
+                            `}
+					>
+						Be at least 8 characters
+					</span>
+					<span
+						className={`
+                                ${styles.checkOption} 
+                                ${passwordCheck[1] && styles.active}
+                            `}
+					>
+						Include at least one uppercase letter
+					</span>
+					<span
+						className={`
+                                ${styles.checkOption} 
+                                ${passwordCheck[2] && styles.active}
+                            `}
+					>
+						Include at least one number
+					</span>
+					<span
+						className={`
+                                ${styles.checkOption} 
+                                ${passwordCheck[3] && styles.active}
+                            `}
+					>
+						Include at least one symbol
+					</span>
 				</div>
 				<button type="submit">Save new password</button>
 			</form>

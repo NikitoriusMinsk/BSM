@@ -337,6 +337,10 @@
     gap: 20px;
 }
 
+.modalContainer .modal .content div:has(input) {
+    width: 100%;
+}
+
 .modalContainer .modal button {
     width: fit-content;
     align-self: center;
@@ -376,6 +380,66 @@
     font-size: 16px;
     line-height: 24px;
     color: #1A1C21;
+    cursor: pointer;
+}
+
+.passwordDescription {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.passwordTitle {
+    font-family: 'Samsung Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #1A1C21;
+}
+
+.checkOption {
+    font: normal normal normal 15px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+    gap: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.checkOption::before {
+    content: "";
+    border: 1px solid #4B445333;
+    border-radius: 100px;
+    width: 18px;
+    height: 18px;
+}
+
+.checkOption.active {
+    color: #2CD114;
+}
+
+.checkOption.active::before {
+    background-image: url(/images/login/check.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: 2px solid #2CD114;
+    width: 16px;
+    height: 16px;
+}
+
+.checkText {
+    font: normal normal normal 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+    margin-bottom: 32px;
+}
+
+.checkText a {
+    text-decoration: underline;
+    font: normal normal normal 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #7F3FFC;
     cursor: pointer;
 }
 

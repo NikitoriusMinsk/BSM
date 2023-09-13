@@ -265,6 +265,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
 										alt="profile"
 										width={52}
 										height={52}
+										style={{ objectFit: "cover" }}
 									/>
 								</div>
 								<div className={styles.userInfo}>
