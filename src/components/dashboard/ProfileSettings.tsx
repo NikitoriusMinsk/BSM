@@ -42,8 +42,7 @@ const ProfileSettings: React.FC = () => {
 			}
 		)
 			.then(async (res) => {
-				const url = await res.json();
-
+				const url = await res.text();
 				updateSession({ image: url });
 			})
 			.catch((e) => console.log(e));
