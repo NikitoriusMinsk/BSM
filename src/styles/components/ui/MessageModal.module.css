@@ -6,7 +6,6 @@
     left: 0px;
     z-index: 999;
     display: flex;
-    backdrop-filter: brightness(.5);
 }
 
 .container {
