@@ -58,6 +58,10 @@
     border-radius: 8px;
 }
 
+#tableContainer th:nth-child(2) {
+    text-align: left;
+}
+
 #tips {
     grid-row-start: 4;
     grid-column-start: 1;
