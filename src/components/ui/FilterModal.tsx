@@ -1,4 +1,4 @@
-import React, { Component, useReducer, useState } from "react";
+import React, { Component, useEffect, useReducer, useState } from "react";
 import { inferArrayElementType } from "src/utils/inferArrayElementType";
 import styles from "@styles/components/ui/FilterModal.module.css";
 import { HtmlPortalNode } from "react-reverse-portal";
@@ -147,6 +147,16 @@ const FilterModal: React.FC<FilterModalProps> = (props) => {
 				);
 		}
 	}
+
+	useEffect(() => {
+		try {
+			if (isOpen) {
+				document.body.style.overflow = "hidden"
+			} else {
+				document.body.style.overflow = ""
+			}
+		} catch {}
+	}, [isOpen])
 
 	return (
 		<>
