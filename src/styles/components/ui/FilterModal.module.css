@@ -16,6 +16,7 @@
     color: #1A1C21;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .modal {

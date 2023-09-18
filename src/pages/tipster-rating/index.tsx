@@ -243,7 +243,7 @@ const TipsterRating: NextPage = () => {
 							placeholder="Search for tipsters"
 							icon="/icons/search.svg"
 						/>
-						{width > 1024 ? (
+						{width > 1200 ? (
 							<div className={styles.dropdowns}>
 								<Dropdown
 									items={SportItems}

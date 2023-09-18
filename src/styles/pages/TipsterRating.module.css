@@ -36,6 +36,7 @@
     flex-direction: row;
     justify-content: space-between;
     height: 42px;
+    gap: 20px;
 }
 
 #tableContainer .controls .dropdowns {
