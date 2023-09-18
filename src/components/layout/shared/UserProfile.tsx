@@ -7,6 +7,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { UserNotifications } from "src/types/queryTypes";
 import { trpc } from "src/utils/trpc";
 import Moment from "react-moment";
+import { DashboardTabs } from "src/pages/user-dashboard";
 
 const UserProfile: React.FC = () => {
 	const { data: session } = useSession();
@@ -275,7 +276,10 @@ const Profile: React.FC<ProfileProps> = (props) => {
 							</div>
 						</div>
 						<div className={styles.menuSection}>
-							<div className={styles.menuItem}>
+							<Link
+								className={styles.menuItem}
+								href={`/user-dashboard#${DashboardTabs.Settings}`}
+							>
 								<Image
 									src="/icons/profile/edit-profile.svg"
 									alt="profile"
@@ -283,8 +287,11 @@ const Profile: React.FC<ProfileProps> = (props) => {
 									height={24}
 								/>
 								<span>Edit Profile</span>
-							</div>
-							<div className={styles.menuItem}>
+							</Link>
+							<Link
+								className={styles.menuItem}
+								href={`/user-dashboard#${DashboardTabs.Followers}`}
+							>
 								<Image
 									src="/icons/profile/followers.svg"
 									alt="profile"
@@ -292,9 +299,9 @@ const Profile: React.FC<ProfileProps> = (props) => {
 									height={24}
 								/>
 								<span>Followers</span>
-							</div>
+							</Link>
 							<Link
-								href="/user-dashboard"
+								href={`/user-dashboard#${DashboardTabs.Dashboard}`}
 								className={styles.menuItem}
 							>
 								<Image
@@ -305,7 +312,10 @@ const Profile: React.FC<ProfileProps> = (props) => {
 								/>
 								<span>My Dashboard</span>
 							</Link>
-							<div className={styles.menuItem}>
+							<Link
+								className={styles.menuItem}
+								href={`/user-dashboard#${DashboardTabs.TrackingTips}`}
+							>
 								<Image
 									src="/icons/profile/tips.svg"
 									alt="profile"
@@ -313,7 +323,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
 									height={24}
 								/>
 								<span>Tracking Tips</span>
-							</div>
+							</Link>
 							<div
 								className={styles.menuItem}
 								onClick={() => signOut()}
