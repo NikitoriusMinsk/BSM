@@ -23,7 +23,6 @@ import { LastSportContext } from "../_app";
 import moment from "moment-timezone";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "@/server/trpc/root";
-import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
@@ -406,7 +405,7 @@ const MostTips: React.FC<{ tips: MostTips }> = (props) => {
 export const getStaticPaths: GetStaticPaths = async () => {
 	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: createInnerTRPCContext({ session: null }),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 
@@ -427,7 +426,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
 	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: createInnerTRPCContext({ session: null }),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 

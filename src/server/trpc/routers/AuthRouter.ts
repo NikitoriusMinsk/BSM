@@ -1,5 +1,4 @@
 import { z } from "zod";
-import getTRPCError from "../utils/getTRPCError";
 import { authSchema, partySchema } from "../utils/DTOSchemas";
 import makeApiCall from "../utils/makeApiCall";
 import { createTRPCRouter, publicProcedure } from "../trpc";

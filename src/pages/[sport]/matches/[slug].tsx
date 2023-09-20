@@ -25,7 +25,7 @@ import superjson from "superjson";
 import { matchSchema } from "src/server/trpc/utils/DTOSchemas";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { AppRouter, appRouter } from "@/server/trpc/root";
-import { createInnerTRPCContext } from "@/server/trpc/trpc";
+
 import { inferRouterOutputs } from "@trpc/server";
 
 const pages = [
@@ -278,7 +278,7 @@ const MatchSummary: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 export const getStaticPaths: GetStaticPaths = async (context) => {
 	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: createInnerTRPCContext({ session: null }),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 
@@ -311,7 +311,7 @@ export const getStaticProps: GetStaticProps<{
 
 	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: createInnerTRPCContext({ session: null }),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 

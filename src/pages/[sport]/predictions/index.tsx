@@ -23,7 +23,6 @@ import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter"
 import { LastSportContext } from "src/pages/_app";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "@/server/trpc/root";
-import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
@@ -449,7 +448,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
 	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: createInnerTRPCContext({ session: null }),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 

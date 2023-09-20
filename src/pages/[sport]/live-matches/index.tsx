@@ -13,8 +13,9 @@ import usePortal from "src/utils/usePortal";
 import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
 import { LastSportContext } from "src/pages/_app";
 import { createServerSideHelpers } from "@trpc/react-query/server";
-import { createInnerTRPCContext } from "@/server/trpc/trpc";
+
 import { appRouter } from "@/server/trpc/root";
+import moment from "moment-timezone";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
@@ -22,7 +23,11 @@ const OutPortal = dynamic(async () => (await import("react-reverse-portal")).Out
 const LiveMatches: NextPage = () => {
 	const sport = useContext(LastSportContext);
 	const { data: filters, isLoading: filtersLoading } = trpc.filters.getLeagues.useQuery(
-		{ page: 0, size: 20, sportId: sport.id }
+		{
+			page: 0,
+			size: 20,
+			sportId: sport.id,
+		}
 	);
 	const { data: matches, isLoading: matchesLoading } =
 		trpc.matches.getAllByLeague.useQuery({
@@ -30,6 +35,7 @@ const LiveMatches: NextPage = () => {
 			page: 1,
 			size: 20,
 			sportId: sport.id,
+			date: moment(new Date()).format("YYYY-MM-DD"),
 		});
 	const portalNode = usePortal();
 
@@ -157,7 +163,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
 	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: createInnerTRPCContext({ session: null }),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 
@@ -165,8 +171,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	await ssg.matches.getAllByLeague.prefetch({
 		leagueId: [],
 		page: 1,
-		size: 20,
+		size: 5,
 		sportId: 1,
+		date: moment(new Date()).format("YYYY-MM-DD"),
 	});
 
 	return {

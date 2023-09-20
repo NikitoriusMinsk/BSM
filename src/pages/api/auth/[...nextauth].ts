@@ -4,7 +4,6 @@ import { env } from "@/env.mjs";
 import superjson from "superjson";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "@/server/trpc/root";
-import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 export const authOptions: NextAuthOptions = {
 	session: {
@@ -26,7 +25,7 @@ export const authOptions: NextAuthOptions = {
 
 				const ssg = createServerSideHelpers({
 					router: appRouter,
-					ctx: createInnerTRPCContext({ session: null }),
+					ctx: { session: null },
 					transformer: superjson,
 				});
 

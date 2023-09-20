@@ -11,7 +11,6 @@ import ArrayToChunks from "src/utils/ArrayToChunks";
 import useWindowSize from "src/utils/useWindowSize";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "@/server/trpc/root";
-import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 const Bookmakers: NextPage = () => {
 	const { data: bestBookmakers, isLoading: bestBookmakersLoading } =
@@ -486,7 +485,7 @@ const TextBlock: React.FC = () => {
 export const getStaticProps: GetStaticProps = async (context) => {
 	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: createInnerTRPCContext({ session: null }),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 

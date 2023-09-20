@@ -26,7 +26,6 @@ import superjson from "superjson";
 import { leagueSchema } from "src/server/trpc/utils/DTOSchemas";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "@/server/trpc/root";
-import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 const pages = [
 	{
@@ -219,7 +218,7 @@ const LeagueSummary: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = 
 export const getStaticPaths: GetStaticPaths = async (context) => {
 	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: createInnerTRPCContext({ session: null }),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 
@@ -252,7 +251,7 @@ export const getStaticProps: GetStaticProps<{
 
 	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: createInnerTRPCContext({ session: null }),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 

@@ -23,7 +23,6 @@ import TipsterInfo from "@components/ui/TipsterInfo";
 import ArrayToChunks from "src/utils/ArrayToChunks";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { appRouter } from "@/server/trpc/root";
-import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 const InPortal = dynamic(async () => (await import("react-reverse-portal")).InPortal, {
 	ssr: false,
@@ -737,7 +736,7 @@ const CompetitionParticipant: React.FC<
 export const getStaticProps: GetStaticProps = async (context) => {
 	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: createInnerTRPCContext({ session: null }),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 
