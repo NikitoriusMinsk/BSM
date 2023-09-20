@@ -8,7 +8,6 @@ import Dropdown from "@components/ui/Dropdown";
 import { useSession } from "next-auth/react";
 import Settings from "@components/layout/shared/Settings";
 import MenuLink from "@components/layout/shared/MenuLink";
-import "moment-timezone";
 import Moment from "react-moment";
 import dynamic from "next/dynamic";
 import { trpc } from "src/utils/trpc";
@@ -27,17 +26,18 @@ const TipsterHeader: React.FC = () => {
 	const { width } = useWindowSize();
 
 	return (
-        <div className={styles.container}>
-			<Link href={"/"} className={styles.logo}>
-
-                <Image
-                    src="/logo.svg"
-                    height={32}
-                    width={188}
-                    alt=""
-                />
-
-            </Link>
+		<div className={styles.container}>
+			<Link
+				href={"/"}
+				className={styles.logo}
+			>
+				<Image
+					src="/logo.svg"
+					height={32}
+					width={188}
+					alt=""
+				/>
+			</Link>
 			<div className={styles.links}>
 				{links.map(({ href, label }) => (
 					<MenuLink
@@ -82,7 +82,7 @@ const TipsterHeader: React.FC = () => {
 				</div>
 			</nav>
 		</div>
-    );
+	);
 };
 
 export default TipsterHeader;

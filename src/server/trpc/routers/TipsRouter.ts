@@ -10,7 +10,7 @@ const MostTipsTemp = [
 			{ name: "Manchester City", image: "/images/team-2-placeholder.svg" },
 		],
 		tipAmount: 21,
-		date: "23:20 2020.01.01",
+		date: "2020.01.01",
 		status: MatchStatus.upcoming,
 	},
 	{
@@ -42,7 +42,7 @@ const MostTipsTemp = [
 			{ name: "Manchester City", image: "/images/team-2-placeholder.svg" },
 		],
 		tipAmount: 21,
-		date: "23:20 2020.01.01",
+		date: "2020.01.01",
 		status: MatchStatus.upcoming,
 	},
 	{
@@ -74,7 +74,7 @@ const MostTipsTemp = [
 			{ name: "Manchester City", image: "/images/team-2-placeholder.svg" },
 		],
 		tipAmount: 21,
-		date: "23:20 2020.01.01",
+		date: "2020.01.01",
 		status: MatchStatus.upcoming,
 	},
 	{
@@ -106,7 +106,7 @@ const MostTipsTemp = [
 			{ name: "Manchester City", image: "/images/team-2-placeholder.svg" },
 		],
 		tipAmount: 21,
-		date: "23:20 2020.01.01",
+		date: "2020.01.01",
 		status: MatchStatus.upcoming,
 	},
 	{

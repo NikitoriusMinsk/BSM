@@ -85,7 +85,7 @@ const MatchesTemp = [
 			},
 		],
 		id: 1,
-		date: "2020.01.01 12:00",
+		date: "2020.01.01",
 		status: MatchStatus.live,
 		league: "Premier League",
 		sport: {
@@ -103,7 +103,7 @@ const MatchesTemp = [
 			},
 		],
 		id: 2,
-		date: "2020.01.01 17:22",
+		date: "2020.01.01",
 		status: MatchStatus.upcoming,
 		league: "England League",
 		sport: {
@@ -121,7 +121,7 @@ const MatchesTemp = [
 			},
 		],
 		id: 3,
-		date: "2020.01.01 13:00",
+		date: "2020.01.01",
 		status: MatchStatus.finished,
 		duration: "17:32",
 		league: "Premier League",
@@ -156,7 +156,7 @@ const MatchesByLeague = [
 					},
 				],
 				id: 1,
-				date: "2020.01.01 12:00",
+				date: "2020.01.01",
 				status: MatchStatus.finished,
 				odds: {
 					home: 0.34,
@@ -179,7 +179,7 @@ const MatchesByLeague = [
 					},
 				],
 				id: 1,
-				date: "2020.01.01 12:00",
+				date: "2020.01.01",
 				status: MatchStatus.live,
 				odds: {
 					home: 0.34,
@@ -202,87 +202,7 @@ const MatchesByLeague = [
 					},
 				],
 				id: 1,
-				date: "2020.01.01 12:00",
-				status: MatchStatus.live,
-				odds: {
-					home: 0.34,
-					draw: 0.17,
-					away: 0.49,
-				},
-				tip_count: 21,
-			},
-		],
-	},
-	{
-		name: "Premier League",
-		sport: {
-			name: "Football",
-			image: "/images/sport-placeholder.svg",
-		},
-		country: "England",
-		image: "/images/team-1-placeholder.svg",
-		matches: [
-			{
-				teams: [
-					{
-						name: "Liverpool",
-						image: "/images/team-1-placeholder.svg",
-						score: 1,
-					},
-					{
-						name: "Manchester City",
-						image: "/images/team-2-placeholder.svg",
-						score: 1,
-					},
-				],
-				id: 1,
-				date: "2020.01.01 12:00",
-				status: MatchStatus.upcoming,
-				odds: {
-					home: 0.34,
-					draw: 0.17,
-					away: 0.49,
-				},
-				tip_count: 21,
-			},
-			{
-				teams: [
-					{
-						name: "Liverpool",
-						image: "/images/team-1-placeholder.svg",
-						score: 1,
-					},
-					{
-						name: "Manchester City",
-						image: "/images/team-2-placeholder.svg",
-						score: 1,
-					},
-				],
-				id: 1,
-				date: "2020.01.01 12:00",
-				status: MatchStatus.live,
-				odds: {
-					home: 0.34,
-					draw: 0.17,
-					away: 0.49,
-				},
-				tip_count: 21,
-			},
-			{
-				teams: [
-					{
-						name: "Liverpool",
-						image: "/images/team-1-placeholder.svg",
-						score: 1,
-					},
-					{
-						name: "Manchester City",
-						image: "/images/team-2-placeholder.svg",
-						score: 1,
-					},
-				],
-				id: 1,
-				date: "2020.01.01 12:00",
+				date: "2020.01.01",
 				status: MatchStatus.live,
 				odds: {
 					home: 0.34,
@@ -316,30 +236,7 @@ const MatchesByLeague = [
 					},
 				],
 				id: 1,
-				date: "2020.01.01 12:00",
-				status: MatchStatus.live,
-				odds: {
-					home: 0.34,
-					draw: 0.17,
-					away: 0.49,
-				},
-				tip_count: 21,
-			},
-			{
-				teams: [
-					{
-						name: "Liverpool",
-						image: "/images/team-1-placeholder.svg",
-						score: 1,
-					},
-					{
-						name: "Manchester City",
-						image: "/images/team-2-placeholder.svg",
-						score: 1,
-					},
-				],
-				id: 1,
-				date: "2020.01.01 12:00",
+				date: "2020.01.01",
 				status: MatchStatus.upcoming,
 				odds: {
 					home: 0.34,
@@ -362,7 +259,110 @@ const MatchesByLeague = [
 					},
 				],
 				id: 1,
-				date: "2020.01.01 12:00",
+				date: "2020.01.01",
+				status: MatchStatus.live,
+				odds: {
+					home: 0.34,
+					draw: 0.17,
+					away: 0.49,
+				},
+				tip_count: 21,
+			},
+			{
+				teams: [
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
+				],
+				id: 1,
+				date: "2020.01.01",
+				status: MatchStatus.live,
+				odds: {
+					home: 0.34,
+					draw: 0.17,
+					away: 0.49,
+				},
+				tip_count: 21,
+			},
+		],
+	},
+	{
+		name: "Premier League",
+		sport: {
+			name: "Football",
+			image: "/images/sport-placeholder.svg",
+		},
+		country: "England",
+		image: "/images/team-1-placeholder.svg",
+		matches: [
+			{
+				teams: [
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
+				],
+				id: 1,
+				date: "2020.01.01",
+				status: MatchStatus.live,
+				odds: {
+					home: 0.34,
+					draw: 0.17,
+					away: 0.49,
+				},
+				tip_count: 21,
+			},
+			{
+				teams: [
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
+				],
+				id: 1,
+				date: "2020.01.01",
+				status: MatchStatus.upcoming,
+				odds: {
+					home: 0.34,
+					draw: 0.17,
+					away: 0.49,
+				},
+				tip_count: 21,
+			},
+			{
+				teams: [
+					{
+						name: "Liverpool",
+						image: "/images/team-1-placeholder.svg",
+						score: 1,
+					},
+					{
+						name: "Manchester City",
+						image: "/images/team-2-placeholder.svg",
+						score: 1,
+					},
+				],
+				id: 1,
+				date: "2020.01.01",
 				status: MatchStatus.live,
 				odds: {
 					home: 0.34,

@@ -16,14 +16,12 @@ const MatchTipsCard: React.FC<inferArrayElementType<MostTips>> = (props) => {
 			case MatchStatus.live:
 				return <span className={styles.mostTipsLive}>Live: {tip.duration}</span>;
 			case MatchStatus.upcoming:
-				return <span className={styles.mostTipsUpcoming}>
-					<Moment format="HH:mm">
-						{tip.date}
-					</Moment>
-					<Moment format="DD.MM.YYYY">
-						{tip.date}
-					</Moment>
-				</span>;
+				return (
+					<span className={styles.mostTipsUpcoming}>
+						<Moment format="HH:mm">{tip.date}</Moment>
+						<Moment format="DD.MM.YYYY">{tip.date}</Moment>
+					</span>
+				);
 		}
 	}
 

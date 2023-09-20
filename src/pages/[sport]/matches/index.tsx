@@ -206,14 +206,28 @@ const MatchesPage: NextPage = () => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+	const ssg = createServerSideHelpers({
+		router: appRouter,
+		ctx: { session: null },
+		transformer: superjson,
+	});
+
+	const sports = await ssg.navigation.getSports.fetch();
+
 	return {
 		fallback: "blocking",
-		paths: [],
+		paths: sports.map((sport) => {
+			return {
+				params: {
+					sport: sport.name,
+				},
+			};
+		}),
 	};
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createServerSideHelpers<AppRouter>({
+	const ssg = createServerSideHelpers({
 		router: appRouter,
 		ctx: { session: null },
 		transformer: superjson,

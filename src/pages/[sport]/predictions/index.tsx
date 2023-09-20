@@ -22,7 +22,7 @@ import { PortalContext } from "src/utils/portalContext";
 import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
 import { LastSportContext } from "src/pages/_app";
 import { createServerSideHelpers } from "@trpc/react-query/server";
-import { appRouter } from "@/server/trpc/root";
+import { AppRouter, appRouter } from "@/server/trpc/root";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
@@ -439,9 +439,23 @@ const SortButtons: React.FC<SortButtonsProps> = (props) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+	const ssg = createServerSideHelpers({
+		router: appRouter,
+		ctx: { session: null },
+		transformer: superjson,
+	});
+
+	const sports = await ssg.navigation.getSports.fetch();
+
 	return {
 		fallback: "blocking",
-		paths: [],
+		paths: sports.map((sport) => {
+			return {
+				params: {
+					sport: sport.name,
+				},
+			};
+		}),
 	};
 };
 
