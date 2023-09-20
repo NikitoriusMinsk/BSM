@@ -14,7 +14,8 @@ ARG NEXTAUTH_SECRET \
 RUN \
     echo "NEXTAUTH_SECRET=${NEXTAUTH_SECRET}" >> .env && \
     echo "NEXTAUTH_URL=${NEXTAUTH_URL}" >> .env && \ 
-    echo "API_URL=${API_URL}" >> .env 
+    echo "API_URL=${API_URL}" >> .env \
+    echo "ANALYZE=false" >> .env
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
