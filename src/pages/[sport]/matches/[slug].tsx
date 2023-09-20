@@ -24,8 +24,9 @@ import { trpc } from "src/utils/trpc";
 import superjson from "superjson";
 import { matchSchema } from "src/server/trpc/utils/DTOSchemas";
 import { createServerSideHelpers } from "@trpc/react-query/server";
-import { appRouter } from "@/server/trpc/root";
+import { AppRouter, appRouter } from "@/server/trpc/root";
 import { createInnerTRPCContext } from "@/server/trpc/trpc";
+import { inferRouterOutputs } from "@trpc/server";
 
 const pages = [
 	{
@@ -302,7 +303,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
 export const getStaticProps: GetStaticProps<{
 	type: string;
-	match: typeof matchSchema._type;
+	match: inferRouterOutputs<AppRouter>["pageGeneration"]["getMatchBySlug"];
 }> = async (context) => {
 	const { params } = context;
 

@@ -2,6 +2,7 @@ import { z } from "zod";
 import { publicProcedure, createTRPCRouter } from "../trpc";
 import { leagueSchema, matchSchema, sportSchema } from "../utils/DTOSchemas";
 import makeApiCall from "../utils/makeApiCall";
+import { matchStatus } from "../utils/DTOSchemas/Match";
 
 export const pageGenerationRouter = createTRPCRouter({
 	getSportWithMatches: publicProcedure.query(async ({ ctx, input }) => {
@@ -23,9 +24,15 @@ export const pageGenerationRouter = createTRPCRouter({
 		.query(async ({ ctx, input }) => {
 			const { slug } = input;
 
-			return await makeApiCall(`matches/bySlug/${slug}`, matchSchema, {
-				method: "GET",
-			});
+			return await makeApiCall(
+				`matches/bySlug/${slug}`,
+				matchSchema
+					.omit({ date: true, odds: true, status: true })
+					.merge(z.object({ matchStatus: matchStatus })),
+				{
+					method: "GET",
+				}
+			);
 		}),
 	getLeagueBySlug: publicProcedure
 		.input(z.object({ slug: z.string() }))
