@@ -7,7 +7,11 @@ const matchSchema = z.object({
 		.object({
 			teamId: z.number(),
 			teamName: z.string(),
-			image: z.string().url().nullish(),
+			image: z
+				.string()
+				.url()
+				.nullish()
+				.or(z.enum([""])),
 			score: z.number(),
 		})
 		.array(),

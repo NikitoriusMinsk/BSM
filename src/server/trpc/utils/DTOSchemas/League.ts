@@ -6,7 +6,11 @@ const leagueSchema = z.object({
 	name: z.string(),
 	country: z.string().nullish(),
 	count: z.number().nullish(),
-	image: z.string().url().nullish(),
+	image: z
+		.string()
+		.url()
+		.nullish()
+		.or(z.enum([""])),
 	matches: matchSchema.array().nullish(),
 	slug: z.string(),
 });
