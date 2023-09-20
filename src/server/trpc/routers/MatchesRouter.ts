@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { MatchStatus } from "src/types/matchStatus";
 import Fuse from "fuse.js";
-import { publicProcedure, router } from "../trpc";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 import makeApiCall from "../utils/makeApiCall";
 import {
 	leagueSchema,
@@ -608,7 +608,7 @@ const MatchTips = [
 	},
 ];
 
-export const matchesRouter = router({
+export const matchesRouter = createTRPCRouter({
 	getAllLive: publicProcedure.query(async ({ ctx, input }) => {
 		return LiveMatchesTemp;
 	}),

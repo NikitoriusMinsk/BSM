@@ -1,11 +1,15 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type {
+	GetStaticPaths,
+	GetStaticProps,
+	InferGetStaticPropsType,
+	NextPage,
+} from "next";
 import Head from "next/head";
 import styles from "@styles/pages/MatchSummary.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GetServerSideProps } from "next";
 import MatchSummaryPage from "@components/match-summary/MatchSummaryPage";
 import MatchTennisBasketPage from "@components/match-summary/MatchTennisBasketPage";
 import OddsPage from "@components/match-summary/OddsPage";
@@ -17,10 +21,11 @@ import NewsPage from "@components/match-summary/NewsPage";
 import PagesSlider from "@components/ui/match-summary/PagesSlider";
 import LiveMatchesExpanded from "@components/ui/LiveMatchesExpanded";
 import { trpc } from "src/utils/trpc";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
-import { appRouter } from "src/server/trpc/router/_app";
-import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
+import { matchSchema } from "src/server/trpc/utils/DTOSchemas";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "@/server/trpc/root";
+import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 const pages = [
 	{
@@ -53,7 +58,10 @@ const pages = [
 	},
 ];
 
-const MatchSummary: NextPage<{ type: string }> = ({ type }) => {
+const MatchSummary: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
+	props
+) => {
+	const { match, type } = props;
 	const router = useRouter();
 	const [selectedPage, setSelectedPage] = useState(0);
 	const [selectedPageComponent, setSelectedPageComponent] = useState(
@@ -267,29 +275,53 @@ const MatchSummary: NextPage<{ type: string }> = ({ type }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-	const matches = [
-		{ sport: "Football", id: 1 },
-		{ sport: "Football", id: 2 },
-		{ sport: "Football", id: 3 },
-	];
+	const ssg = createServerSideHelpers({
+		router: appRouter,
+		ctx: createInnerTRPCContext({ session: null }),
+		transformer: superjson,
+	});
+
+	const data = await ssg.pageGeneration.getSportWithMatches.fetch();
 
 	return {
 		fallback: "blocking",
-		paths: matches.map((match) => {
-			return {
-				params: {
-					sport: match.sport,
-					id: match.id.toString(),
-				},
-			};
-		}),
+		paths: data
+			.map((sport) => {
+				return sport.matches.map((match) => {
+					return {
+						params: {
+							sport: sport.name,
+							slug: match,
+						},
+					};
+				});
+			})
+			.flat(),
 	};
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<{
+	type: string;
+	match: typeof matchSchema._type;
+}> = async (context) => {
+	const { params } = context;
+
+	const { slug, sport } = params as { sport: string; slug: string };
+
+	const ssg = createServerSideHelpers({
+		router: appRouter,
+		ctx: createInnerTRPCContext({ session: null }),
+		transformer: superjson,
+	});
+
+	const data = await ssg.pageGeneration.getMatchBySlug.fetch({
+		slug,
+	});
+
 	return {
 		props: {
-			type: context.params?.id || "default",
+			type: sport || "default",
+			match: data,
 		},
 	};
 };

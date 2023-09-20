@@ -1,10 +1,10 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { env } from "../../../env/server.mjs";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
-import { appRouter } from "src/server/trpc/router/_app";
-import { createContext } from "src/server/trpc/context";
+import { env } from "@/env.mjs";
 import superjson from "superjson";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "@/server/trpc/root";
+import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 export const authOptions: NextAuthOptions = {
 	session: {
@@ -24,9 +24,9 @@ export const authOptions: NextAuthOptions = {
 			async authorize(credentials, req) {
 				if (!credentials) return null;
 
-				const ssg = createProxySSGHelpers({
+				const ssg = createServerSideHelpers({
 					router: appRouter,
-					ctx: await createContext(),
+					ctx: createInnerTRPCContext({ session: null }),
 					transformer: superjson,
 				});
 

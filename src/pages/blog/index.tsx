@@ -6,12 +6,12 @@ import { trpc } from "src/utils/trpc";
 import Moment from "react-moment";
 import shortenString from "src/utils/shortenString";
 import { MatchStatus } from "src/types/matchStatus";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
-import { appRouter } from "src/server/trpc/router/_app";
-import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
 import DisaperingContainer from "@components/helpers/DisaperingContainer";
 import useWindowSize from "src/utils/useWindowSize";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "@/server/trpc/root";
+import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 const BlogPage: NextPage = () => {
 	const { data: news, isLoading: newsLoading } = trpc.news.getAll.useQuery();
@@ -523,9 +523,9 @@ const FullWidthNewsBlock: React.FC<NewsBlockProps> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createProxySSGHelpers({
+	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: await createContext(),
+		ctx: createInnerTRPCContext({ session: null }),
 		transformer: superjson,
 	});
 

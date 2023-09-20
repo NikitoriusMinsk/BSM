@@ -1,8 +1,7 @@
-import { createRouter } from "../context";
 import { z } from "zod";
 import { TransactionStatus } from "src/types/transactionStatus";
 import Fuse from "fuse.js";
-import { protectedProcedure, router } from "../trpc";
+import { protectedProcedure, createTRPCRouter } from "../trpc";
 import makeApiCall from "../utils/makeApiCall";
 import { TRPCError } from "@trpc/server";
 
@@ -1304,7 +1303,7 @@ const UserNotifications = {
 	],
 };
 
-export const userRouter = router({
+export const userRouter = createTRPCRouter({
 	getInfo: protectedProcedure.query(async ({ ctx, input }) => {
 		return UserInfo;
 	}),

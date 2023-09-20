@@ -24,9 +24,10 @@ const matchSchema = z.object({
 	teams: teamSchema.array(),
 	duration: z.string().nullish(),
 	date: z.string(),
-	status: matchStatus,
+	matchStatus: matchStatus,
 	odds: oddsSchema,
 	tipCount: z.number().nullish(),
+	slug: z.string(),
 });
 
 export { matchStatus };

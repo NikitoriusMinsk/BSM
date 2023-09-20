@@ -5,6 +5,8 @@ NEXTAUTH_URL=http://localhost:3000
 API_URL=
 
 <!-- PLEASE DON'T FORGET TO UPDATE THE DOCKERFILE AND DEV.YAML TO USE NEW ENV VALUES AT BUILD STEP -->
+<!-- # When adding additional environment variables, the schema in "/src/env.mjs"
+# should be updated accordingly. -->
 
 # Next bundle Analyzer
 

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, createTRPCRouter } from "../trpc";
 
 const tempSport = {
 	name: "Boxing",
@@ -477,7 +477,7 @@ const TipstersTemp = [
 	},
 ];
 
-export const tipsterRouter = router({
+export const tipsterRouter = createTRPCRouter({
 	getAll: publicProcedure.query(async ({ ctx, input }) => {
 		return TipstersTemp;
 	}),

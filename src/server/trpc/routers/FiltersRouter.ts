@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, createTRPCRouter } from "../trpc";
 import { countrySchema, leagueSchema, paginatorHelper } from "../utils/DTOSchemas";
 import makeApiCall from "../utils/makeApiCall";
 
@@ -421,7 +421,7 @@ const SportClubs = [
 	{ name: "FC Bayern Munich", image: "/images/team-1-placeholder.svg", id: "4" },
 ];
 
-export const filtersRouter = router({
+export const filtersRouter = createTRPCRouter({
 	getLeagues: publicProcedure
 		.input(
 			z.object({

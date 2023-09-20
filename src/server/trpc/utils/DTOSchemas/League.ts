@@ -8,6 +8,7 @@ const leagueSchema = z.object({
 	count: z.number().nullish(),
 	image: z.string().url().nullish(),
 	matches: matchSchema.array().nullish(),
+	slug: z.string(),
 });
 
 export default leagueSchema;

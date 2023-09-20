@@ -1,49 +1,43 @@
-import React, { useEffect, useState } from "react"
-import styles from "@styles/pages/TipsterRating.module.css"
-import { trpc } from "src/utils/trpc"
-import Image from "next/image"
-import Slider from "@components/ui/Slider"
-import type { CurrentCompetition, Tipsters } from "src/types/queryTypes"
-import { inferArrayElementType } from "src/utils/inferArrayElementType"
-import { AnimatePresence, motion } from "framer-motion"
-import Moment from "react-moment"
-import BestBookmakers from "@components/ui/BestBookmakers"
-import LiveMatches from "@components/ui/LiveMatches"
-import Banner from "@components/ui/Banner"
-import { CircularProgressbarWithChildren } from "react-circular-progressbar"
-import "react-circular-progressbar/dist/styles.css"
-import TipsterModal from "@components/ui/TipsterModal"
-import { PortalContext } from "src/utils/portalContext"
-import { GetStaticProps, NextPage } from "next"
-import TextField from "@components/ui/TextField"
-import Dropdown from "@components/ui/Dropdown"
-import usePortal from "src/utils/usePortal"
-import { createColumnHelper } from "@tanstack/react-table"
-import shortenNumber from "src/utils/shortenNumber"
-import Table from "@components/ui/Table"
-import dynamic from "next/dynamic"
-import { HtmlPortalNode } from "react-reverse-portal"
-import { createProxySSGHelpers } from "@trpc/react-query/ssg"
-import { appRouter } from "src/server/trpc/router/_app"
-import { createContext } from "src/server/trpc/context"
-import superjson from "superjson"
-import TipsterInfo from "@components/ui/TipsterInfo"
-import useWindowSize from "src/utils/useWindowSize"
-import FilterModal from "@components/ui/FilterModal"
-import DisaperingContainer from "@components/helpers/DisaperingContainer"
+import React, { useEffect, useState } from "react";
+import styles from "@styles/pages/TipsterRating.module.css";
+import { trpc } from "src/utils/trpc";
+import Image from "next/image";
+import Slider from "@components/ui/Slider";
+import type { CurrentCompetition, Tipsters } from "src/types/queryTypes";
+import { inferArrayElementType } from "src/utils/inferArrayElementType";
+import { AnimatePresence, motion } from "framer-motion";
+import Moment from "react-moment";
+import BestBookmakers from "@components/ui/BestBookmakers";
+import LiveMatches from "@components/ui/LiveMatches";
+import Banner from "@components/ui/Banner";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import TipsterModal from "@components/ui/TipsterModal";
+import { PortalContext } from "src/utils/portalContext";
+import { GetStaticProps, NextPage } from "next";
+import TextField from "@components/ui/TextField";
+import Dropdown from "@components/ui/Dropdown";
+import usePortal from "src/utils/usePortal";
+import { createColumnHelper } from "@tanstack/react-table";
+import shortenNumber from "src/utils/shortenNumber";
+import Table from "@components/ui/Table";
+import dynamic from "next/dynamic";
+import { HtmlPortalNode } from "react-reverse-portal";
+import superjson from "superjson";
+import TipsterInfo from "@components/ui/TipsterInfo";
+import useWindowSize from "src/utils/useWindowSize";
+import FilterModal from "@components/ui/FilterModal";
+import DisaperingContainer from "@components/helpers/DisaperingContainer";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "@/server/trpc/root";
+import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
-const InPortal = dynamic(
-	async () => (await import("react-reverse-portal")).InPortal,
-	{
-		ssr: false,
-	}
-)
-const OutPortal = dynamic(
-	async () => (await import("react-reverse-portal")).OutPortal,
-	{
-		ssr: false,
-	}
-)
+const InPortal = dynamic(async () => (await import("react-reverse-portal")).InPortal, {
+	ssr: false,
+});
+const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
+	ssr: false,
+});
 
 const SportItems = [
 	{
@@ -62,7 +56,7 @@ const SportItems = [
 		name: "Box",
 		id: "4",
 	},
-]
+];
 
 const TimeItems = [
 	{
@@ -81,9 +75,9 @@ const TimeItems = [
 		name: "1 Month",
 		id: "4",
 	},
-]
+];
 
-const columnHelper = createColumnHelper<inferArrayElementType<Tipsters>>()
+const columnHelper = createColumnHelper<inferArrayElementType<Tipsters>>();
 
 const columns = [
 	columnHelper.display({
@@ -107,7 +101,7 @@ const columns = [
 	columnHelper.accessor((row) => ({ ...row }), {
 		id: "user",
 		cell: (info) => {
-			return <TipsterInfo {...info.getValue()} />
+			return <TipsterInfo {...info.getValue()} />;
 		},
 		header: () => <span>Tipster</span>,
 		enableSorting: false,
@@ -126,7 +120,7 @@ const columns = [
 							key={`table_dot_${index}_${info.row.index}`}
 							className={`${styles.dot} ${styles.lose}`}
 						/>
-					)
+					);
 				})}
 			</div>
 		),
@@ -154,7 +148,7 @@ const columns = [
 			),
 		header: () => <span>ROI</span>,
 	}),
-]
+];
 
 const mobileColumns = [
 	columnHelper.display({
@@ -178,7 +172,7 @@ const mobileColumns = [
 	columnHelper.accessor((row) => ({ ...row }), {
 		id: "user",
 		cell: (info) => {
-			return <TipsterInfo {...info.getValue()} />
+			return <TipsterInfo {...info.getValue()} />;
 		},
 		header: () => <span>Tipster</span>,
 		enableSorting: false,
@@ -196,19 +190,19 @@ const mobileColumns = [
 			),
 		header: () => <span>ROI</span>,
 	}),
-]
+];
 
 const TipsterRating: NextPage = () => {
 	const { data: tipsters, isLoading: tipstersLoading } =
-		trpc.tipsters.getAll.useQuery()
+		trpc.tipsters.getAll.useQuery();
 	const { data: bookmakers, isLoading: bookmakersLoading } =
-		trpc.bookmakers.getTop.useQuery()
+		trpc.bookmakers.getTop.useQuery();
 	const { data: liveMatches, isLoading: liveMatchesLoading } =
-		trpc.matches.getAllLive.useQuery()
+		trpc.matches.getAllLive.useQuery();
 	const { data: currentCompetition, isLoading: currentCompetitionLoading } =
-		trpc.competitions.getCurrent.useQuery()
-	const portalNode = usePortal()
-	const { width } = useWindowSize()
+		trpc.competitions.getCurrent.useQuery();
+	const portalNode = usePortal();
+	const { width } = useWindowSize();
 
 	if (
 		tipstersLoading ||
@@ -216,11 +210,11 @@ const TipsterRating: NextPage = () => {
 		liveMatchesLoading ||
 		currentCompetitionLoading
 	) {
-		return <div>Loading...</div>
+		return <div>Loading...</div>;
 	}
 
 	if (!tipsters || !bookmakers || !liveMatches || !currentCompetition) {
-		return <div>Error...</div>
+		return <div>Error...</div>;
 	}
 
 	return (
@@ -372,64 +366,64 @@ const TipsterRating: NextPage = () => {
 				</DisaperingContainer>
 			</PortalContext.Provider>
 		</>
-	)
-}
+	);
+};
 
 const VerifiedTipsters: React.FC<{
-	tipsters: Tipsters
-	portalNode: HtmlPortalNode | null
+	tipsters: Tipsters;
+	portalNode: HtmlPortalNode | null;
 }> = (props) => {
-	const { tipsters } = props
-	const { width } = useWindowSize()
+	const { tipsters } = props;
+	const { width } = useWindowSize();
 
 	function sliceIntoChunks(arr: Tipsters, chunkSize: number) {
-		const res = []
+		const res = [];
 		for (let i = 0; i < arr.length; i += chunkSize) {
-			const chunk = arr.slice(i, i + chunkSize)
-			res.push(chunk)
+			const chunk = arr.slice(i, i + chunkSize);
+			res.push(chunk);
 		}
-		return res
+		return res;
 	}
 
 	function getArrowOffset(width: number) {
 		switch (true) {
 			case width >= 1920:
-				return undefined
+				return undefined;
 			case width >= 1440:
 				return {
 					offset: { next: { side: -60 }, prev: { side: -60 } },
-				}
+				};
 			case width >= 1366:
 				return {
 					offset: { next: { side: -60 }, prev: { side: -60 } },
-				}
+				};
 			case width >= 1280:
 				return {
 					offset: { next: { side: -50 }, prev: { side: -50 } },
-				}
+				};
 			default:
-				return undefined
+				return undefined;
 		}
 	}
 
 	function getTipsterCount(width: number) {
 		switch (true) {
 			case width >= 1920:
-				return 3
+				return 3;
 			case width >= 1440:
-				return 3
+				return 3;
 			case width >= 1366:
-				return 3
+				return 3;
 			case width >= 1280:
-				return 3
+				return 3;
 			case width >= 1024:
-				return 2
+				return 2;
 			case width >= 900:
-				return 2
+				return 2;
 			case width >= 320:
-				return 1
+				return 1;
 			default:
-				return 3
+				return 3;
 		}
 	}
 
@@ -445,17 +439,14 @@ const VerifiedTipsters: React.FC<{
 					}}
 				/>
 			</div>
-			<h2 className={styles.verifiedTipstersTitle}>
-				Optimo.com Verified Tipsters
-			</h2>
+			<h2 className={styles.verifiedTipstersTitle}>Optimo.com Verified Tipsters</h2>
 			<span className={styles.verifiedTipstersSubtitle}>
-				Betting on sports can be really profitable if you have the right
-				knowledge in place. Following betting tipsters is certainly wise
-				decision as it helps you leverage their expertise and analyses
-				in your favor. Here you can find and follow verified by us
-				tipsters. By starting to follow some of the betting experts you
-				will receive optional notification each time they post a new
-				betting tip on the site.
+				Betting on sports can be really profitable if you have the right knowledge
+				in place. Following betting tipsters is certainly wise decision as it
+				helps you leverage their expertise and analyses in your favor. Here you
+				can find and follow verified by us tipsters. By starting to follow some of
+				the betting experts you will receive optional notification each time they
+				post a new betting tip on the site.
 			</span>
 			<div className={styles.verifiedTipstersSlider}>
 				<Slider
@@ -482,14 +473,14 @@ const VerifiedTipsters: React.FC<{
 				</Slider>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 const TipsterCard: React.FC<inferArrayElementType<Tipsters>> = (props) => {
-	const { avgProfit, image, name, subscriptionCost, winrate, sport } = props
-	const [following, setFollowing] = useState(false)
-	const [modalOpen, setModalOpen] = useState(false)
-	const { width } = useWindowSize()
+	const { avgProfit, image, name, subscriptionCost, winrate, sport } = props;
+	const [following, setFollowing] = useState(false);
+	const [modalOpen, setModalOpen] = useState(false);
+	const { width } = useWindowSize();
 
 	return (
 		<>
@@ -543,9 +534,7 @@ const TipsterCard: React.FC<inferArrayElementType<Tipsters>> = (props) => {
 									alt=""
 								/>
 								{width >= 1920 ?? (
-									<span>
-										{following ? "Following" : "Follow"}
-									</span>
+									<span>{following ? "Following" : "Follow"}</span>
 								)}
 							</button>
 						</div>
@@ -566,36 +555,34 @@ const TipsterCard: React.FC<inferArrayElementType<Tipsters>> = (props) => {
 						<h4>$ {subscriptionCost}/MO</h4>
 						<span>How to subscribe?</span>
 					</div>
-					<button onClick={() => setModalOpen(!modalOpen)}>
-						Subscribe
-					</button>
+					<button onClick={() => setModalOpen(!modalOpen)}>Subscribe</button>
 				</div>
 			</div>
 		</>
-	)
-}
+	);
+};
 
 const CountdownTimer: React.FC<CurrentCompetition> = (props) => {
-	const { endsOn, startedOn } = props
+	const { endsOn, startedOn } = props;
 	const [progress, setProgress] = useState(
 		((new Date().getTime() - startedOn.getTime()) /
 			(endsOn.getTime() - startedOn.getTime())) *
 			100
-	)
-	const { width } = useWindowSize()
+	);
+	const { width } = useWindowSize();
 
 	function calculateProgress() {
-		const currentTime = new Date().getTime()
-		const startTime = startedOn.getTime()
-		const targetTime = endsOn.getTime()
-		const res = ((currentTime - startTime) / (targetTime - startTime)) * 100
-		setProgress(res)
+		const currentTime = new Date().getTime();
+		const startTime = startedOn.getTime();
+		const targetTime = endsOn.getTime();
+		const res = ((currentTime - startTime) / (targetTime - startTime)) * 100;
+		setProgress(res);
 	}
 
 	useEffect(() => {
-		const timer = setInterval(calculateProgress, 60000)
-		return () => clearInterval(timer)
-	}, [])
+		const timer = setInterval(calculateProgress, 60000);
+		return () => clearInterval(timer);
+	}, []);
 
 	return (
 		<div className={styles.timer}>
@@ -664,8 +651,8 @@ const CountdownTimer: React.FC<CurrentCompetition> = (props) => {
 				<button>Learn More</button>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 const PageTips: React.FC = () => {
 	return (
@@ -674,46 +661,41 @@ const PageTips: React.FC = () => {
 				<h2>7 Reasons to Follow Our Betting Tips and Predictions</h2>
 				<ol>
 					<li>
-						In today’s high paced world is really important to
-						ensure that we use our time efficiently. In order to win
-						regularly from sports betting, you definitely have to
-						commit a lot of time in researching, building data
-						models and know what is happening with each team or
-						player. This indeed is very challenging and only a very
-						few people are successful with that. By following
-						betting tips provided by experts you are using their
-						knowledge in your favour while not spending any time on
-						doing the hard work. It won’t be crazy if we assume that
-						by betting with the right information and tips in our
-						hands we are increasing our chance of winning quite
-						significantly. Therefore, this is our reason number 1
-						why to follow betting tips.
+						In today’s high paced world is really important to ensure that we
+						use our time efficiently. In order to win regularly from sports
+						betting, you definitely have to commit a lot of time in
+						researching, building data models and know what is happening with
+						each team or player. This indeed is very challenging and only a
+						very few people are successful with that. By following betting
+						tips provided by experts you are using their knowledge in your
+						favour while not spending any time on doing the hard work. It
+						won’t be crazy if we assume that by betting with the right
+						information and tips in our hands we are increasing our chance of
+						winning quite significantly. Therefore, this is our reason number
+						1 why to follow betting tips.
 					</li>
 					<li>
-						If you are willing to commit the hard work and be the
-						person who knows a certain sport in depth this is great
-						you will not need betting tips for your chosen sport.
-						But if you are treating sports betting as an investment
-						there is a huge chance that you will want to see your
-						betting portfolio well diversified meaning that you
-						should bet on more than one sport. Therefore, you will
-						need again an expert who will provide you with well
-						researched betting tips on different sports. Certainly,
-						this is the right way to build sustainable portfolio by
-						using your own knowledge and leverage other people’s
-						expertise. This is reason number 2 why it is wise to use
-						betting tips as part of your betting activities.
+						If you are willing to commit the hard work and be the person who
+						knows a certain sport in depth this is great you will not need
+						betting tips for your chosen sport. But if you are treating sports
+						betting as an investment there is a huge chance that you will want
+						to see your betting portfolio well diversified meaning that you
+						should bet on more than one sport. Therefore, you will need again
+						an expert who will provide you with well researched betting tips
+						on different sports. Certainly, this is the right way to build
+						sustainable portfolio by using your own knowledge and leverage
+						other people’s expertise. This is reason number 2 why it is wise
+						to use betting tips as part of your betting activities.
 					</li>
 					<li>
-						Take calculated risk. Sports betting is not about
-						gambling, it is about making educated decisions that
-						will likely result in long term profits. By following
-						betting tips, you are ensuring to always be informed
-						when placing your bets and reduce the risk factor to the
-						very minimum. At the end of the day, betting is a game
-						of chances but it is always good to know the odds are in
-						your favour and betting tips are the tool that will help
-						you achieve that.
+						Take calculated risk. Sports betting is not about gambling, it is
+						about making educated decisions that will likely result in long
+						term profits. By following betting tips, you are ensuring to
+						always be informed when placing your bets and reduce the risk
+						factor to the very minimum. At the end of the day, betting is a
+						game of chances but it is always good to know the odds are in your
+						favour and betting tips are the tool that will help you achieve
+						that.
 					</li>
 				</ol>
 			</div>
@@ -721,80 +703,72 @@ const PageTips: React.FC = () => {
 				<h2>How to Turn Our Sports Betting Tips to Profit?</h2>
 				<div>
 					<span>
-						Sports betting is a hugely popular way to increase the
-						amount of fun you have when you watch your favourite
-						sports. Alongside this, while we would not recommend
-						trying to make sports betting a second source of income
-						as it can be a fickle hobby, it is entirely possible to
-						make a good profit from betting on your favourite
-						sports.
+						Sports betting is a hugely popular way to increase the amount of
+						fun you have when you watch your favourite sports. Alongside this,
+						while we would not recommend trying to make sports betting a
+						second source of income as it can be a fickle hobby, it is
+						entirely possible to make a good profit from betting on your
+						favourite sports.
 					</span>
 					<span>
-						To do this, you need to be supremely disciplined when
-						you come to betting. Many bettors will look to employ
-						strategies when they bet, such as only backing or
-						avoiding specific markets or teams, they will only wager
-						on certain events and will likely stay away from betting
-						tips that are too short or too long.
+						To do this, you need to be supremely disciplined when you come to
+						betting. Many bettors will look to employ strategies when they
+						bet, such as only backing or avoiding specific markets or teams,
+						they will only wager on certain events and will likely stay away
+						from betting tips that are too short or too long.
 					</span>
 					<span>
-						With regard to sports betting odds, it is always
-						important to understand what the odds mean. For example,
-						an odds-on bet means that a side is likely to win that
-						particular game or event, while very long odds mean the
-						chances of the bet coming off a very lower. With a long
-						odds bet offers a big potential return but a huge risk
-						to your wager amount, and a short odds bet offering a
-						safer path but with a smaller return, many bettors will
-						look to play somewhere in the middle of this, in an area
-						where the potential risk and reward and weight together
-						well.
+						With regard to sports betting odds, it is always important to
+						understand what the odds mean. For example, an odds-on bet means
+						that a side is likely to win that particular game or event, while
+						very long odds mean the chances of the bet coming off a very
+						lower. With a long odds bet offers a big potential return but a
+						huge risk to your wager amount, and a short odds bet offering a
+						safer path but with a smaller return, many bettors will look to
+						play somewhere in the middle of this, in an area where the
+						potential risk and reward and weight together well.
 					</span>
 					<span>
-						Importantly, if you are not overly confident when it
-						comes to betting on your own, then you can wager on our
-						sports betting tips and betting predictions to help
-						swell your wins. You can then use these sports betting
-						tips at home on your laptop or on the move on your
-						phone, whilst utilising a bookmaker’s betting app is
-						also a great way to keep up to date with the biggest
-						games.
+						Importantly, if you are not overly confident when it comes to
+						betting on your own, then you can wager on our sports betting tips
+						and betting predictions to help swell your wins. You can then use
+						these sports betting tips at home on your laptop or on the move on
+						your phone, whilst utilising a bookmaker’s betting app is also a
+						great way to keep up to date with the biggest games.
 					</span>
 					<span>
-						The use of betting calculators alongside using strong
-						money management is vital to ensure you stay in profit
-						when it comes to betting. When it comes to your money
-						management, we recommend that you set limits for
-						yourself when it comes to depositing, whilst you should
-						not only ever bet huge amounts of money all in one bet.
-						You can also track your performance in betting too, with
-						this showing you where and when you are losing/gaining
-						money.
+						The use of betting calculators alongside using strong money
+						management is vital to ensure you stay in profit when it comes to
+						betting. When it comes to your money management, we recommend that
+						you set limits for yourself when it comes to depositing, whilst
+						you should not only ever bet huge amounts of money all in one bet.
+						You can also track your performance in betting too, with this
+						showing you where and when you are losing/gaining money.
 					</span>
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createProxySSGHelpers({
+	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: await createContext(),
+		ctx: createInnerTRPCContext({ session: null }),
 		transformer: superjson,
-	})
+	});
 
-	await ssg.tipsters.getAll.prefetch()
-	await ssg.bookmakers.getTop.prefetch()
-	await ssg.matches.getAllLive.prefetch()
-	await ssg.competitions.getCurrent.prefetch()
+	await ssg.tipsters.getAll.prefetch();
+	await ssg.bookmakers.getTop.prefetch();
+	await ssg.matches.getAllLive.prefetch();
+	await ssg.competitions.getCurrent.prefetch();
 
 	return {
 		props: {
 			trpcState: ssg.dehydrate(),
 		},
 		revalidate: 60,
-	}
-}
+	};
+};
 
-export default TipsterRating
+export default TipsterRating;

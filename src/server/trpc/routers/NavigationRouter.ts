@@ -1,4 +1,4 @@
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, createTRPCRouter } from "../trpc";
 import makeApiCall from "../utils/makeApiCall";
 import { sportSchema } from "../utils/DTOSchemas";
 
@@ -31,7 +31,7 @@ const Timezones = [
 	},
 ];
 
-export const navigationRouter = router({
+export const navigationRouter = createTRPCRouter({
 	getSports: publicProcedure.query(async ({ ctx, input }) => {
 		return await makeApiCall("sports", sportSchema.array(), {
 			method: "GET",

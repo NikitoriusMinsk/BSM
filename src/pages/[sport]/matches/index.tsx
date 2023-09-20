@@ -9,9 +9,6 @@ import DatePicker from "@components/ui/DatePicker";
 import LiveMatches from "@components/ui/LiveMatches";
 import Leagues from "@components/ui/Leagues";
 import NestedFilter from "@components/ui/NestedFilter";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
-import { appRouter } from "src/server/trpc/router/_app";
-import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
 import useWindowSize from "src/utils/useWindowSize";
 import dynamic from "next/dynamic";
@@ -23,6 +20,8 @@ import DisaperingContainer from "@components/helpers/DisaperingContainer";
 import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
 import { LastSportContext } from "src/pages/_app";
 import moment from "moment-timezone";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { AppRouter, appRouter } from "@/server/trpc/root";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
@@ -214,9 +213,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createProxySSGHelpers({
+	const ssg = createServerSideHelpers<AppRouter>({
 		router: appRouter,
-		ctx: await createContext(),
+		ctx: { session: null },
 		transformer: superjson,
 	});
 

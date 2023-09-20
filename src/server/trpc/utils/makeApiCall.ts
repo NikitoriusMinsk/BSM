@@ -1,4 +1,4 @@
-import { env } from "src/env/server.mjs";
+import { env } from "@/env.mjs";
 import { z } from "zod";
 import getTRPCError from "./getTRPCError";
 

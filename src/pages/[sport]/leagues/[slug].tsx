@@ -1,4 +1,9 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type {
+	GetStaticPaths,
+	GetStaticProps,
+	InferGetStaticPropsType,
+	NextPage,
+} from "next";
 import Head from "next/head";
 import styles from "@styles/pages/LeagueSummary.module.css";
 import Image from "next/image";
@@ -17,10 +22,11 @@ import { trpc } from "src/utils/trpc";
 import Leagues from "@components/ui/league-summary/Leagues";
 import LeaguesMobileBlocksLinks from "@components/ui/LeaguesMobileBlocksLinks";
 import { LastSportContext } from "src/pages/_app";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
-import { appRouter } from "src/server/trpc/router/_app";
-import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
+import { leagueSchema } from "src/server/trpc/utils/DTOSchemas";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "@/server/trpc/root";
+import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 const pages = [
 	{
@@ -45,7 +51,10 @@ const pages = [
 	},
 ];
 
-const LeagueSummary: NextPage<{ type: string }> = ({ type }) => {
+const LeagueSummary: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
+	props
+) => {
+	const { type, league } = props;
 	const router = useRouter();
 	const sport = useContext(LastSportContext);
 	const [selectedPage, setSelectedPage] = useState(0);
@@ -208,22 +217,51 @@ const LeagueSummary: NextPage<{ type: string }> = ({ type }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-	const ssg = createProxySSGHelpers({
+	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: await createContext(),
+		ctx: createInnerTRPCContext({ session: null }),
 		transformer: superjson,
 	});
 
+	const data = await ssg.pageGeneration.getSportWithLeagues.fetch();
+
 	return {
 		fallback: "blocking",
-		paths: [],
+		paths: data
+			.map((sport) => {
+				return sport.competitions.map((league) => {
+					return {
+						params: {
+							sport: sport.name,
+							slug: league,
+						},
+					};
+				});
+			})
+			.flat(),
 	};
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<{
+	type: string;
+	league: typeof leagueSchema._type;
+}> = async (context) => {
+	const { params } = context;
+
+	const { slug, sport } = params as { sport: string; slug: string };
+
+	const ssg = createServerSideHelpers({
+		router: appRouter,
+		ctx: createInnerTRPCContext({ session: null }),
+		transformer: superjson,
+	});
+
+	const data = await ssg.pageGeneration.getLeagueBySlug.fetch({ slug });
+
 	return {
 		props: {
-			type: context.params?.id || "default",
+			type: sport || "default",
+			league: data,
 		},
 	};
 };

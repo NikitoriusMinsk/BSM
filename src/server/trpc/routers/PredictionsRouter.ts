@@ -1,6 +1,5 @@
-import { createRouter } from "../context";
 import { z } from "zod";
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, createTRPCRouter } from "../trpc";
 
 const PredictionsTemp = [
 	{
@@ -343,7 +342,7 @@ const PredictionsTemp = [
 	},
 ];
 
-export const predictionsRouter = router({
+export const predictionsRouter = createTRPCRouter({
 	getAll: publicProcedure
 		.input(
 			z

@@ -1,6 +1,5 @@
-import { createRouter } from "../context";
 import { z } from "zod";
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, createTRPCRouter } from "../trpc";
 
 const NewsTemp = [
 	{
@@ -165,7 +164,7 @@ const NewsTemp = [
 	},
 ];
 
-export const newsRouter = router({
+export const newsRouter = createTRPCRouter({
 	getAll: publicProcedure.query(async ({ ctx, input }) => {
 		return NewsTemp;
 	}),

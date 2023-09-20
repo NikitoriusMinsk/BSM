@@ -1,7 +1,6 @@
-import { createRouter } from "../context";
 import { z } from "zod";
 import { MethodStatus } from "src/types/methodStatus";
-import { publicProcedure, router } from "../trpc";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 
 const methodsTemp = [
 	{
@@ -42,7 +41,7 @@ const methodsTemp = [
 	},
 ];
 
-export const coinsRouter = router({
+export const coinsRouter = createTRPCRouter({
 	getMethods: publicProcedure.query(async ({ ctx, input }) => {
 		return methodsTemp;
 	}),

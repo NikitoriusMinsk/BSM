@@ -18,25 +18,22 @@ import DateInput from "@components/ui/DatePicker";
 import usePortal from "src/utils/usePortal";
 import dynamic from "next/dynamic";
 import superjson from "superjson";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
-import { appRouter } from "src/server/trpc/router/_app";
-import { createContext } from "src/server/trpc/context";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "@/server/trpc/root";
+import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
-const InPortal = dynamic(
-	async () => (await import("react-reverse-portal")).InPortal,
-	{ ssr: false }
-);
-const OutPortal = dynamic(
-	async () => (await import("react-reverse-portal")).OutPortal,
-	{ ssr: false }
-);
+const InPortal = dynamic(async () => (await import("react-reverse-portal")).InPortal, {
+	ssr: false,
+});
+const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
+	ssr: false,
+});
 
 // TODO
 // fix prop drilling
 
 const AddTip: NextPage = () => {
-	const { data: sports, isLoading: sportsLoading } =
-		trpc.filters.getSports.useQuery();
+	const { data: sports, isLoading: sportsLoading } = trpc.filters.getSports.useQuery();
 	const [step, setStep] = useState(1);
 	const portalNode = usePortal();
 
@@ -95,10 +92,9 @@ const AddTip: NextPage = () => {
 						</div>
 					</div>
 					<span className={styles.disclaimer}>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-						Etiam nisi quam, pretium imperdiet erat nec, malesuada
-						scelerisque arcu. Proin quis varius orci. Donec ut suscipit
-						orci.
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+						nisi quam, pretium imperdiet erat nec, malesuada scelerisque arcu.
+						Proin quis varius orci. Donec ut suscipit orci.
 					</span>
 				</div>
 			</PortalContext.Provider>
@@ -349,9 +345,9 @@ const FilterModal: React.FC<{
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createProxySSGHelpers({
+	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: await createContext(),
+		ctx: createInnerTRPCContext({ session: null }),
 		transformer: superjson,
 	});
 

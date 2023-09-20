@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { MatchStatus } from "src/types/matchStatus";
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, createTRPCRouter } from "../trpc";
 
 const MostTipsTemp = [
 	{
@@ -133,7 +133,7 @@ const MostTipsTemp = [
 	},
 ];
 
-export const tipsRouter = router({
+export const tipsRouter = createTRPCRouter({
 	getAll: publicProcedure.query(async ({ ctx, input }) => {
 		return MostTipsTemp;
 	}),

@@ -100,7 +100,7 @@ const League: React.FC<{
 									pathname: "/[sport]/leagues/[id]",
 									query: {
 										sport: router.query.sport,
-										id: league.name, // this should be replaced with a slug property
+										id: league.slug, // this should be replaced with a slug property
 									},
 								}}
 							>
@@ -203,7 +203,7 @@ const League: React.FC<{
 export const Match: React.FC<
 	typeof matchSchema._type & { mode?: "live" | "odds" | "stats" }
 > = (props) => {
-	let { status, teams, date, odds, tipCount, mode, id, duration } = props;
+	let { status, teams, date, odds, tipCount, mode, id, duration, slug } = props;
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
 
@@ -276,9 +276,7 @@ export const Match: React.FC<
 						pathname: "/[sport]/matches/[id]",
 						query: {
 							sport: router.query.sport,
-							id: `${teams[0]?.name}-${teams[1]?.name}-${moment(
-								date
-							).format("DD-MM-YYYY-HH-mm")}`,
+							id: slug,
 						}, // this should be replaced with a slug property
 					}}
 				>

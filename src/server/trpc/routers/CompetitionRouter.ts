@@ -1,6 +1,5 @@
-import { createRouter } from "../context";
 import { z } from "zod";
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, createTRPCRouter } from "../trpc";
 
 const currentCompetitionTemp = {
 	startedOn: new Date(
@@ -280,7 +279,7 @@ const previousCompetitions = [
 	},
 ];
 
-export const competitionRouter = router({
+export const competitionRouter = createTRPCRouter({
 	getCurrent: publicProcedure.query(async ({ ctx, input }) => {
 		return currentCompetitionTemp;
 	}),

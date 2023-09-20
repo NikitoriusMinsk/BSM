@@ -1,42 +1,36 @@
-import { GetStaticProps, NextPage } from "next"
-import React, { useState } from "react"
-import { trpc } from "src/utils/trpc"
-import styles from "@styles/pages/TipsterCompetition.module.css"
-import Image from "next/image"
-import {
-	CurrentCompetition,
-	PreviousCompetitions,
-	Tipsters,
-} from "src/types/queryTypes"
-import Moment from "react-moment"
-import { PortalContext } from "src/utils/portalContext"
-import TextField from "@components/ui/TextField"
-import Dropdown from "@components/ui/Dropdown"
-import { AnimatePresence, motion } from "framer-motion"
-import Slider from "@components/ui/Slider"
-import shortenNumber from "src/utils/shortenNumber"
-import TipsterModal from "@components/ui/TipsterModal"
-import usePortal from "src/utils/usePortal"
-import Table from "@components/ui/Table"
-import { createColumnHelper } from "@tanstack/react-table"
-import { inferArrayElementType } from "src/utils/inferArrayElementType"
-import dynamic from "next/dynamic"
-import { createProxySSGHelpers } from "@trpc/react-query/ssg"
-import { appRouter } from "src/server/trpc/router/_app"
-import { createContext } from "src/server/trpc/context"
-import superjson from "superjson"
-import useWindowSize from "src/utils/useWindowSize"
-import TipsterInfo from "@components/ui/TipsterInfo"
-import ArrayToChunks from "src/utils/ArrayToChunks"
+import { GetStaticProps, NextPage } from "next";
+import React, { useState } from "react";
+import { trpc } from "src/utils/trpc";
+import styles from "@styles/pages/TipsterCompetition.module.css";
+import Image from "next/image";
+import { CurrentCompetition, PreviousCompetitions, Tipsters } from "src/types/queryTypes";
+import Moment from "react-moment";
+import { PortalContext } from "src/utils/portalContext";
+import TextField from "@components/ui/TextField";
+import Dropdown from "@components/ui/Dropdown";
+import { AnimatePresence, motion } from "framer-motion";
+import Slider from "@components/ui/Slider";
+import shortenNumber from "src/utils/shortenNumber";
+import TipsterModal from "@components/ui/TipsterModal";
+import usePortal from "src/utils/usePortal";
+import Table from "@components/ui/Table";
+import { createColumnHelper } from "@tanstack/react-table";
+import { inferArrayElementType } from "src/utils/inferArrayElementType";
+import dynamic from "next/dynamic";
+import superjson from "superjson";
+import useWindowSize from "src/utils/useWindowSize";
+import TipsterInfo from "@components/ui/TipsterInfo";
+import ArrayToChunks from "src/utils/ArrayToChunks";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "@/server/trpc/root";
+import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
-const InPortal = dynamic(
-	async () => (await import("react-reverse-portal")).InPortal,
-	{ ssr: false }
-)
-const OutPortal = dynamic(
-	async () => (await import("react-reverse-portal")).OutPortal,
-	{ ssr: false }
-)
+const InPortal = dynamic(async () => (await import("react-reverse-portal")).InPortal, {
+	ssr: false,
+});
+const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
+	ssr: false,
+});
 
 const TableDropdownItems = [
 	{
@@ -55,7 +49,7 @@ const TableDropdownItems = [
 		name: "1 Month",
 		id: "4",
 	},
-]
+];
 
 const CompetitionDropdownItems = [
 	{
@@ -74,7 +68,7 @@ const CompetitionDropdownItems = [
 		name: "This year",
 		id: "4",
 	},
-]
+];
 
 const CompetitionSportItems = [
 	{
@@ -93,9 +87,9 @@ const CompetitionSportItems = [
 		name: "Box",
 		id: "4",
 	},
-]
+];
 
-const columnHelper = createColumnHelper<inferArrayElementType<Tipsters>>()
+const columnHelper = createColumnHelper<inferArrayElementType<Tipsters>>();
 
 const columns = [
 	columnHelper.display({
@@ -119,7 +113,7 @@ const columns = [
 	columnHelper.accessor((row) => ({ ...row }), {
 		id: "user",
 		cell: (info) => {
-			return <TipsterInfo {...info.getValue()} />
+			return <TipsterInfo {...info.getValue()} />;
 		},
 		header: () => <span>Tipster</span>,
 		enableSorting: false,
@@ -138,7 +132,7 @@ const columns = [
 							key={`table_dot_${index}_${info.row.index}`}
 							className={`${styles.dot} ${styles.lose}`}
 						/>
-					)
+					);
 				})}
 			</div>
 		),
@@ -166,7 +160,7 @@ const columns = [
 			),
 		header: () => <span>ROI</span>,
 	}),
-]
+];
 
 const mobileColumns = [
 	columnHelper.display({
@@ -190,7 +184,7 @@ const mobileColumns = [
 	columnHelper.accessor((row) => ({ ...row }), {
 		id: "user",
 		cell: (info) => {
-			return <TipsterInfo {...info.getValue()} />
+			return <TipsterInfo {...info.getValue()} />;
 		},
 		header: () => <span>Tipster</span>,
 		enableSorting: false,
@@ -208,28 +202,24 @@ const mobileColumns = [
 			),
 		header: () => <span>ROI</span>,
 	}),
-]
+];
 
 const TipsterCompetition: NextPage = () => {
 	const { data: currentCompetition, isLoading: currentCompetitionLoading } =
-		trpc.competitions.getCurrent.useQuery()
+		trpc.competitions.getCurrent.useQuery();
 	const { data: tipsters, isLoading: tipstersLoading } =
-		trpc.tipsters.getAll.useQuery()
+		trpc.tipsters.getAll.useQuery();
 	const { data: previousCompetition, isLoading: previousCompetitionLoading } =
-		trpc.competitions.getPrevious.useQuery()
-	const portalNode = usePortal()
-	const { width } = useWindowSize()
+		trpc.competitions.getPrevious.useQuery();
+	const portalNode = usePortal();
+	const { width } = useWindowSize();
 
-	if (
-		currentCompetitionLoading ||
-		tipstersLoading ||
-		previousCompetitionLoading
-	) {
-		return <div>Loading...</div>
+	if (currentCompetitionLoading || tipstersLoading || previousCompetitionLoading) {
+		return <div>Loading...</div>;
 	}
 
 	if (!currentCompetition || !tipsters || !previousCompetition) {
-		return <div>Error...</div>
+		return <div>Error...</div>;
 	}
 
 	return (
@@ -273,11 +263,11 @@ const TipsterCompetition: NextPage = () => {
 				</div>
 			</PortalContext.Provider>
 		</>
-	)
-}
+	);
+};
 
 const CurrentCompetition: React.FC<CurrentCompetition> = (props) => {
-	const { endsOn, startedOn, leaders } = props
+	const { endsOn, startedOn, leaders } = props;
 
 	return (
 		<div className={styles.currentCompetition}>
@@ -312,12 +302,8 @@ const CurrentCompetition: React.FC<CurrentCompetition> = (props) => {
 					/>
 					!
 				</span>
-				<span>
-					You can join Optimo Bet Free Tipster Competition at any time
-				</span>
-				<span>
-					You are only Allowed to have one tipster account per person
-				</span>
+				<span>You can join Optimo Bet Free Tipster Competition at any time</span>
+				<span>You are only Allowed to have one tipster account per person</span>
 			</div>
 			<h2 className={styles.rewardDistribution}>Reward Distribution</h2>
 			<div className={styles.leaders}>
@@ -357,26 +343,25 @@ const CurrentCompetition: React.FC<CurrentCompetition> = (props) => {
 					</div>
 				</div>
 				<span className={styles.text}>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-					Etiam tristique hendrerit ligula, vitae finibus odio aliquet
-					sit amet. Mauris semper arcu vitae neque sollicitudin
-					lobortis vitae sit amet quam. Proin viverra nulla in tellus
-					dictum faucibus. Proin a dictum nulla. Duis euismod
-					venenatis semper. Mauris sed volutpat elit, eget egestas
-					nulla. Pellentesque vitae consequat ipsum.
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+					tristique hendrerit ligula, vitae finibus odio aliquet sit amet.
+					Mauris semper arcu vitae neque sollicitudin lobortis vitae sit amet
+					quam. Proin viverra nulla in tellus dictum faucibus. Proin a dictum
+					nulla. Duis euismod venenatis semper. Mauris sed volutpat elit, eget
+					egestas nulla. Pellentesque vitae consequat ipsum.
 				</span>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 const Leader: React.FC<{
-	name: string
-	image: string
-	prize: number
-	place: number
+	name: string;
+	image: string;
+	prize: number;
+	place: number;
 }> = (props) => {
-	const { image, name, place, prize } = props
+	const { image, name, place, prize } = props;
 
 	return (
 		<div className={styles.leader}>
@@ -399,11 +384,11 @@ const Leader: React.FC<{
 			</div>
 			<span className={styles.prize}>$ {prize}</span>
 		</div>
-	)
-}
+	);
+};
 
 const GetStarted: React.FC = () => {
-	const [step, setStep] = useState<number>(1)
+	const [step, setStep] = useState<number>(1);
 
 	return (
 		<div className={styles.getStarted}>
@@ -437,8 +422,8 @@ const GetStarted: React.FC = () => {
 				</AnimatePresence>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 const StepVariants = {
 	show: {
@@ -455,14 +440,14 @@ const StepVariants = {
 			ease: "easeInOut",
 		},
 	},
-}
+};
 
 const CompetitionStep: React.FC<{
-	text: string
-	step: number
-	onClick: () => void
+	text: string;
+	step: number;
+	onClick: () => void;
 }> = (props) => {
-	const { onClick, step, text } = props
+	const { onClick, step, text } = props;
 
 	return (
 		<motion.div
@@ -502,15 +487,15 @@ const CompetitionStep: React.FC<{
 				/>
 			</div>
 		</motion.div>
-	)
-}
+	);
+};
 
 const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 	props
 ) => {
-	const { competitions } = props
+	const { competitions } = props;
 
-	const { width } = useWindowSize()
+	const { width } = useWindowSize();
 
 	return (
 		<div className={styles.previousCompetitions}>
@@ -633,8 +618,7 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 												{...user}
 												place={
 													users.findIndex(
-														(_user) =>
-															_user.id === user.id
+														(_user) => _user.id === user.id
 													) + 1
 												}
 												key={`participant_${user.id}`}
@@ -648,17 +632,15 @@ const PreviousCompetitions: React.FC<{ competitions: PreviousCompetitions }> = (
 				</Slider>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 interface CompetitionParticipantProps {
-	place: number
+	place: number;
 }
 
 const CompetitionParticipant: React.FC<
-	inferArrayElementType<
-		inferArrayElementType<PreviousCompetitions>["users"]
-	> &
+	inferArrayElementType<inferArrayElementType<PreviousCompetitions>["users"]> &
 		CompetitionParticipantProps
 > = (props) => {
 	const {
@@ -670,8 +652,8 @@ const CompetitionParticipant: React.FC<
 		subscriptionCost,
 		winrate,
 		place,
-	} = props
-	const [modalOpen, setModalOpen] = useState(false)
+	} = props;
+	const [modalOpen, setModalOpen] = useState(false);
 
 	return (
 		<>
@@ -749,26 +731,26 @@ const CompetitionParticipant: React.FC<
 				</button>
 			</div>
 		</>
-	)
-}
+	);
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createProxySSGHelpers({
+	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: await createContext(),
+		ctx: createInnerTRPCContext({ session: null }),
 		transformer: superjson,
-	})
+	});
 
-	await ssg.competitions.getCurrent.prefetch()
-	await ssg.competitions.getPrevious.prefetch()
-	await ssg.tipsters.getAll.prefetch()
+	await ssg.competitions.getCurrent.prefetch();
+	await ssg.competitions.getPrevious.prefetch();
+	await ssg.tipsters.getAll.prefetch();
 
 	return {
 		props: {
 			trpcState: ssg.dehydrate(),
 		},
 		revalidate: 60,
-	}
-}
+	};
+};
 
-export default TipsterCompetition
+export default TipsterCompetition;

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../trpc";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 
 const BookmakersTopTemp = [
 	{
@@ -76,7 +76,7 @@ const BookmakersTemp = [
 	},
 ];
 
-export const bookmakerRouter = router({
+export const bookmakerRouter = createTRPCRouter({
 	getTop: publicProcedure.query(async ({ ctx, input }) => {
 		return BookmakersTopTemp;
 	}),

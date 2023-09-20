@@ -1,5 +1,5 @@
+import { AppRouter } from "@/server/trpc/root";
 import { inferRouterOutputs } from "@trpc/server/dist/core";
-import { AppRouter } from "src/server/trpc/router/_app";
 
 export type RouterOutput = inferRouterOutputs<AppRouter>;
 

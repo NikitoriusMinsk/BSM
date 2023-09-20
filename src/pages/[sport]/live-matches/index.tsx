@@ -4,9 +4,6 @@ import React, { useContext } from "react";
 import { trpc } from "src/utils/trpc";
 import Filter from "@components/ui/Filter";
 import Leagues from "@components/ui/Leagues";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
-import { appRouter } from "src/server/trpc/router/_app";
-import { createContext } from "src/server/trpc/context";
 import superjson from "superjson";
 import TextField from "@components/ui/TextField";
 import FilterModal from "@components/ui/FilterModal";
@@ -15,6 +12,9 @@ import dynamic from "next/dynamic";
 import usePortal from "src/utils/usePortal";
 import LeaguesMobileBlocksFilter from "@components/ui/LeaguesMobileBlocksFilter";
 import { LastSportContext } from "src/pages/_app";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { createInnerTRPCContext } from "@/server/trpc/trpc";
+import { appRouter } from "@/server/trpc/root";
 
 const OutPortal = dynamic(async () => (await import("react-reverse-portal")).OutPortal, {
 	ssr: false,
@@ -155,9 +155,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createProxySSGHelpers({
+	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: await createContext(),
+		ctx: createInnerTRPCContext({ session: null }),
 		transformer: superjson,
 	});
 

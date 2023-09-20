@@ -1,69 +1,69 @@
-import Banner from "@components/ui/Banner"
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next"
-import styles from "@styles/pages/Home.module.css"
-import Slider from "@components/ui/Slider"
-import Image from "next/image"
-import { useSession } from "next-auth/react"
-import BestBookmakers from "@components/ui/BestBookmakers"
-import LiveMatches from "@components/ui/LiveMatches"
-import Filter from "@components/ui/Filter"
-import Predictions from "@components/ui/Predictions"
-import { MostTips, Tipsters } from "src/types/queryTypes"
-import MatchTipsCard from "@components/ui/MatchTipsCard"
-import Leagues from "@components/ui/Leagues"
-import Link from "next/link"
-import { appRouter } from "src/server/trpc/router/_app"
-import { createContext } from "src/server/trpc/context"
-import superjson from "superjson"
-import useWindowSize from "src/utils/useWindowSize"
-import ArrayToChunks from "src/utils/ArrayToChunks"
-import { trpc } from "src/utils/trpc"
-import { createProxySSGHelpers } from "@trpc/react-query/ssg"
-import DisaperingContainer from "@components/helpers/DisaperingContainer"
-import Matches from "@components/ui/Matches"
-import { useContext, useReducer, useState } from "react"
-import { LastSportContext } from "../_app"
-import moment from "moment-timezone"
+import Banner from "@components/ui/Banner";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import styles from "@styles/pages/Home.module.css";
+import Slider from "@components/ui/Slider";
+import Image from "next/image";
+import { useSession } from "next-auth/react";
+import BestBookmakers from "@components/ui/BestBookmakers";
+import LiveMatches from "@components/ui/LiveMatches";
+import Filter from "@components/ui/Filter";
+import Predictions from "@components/ui/Predictions";
+import { MostTips, Tipsters } from "src/types/queryTypes";
+import MatchTipsCard from "@components/ui/MatchTipsCard";
+import Leagues from "@components/ui/Leagues";
+import Link from "next/link";
+import superjson from "superjson";
+import useWindowSize from "src/utils/useWindowSize";
+import ArrayToChunks from "src/utils/ArrayToChunks";
+import { trpc } from "src/utils/trpc";
+import DisaperingContainer from "@components/helpers/DisaperingContainer";
+import Matches from "@components/ui/Matches";
+import { useContext, useReducer, useState } from "react";
+import { LastSportContext } from "../_app";
+import moment from "moment-timezone";
+import { createServerSideHelpers } from "@trpc/react-query/server";
+import { appRouter } from "@/server/trpc/root";
+import { createInnerTRPCContext } from "@/server/trpc/trpc";
 
 const Home: NextPage = () => {
-	const { data: session } = useSession()
+	const { data: session } = useSession();
 	const [selectedLeagues, setSelectedLeagues] = useReducer(
 		(state: number[], action: number[]) => {
-			const newState = state.concat(action)
-			return Array.from(new Set(newState))
+			const newState = state.concat(action);
+			return Array.from(new Set(newState));
 		},
 		[],
 		() => []
-	)
-	const [topMatchesDate, setTopMatchesDate] = useState<Date>(new Date())
-	const sport = useContext(LastSportContext)
+	);
+	const [topMatchesDate, setTopMatchesDate] = useState<Date>(new Date());
+	const sport = useContext(LastSportContext);
 	const { data: bookmakers, isLoading: bookmakersLoading } =
-		trpc.bookmakers.getTop.useQuery()
+		trpc.bookmakers.getTop.useQuery();
 	const { data: filtersTop, isLoading: filtersTopLoading } =
 		trpc.filters.getTopLeagues.useQuery({
 			page: 0,
 			size: 20,
 			sportId: sport.id,
-		})
-	const { data: filters, isLoading: filtersLoading } =
-		trpc.filters.getLeagues.useQuery({
+		});
+	const { data: filters, isLoading: filtersLoading } = trpc.filters.getLeagues.useQuery(
+		{
 			page: 0,
 			size: 20,
 			sportId: sport.id,
-		})
+		}
+	);
 	const { data: predictions, isLoading: predictionsLoading } =
-		trpc.predictions.getAll.useQuery()
+		trpc.predictions.getAll.useQuery();
 	const { data: liveMatches, isLoading: liveMatchesLoading } =
-		trpc.matches.getAllLive.useQuery()
-	const { data: matches, isLoading: matchesLoading } =
-		trpc.matches.getTop.useQuery({
-			sportId: sport!.id,
-			date: moment(topMatchesDate).format("YYYY-MM-DD"),
-		})
-	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery()
+		trpc.matches.getAllLive.useQuery();
+	const { data: matches, isLoading: matchesLoading } = trpc.matches.getTop.useQuery({
+		sportId: sport!.id,
+		date: moment(topMatchesDate).format("YYYY-MM-DD"),
+	});
+	const { data: tips, isLoading: tipsLoading } = trpc.tips.getAll.useQuery();
 	const { data: tipsters, isLoading: tipstersLoading } =
-		trpc.tipsters.getAll.useQuery()
-	const { width } = useWindowSize()
+		trpc.tipsters.getAll.useQuery();
+	const { width } = useWindowSize();
 
 	if (
 		bookmakersLoading ||
@@ -74,7 +74,7 @@ const Home: NextPage = () => {
 		tipsLoading ||
 		tipstersLoading
 	) {
-		return <div>Loading...</div>
+		return <div>Loading...</div>;
 	}
 
 	if (
@@ -86,7 +86,7 @@ const Home: NextPage = () => {
 		!tips ||
 		!tipsters
 	) {
-		return <div>Error</div>
+		return <div>Error</div>;
 	}
 
 	return (
@@ -183,8 +183,8 @@ const Home: NextPage = () => {
 				</div>
 			</DisaperingContainer>
 		</>
-	)
-}
+	);
+};
 
 const Slide: React.FC = () => {
 	return (
@@ -222,12 +222,8 @@ const Slide: React.FC = () => {
 			</div>
 			<div className={styles.slideSummary}>
 				<div className={styles.slideSummaryTitle}>
-					<span className={styles.slideSummaryTitleCountry}>
-						Germany
-					</span>
-					<span className={styles.slideSummaryTitleLeague}>
-						Bunes League
-					</span>
+					<span className={styles.slideSummaryTitleCountry}>Germany</span>
+					<span className={styles.slideSummaryTitleLeague}>Bunes League</span>
 				</div>
 				<div className={styles.slideSummaryTeams}>
 					<div className={styles.slideSummaryTeam}>
@@ -253,25 +249,23 @@ const Slide: React.FC = () => {
 								height={36}
 							/>
 						</div>
-						<span className={styles.slideSummaryTeamName}>
-							Bayern Munich
-						</span>
+						<span className={styles.slideSummaryTeamName}>Bayern Munich</span>
 					</div>
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 const SignUpPropose: React.FC = () => {
 	return (
 		<div className={styles.signUpPropose}>
 			<h2>Join with us!</h2>
 			<span>
-				Lorem Ipsum is simply dummy text of the printing and typesetting
-				industry. Lorem Ipsum has been the industry's standard dummy
-				text ever since the 1500s, when an unknown printer took a galley
-				of type and scrambled it to make a type specimen book.
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+				Lorem Ipsum has been the industry's standard dummy text ever since the
+				1500s, when an unknown printer took a galley of type and scrambled it to
+				make a type specimen book.
 			</span>
 			<Link
 				href="/sign-up"
@@ -280,21 +274,21 @@ const SignUpPropose: React.FC = () => {
 				<button>Sign Up</button>
 			</Link>
 		</div>
-	)
-}
+	);
+};
 
 const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
-	const { tipsters } = props
-	const { width } = useWindowSize()
+	const { tipsters } = props;
+	const { width } = useWindowSize();
 
 	function GetTipsterCount(width: number) {
 		switch (true) {
 			case width > 900:
-				return 3
+				return 3;
 			case width >= 320:
-				return tipsters.length
+				return tipsters.length;
 			default:
-				return 3
+				return 3;
 		}
 	}
 
@@ -306,39 +300,35 @@ const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
 			</div>
 			<div className={styles.topTipstersList}>
 				<div className={styles.topThreeTipsters}>
-					{tipsters
-						.slice(0, GetTipsterCount(width))
-						.map((tipster, index) => (
+					{tipsters.slice(0, GetTipsterCount(width)).map((tipster, index) => (
+						<div
+							className={styles.topTipster}
+							key={`tipster_${index}`}
+						>
 							<div
-								className={styles.topTipster}
-								key={`tipster_${index}`}
+								className={styles.topTipsterImage}
+								data-place={index + 1}
 							>
-								<div
-									className={styles.topTipsterImage}
-									data-place={index + 1}
-								>
-									<Image
-										src={tipster.image}
-										alt={tipster.name}
-										width={65}
-										height={65}
-									/>
-								</div>
-								<div className={styles.topTipsterInfo}>
-									<span className={styles.topTipsterName}>
-										{tipster.name}
+								<Image
+									src={tipster.image}
+									alt={tipster.name}
+									width={65}
+									height={65}
+								/>
+							</div>
+							<div className={styles.topTipsterInfo}>
+								<span className={styles.topTipsterName}>
+									{tipster.name}
+								</span>
+								<div className={styles.topTipsterWinrate}>
+									<span className={styles.winrateLabel}>Winrate</span>
+									<span className={styles.winratePercent}>
+										{tipster.winrate * 100}%
 									</span>
-									<div className={styles.topTipsterWinrate}>
-										<span className={styles.winrateLabel}>
-											Winrate
-										</span>
-										<span className={styles.winratePercent}>
-											{tipster.winrate * 100}%
-										</span>
-									</div>
 								</div>
 							</div>
-						))}
+						</div>
+					))}
 				</div>
 				<div className={styles.topTipstersOther}>
 					{tipsters.slice(3, 8).map((tipster, index) => (
@@ -347,10 +337,7 @@ const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
 							key={`tipster_${index + 4}`}
 						>
 							<div className={styles.otherContent}>
-								<div className={styles.otherIndex}>
-									{" "}
-									{index + 4}{" "}
-								</div>
+								<div className={styles.otherIndex}> {index + 4} </div>
 								<div className={styles.otherInfo}>
 									<div className={styles.topOtherImage}>
 										<Image
@@ -375,12 +362,12 @@ const TopTipsters: React.FC<{ tipsters: Tipsters }> = (props) => {
 				<a className={styles.topTipstersMore}>See All</a>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 const MostTips: React.FC<{ tips: MostTips }> = (props) => {
-	const { tips } = props
-	const { width } = useWindowSize()
+	const { tips } = props;
+	const { width } = useWindowSize();
 
 	return (
 		<div className={styles.mostTips}>
@@ -413,17 +400,17 @@ const MostTips: React.FC<{ tips: MostTips }> = (props) => {
 				))}
 			</Slider>
 		</div>
-	)
-}
+	);
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const ssg = createProxySSGHelpers({
+	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: await createContext(),
+		ctx: createInnerTRPCContext({ session: null }),
 		transformer: superjson,
-	})
+	});
 
-	const sports = await ssg.navigation.getSports.fetch()
+	const sports = await ssg.navigation.getSports.fetch();
 
 	return {
 		fallback: "blocking",
@@ -432,36 +419,36 @@ export const getStaticPaths: GetStaticPaths = async () => {
 				params: {
 					sport: sport.name,
 				},
-			}
+			};
 		}),
-	}
-}
+	};
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const ssg = createProxySSGHelpers({
+	const ssg = createServerSideHelpers({
 		router: appRouter,
-		ctx: await createContext(),
+		ctx: createInnerTRPCContext({ session: null }),
 		transformer: superjson,
-	})
+	});
 
-	await ssg.bookmakers.getTop.prefetch()
-	await ssg.filters.getLeagues.prefetch({ page: 0, size: 20, sportId: 1 })
-	await ssg.filters.getTopLeagues.prefetch({ page: 0, size: 20, sportId: 1 })
-	await ssg.predictions.getAll.prefetch()
-	await ssg.matches.getAllLive.prefetch()
+	await ssg.bookmakers.getTop.prefetch();
+	await ssg.filters.getLeagues.prefetch({ page: 0, size: 20, sportId: 1 });
+	await ssg.filters.getTopLeagues.prefetch({ page: 0, size: 20, sportId: 1 });
+	await ssg.predictions.getAll.prefetch();
+	await ssg.matches.getAllLive.prefetch();
 	await ssg.matches.getTop.prefetch({
 		sportId: 1, //temporary, no idea how to get the current sport id for now
 		date: moment(new Date()).format("YYYY-MM-DD"),
-	})
-	await ssg.tips.getAll.prefetch()
-	await ssg.tipsters.getAll.prefetch()
+	});
+	await ssg.tips.getAll.prefetch();
+	await ssg.tipsters.getAll.prefetch();
 
 	return {
 		props: {
 			trpcState: ssg.dehydrate(),
 		},
 		revalidate: 60,
-	}
-}
+	};
+};
 
-export default Home
+export default Home;
