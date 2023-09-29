@@ -8,6 +8,7 @@ import { UserNotifications } from "src/types/queryTypes";
 import { trpc } from "src/utils/trpc";
 import Moment from "react-moment";
 import { DashboardTabs } from "src/pages/user-dashboard";
+import { useRouter } from "next/router";
 
 const UserProfile: React.FC = () => {
 	const { data: session } = useSession();
@@ -216,6 +217,7 @@ const Profile: React.FC<ProfileProps> = (props) => {
 	const { name, id, image } = props;
 	const [isOpen, setIsOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
+	const router = useRouter();
 
 	const closeIfNotDropdown = (e: MouseEvent) => {
 		if (
@@ -232,6 +234,10 @@ const Profile: React.FC<ProfileProps> = (props) => {
 			window.removeEventListener("click", closeIfNotDropdown);
 		};
 	}, []);
+
+	useEffect(() => {
+		setIsOpen(false);
+	}, [router.asPath]);
 
 	return (
 		<div
